@@ -4,13 +4,14 @@ import { VueLoaderPlugin } from 'vue-loader'
 
 const DEV_SERVER_PORT = 3000
 const PATH_TO_SRC = path.resolve(__dirname, 'src')
+const PATH_TO_VUE_FORM = path.resolve(__dirname, '..', 'VueForm')
 const PATH_TO_DEV_DIST = path.resolve(__dirname, 'public')
 const PATH_TO_NODE_MODULES = path.resolve(__dirname, 'node_modules')
 
 export default {
   mode: 'development',
 
-  entry: './src/index.js',
+  entry: path.resolve(PATH_TO_SRC, 'index.js'),
 
   output: {
     path: PATH_TO_DEV_DIST,
@@ -34,12 +35,12 @@ export default {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
-        include: PATH_TO_SRC,
+        include: [PATH_TO_SRC, PATH_TO_VUE_FORM],
       },
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: PATH_TO_SRC,
+        include: [PATH_TO_SRC, PATH_TO_VUE_FORM],
       },
       {
         test: /\.s[a|c]ss$/,

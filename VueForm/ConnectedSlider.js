@@ -1,8 +1,8 @@
-import { Input } from 'element-ui'
-import { withHooks } from 'vue-hooks'
+import { Slider } from 'element-ui'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import { withHooks } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
@@ -29,12 +29,15 @@ export default withHooks((h, props, instance) => {
   const change = get(props, 'handleChange', noop)
 
   return (
-    <Input
+    <Slider
       class={props.class}
       name={props.name}
       value={value}
-      size={props.size}
-      type={props.type}
+      step={props.step}
+      min={props.min}
+      max={props.max}
+      show-stops={props.showStops}
+      show-input={props.showInput}
       on-focus={focus}
       on-input={input}
       on-blur={blur}

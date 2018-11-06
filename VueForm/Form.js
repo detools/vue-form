@@ -1,6 +1,6 @@
-import { withHooks, useFormState } from 'vue-hooks'
 import { isEmpty, isNil } from 'lodash'
 import { Form } from 'element-ui'
+import { withHooks, useFormState } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   // eslint-disable-next-line

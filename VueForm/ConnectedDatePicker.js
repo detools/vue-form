@@ -1,8 +1,8 @@
 import { DatePicker } from 'element-ui'
-import { withHooks } from 'vue-hooks'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import { withHooks } from '../hooks'
 
 /**
  * DatePicker Componenet connected to @detools/vue-form

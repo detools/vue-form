@@ -1,8 +1,8 @@
-import { Switch } from 'element-ui'
-import { withHooks } from 'vue-hooks'
+import { Input } from 'element-ui'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import { withHooks } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
@@ -29,14 +29,12 @@ export default withHooks((h, props, instance) => {
   const change = get(props, 'handleChange', noop)
 
   return (
-    <Switch
+    <Input
       class={props.class}
       name={props.name}
       value={value}
-      active-text={props.activeText}
-      inactive-text={props.inactiveText}
-      active-value={props.activeValue}
-      inactive-value={props.inactiveValue}
+      size={props.size}
+      type={props.type}
       on-focus={focus}
       on-input={input}
       on-blur={blur}

@@ -16,7 +16,7 @@ const STATS_FILE = 'webpack.stats.json'
 const command = [
   'node -r esm',
   bin('webpack'),
-  '--config webpack.prod.js',
+  '--config example/webpack.prod.js',
   '--progress',
   `--json > ${STATS_FILE}`,
 ].join(' ')

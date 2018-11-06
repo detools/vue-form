@@ -1,8 +1,8 @@
-import { Slider } from 'element-ui'
-import { withHooks } from 'vue-hooks'
+import { Radio } from 'element-ui'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import { withHooks } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
@@ -29,19 +29,16 @@ export default withHooks((h, props, instance) => {
   const change = get(props, 'handleChange', noop)
 
   return (
-    <Slider
+    <Radio
       class={props.class}
       name={props.name}
+      label={props.value}
       value={value}
-      step={props.step}
-      min={props.min}
-      max={props.max}
-      show-stops={props.showStops}
-      show-input={props.showInput}
       on-focus={focus}
       on-input={input}
       on-blur={blur}
-      on-change={change}
-    />
+      on-change={change}>
+      {instance.$slots.default}
+    </Radio>
   )
 })

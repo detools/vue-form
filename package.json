@@ -1,6 +1,70 @@
 {
-  "name": "vue-form",
+  "name": "@detools/vue-form",
+  "version": "1.0.0",
+  "description": "Vue Form component on hooks",
+  "main": "VueForm/index.js",
+  "scripts": {
+    "start": "node -r esm scripts/start.js",
+    "build": "node -r esm scripts/build.js",
+    "server": "node -r esm scripts/server.js",
+    "lint": "eslint --ext .js,.vue src",
+    "lint:format": "npm run lint -- --format eslint-formatter-friendly",
+    "publish": "npm publish ./ --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/detools/vue-form.git"
+  },
+  "keywords": ["vue", "form", "hooks"],
+  "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/detools/vue-form/issues"
+  },
+  "homepage": "https://github.com/detools/vue-form#readme",
   "devDependencies": {
-    "prettier": "^1.14.3"
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-jsx": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime": "^7.1.2",
+    "@detools/eslint-config-vue": "^1.0.9",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-jsx-v-model": "^2.0.3",
+    "babel-plugin-lodash": "^3.3.4",
+    "babel-plugin-transform-vue-jsx": "^3.7.0",
+    "babel-plugin-vue-jsx-sync": "0.0.5",
+    "css-loader": "^1.0.1",
+    "element-ui": "^2.4.9",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "esm": "^3.0.84",
+    "lodash": "^4.17.11",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "vue": "^2.5.17",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "peerDependencies": {
+    "element-ui": "^2.4.9",
+    "lodash": "^4.17.11",
+    "vue": "^2.5.17"
+  },
+  "dependencies": {
+    "invariant": "^2.2.4"
   }
 }

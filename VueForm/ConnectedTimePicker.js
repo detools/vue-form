@@ -1,8 +1,8 @@
 import { TimeSelect } from 'element-ui'
-import { withHooks } from 'vue-hooks'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import { withHooks } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')

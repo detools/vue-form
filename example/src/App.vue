@@ -1,7 +1,15 @@
 <script>
+import BasicForm from './BasicForm'
+
 export default {
   render() {
-    return <div>Hello World</div>
+    return (
+      <div>
+        <div>
+          <BasicForm />
+        </div>
+      </div>
+    )
   },
 }
 </script>

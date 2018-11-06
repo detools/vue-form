@@ -10,7 +10,7 @@ const options = {
 const command = [
   'node -r esm',
   bin('webpack-dev-server'),
-  '--config webpack.config.js',
+  '--config example/webpack.config.js',
   '--inline',
   '--hot',
 ].join(' ')
