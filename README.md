@@ -4,7 +4,7 @@ Vue Form component on hooks
 
 ## Installation
 
-```sh
+```bash
 npm i @detools/vue-form
 ```
 
