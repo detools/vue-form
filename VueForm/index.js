@@ -1,13 +1,28 @@
-export Radio from './ConnectedRadio'
-export Checkbox from './ConnectedCheckbox'
-export Input from './ConnectedInput'
-export InputNumber from './ConnectedInputNumber'
-export Select from './ConnectedSelect'
-export Switch from './ConnectedSwitch'
-export Slider from './ConnectedSlider'
-export TimePicker from './ConnectedTimePicker'
-export DatePicker from './ConnectedDatePicker'
+import { FormItem } from 'element-ui'
 
-export { FormItem } from 'element-ui'
+import Radio from './ConnectedRadio'
+import Checkbox from './ConnectedCheckbox'
+import Input from './ConnectedInput'
+import InputNumber from './ConnectedInputNumber'
+import Select from './ConnectedSelect'
+import Switch from './ConnectedSwitch'
+import Slider from './ConnectedSlider'
+import TimePicker from './ConnectedTimePicker'
+import DatePicker from './ConnectedDatePicker'
 
-export default from './Form'
+import Form from './Form'
+
+export {
+  Radio,
+  Checkbox,
+  Input,
+  InputNumber,
+  Select,
+  Switch,
+  Slider,
+  TimePicker,
+  DatePicker,
+  FormItem,
+}
+
+export default Form
