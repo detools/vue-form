@@ -74,3 +74,8 @@ See in [example/src](/example/src) folder
 - Switch
 - TimePicker
 - Form
+
+## Roadmap
+
+- Add remaining components
+- Add validation examples
