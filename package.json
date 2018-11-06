@@ -53,6 +53,7 @@
     "eslint-plugin-vue": "^5.0.0-0",
     "esm": "^3.0.84",
     "lodash": "^4.17.11",
+    "mini-css-extract-plugin": "^0.4.4",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",

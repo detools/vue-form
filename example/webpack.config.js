@@ -2,8 +2,10 @@ import path from 'path'
 import webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
 import CleanWebpackPlugin from 'clean-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 const DEV_SERVER_PORT = 3000
+const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 const PATH_TO_SRC = path.resolve(__dirname, 'src')
 const PATH_TO_VUE_FORM = path.resolve(__dirname, '..', 'VueForm')
 const PATH_TO_DIST = path.resolve(__dirname, '..', 'docs')
@@ -24,7 +26,7 @@ export default {
   entry: path.resolve(PATH_TO_SRC, 'index.js'),
 
   output: {
-    path: process.env.NODE_ENV !== 'production' ? PATH_TO_DEV_DIST : PATH_TO_DIST,
+    path: !IS_PRODUCTION ? PATH_TO_DEV_DIST : PATH_TO_DIST,
     filename: 'bundle.js',
     chunkFilename: '[name].bundle.js',
     publicPath: '/',
@@ -55,7 +57,7 @@ export default {
       {
         test: /\.s[a|c]ss$/,
         use: [
-          'style-loader', // CommonJS => Style nodes
+          !IS_PRODUCTION ? 'style-loader' : MiniCssExtractPlugin.loader, // CommonJS => Style nodes
           'css-loader', // CSS => CommonJS
           'sass-loader', // Sass => CSS
         ],
@@ -81,12 +83,19 @@ export default {
   },
 
   plugins: [
+    // common
     new VueLoaderPlugin(),
     new webpack.NormalModuleReplacementPlugin(
       /element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/,
       'element-ui/lib/locale/lang/en'
     ),
+
+    // prod
     new CleanWebpackPlugin(PATH_TO_DIST, CLEAN_OPTIONS),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
   ],
 
   devServer: {
