@@ -4,6 +4,7 @@ import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
 import { withHooks } from '../hooks'
 
+// XXX: Add RadioGroup
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
 
@@ -32,8 +33,11 @@ export default withHooks((h, props, instance) => {
     <Radio
       class={props.class}
       name={props.name}
-      label={props.value}
       value={value}
+      label={props.value}
+      disabled={props.disabled}
+      border={props.border}
+      size={props.size}
       on-focus={focus}
       on-input={input}
       on-blur={blur}

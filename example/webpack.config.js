@@ -20,6 +20,14 @@ const CLEAN_OPTIONS = {
   dry: false,
 }
 
+const productionPlugins = [
+  new CleanWebpackPlugin(PATH_TO_DIST, CLEAN_OPTIONS),
+  new MiniCssExtractPlugin({
+    filename: '[name].css',
+    chunkFilename: '[id].css',
+  }),
+]
+
 export default {
   mode: 'development',
 
@@ -35,7 +43,7 @@ export default {
   resolve: {
     extensions: ['.js', '.vue'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm.js',
       '@': PATH_TO_SRC,
     },
   },
@@ -89,14 +97,7 @@ export default {
       /element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/,
       'element-ui/lib/locale/lang/en'
     ),
-
-    // prod
-    new CleanWebpackPlugin(PATH_TO_DIST, CLEAN_OPTIONS),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
+  ].concat(IS_PRODUCTION ? productionPlugins : []),
 
   devServer: {
     port: DEV_SERVER_PORT,
