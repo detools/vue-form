@@ -1,0 +1,33 @@
+{
+  "name": "@detools/vue-form",
+  "version": "1.0.0",
+  "description": "Vue Form component on hooks",
+  "main": "index.js",
+  "scripts": {
+    "publish": "npm publish ./ --access public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/detools/vue-form.git"
+  },
+  "keywords": [
+    "vue",
+    "form",
+    "hooks"
+  ],
+  "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/detools/vue-form/issues"
+  },
+  "homepage": "https://github.com/detools/vue-form#readme",
+  "devDependencies": {
+    "@detools/eslint-config-vue": "^1.0.9",
+    "element-ui": "^2.4.9",
+    "vue": "^2.5.17"
+  },
+  "peerDependencies": {
+    "element-ui": "^2.4.9",
+    "vue": "^2.5.17"
+  }
+}
