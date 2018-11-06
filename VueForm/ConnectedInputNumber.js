@@ -32,10 +32,16 @@ export default withHooks((h, props, instance) => {
     <InputNumber
       class={props.class}
       name={props.name}
-      disabled={props.disabled}
       value={value}
       min={props.min}
       max={props.max}
+      step={props.step}
+      precision={props.precision}
+      size={props.size}
+      disabled={props.disabled}
+      controls={props.controls}
+      controls-position={props.controlsPosition}
+      label={props.label}
       on-focus={focus}
       on-input={input}
       on-blur={blur}
