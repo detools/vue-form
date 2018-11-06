@@ -8,7 +8,7 @@ export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
   invariant(Array.isArray(props.options), 'Prop "options" is required and should be an array')
 
-  const { normalize = noop, validate = noop, multiple = false } = props
+  const { normalize = noop, validate = noop, multiple = false, valueKey = 'value' } = props
 
   let initialValue = props.value
   if (multiple) {
@@ -41,7 +41,7 @@ export default withHooks((h, props, instance) => {
   const change = get(props, 'handleChange', noop)
 
   const generateOptions = option => {
-    let { value: optionValue, label: optionLabel } = option
+    let { [valueKey]: optionValue, label: optionLabel } = option
 
     if (isNil(optionLabel)) {
       optionValue = option
@@ -56,13 +56,28 @@ export default withHooks((h, props, instance) => {
       class={props.class}
       name={props.name}
       value={value}
-      clearable={props.clearable}
-      placeholder={props.placeholder}
       multiple={multiple}
+      disabled={props.disabled}
+      value-key={valueKey}
+      size={props.size}
+      clearable={props.clearable}
+      collapse-tags={props.collapseTags}
+      multiple-limit={props.multipleLimit}
+      autocomplete={props.autocomplete}
+      placeholder={props.placeholder}
       filterable={props.filterable}
+      allow-create={props.allowCreate}
+      filter-method={props.filterMethod}
       remote={props.remote}
-      loading={props.loading}
       remote-method={props.remoteMethod}
+      loading={props.loading}
+      loading-text={props.loadingText}
+      no-match-text={props.noMatchText}
+      no-data-text={props.noDataText}
+      reserve-keyword={props.reserveKeyword}
+      default-first-option={props.defaultFirstOption}
+      popper-append-to-body={props.popperAppendToBody}
+      automatic-dropdown={props.automaticDropdown}
       on-focus={focus}
       on-input={input}
       on-blur={blur}
