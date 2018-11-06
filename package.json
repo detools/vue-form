@@ -9,17 +9,13 @@
     "server": "node -r esm scripts/server.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:format": "npm run lint -- --format eslint-formatter-friendly",
-    "publish": "npm publish ./ --access public"
+    "pub": "npm publish ./ --access public"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/detools/vue-form.git"
   },
-  "keywords": [
-    "vue",
-    "form",
-    "hooks"
-  ],
+  "keywords": ["vue", "form", "hooks"],
   "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
   "license": "MIT",
   "bugs": {
