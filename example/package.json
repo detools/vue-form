@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "postinstall": "ln -s ../src ./node_modules/@detools/vue-form"
   },
   "dependencies": {
     "element-ui": "^2.4.9",
@@ -22,7 +23,6 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@detools/eslint-config-vue": "^1.0.9",
-    "@detools/vue-form": "file:../src",
     "babel-eslint": "^10.0.1",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-jsx-v-model": "^2.0.3",

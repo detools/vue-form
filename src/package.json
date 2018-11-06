@@ -2,7 +2,7 @@
   "name": "@detools/vue-form",
   "version": "1.0.0",
   "description": "Vue Form component on hooks",
-  "main": "index.js",
+  "main": "VueForm/index.js",
   "scripts": {
     "publish": "npm publish ./ --access public"
   },
@@ -10,11 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/detools/vue-form.git"
   },
-  "keywords": [
-    "vue",
-    "form",
-    "hooks"
-  ],
+  "keywords": ["vue", "form", "hooks"],
   "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
   "license": "MIT",
   "bugs": {
