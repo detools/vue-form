@@ -1,12 +1,22 @@
 import path from 'path'
 import webpack from 'webpack'
 import { VueLoaderPlugin } from 'vue-loader'
+import CleanWebpackPlugin from 'clean-webpack-plugin'
 
 const DEV_SERVER_PORT = 3000
 const PATH_TO_SRC = path.resolve(__dirname, 'src')
 const PATH_TO_VUE_FORM = path.resolve(__dirname, '..', 'VueForm')
+const PATH_TO_DIST = path.resolve(__dirname, '..', 'docs')
 const PATH_TO_DEV_DIST = path.resolve(__dirname, 'public')
 const PATH_TO_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules')
+
+const CLEAN_OPTIONS = {
+  // Instead of this ugly hack — we will get "wwwroot is outside of the project root. Skipping..."
+  root: path.resolve(PATH_TO_DIST, '..'),
+  exclude: ['index.html'],
+  verbose: true,
+  dry: false,
+}
 
 export default {
   mode: 'development',
@@ -14,7 +24,7 @@ export default {
   entry: path.resolve(PATH_TO_SRC, 'index.js'),
 
   output: {
-    path: PATH_TO_DEV_DIST,
+    path: process.env.NODE_ENV !== 'production' ? PATH_TO_DEV_DIST : PATH_TO_DIST,
     filename: 'bundle.js',
     chunkFilename: '[name].bundle.js',
     publicPath: '/',
@@ -64,17 +74,20 @@ export default {
     ],
   },
 
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+
   plugins: [
     new VueLoaderPlugin(),
     new webpack.NormalModuleReplacementPlugin(
       /element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/,
       'element-ui/lib/locale/lang/en'
     ),
+    new CleanWebpackPlugin(PATH_TO_DIST, CLEAN_OPTIONS),
   ],
-
-  // cheap-module-eval-source-map — original source (lines only) (rebuild faster)
-  // eval-source-map — original source
-  devtool: 'cheap-module-eval-source-map',
 
   devServer: {
     port: DEV_SERVER_PORT,

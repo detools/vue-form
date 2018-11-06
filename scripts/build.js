@@ -11,18 +11,13 @@ const options = {
   },
 }
 
-const STATS_FILE = 'webpack.stats.json'
-
 const command = [
   'node -r esm',
   bin('webpack'),
-  '--config example/webpack.prod.js',
+  '--config example/webpack.config.js',
   '--progress',
-  `--json > ${STATS_FILE}`,
+  '--mode production',
 ].join(' ')
 
 // Run Production Build
 execSync(command, options)
-
-// Analyze Production Build
-execSync(`node -r esm ${bin('webpack-bundle-size-analyzer')} ${STATS_FILE}`, options)
