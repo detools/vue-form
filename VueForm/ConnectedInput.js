@@ -35,6 +35,7 @@ export default withHooks((h, props, instance) => {
       value={value}
       size={props.size}
       type={props.type}
+      placeholder={props.placeholder}
       on-focus={focus}
       on-input={input}
       on-blur={blur}

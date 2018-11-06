@@ -6,7 +6,7 @@ const DEV_SERVER_PORT = 3000
 const PATH_TO_SRC = path.resolve(__dirname, 'src')
 const PATH_TO_VUE_FORM = path.resolve(__dirname, '..', 'VueForm')
 const PATH_TO_DEV_DIST = path.resolve(__dirname, 'public')
-const PATH_TO_NODE_MODULES = path.resolve(__dirname, 'node_modules')
+const PATH_TO_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules')
 
 export default {
   mode: 'development',

@@ -34,6 +34,8 @@ export default withHooks((h, props, instance) => {
       instance.$set(state, key, initialValue || Array.isArray(value) ? [] : '')
       instance.$set(errors, key, null)
     })
+
+    return handleSubmit(initialValues)
   }
 
   return (

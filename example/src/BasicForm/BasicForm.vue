@@ -17,13 +17,31 @@ export default {
 
   render() {
     return (
-      <div class="basic-form">
-        <Form handleSubmit={this.handleSubmit}>
-          <Input name="username" />
-          <Button nativeType="submit" type="primary">
-            Save
-          </Button>
-        </Form>
+      <div>
+        <h1>Basic Form</h1>
+        <div class="wrapper">
+          <div class="form">
+            <Form handleSubmit={this.handleSubmit}>
+              <Input name="username" placeholder="Username" />
+              <br />
+              <br />
+              <Button nativeType="reset">
+                Reset
+              </Button>
+              <Button nativeType="submit" type="primary">
+                Save
+              </Button>
+            </Form>
+          </div>
+          <div class="values">
+            <strong>Form Values</strong>
+            <br />
+            <br />
+            <div>
+              {JSON.stringify(this.formValues, null, 2)}
+            </div>
+          </div>
+        </div>
       </div>
     )
   },
@@ -31,8 +49,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.basic-form {
+.wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form, .values {
+  width: 320px;
 }
 </style>
