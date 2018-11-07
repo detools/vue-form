@@ -57,7 +57,9 @@ export default withHooks((h, props, instance) => {
       on-focus={focus}
       on-input={input}
       on-blur={blur}
-      on-change={change}
-    />
+      on-change={change}>
+      {Boolean(props.append) && <template slot="append">{props.append}</template>}
+      {Boolean(props.prepend) && <template slot="prepend">{props.prepend}</template>}
+    </Input>
   )
 })
