@@ -11,7 +11,9 @@ export default withHooks((h, props, instance) => {
   invariant(handleSubmit, 'Prop "handleSubmit" is required')
 
   instance.$registerFormComponent = (name, initialValue, error) => {
-    const formComponentInitialValue = !isNil(initialValue) ? initialValue : initialValues[name]
+    const formComponentInitialValue = !isNil(initialValues[name])
+      ? initialValues[name]
+      : initialValue
     const [value, setValue, setError] = useFormState(
       instance,
       name,
