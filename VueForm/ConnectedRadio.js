@@ -2,13 +2,14 @@ import { Radio } from 'element-ui'
 import { get, noop } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import defaultNormalizer from './defaultNormalizer'
 import { withHooks } from '../hooks'
 
 // XXX: Add RadioGroup
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
 
-  const { normalize = noop, validate = noop } = props
+  const { normalize = defaultNormalizer, validate = noop } = props
 
   const $registerFormComponent = resolveRegisterFormComponent(instance)
   const [value, setValue, setError] = $registerFormComponent(
@@ -18,7 +19,7 @@ export default withHooks((h, props, instance) => {
   )
 
   const input = inputValue => {
-    const nextValue = normalize(inputValue) || inputValue
+    const nextValue = normalize(inputValue)
     const isError = validate(nextValue)
 
     setValue(nextValue)

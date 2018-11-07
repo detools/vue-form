@@ -2,13 +2,19 @@ import { Select, Option } from 'element-ui'
 import { get, noop, isNil, castArray } from 'lodash'
 import invariant from 'invariant'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import defaultNormalizer from './defaultNormalizer'
 import { withHooks } from '../hooks'
 
 export default withHooks((h, props, instance) => {
   invariant(props.name, 'Prop "name" is required')
   invariant(Array.isArray(props.options), 'Prop "options" is required and should be an array')
 
-  const { normalize = noop, validate = noop, multiple = false, valueKey = 'value' } = props
+  const {
+    normalize = defaultNormalizer,
+    validate = noop,
+    multiple = false,
+    valueKey = 'value',
+  } = props
 
   let initialValue = props.value
   if (multiple) {
@@ -29,7 +35,7 @@ export default withHooks((h, props, instance) => {
   )
 
   const input = inputValue => {
-    const nextValue = normalize(inputValue) || inputValue
+    const nextValue = normalize(inputValue)
     const isError = validate(nextValue)
 
     setValue(nextValue)
