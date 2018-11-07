@@ -66,7 +66,9 @@ export function withHooks(render) {
     destroyed() {
       const { form } = this.$data._form
 
-      form.$delete(form.$data._state, this.$attrs.name)
+      if (form) {
+        form.$delete(form.$data._state, this.$attrs.name)
+      }
     },
   }
 }
