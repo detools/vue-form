@@ -16,14 +16,16 @@ function ensureCurrentInstance() {
 }
 
 export function useFormState(formInstance, id, initialValue, intiialError) {
+  ensureCurrentInstance()
+
   const { _state: state, _errors: errors } = formInstance.$data
 
   const updater = newValue => {
-    state[id] = newValue
+    formInstance.$set(state, id, newValue)
   }
 
   const validator = error => {
-    errors[id] = error
+    formInstance.$set(errors, id, error)
   }
 
   if (isMounting) {
@@ -31,7 +33,7 @@ export function useFormState(formInstance, id, initialValue, intiialError) {
     formInstance.$set(errors, id, intiialError)
   }
 
-  return [state[id], updater, validator]
+  return [state[id] || initialValue, updater, validator]
 }
 
 export function withHooks(render) {
@@ -54,6 +56,6 @@ export function withHooks(render) {
       const ret = render(h, this.$attrs, this)
       currentInstance = null
       return ret
-    }
+    },
   }
 }
