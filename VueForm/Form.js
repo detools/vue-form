@@ -5,7 +5,7 @@ import { withHooks, useFormState } from '../hooks'
 export default withHooks((h, props, instance) => {
   // eslint-disable-next-line
   const { _state: state, _errors: errors } = instance.$data
-  const { initialValues = {}, handleSubmit, handleDisabled } = props
+  const { initialValues = {}, handleSubmit, handleDisabled, handleReset } = props
 
   instance.$registerFormComponent = (name, initialValue, error) => {
     const formComponentInitialValue = !isNil(initialValue) ? initialValue : initialValues[name]
@@ -35,7 +35,7 @@ export default withHooks((h, props, instance) => {
       instance.$set(errors, key, null)
     })
 
-    return handleSubmit(initialValues)
+    return handleReset(initialValues)
   }
 
   return (
