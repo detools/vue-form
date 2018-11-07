@@ -6,14 +6,24 @@ import { withHooks, useFormState } from '../hooks'
 export default withHooks((h, props, instance) => {
   // eslint-disable-next-line
   const { _state: state, _errors: errors } = instance.$data
-  const { initialValues = {}, handleSubmit, handleDisabled, handleReset } = props
+  const { initialValues = {}, handleModelChange, handleSubmit, handleDisabled, handleReset } = props
 
   invariant(handleSubmit, 'Prop "handleSubmit" is required')
 
   instance.$registerFormComponent = (name, initialValue, error) => {
     const formComponentInitialValue = !isNil(initialValue) ? initialValue : initialValues[name]
+    const [value, setValue, setError] = useFormState(
+      instance,
+      name,
+      formComponentInitialValue,
+      error
+    )
 
-    return useFormState(instance, name, formComponentInitialValue, error)
+    if (handleModelChange) {
+      handleModelChange(state)
+    }
+
+    return [value, setValue, setError]
   }
 
   const nativeOnSubmit = event => {
