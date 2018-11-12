@@ -3,6 +3,8 @@
   All credits for Evan You
  */
 
+const has = require('lodash/has')
+
 let currentInstance = null
 let isMounting = false
 
@@ -38,7 +40,7 @@ export function useFormState(formInstance, id, initialValue, intiialError) {
     formInstance.$set(form, 'form', formInstance)
   }
 
-  return [state[id] || initialValue, updater, validator]
+  return [has(state, id) ? state[id] : initialValue, updater, validator]
 }
 
 export function withHooks(render) {
