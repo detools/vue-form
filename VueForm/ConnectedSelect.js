@@ -14,6 +14,7 @@ export default withHooks((h, props, instance) => {
     validate = noop,
     multiple = false,
     valueKey = 'value',
+    labelKey = 'label',
   } = props
 
   let initialValue = props.value
@@ -47,7 +48,7 @@ export default withHooks((h, props, instance) => {
   const change = get(props, 'handleChange', noop)
 
   const generateOptions = option => {
-    let { [valueKey]: optionValue, label: optionLabel } = option
+    let { [valueKey]: optionValue, [labelKey]: optionLabel } = option
 
     if (isNil(optionLabel)) {
       optionValue = option
