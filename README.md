@@ -60,7 +60,7 @@ export default {
 
 ## More Examples
 
-See source in [example/src](/example/src) folder
+See source in [example/src](/example/src) folder.  
 See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-form)
 
 ## Available Connected Components
