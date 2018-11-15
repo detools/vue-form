@@ -45,6 +45,7 @@ export default {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': PATH_TO_SRC,
+      '@detools/vue-form': PATH_TO_VUE_FORM,
     },
   },
 
@@ -63,11 +64,11 @@ export default {
         include: [PATH_TO_SRC, PATH_TO_VUE_FORM],
       },
       {
-        test: /\.s[a|c]ss$/,
+        test: /\.less$/,
         use: [
           !IS_PRODUCTION ? 'style-loader' : MiniCssExtractPlugin.loader, // CommonJS => Style nodes
           'css-loader', // CSS => CommonJS
-          'sass-loader', // Sass => CSS
+          'less-loader', // Less => CSS
         ],
       },
       {

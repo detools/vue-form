@@ -1,12 +1,9 @@
 import { DatePicker } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
 /**
- * DatePicker Componenet connected to @detools/vue-form
+ * DatePicker Component connected to @detools/vue-form
  * @see  http://element.eleme.io/#/en-US/component/date-picker#date-formats
  *
  * @param {Object} props Passed props
@@ -38,61 +35,106 @@ import { withHooks } from '../hooks'
  * @param {String} text title of the shortcut
  * @param {Function} onClick callback on that click
  */
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    value: [Date, String, Number],
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    readonly: Boolean,
+    disabled: Boolean,
+    size: String,
+    editable: Boolean,
+    clearable: Boolean,
+    placeholder: String,
+    startPlaceholder: String,
+    endPlaceholder: String,
+    type: String,
+    format: {
+      type: String,
+      default: () => 'MM/dd/yyyy',
+    },
+    align: String,
+    popperClass: String,
+    pickerOptions: Array,
+    rangeSeparator: String,
+    defaultValue: [Date, String, Number],
+    defaultTime: String,
+    valueFormat: {
+      type: String,
+      default: () => 'MM/dd/yyyy',
+    },
+    unlinkPanels: Boolean,
+    prefixIcon: String,
+    clearIcon: String,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  const format = 'MM/dd/yyyy'
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
 
-  return (
-    <DatePicker
-      class={props.class}
-      name={props.name}
-      value={value}
-      readonly={props.readonly}
-      disabled={props.disabled}
-      size={props.size}
-      editable={props.editable || false}
-      clearable={props.clearable}
-      placeholder={props.placeholder}
-      start-placeholder={props.startPlaceholder}
-      end-placeholder={props.endPlaceholder}
-      type={props.type}
-      format={props.format || format}
-      align={props.align}
-      popper-class={props.popperClass}
-      picker-options={props.pickerOptions}
-      range-separator={props.rangeSeparator}
-      defaul-value={props.defaulValue}
-      defaul-time={props.defaultTime}
-      value-format={props.valueFormat || format}
-      unlink-panels={props.unlinkPanels}
-      prefix-icon={props.prefixPanels}
-      clear-icon={props.clearPanels}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}
-    />
-  )
-})
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <DatePicker
+        class={this.class}
+        name={this.name}
+        value={value}
+        readonly={this.readonly}
+        disabled={this.disabled}
+        size={this.size}
+        editable={this.editable}
+        clearable={this.clearable}
+        placeholder={this.placeholder}
+        start-placeholder={this.startPlaceholder}
+        end-placeholder={this.endPlaceholder}
+        type={this.type}
+        format={this.format}
+        align={this.align}
+        popper-class={this.popperClass}
+        picker-options={this.pickerOptions}
+        range-separator={this.rangeSeparator}
+        default-value={this.defaultValue}
+        default-time={this.defaultTime}
+        value-format={this.valueFormat}
+        unlink-panels={this.unlinkPanels}
+        prefix-icon={this.prefixIcon}
+        clear-icon={this.clearIcon}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}
+      />
+    )
+  },
+}

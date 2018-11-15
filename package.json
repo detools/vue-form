@@ -1,6 +1,6 @@
 {
   "name": "@detools/vue-form",
-  "version": "1.0.13",
+  "version": "1.1.0",
   "description": "Vue Form component on hooks",
   "main": "VueForm/index.js",
   "scripts": {
@@ -48,10 +48,10 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "esm": "^3.0.84",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.4.4",
-    "node-sass": "^4.10.0",
-    "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "vue": "^2.5.17",
@@ -65,8 +65,5 @@
     "element-ui": "^2.4.9",
     "lodash": "^4.17.11",
     "vue": "^2.5.17"
-  },
-  "dependencies": {
-    "invariant": "^2.2.4"
   }
 }

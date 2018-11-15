@@ -1,48 +1,70 @@
 import { Slider } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    value: Number,
+    step: Number,
+    min: Number,
+    max: Number,
+    showStops: Boolean,
+    showInput: Boolean,
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
 
-  return (
-    <Slider
-      class={props.class}
-      name={props.name}
-      value={value}
-      step={props.step}
-      min={props.min}
-      max={props.max}
-      show-stops={props.showStops}
-      show-input={props.showInput}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}
-    />
-  )
-})
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <Slider
+        class={this.class}
+        name={this.name}
+        value={value}
+        step={this.step}
+        min={this.min}
+        max={this.max}
+        show-stops={this.showStops}
+        show-input={this.showInput}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}
+      />
+    )
+  },
+}

@@ -1,52 +1,84 @@
 import { Switch } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = noop, validate = noop } = props
+    value: {
+      type: Boolean,
+      default: () => false,
+    },
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    disabled: Boolean,
+    width: String,
+    activeIconClass: String,
+    inactiveIconClass: String,
+    activeText: String,
+    inactiveText: String,
+    activeValue: [String, Number],
+    inactiveValue: [String, Number],
+    activeColor: String,
+    inactiveColor: String,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue) || inputValue
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  return (
-    <Switch
-      class={props.class}
-      name={props.name}
-      value={value}
-      disabled={props.disabled}
-      width={props.width}
-      active-icon-class={props.activeIconClass}
-      inactive-icon-class={props.inactiveIconClass}
-      active-text={props.activeText}
-      inactive-text={props.inactiveText}
-      active-value={props.activeValue}
-      inactive-value={props.inactiveValue}
-      active-color={props.activeColor}
-      inactive-color={props.inactiveColor}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}
-    />
-  )
-})
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <Switch
+        class={this.class}
+        name={this.name}
+        value={value}
+        disabled={this.disabled}
+        width={this.width}
+        active-icon-class={this.activeIconClass}
+        inactive-icon-class={this.inactiveIconClass}
+        active-text={this.activeText}
+        inactive-text={this.inactiveText}
+        active-value={this.activeValue}
+        inactive-value={this.inactiveValue}
+        active-color={this.activeColor}
+        inactive-color={this.inactiveColor}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}
+      />
+    )
+  },
+}

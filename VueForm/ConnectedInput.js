@@ -1,67 +1,109 @@
 import { Input } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    type: String,
+    value: [String, Number],
+    maxlength: Number,
+    minLength: Number,
+    placeholder: String,
+    clearable: Boolean,
+    disabled: Boolean,
+    size: String,
+    prefixIcon: String,
+    suffixIcon: String,
+    rows: Number,
+    autosize: Boolean,
+    autocomplete: {
+      type: String,
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+      // Autocomplete === 'off' does not work in Chrome
+      default: () => 'nope',
+    },
+    readonly: Boolean,
+    max: Number,
+    min: Number,
+    step: Number,
+    resize: String,
+    autofocus: Boolean,
+    form: String,
+    label: String,
+    tabindex: Number,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  return (
-    <Input
-      class={props.class}
-      name={props.name}
-      type={props.type}
-      value={value}
-      maxlength={props.maxlength}
-      minLength={props.minLength}
-      placeholder={props.placeholder}
-      clearable={props.clearable}
-      disabled={props.disabled}
-      size={props.size}
-      prefix-icon={props.prefixIcon}
-      suffix-icon={props.suffixIcon}
-      rows={props.rows}
-      autosize={props.autosize}
-      // Autocomplete === 'off' does not work on Chrome
-      autocomplete={props.autocomplete || 'nope'}
-      readonly={props.readonly}
-      max={props.max}
-      min={props.min}
-      step={props.step}
-      resize={props.resize}
-      autofocus={props.autofocus}
-      form={props.form}
-      label={props.label}
-      tabindex={props.tabindex}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}>
-      {Boolean(props.append) && <template slot="append">{props.append}</template>}
-      {Boolean(props.prepend) && <template slot="prepend">{props.prepend}</template>}
-    </Input>
-  )
-})
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <Input
+        class={this.class}
+        name={this.name}
+        type={this.type}
+        value={value}
+        maxlength={this.maxlength}
+        minLength={this.minLength}
+        placeholder={this.placeholder}
+        clearable={this.clearable}
+        disabled={this.disabled}
+        size={this.size}
+        prefix-icon={this.prefixIcon}
+        suffix-icon={this.suffixIcon}
+        rows={this.rows}
+        autosize={this.autosize}
+        autocomplete={this.autocomplete}
+        readonly={this.readonly}
+        max={this.max}
+        min={this.min}
+        step={this.step}
+        resize={this.resize}
+        autofocus={this.autofocus}
+        form={this.form}
+        label={this.label}
+        tabindex={this.tabindex}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}>
+        {Boolean(this.append) && <template slot="append">{this.append}</template>}
+        {Boolean(this.prepend) && <template slot="prepend">{this.prepend}</template>}
+      </Input>
+    )
+  },
+}

@@ -1,15 +1,17 @@
 
-.wrapper[data-v-436663c0] {
+.wrapper[data-v-3ad6904c] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.form[data-v-436663c0], .values[data-v-436663c0] {
+.form[data-v-3ad6904c],
+.values[data-v-3ad6904c] {
   width: 320px;
 }
 
 
-.forms[data-v-a33a3c70] {
+.forms[data-v-71e3d4df] {
   max-width: 800px;
+  padding: 0 20px;
 }
 

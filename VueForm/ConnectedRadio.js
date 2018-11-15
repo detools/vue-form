@@ -1,49 +1,69 @@
 import { Radio } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
 // XXX: Add RadioGroup
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    value: [String, Number, Boolean],
+    disabled: Boolean,
+    border: Boolean,
+    size: String,
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
 
-  return (
-    <Radio
-      class={props.class}
-      name={props.name}
-      value={value}
-      label={props.value}
-      disabled={props.disabled}
-      border={props.border}
-      size={props.size}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}>
-      {instance.$slots.default}
-    </Radio>
-  )
-})
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <Radio
+        class={this.class}
+        name={this.name}
+        value={value}
+        label={this.value}
+        disabled={this.disabled}
+        border={this.border}
+        size={this.size}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}>
+        {this.$slots.default}
+      </Radio>
+    )
+  },
+}

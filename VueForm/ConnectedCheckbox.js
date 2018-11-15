@@ -1,52 +1,81 @@
 import { Checkbox } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    value: {
+      type: Boolean,
+      default: () => false,
+    },
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    label: String,
+    trueLabel: String,
+    falseLabel: String,
+    disabled: Boolean,
+    border: Boolean,
+    size: String,
+    checked: String,
+    indeterminate: String,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  return (
-    <Checkbox
-      class={props.class}
-      name={props.name}
-      value={value}
-      label={props.label}
-      true-label={props.trueLabel}
-      false-label={props.falseLabel}
-      disabled={props.disabled}
-      border={props.border}
-      size={props.size}
-      checked={props.checked}
-      indeterminate={props.indeterminate}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}>
-      {instance.$slots.default}
-    </Checkbox>
-  )
-})
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <Checkbox
+        class={this.class}
+        name={this.name}
+        value={value}
+        label={this.label}
+        true-label={this.trueLabel}
+        false-label={this.falseLabel}
+        disabled={this.disabled}
+        border={this.border}
+        size={this.size}
+        checked={this.checked}
+        indeterminate={this.indeterminate}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}>
+        {this.$slots.default}
+      </Checkbox>
+    )
+  },
+}

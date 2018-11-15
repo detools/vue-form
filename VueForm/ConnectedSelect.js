@@ -1,96 +1,156 @@
 import { Select, Option } from 'element-ui'
-import { get, noop, isNil, castArray } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
+import isNil from 'lodash/isNil'
+import castArray from 'lodash/castArray'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
-  invariant(Array.isArray(props.options), 'Prop "options" is required and should be an array')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const {
-    normalize = defaultNormalizer,
-    validate = noop,
-    multiple = false,
-    valueKey = 'value',
-    labelKey = 'label',
-  } = props
+    options: {
+      type: Array,
+      required: true,
+    },
 
-  let initialValue = props.value
-  if (multiple) {
-    // If there is no defined "value" inside props — use an empty array
-    if (isNil(initialValue)) {
-      initialValue = []
-    } else if (!Array.isArray(initialValue)) {
-      // If there is a non-null value, but it is not an array — cast it to an array
-      initialValue = castArray(initialValue)
+    value: [Number, String, Array],
+
+    valueKey: {
+      type: String,
+      default: () => 'id',
+    },
+
+    labelKey: {
+      type: String,
+      default: () => 'name',
+    },
+
+    multiple: {
+      type: Boolean,
+      default: () => false,
+    },
+
+    autocomplete: {
+      type: String,
+
+      // Autocomplete === 'off' does not work in Chrome
+      default: () => 'nope',
+    },
+
+    disabled: Boolean,
+    size: String,
+    clearable: Boolean,
+    collapseTags: Boolean,
+    multipleLimit: Number,
+    placeholder: String,
+    filterable: Boolean,
+    allowCreate: Boolean,
+    filterMethod: Function,
+    remote: Boolean,
+    remoteMethod: Function,
+    loading: Boolean,
+    loadingText: String,
+    noMatchText: String,
+    noDataText: String,
+    reserveKeyword: String,
+    defaultFirstOption: [String, Number],
+    popperAppendToBody: Boolean,
+    automaticDropdown: Boolean,
+
+    validate: {
+      type: Function,
+      default: noop,
+    },
+
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
+
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
+
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  methods: {
+    generateOptions(option) {
+      let { [this.valueKey]: optionValue, [this.labelKey]: optionLabel } = option
+
+      if (isNil(optionLabel)) {
+        optionValue = option
+        optionLabel = option
+      }
+
+      return <Option key={optionValue} label={optionLabel} value={optionValue} />
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    let initialValue = this.value
+    if (this.multiple) {
+      // If there is no defined "value" inside props — use an empty array
+      if (isNil(initialValue)) {
+        initialValue = []
+      } else if (!Array.isArray(initialValue)) {
+        // If there is a non-null value, but it is not an array — cast it to an array
+        initialValue = castArray(initialValue)
+      }
     }
-  }
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    initialValue,
-    validate(initialValue)
-  )
+    return $registerFormComponent(this.name, initialValue, this.validate)
+  },
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+  destroyed() {
+    this.cleanFormValue()
+  },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+  render() {
+    const [value, setValue] = this.useState()
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
-
-  const generateOptions = option => {
-    let { [valueKey]: optionValue, [labelKey]: optionLabel } = option
-
-    if (isNil(optionLabel)) {
-      optionValue = option
-      optionLabel = option
-    }
-
-    return <Option key={optionValue} label={optionLabel} value={optionValue} />
-  }
-
-  return (
-    <Select
-      class={props.class}
-      name={props.name}
-      value={value}
-      multiple={multiple}
-      disabled={props.disabled}
-      value-key={valueKey}
-      size={props.size}
-      clearable={props.clearable}
-      collapse-tags={props.collapseTags}
-      multiple-limit={props.multipleLimit}
-      // Autocomplete === 'off' does not work on Chrome
-      autocomplete={props.autocomplete || 'nope'}
-      placeholder={props.placeholder}
-      filterable={props.filterable}
-      allow-create={props.allowCreate}
-      filter-method={props.filterMethod}
-      remote={props.remote}
-      remote-method={props.remoteMethod}
-      loading={props.loading}
-      loading-text={props.loadingText}
-      no-match-text={props.noMatchText}
-      no-data-text={props.noDataText}
-      reserve-keyword={props.reserveKeyword}
-      default-first-option={props.defaultFirstOption}
-      popper-append-to-body={props.popperAppendToBody}
-      automatic-dropdown={props.automaticDropdown}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}>
-      {props.options.map(generateOptions)}
-    </Select>
-  )
-})
+    return (
+      <Select
+        class={this.class}
+        name={this.name}
+        value={value}
+        multiple={this.multiple}
+        disabled={this.disabled}
+        value-key={this.valueKey}
+        size={this.size}
+        clearable={this.clearable}
+        collapse-tags={this.collapseTags}
+        multiple-limit={this.multipleLimit}
+        autocomplete={this.autocomplete}
+        placeholder={this.placeholder}
+        filterable={this.filterable}
+        allow-create={this.allowCreate}
+        filter-method={this.filterMethod}
+        remote={this.remote}
+        remote-method={this.remoteMethod}
+        loading={this.loading}
+        loading-text={this.loadingText}
+        no-match-text={this.noMatchText}
+        no-data-text={this.noDataText}
+        reserve-keyword={this.reserveKeyword}
+        default-first-option={this.defaultFirstOption}
+        popper-append-to-body={this.popperAppendToBody}
+        automatic-dropdown={this.automaticDropdown}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}>
+        {this.options.map(this.generateOptions)}
+      </Select>
+    )
+  },
+}

@@ -1,61 +1,97 @@
 import { TimeSelect } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  invariant(props.name, 'Prop "name" is required')
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  const { normalize = defaultNormalizer, validate = noop } = props
+    value: [Date, String, Number],
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    readonly: Boolean,
+    disabled: Boolean,
+    editable: Boolean,
+    clearable: Boolean,
+    size: String,
+    placeholder: String,
+    startPlaceholder: String,
+    endPlaceholder: String,
+    isRange: Boolean,
+    arrowControl: Boolean,
+    align: String,
+    popperClass: String,
+    pickerOptions: Array,
+    rangeSeparator: String,
+    defaultValue: [Date, String, Number],
+    valueFormat: String,
+    prefixIcon: String,
+    clearIcon: String,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  return (
-    <TimeSelect
-      class={props.class}
-      name={props.name}
-      value={value}
-      readonly={props.readonly}
-      disabled={props.disabled}
-      editable={props.editable}
-      clearable={props.clearable}
-      size={props.size}
-      placeholder={props.placeholder}
-      start-placeholder={props.startPlaceholder}
-      end-placeholder={props.endPlaceholder}
-      is-range={props.isRange}
-      arrow-control={props.arrowControl}
-      align={props.align}
-      popper-class={props.popperClass}
-      picker-options={props.pickerOptions}
-      range-separator={props.rangeSeparator}
-      default-value={props.defaultValue}
-      value-format={props.valueFormat}
-      prefix-icon={props.prefixPanels}
-      clear-icon={props.clearPanels}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}
-    />
-  )
-})
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <TimeSelect
+        class={this.class}
+        name={this.name}
+        value={value}
+        readonly={this.readonly}
+        disabled={this.disabled}
+        editable={this.editable}
+        clearable={this.clearable}
+        size={this.size}
+        placeholder={this.placeholder}
+        start-placeholder={this.startPlaceholder}
+        end-placeholder={this.endPlaceholder}
+        is-range={this.isRange}
+        arrow-control={this.arrowControl}
+        align={this.align}
+        popper-class={this.popperClass}
+        picker-options={this.pickerOptions}
+        range-separator={this.rangeSeparator}
+        default-value={this.defaultValue}
+        value-format={this.valueFormat}
+        prefix-icon={this.prefixIcon}
+        clear-icon={this.clearIcon}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}
+      />
+    )
+  },
+}

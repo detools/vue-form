@@ -1,6 +1,6 @@
 # vue-form
 
-Vue Form component on hooks
+Form State Management for VueJS
 
 ## Installation
 

@@ -1,69 +1,116 @@
-import { isEmpty, isNil } from 'lodash'
+import { isEmpty, isNil, has } from 'lodash'
 import { Form } from 'element-ui'
-import invariant from 'invariant'
-import { withHooks, useFormState } from '../hooks'
+import CONSTANTS from './constants'
 
-export default withHooks((h, props, instance) => {
-  // eslint-disable-next-line
-  const { _state: state, _errors: errors } = instance.$data
-  const { initialValues = {}, handleModelChange, handleSubmit, handleDisabled, handleReset } = props
+export default {
+  props: {
+    labelWidth: String,
+    labelSuffix: String,
+    labelPosition: String,
+    initialValues: {
+      type: Object,
+      default: () => ({}),
+    },
+    handleModelChange: Function,
+    handleSubmit: {
+      type: Function,
+      required: true,
+    },
+    handleDisabled: Function,
+    handleReset: Function,
+  },
 
-  invariant(handleSubmit, 'Prop "handleSubmit" is required')
-
-  instance.$registerFormComponent = (name, initialValue, error) => {
-    const formComponentInitialValue = !isNil(initialValues[name])
-      ? initialValues[name]
-      : initialValue
-    const [value, setValue, setError] = useFormState(
-      instance,
-      name,
-      formComponentInitialValue,
-      error
-    )
-
-    if (handleModelChange) {
-      handleModelChange(state)
+  data() {
+    return {
+      state: {},
+      errors: {},
+      form: {},
     }
+  },
 
-    return [value, setValue, setError]
-  }
+  methods: {
+    // Should be called once
+    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validate) {
+      const vm = this
 
-  const nativeOnSubmit = event => {
-    event.preventDefault()
+      const formLevelInitialValue = vm.initialValues[name]
+      const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
-    if (handleDisabled) {
-      if (Object.values(errors).some(item => !isEmpty(item))) {
-        return handleDisabled(errors)
+      const setError = nextValue => {
+        const error = validate(nextValue)
+
+        if (error) {
+          vm.$set(this.errors, name, error)
+        }
       }
-    }
 
-    return handleSubmit({ ...initialValues, ...state })
-  }
+      const setValue = nextValue => {
+        vm.$set(this.state, name, nextValue)
 
-  const nativeOnReset = event => {
-    event.preventDefault()
+        setError(nextValue)
+      }
 
-    Object.entries(state).forEach(([key, value]) => {
-      const initialValue = initialValues[key]
+      if (!has(this.state, name)) {
+        setValue(value)
+      }
 
-      instance.$set(state, key, initialValue || Array.isArray(value) ? [] : '')
-      instance.$set(errors, key, null)
-    })
+      const cleanFormValue = () => {
+        vm.$delete(this.state, name)
+        vm.$delete(this.errors, name)
+      }
 
-    if (handleReset) {
-      handleReset(initialValues)
-    }
-  }
+      if (this.handleModelChange) {
+        this.handleModelChange({ ...this.state, [name]: value })
+      }
 
-  return (
-    <Form
-      class={props.class}
-      label-width={props.labelWidth}
-      label-suffix={props.labelSuffix}
-      label-position={props.labelPosition}
-      nativeOnSubmit={nativeOnSubmit}
-      nativeOnReset={nativeOnReset}>
-      {instance.$slots.default}
-    </Form>
-  )
-})
+      return {
+        cleanFormValue,
+        setError,
+        useState: () => [this.state[name], setValue],
+      }
+    },
+
+    nativeOnSubmit(event) {
+      event.preventDefault()
+
+      if (this.handleDisabled) {
+        if (Object.values(this.errors).some(item => !isEmpty(item))) {
+          return this.handleDisabled(this.errors)
+        }
+      }
+
+      return this.handleSubmit({ ...this.initialValues, ...this.state })
+    },
+
+    nativeOnReset(event) {
+      event.preventDefault()
+
+      const vm = this
+
+      Object.entries(this.state).forEach(([key, value]) => {
+        const initialValue = this.initialValues[key]
+
+        vm.$set(this.state, key, initialValue || Array.isArray(value) ? [] : '')
+        vm.$set(this.errors, key, null)
+      })
+
+      if (this.handleReset) {
+        this.handleReset(this.initialValues)
+      }
+    },
+  },
+
+  render() {
+    return (
+      <Form
+        class={this.class}
+        label-width={this.labelWidth}
+        label-suffix={this.labelSuffix}
+        label-position={this.labelPosition}
+        nativeOnSubmit={this.nativeOnSubmit}
+        nativeOnReset={this.nativeOnReset}>
+        {this.$slots.default}
+      </Form>
+    )
+  },
+}

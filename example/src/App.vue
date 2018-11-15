@@ -12,8 +12,9 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .forms {
   max-width: 800px;
+  padding: 0 20px;
 }
 </style>

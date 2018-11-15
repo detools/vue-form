@@ -1,52 +1,82 @@
 import { InputNumber } from 'element-ui'
-import { get, noop } from 'lodash'
-import invariant from 'invariant'
+import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './resolveRegisterFormComponent'
-import defaultNormalizer from './defaultNormalizer'
-import { withHooks } from '../hooks'
 
-export default withHooks((h, props, instance) => {
-  const { normalize = defaultNormalizer, validate = noop } = props
+export default {
+  props: {
+    name: {
+      type: String,
+      required: true,
+    },
 
-  invariant(props.name, 'Prop "name" is required')
+    value: {
+      type: Number,
+      default: () => 0,
+    },
 
-  const $registerFormComponent = resolveRegisterFormComponent(instance)
-  const [value, setValue, setError] = $registerFormComponent(
-    props.name,
-    props.value,
-    validate(props.value)
-  )
+    label: String,
+    min: Number,
+    max: Number,
+    step: Number,
+    precision: Number,
+    size: String,
+    disabled: Boolean,
+    controls: Boolean,
+    controlsPosition: String,
 
-  const input = inputValue => {
-    const nextValue = normalize(inputValue)
-    const isError = validate(nextValue)
+    validate: {
+      type: Function,
+      default: noop,
+    },
 
-    setValue(nextValue)
-    setError(isError)
-  }
+    handleFocus: {
+      type: Function,
+      default: noop,
+    },
 
-  const focus = get(props, 'handleFocus', noop)
-  const blur = get(props, 'handleBlur', noop)
-  const change = get(props, 'handleChange', noop)
+    handleBlur: {
+      type: Function,
+      default: noop,
+    },
 
-  return (
-    <InputNumber
-      class={props.class}
-      name={props.name}
-      value={value}
-      min={props.min}
-      max={props.max}
-      step={props.step}
-      precision={props.precision}
-      size={props.size}
-      disabled={props.disabled}
-      controls={props.controls}
-      controls-position={props.controlsPosition}
-      label={props.label}
-      on-focus={focus}
-      on-input={input}
-      on-blur={blur}
-      on-change={change}
-    />
-  )
-})
+    handleChange: {
+      type: Function,
+      default: noop,
+    },
+  },
+
+  data() {
+    const $registerFormComponent = resolveRegisterFormComponent(this)
+
+    return $registerFormComponent(this.name, this.value, this.validate)
+  },
+
+  destroyed() {
+    this.cleanFormValue()
+  },
+
+  render() {
+    const [value, setValue] = this.useState()
+
+    return (
+      <InputNumber
+        class={this.class}
+        name={this.name}
+        value={value}
+        min={this.min}
+        max={this.max}
+        step={this.step}
+        precision={this.precision}
+        size={this.size}
+        disabled={this.disabled}
+        controls={this.controls}
+        controls-position={this.controlsPosition}
+        label={this.label}
+        on-input={setValue}
+        on-focus={this.handleFocus}
+        on-blur={this.handleBlur}
+        on-change={this.handleChange}
+      />
+    )
+  },
+}
