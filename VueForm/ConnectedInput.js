@@ -45,7 +45,8 @@ export default withHooks((h, props, instance) => {
       suffix-icon={props.suffixIcon}
       rows={props.rows}
       autosize={props.autosize}
-      autocomplete={props.autocomplete}
+      // Autocomplete === 'off' does not work on Chrome
+      autocomplete={props.autocomplete || 'nope'}
       readonly={props.readonly}
       max={props.max}
       min={props.min}

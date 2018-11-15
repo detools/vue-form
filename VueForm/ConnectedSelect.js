@@ -70,7 +70,8 @@ export default withHooks((h, props, instance) => {
       clearable={props.clearable}
       collapse-tags={props.collapseTags}
       multiple-limit={props.multipleLimit}
-      autocomplete={props.autocomplete}
+      // Autocomplete === 'off' does not work on Chrome
+      autocomplete={props.autocomplete || 'nope'}
       placeholder={props.placeholder}
       filterable={props.filterable}
       allow-create={props.allowCreate}
