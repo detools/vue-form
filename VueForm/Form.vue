@@ -129,8 +129,8 @@ export default {
       Object.entries(this.state).forEach(([key, value]) => {
         const initialValue = this.initialValues[key]
 
-        vm.$set(this.state, key, initialValue || Array.isArray(value) ? [] : '')
-        vm.$set(this.errors, key, null)
+        vm.$set(this.state, key, initialValue || (Array.isArray(value) ? [] : ''))
+        vm.$delete(this.errors, key)
       })
 
       if (this.handleReset) {
