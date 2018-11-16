@@ -140,6 +140,7 @@ export default {
 
     reinitializeValues(updatedInitialValues) {
       this.state = mapValues(this.state, (value, key) => updatedInitialValues[key])
+      this.errors = {}
     },
 
     renderPlainButtons() {
@@ -165,7 +166,10 @@ export default {
             </Button>
           )}
           {this.submit && (
-            <Button type={this.save ? 'danger' : 'primary'} on-click={this.nativeOnSubmit}>
+            <Button
+              type={this.save ? 'danger' : 'primary'}
+              disabled={!this.isValid && !this.handleDisabled}
+              on-click={this.nativeOnSubmit}>
               {buttons.submit}
             </Button>
           )}
