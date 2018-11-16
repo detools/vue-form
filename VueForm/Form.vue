@@ -168,6 +168,7 @@ export default {
           {this.submit && (
             <Button
               type={this.save ? 'danger' : 'primary'}
+              nativeType={!this.save ? 'submit' : undefined}
               disabled={!this.isValid && !this.handleDisabled}
               on-click={this.nativeOnSubmit}>
               {buttons.submit}
