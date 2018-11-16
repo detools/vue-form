@@ -1,5 +1,5 @@
 import isNil from 'lodash/isNil'
-import CONSTANTS from './constants'
+import CONSTANTS from '../constants'
 
 export default function resolveRegisterFormComponent(formComponent) {
   let parent = formComponent.$parent

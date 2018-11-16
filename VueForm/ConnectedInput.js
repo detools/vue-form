@@ -1,6 +1,6 @@
 import { Input } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
 import FormItem from './ConnectedFormItem'
 
 export default {

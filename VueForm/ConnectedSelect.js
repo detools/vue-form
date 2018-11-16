@@ -2,7 +2,7 @@ import { Select, Option } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
-import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
 
 export default {
   props: {

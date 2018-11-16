@@ -1,6 +1,6 @@
 import { DatePicker } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
 
 /**
  * DatePicker Component connected to @detools/vue-form

@@ -1,6 +1,6 @@
 import { InputNumber } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './resolveRegisterFormComponent'
+import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
 
 export default {
   props: {

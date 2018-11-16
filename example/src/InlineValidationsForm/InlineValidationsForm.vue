@@ -1,18 +1,5 @@
 <script>
-import { Button } from 'element-ui'
-import Form, {
-  FormItem,
-  Input,
-  Checkbox,
-  InputNumber,
-  Radio,
-  Select,
-  Slider,
-  Switch,
-  TimePicker,
-  DatePicker,
-  validations,
-} from '@detools/vue-form'
+import Form, { Input, validations } from '@detools/vue-form'
 
 export default {
   data() {
@@ -35,21 +22,6 @@ export default {
     handleSubmit(values) {
       this.formValues = values
     },
-
-    validateUsername(value) {
-      const name = 'Username'
-
-      return [
-        validations.isRequired(value, name),
-        validations.length(value, name, { min: 6 }),
-      ].reduce((error, validator) => {
-        if (error) {
-          return error
-        }
-
-        return validator()
-      }, undefined)
-    },
   },
 
   render() {
@@ -61,9 +33,12 @@ export default {
             <Form reset save submit handleSubmit={this.handleSubmit}>
               <Input
                 formItem
-                name="validUsername"
+                name="usename"
                 label="Username"
-                validate={this.validateUsername}
+                validate={validations.validate([
+                  validations.isRequired(),
+                  validations.length({ min: 6 }),
+                ])}
               />
             </Form>
           </div>
