@@ -16,8 +16,7 @@ npm i @detools/vue-form
 
 ## Usage
 
-```vue
-<script>
+```js
 import { Button } from 'element-ui'
 import Form, { Input } from '@detools/vue-form'
 
@@ -61,7 +60,6 @@ export default {
     )
   },
 }
-</script>
 ```
 
 ## More Examples
