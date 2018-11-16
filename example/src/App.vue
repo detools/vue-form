@@ -1,11 +1,15 @@
 <script>
 import BasicForm from './BasicForm'
+import InlineValidationsForm from './InlineValidationsForm'
 
 export default {
   render() {
     return (
       <div class="forms">
         <BasicForm />
+        <br />
+        <hr />
+        <InlineValidationsForm />
       </div>
     )
   },

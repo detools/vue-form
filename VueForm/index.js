@@ -1,5 +1,4 @@
-import { FormItem } from 'element-ui'
-
+import Form from './Form'
 import Radio from './ConnectedRadio'
 import Checkbox from './ConnectedCheckbox'
 import Input from './ConnectedInput'
@@ -9,8 +8,8 @@ import Switch from './ConnectedSwitch'
 import Slider from './ConnectedSlider'
 import TimePicker from './ConnectedTimePicker'
 import DatePicker from './ConnectedDatePicker'
-
-import Form from './Form'
+import FormItem from './ConnectedFormItem'
+import validations from './validations'
 
 export {
   Radio,
@@ -23,6 +22,7 @@ export {
   TimePicker,
   DatePicker,
   FormItem,
+  validations,
 }
 
 export default Form
