@@ -1,4 +1,32 @@
 
+.buttons[data-v-64179966] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.buttons_center[data-v-64179966] {
+  justify-content: center;
+}
+.buttons_end[data-v-64179966] {
+  justify-content: flex-end;
+}
+
+
+.is-vue-form-warn .el-form-item__error {
+  color: #FF9800;
+}
+.is-vue-form-warn .el-form-item.is-error .el-input__inner,
+.is-vue-form-warn .el-form-item.is-error .el-input__inner:focus,
+.is-vue-form-warn .el-form-item.is-error .el-textarea__inner,
+.is-vue-form-warn .el-form-item.is-error .el-textarea__inner:focus,
+.is-vue-form-warn .el-message-box__input input.invalid,
+.is-vue-form-warn .el-message-box__input input.invalid:focus {
+  border-color: #FF9800;
+}
+
+
 .wrapper[data-v-3ad6904c] {
   display: flex;
   flex-direction: row;
@@ -10,7 +38,18 @@
 }
 
 
-.forms[data-v-71e3d4df] {
+.wrapper[data-v-5a0d7b3a] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form[data-v-5a0d7b3a],
+.values[data-v-5a0d7b3a] {
+  width: 320px;
+}
+
+
+.forms[data-v-8de40e3e] {
   max-width: 800px;
   padding: 0 20px;
 }

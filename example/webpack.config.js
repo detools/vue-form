@@ -15,7 +15,7 @@ const PATH_TO_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules')
 const CLEAN_OPTIONS = {
   // Instead of this ugly hack — we will get "wwwroot is outside of the project root. Skipping..."
   root: path.resolve(PATH_TO_DIST, '..'),
-  exclude: ['index.html'],
+  exclude: ['index.html', 'favicon.png'],
   verbose: true,
   dry: false,
 }
