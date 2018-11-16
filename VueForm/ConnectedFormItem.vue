@@ -10,7 +10,7 @@ export default {
 
   render() {
     return (
-      <FormItem label={this.label} label-width={this.labelWwidth} error={this.error}>
+      <FormItem label={this.label} label-width={this.labelWidth} error={this.error}>
         {this.$slots.default}
       </FormItem>
     )
