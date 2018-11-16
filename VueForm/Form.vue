@@ -1,12 +1,14 @@
 <script>
 import { isNil, isBoolean, has, mapValues } from 'lodash'
 import { Form, Button } from 'element-ui'
+import FormItem from './ConnectedFormItem'
 import CONSTANTS from './constants'
 
 const BUTTONS_POSITION = {
   START: 'start',
   CENTER: 'center',
   END: 'end',
+  LABEL: 'label',
 }
 
 export default {
@@ -139,38 +141,22 @@ export default {
     reinitializeValues(updatedInitialValues) {
       this.state = mapValues(this.state, (value, key) => updatedInitialValues[key])
     },
-  },
 
-  render() {
-    const className = [
-      this.class, {
-        'is-vue-form-error': !this.isValid && !this.save,
-        'is-vue-form-warn': !this.isValid && this.save,
-      },
-    ]
+    renderPlainButtons() {
+      const buttons = {
+        reset: isBoolean(this.reset) ? 'Reset' : this.reset,
+        save: isBoolean(this.save) ? 'Save' : this.save,
+        submit: isBoolean(this.submit) ? 'Submit' : this.submit,
+      }
 
-    const buttons = {
-      reset: isBoolean(this.reset) ? 'Reset' : this.reset,
-      save: isBoolean(this.save) ? 'Save' : this.save,
-      submit: isBoolean(this.submit) ? 'Submit' : this.submit,
-    }
+      const buttonsClassName = [
+        'buttons', {
+          buttons_center: this.buttonsPosition === BUTTONS_POSITION.CENTER,
+          buttons_end: this.buttonsPosition === BUTTONS_POSITION.END,
+        },
+      ]
 
-    const buttonsClassName = [
-      'buttons', {
-        buttons_center: this.buttonsPosition === BUTTONS_POSITION.CENTER,
-        buttons_end: this.buttonsPosition === BUTTONS_POSITION.END,
-      },
-    ]
-
-    return (
-      <Form
-        class={className}
-        label-width={this.labelWidth}
-        label-suffix={this.labelSuffix}
-        label-position={this.labelPosition}
-        nativeOnSubmit={this.nativeOnSubmit}
-        nativeOnReset={this.nativeOnReset}>
-        {this.$slots.default}
+      return (
         <div class={buttonsClassName}>
           {this.reset && <Button nativeType="reset">{buttons.reset}</Button>}
           {this.save && (
@@ -184,6 +170,40 @@ export default {
             </Button>
           )}
         </div>
+      )
+    },
+
+    renderButtons() {
+      if (this.buttonsPosition === BUTTONS_POSITION.LABEL) {
+        return (
+          <FormItem>
+            {this.renderPlainButtons()}
+          </FormItem>
+        )
+      }
+
+      return this.renderPlainButtons()
+    },
+  },
+
+  render() {
+    const className = [
+      this.class, {
+        'is-vue-form-error': !this.isValid && !this.save,
+        'is-vue-form-warn': !this.isValid && this.save,
+      },
+    ]
+
+    return (
+      <Form
+        class={className}
+        label-width={this.labelWidth}
+        label-suffix={this.labelSuffix}
+        label-position={this.labelPosition}
+        nativeOnSubmit={this.nativeOnSubmit}
+        nativeOnReset={this.nativeOnReset}>
+        {this.$slots.default}
+        {this.renderButtons()}
       </Form>
     )
   },
