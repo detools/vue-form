@@ -1,5 +1,5 @@
 <script>
-import { isNil, isBoolean, has } from 'lodash'
+import { isNil, isBoolean, has, mapValues } from 'lodash'
 import { Form, Button } from 'element-ui'
 import CONSTANTS from './constants'
 
@@ -45,6 +45,17 @@ export default {
       state: {},
       errors: {},
       form: {},
+    }
+  },
+
+  mounted() {
+    this.defaultInitialValues = this.initialValues
+  },
+
+  updated() {
+    if (this.defaultInitialValues !== this.initialValues) {
+      this.defaultInitialValues = this.initialValues
+      this.reinitializeValues(this.initialValues)
     }
   },
 
@@ -123,6 +134,10 @@ export default {
       if (this.handleReset) {
         this.handleReset(this.initialValues)
       }
+    },
+
+    reinitializeValues(updatedInitialValues) {
+      this.state = mapValues(this.state, (value, key) => updatedInitialValues[key])
     },
   },
 
