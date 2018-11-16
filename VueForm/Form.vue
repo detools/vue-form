@@ -179,7 +179,9 @@ export default {
             </Button>
           )}
           {this.submit && (
-            <Button type="danger" on-click={this.nativeOnSubmit}>{buttons.submit}</Button>
+            <Button type={this.save ? 'danger' : 'primary'} on-click={this.nativeOnSubmit}>
+              {buttons.submit}
+            </Button>
           )}
         </div>
       </Form>
