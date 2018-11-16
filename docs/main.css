@@ -1,15 +1,15 @@
 
-.buttons[data-v-64179966] {
+.buttons[data-v-5ae8c3bf] {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.buttons_center[data-v-64179966] {
+.buttons_center[data-v-5ae8c3bf] {
   justify-content: center;
 }
-.buttons_end[data-v-64179966] {
+.buttons_end[data-v-5ae8c3bf] {
   justify-content: flex-end;
 }
 
