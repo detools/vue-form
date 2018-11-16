@@ -3,6 +3,7 @@ import { isNil, isBoolean, has, mapValues } from 'lodash'
 import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import CONSTANTS from './constants'
+import isPromise from './utils/is-promise'
 
 const BUTTONS_POSITION = {
   START: 'start',
@@ -46,7 +47,9 @@ export default {
     return {
       state: {},
       errors: {},
-      form: {},
+      form: {
+        submitting: false,
+      },
     }
   },
 
@@ -108,6 +111,14 @@ export default {
       }
     },
 
+    manageSubmittingState() {
+      this.form.submitting = true
+
+      return () => {
+        this.form.submitting = false
+      }
+    },
+
     nativeOnSubmit(event) {
       event.preventDefault()
 
@@ -118,7 +129,14 @@ export default {
         return this.handleDisabled(this.errors)
       }
 
-      return this.handleSubmit({ ...this.initialValues, ...this.state })
+      const response = this.handleSubmit({ ...this.initialValues, ...this.state })
+      if (isPromise(response)) {
+        const off = this.manageSubmittingState()
+
+        return response.then(off).catch(off)
+      }
+
+      return response
     },
 
     nativeOnReset(event) {
@@ -159,9 +177,13 @@ export default {
 
       return (
         <div class={buttonsClassName}>
-          {this.reset && <Button nativeType="reset">{buttons.reset}</Button>}
+          {this.reset && (
+            <Button nativeType="reset" disabled={this.form.submitting}>
+              {buttons.reset}
+            </Button>
+          )}
           {this.save && (
-            <Button nativeType="submit" type="primary">
+            <Button nativeType="submit" type="primary" disabled={this.form.submitting}>
               {buttons.save}
             </Button>
           )}
@@ -169,7 +191,7 @@ export default {
             <Button
               type={this.save ? 'danger' : 'primary'}
               nativeType={!this.save ? 'submit' : undefined}
-              disabled={!this.isValid && !this.handleDisabled}
+              disabled={(!this.isValid && !this.handleDisabled) || this.form.submitting}
               on-click={this.nativeOnSubmit}>
               {buttons.submit}
             </Button>

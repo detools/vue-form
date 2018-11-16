@@ -1,5 +1,6 @@
 <script>
-import Form, { Input, validations } from '@detools/vue-form'
+import Form, { Input } from '@detools/vue-form'
+import { Notification } from 'element-ui'
 
 export default {
   data() {
@@ -9,27 +10,39 @@ export default {
   },
 
   methods: {
-    handleSubmit(values) {
-      this.formValues = values
+    handleSubmit() {
+      return new Promise(resolve => {
+        setTimeout(resolve, 2000)
+      }).then(() => {
+        Notification.success({
+          title: 'Yay!',
+          message: 'Async Validation is Working',
+        })
+      })
     },
   },
 
   render() {
     return (
       <div>
-        <h1>Inline Validations Form</h1>
+        <h1>Async Validation Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset save submit handleSubmit={this.handleSubmit}>
+            <Form reset submit handleSubmit={this.handleSubmit}>
               <Input
                 formItem
                 name="usename"
                 label="Username"
-                validate={validations.validate([
-                  validations.isRequired(),
-                  validations.length({ min: 6 }),
-                ])}
+                placeholder="Just submit me"
               />
+              <div>
+                You will see a notification
+                <br />
+                when form will be submitted
+                <br />
+                buttons will be disabled
+              </div>
+              <br />
             </Form>
           </div>
           <div class="values">

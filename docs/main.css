@@ -1,19 +1,4 @@
 
-.buttons[data-v-5ae8c3bf] {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.buttons_center[data-v-5ae8c3bf] {
-  justify-content: center;
-}
-.buttons_end[data-v-5ae8c3bf] {
-  justify-content: flex-end;
-}
-
-
 .is-vue-form-warn .el-form-item__error {
   color: #FF9800;
 }
@@ -24,6 +9,21 @@
 .is-vue-form-warn .el-message-box__input input.invalid,
 .is-vue-form-warn .el-message-box__input input.invalid:focus {
   border-color: #FF9800;
+}
+
+
+.buttons[data-v-3e4a268c] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: no-wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.buttons_center[data-v-3e4a268c] {
+  justify-content: center;
+}
+.buttons_end[data-v-3e4a268c] {
+  justify-content: flex-end;
 }
 
 
@@ -38,18 +38,29 @@
 }
 
 
-.wrapper[data-v-5a0d7b3a] {
+.wrapper[data-v-963a1766] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.form[data-v-5a0d7b3a],
-.values[data-v-5a0d7b3a] {
+.form[data-v-963a1766],
+.values[data-v-963a1766] {
   width: 320px;
 }
 
 
-.forms[data-v-8de40e3e] {
+.wrapper[data-v-5fb18062] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.form[data-v-5fb18062],
+.values[data-v-5fb18062] {
+  width: 320px;
+}
+
+
+.forms[data-v-35c71fa7] {
   max-width: 800px;
   padding: 0 20px;
 }

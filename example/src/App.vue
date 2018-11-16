@@ -1,6 +1,7 @@
 <script>
 import BasicForm from './BasicForm'
 import InlineValidationsForm from './InlineValidationsForm'
+import AsyncValidationForm from './AsyncValidationForm'
 
 export default {
   render() {
@@ -10,6 +11,9 @@ export default {
         <br />
         <hr />
         <InlineValidationsForm />
+        <br />
+        <hr />
+        <AsyncValidationForm />
       </div>
     )
   },
