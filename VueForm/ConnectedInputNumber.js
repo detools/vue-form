@@ -43,6 +43,10 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {
@@ -55,28 +59,49 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <InputNumber
-        class={this.class}
-        name={this.name}
-        value={value}
-        min={this.min}
-        max={this.max}
-        step={this.step}
-        precision={this.precision}
-        size={this.size}
-        disabled={this.disabled}
-        controls={this.controls}
-        controls-position={this.controlsPosition}
-        label={this.label}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}
-      />
-    )
+      this.handleBlur(...args)
+    },
+
+    renderInput(value, setValue) {
+      return (
+        <InputNumber
+          class={this.class}
+          name={this.name}
+          value={value}
+          min={this.min}
+          max={this.max}
+          step={this.step}
+          precision={this.precision}
+          size={this.size}
+          disabled={this.disabled}
+          controls={this.controls}
+          controls-position={this.controlsPosition}
+          label={this.label}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}
+        />
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderInput(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderInput(value, setValue)
   },
 }
