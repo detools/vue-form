@@ -3,5 +3,5 @@
 ### Added:
 
 - Support for integrated FormItem for all components via `formItem` prop
-- [<RadioGroup />](/VueForm/RadioGroup.js)
-- [<CheckboxGroup />](/VueForm/CheckboxGroup.js)
+- [<RadioGroup />](/VueForm/ConnectedRadioGroup.js)
+- [<CheckboxGroup />](/VueForm/ConnectedCheckboxGroup.js)
