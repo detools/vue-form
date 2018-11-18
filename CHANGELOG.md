@@ -1,3 +1,9 @@
+## 1.4.2
+
+### Fixed
+
+- `buttonsPosition` prop validator for `<Form />`
+
 ## 1.4.1
 
 ### Added:

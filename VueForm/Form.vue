@@ -25,7 +25,7 @@ export default {
     buttonsPosition: {
       type: String,
       default: () => 'start',
-      validate: value => Object.values(BUTTONS_POSITION).includes(value),
+      validator: value => Object.values(BUTTONS_POSITION).includes(value),
     },
 
     initialValues: {

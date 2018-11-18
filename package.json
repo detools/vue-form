@@ -1,6 +1,6 @@
 {
   "name": "@detools/vue-form",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Vue Form component on hooks",
   "main": "VueForm/index.js",
   "scripts": {
