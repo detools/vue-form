@@ -39,14 +39,8 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form handleSubmit={this.handleSubmit}>
-              <Input name="username" placeholder="Username" />
-              <br />
-              <br />
-              <Button nativeType="reset">Reset</Button>
-              <Button nativeType="submit" type="primary">
-                Save
-              </Button>
+            <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
+              <Input formItem name="username" label="Username" />
             </Form>
           </div>
           <div class="values">
