@@ -1,8 +1,8 @@
 <script>
-import { Button } from 'element-ui'
 import Form, {
   Input,
   Checkbox,
+  CheckboxGroup,
   InputNumber,
   Radio,
   Select,
@@ -26,6 +26,7 @@ export default {
         'Doctor Strange',
         'Ebony Maw',
       ],
+      companiesOptions: ['Apple', 'Google', 'Amazon', 'Microsoft'],
     }
   },
 
@@ -45,6 +46,12 @@ export default {
               <Input formItem name="username" label="Username" />
               <Input formItem name="password" type="password" label="Password" />
               <Checkbox formItem name="savePassword">Save password on this computer</Checkbox>
+              <CheckboxGroup
+                formItem
+                name="companies"
+                label="What companies do you prefer?"
+                options={this.companiesOptions}
+              />
               <InputNumber formItem controls name="age" label="Select your age" value={26} />
               <div>
                 <Radio name="word" value="A">A</Radio>
@@ -97,7 +104,11 @@ export default {
   justify-content: space-between;
 }
 
-.form, .values {
-  width: 320px;
+.form {
+  width: 750px;
+}
+
+.values {
+  width: 200px;
 }
 </style>

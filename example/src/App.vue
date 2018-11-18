@@ -22,7 +22,7 @@ export default {
 
 <style scoped lang="less">
 .forms {
-  max-width: 800px;
+  max-width: 1000px;
   padding: 0 20px;
 }
 </style>
