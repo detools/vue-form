@@ -5,6 +5,7 @@ import Form, {
   CheckboxGroup,
   InputNumber,
   Radio,
+  RadioGroup,
   Select,
   Slider,
   Switch,
@@ -27,6 +28,7 @@ export default {
         'Ebony Maw',
       ],
       companiesOptions: ['Apple', 'Google', 'Amazon', 'Microsoft'],
+      browsersOptions: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Opera'],
     }
   },
 
@@ -58,6 +60,12 @@ export default {
                 <Radio name="word" value="B">B</Radio>
               </div>
               <br />
+              <RadioGroup
+                formItem
+                name="browser"
+                label="Which browser do you use?"
+                options={this.browsersOptions}
+              />
               <Select
                 formItem
                 name="superhero"

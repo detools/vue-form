@@ -1,5 +1,6 @@
 import Form from './Form'
 import Radio from './ConnectedRadio'
+import RadioGroup from './ConnectedRadioGroup'
 import Checkbox from './ConnectedCheckbox'
 import CheckboxGroup from './ConnectedCheckboxGroup'
 import Input from './ConnectedInput'
@@ -14,6 +15,7 @@ import validations from './validations'
 
 export {
   Radio,
+  RadioGroup,
   Checkbox,
   CheckboxGroup,
   Input,
