@@ -1,6 +1,7 @@
 import { Slider } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 export default {
   props: {
@@ -35,6 +36,11 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    label: String,
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {

@@ -1,6 +1,7 @@
 import { Radio } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 // XXX: Add RadioGroup
 export default {
@@ -34,6 +35,10 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {
@@ -79,7 +84,7 @@ export default {
 
     if (this.formItem) {
       return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+        <FormItem label-width={this.labelWidth} error={fieldError}>
           {this.renderRadio(value, setValue)}
         </FormItem>
       )

@@ -41,57 +41,38 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form handleSubmit={this.handleSubmit}>
-              <Input name="username" placeholder="Username" />
-              <br />
-              <br />
-              <Input name="password" type="password" placeholder="Password" />
-              <br />
-              <br />
-              <Checkbox name="savePassword">Save password on this computer</Checkbox>
-              <br />
-              <br />
-              <InputNumber controls name="age" value={26} />
-              <br />
-              <br />
+            <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
+              <Input formItem name="username" label="Username" />
+              <Input formItem name="password" type="password" label="Password" />
+              <Checkbox formItem name="savePassword">Save password on this computer</Checkbox>
+              <InputNumber formItem controls name="age" label="Select your age" value={26} />
               <div>
                 <Radio name="word" value="A">A</Radio>
                 <Radio name="word" value="B">B</Radio>
               </div>
               <br />
               <Select
+                formItem
                 name="superhero"
                 options={this.heroesOptions}
-                placeholder="Select a Superhero"
+                label="Select a Superhero"
               />
-              <br />
-              <br />
-              <div>How many cups of coffee do you drink during a day?</div>
               <Slider
+                formItem
                 name="coffee"
+                label="How many controls in this form?"
                 min={0}
                 max={10}
               />
-              <br />
               <Switch
+                formItem
                 name="ligths"
-                activeText="Lights ON"
-                inactiveText="Lights OFF"
+                label="What should we do with lights?"
+                activeText="ON"
+                inactiveText="OFF"
               />
-              <br />
-              <br />
-              <TimePicker name="time" placeholder="Select Time" />
-              <br />
-              <br />
-              <DatePicker name="date" placeholder="Select Date" />
-              <br />
-              <br />
-              <Button nativeType="reset">
-                Reset
-              </Button>
-              <Button nativeType="submit" type="primary">
-                Save
-              </Button>
+              <TimePicker formItem name="time" label="Select Time" />
+              <DatePicker formItem name="date" label="Select Date" />
             </Form>
           </div>
           <div class="values">

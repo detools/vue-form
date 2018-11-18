@@ -1,6 +1,7 @@
 import { Checkbox } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 export default {
   props: {
@@ -42,6 +43,10 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {
@@ -91,7 +96,7 @@ export default {
 
     if (this.formItem) {
       return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+        <FormItem label-width={this.labelWidth} error={fieldError}>
           {this.renderCheckbox(value, setValue)}
         </FormItem>
       )

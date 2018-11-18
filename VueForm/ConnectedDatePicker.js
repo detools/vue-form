@@ -1,6 +1,7 @@
 import { DatePicker } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 /**
  * DatePicker Component connected to @detools/vue-form
@@ -90,6 +91,11 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    label: String,
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {

@@ -1,6 +1,7 @@
 import { InputNumber } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 export default {
   props: {
@@ -14,7 +15,6 @@ export default {
       default: () => 0,
     },
 
-    label: String,
     min: Number,
     max: Number,
     step: Number,
@@ -45,6 +45,7 @@ export default {
     },
 
     /* FormItem Props */
+    label: String,
     formItem: Boolean,
     labelWidth: String,
   },

@@ -1,6 +1,7 @@
 import { TimeSelect } from 'element-ui'
 import noop from 'lodash/noop'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 export default {
   props: {
@@ -49,6 +50,11 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    label: String,
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {
@@ -68,7 +74,7 @@ export default {
       this.handleBlur(...args)
     },
 
-    render(value, setValue) {
+    renderTimePicker(value, setValue) {
       return (
         <TimeSelect
           class={this.class}
@@ -108,11 +114,11 @@ export default {
     if (this.formItem) {
       return (
         <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
-          {this.renderSelect(value, setValue)}
+          {this.renderTimePicker(value, setValue)}
         </FormItem>
       )
     }
 
-    return this.renderSelect(value, setValue)
+    return this.renderTimePicker(value, setValue)
   },
 }

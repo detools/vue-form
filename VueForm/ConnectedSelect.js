@@ -3,6 +3,7 @@ import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
 import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
+import FormItem from './ConnectedFormItem'
 
 export default {
   props: {
@@ -79,6 +80,11 @@ export default {
       type: Function,
       default: noop,
     },
+
+    /* FormItem Props */
+    label: String,
+    formItem: Boolean,
+    labelWidth: String,
   },
 
   data() {

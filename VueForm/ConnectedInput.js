@@ -35,7 +35,6 @@ export default {
     resize: String,
     autofocus: Boolean,
     form: String,
-    label: String,
     tabindex: Number,
 
     validate: {
@@ -59,6 +58,7 @@ export default {
     },
 
     /* FormItem Props */
+    label: String,
     formItem: Boolean,
     labelWidth: String,
   },
