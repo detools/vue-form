@@ -79,8 +79,8 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 ## Roadmap
 
 - Add remaining components
-  - <Upload />
-  - <Rate />
+  - Upload
+  - Rate
 - Add validation examples
   - [Field level sync validation](https://detools.github.io/vue-form/#inline-validations-form)
   - Form level sync validation
