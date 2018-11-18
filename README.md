@@ -63,18 +63,26 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 
 ## Available Connected Components
 
-- Checkbox
-- DatePicker
-- Input
-- InputNumber
-- Radio
-- Select
-- Slider
-- Switch
-- TimePicker
-- Form
+- [Checkbox](/VueForm/Checkbox.js)
+- [CheckboxGroup](/VueForm/CheckboxGroup.js)
+- [DatePicker](/VueForm/DatePicker.js)
+- [Input](/VueForm/Input.js)
+- [InputNumber](/VueForm/InputNumber.js)
+- [Radio](/VueForm/Radio.js)
+- [RadioGroup](/VueForm/RadioGroup.js)
+- [Select](/VueForm/Select.js)
+- [Slider](/VueForm/Slider.js)
+- [Switch](/VueForm/Switch.js)
+- [TimePicker](/VueForm/TimePicker.js)
+- [Form](/VueForm/Form.vue)
 
 ## Roadmap
 
 - Add remaining components
+  - <Upload />
+  - <Rate />
 - Add validation examples
+  - [Field level sync validation](https://detools.github.io/vue-form/#inline-validations-form)
+  - Form level sync validation
+  - Field level async validation
+  - Form level async validation

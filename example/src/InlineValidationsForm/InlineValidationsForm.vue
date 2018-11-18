@@ -17,7 +17,7 @@ export default {
   render() {
     return (
       <div>
-        <h1>Inline Validations Form</h1>
+        <h1 id="inline-validations-form">Inline Validations Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form reset save submit handleSubmit={this.handleSubmit}>
