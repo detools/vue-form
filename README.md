@@ -76,13 +76,15 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 - [TimePicker](/VueForm/ConnectedTimePicker.js)
 - [Form](/VueForm/Form.vue)
 
-## [Changelog](/CHANGELOG.md)
+## Changelog
+
+- [1.4.0](/CHANGELOG.md#140)
 
 ## Roadmap
 
 - Add remaining components
-  - Upload
-  - Rate
+  - `<Upload />`
+  - `<Rate />`
 - Add validation examples
   - [Field level sync validation](https://detools.github.io/vue-form/#inline-validations-form)
   - Form level sync validation
