@@ -1,3 +1,14 @@
+## 1.4.1
+
+### Added:
+
+- Support for immediate changes handler `handleModelChange`
+- Example for immediate changes form [`<ImmediateForm />`](https://detools.github.io/vue-form#immediate-form)
+
+### Changed:
+
+- Example `<AsyncValidationForm />` renamed to `<AsyncSubmitForm />`
+
 ## 1.4.0
 
 ### Added:

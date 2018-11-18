@@ -1,7 +1,8 @@
 <script>
 import BasicForm from './BasicForm'
 import InlineValidationsForm from './InlineValidationsForm'
-import AsyncValidationForm from './AsyncValidationForm'
+import AsyncSubmitForm from './AsyncSubmitForm'
+import ImmediateForm from './ImmediateForm'
 
 const Divider = {
   render() {
@@ -19,7 +20,9 @@ export default {
         <Divider />
         <InlineValidationsForm />
         <Divider />
-        <AsyncValidationForm />
+        <AsyncSubmitForm />
+        <Divider />
+        <ImmediateForm />
       </div>
     )
   },

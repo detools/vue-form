@@ -1,5 +1,5 @@
 <script>
-import { isNil, isBoolean, has, mapValues } from 'lodash'
+import { isNil, isBoolean, has, mapValues, noop } from 'lodash'
 import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import CONSTANTS from './constants'
@@ -35,9 +35,8 @@ export default {
 
     handleSubmit: {
       type: Function,
-      required: true,
+      default: noop,
     },
-
     handleModelChange: Function,
     handleDisabled: Function,
     handleReset: Function,
@@ -88,6 +87,10 @@ export default {
       const setValue = nextValue => {
         vm.$set(this.state, name, nextValue)
 
+        if (this.handleModelChange) {
+          this.handleModelChange(this.state)
+        }
+
         setError(nextValue)
       }
 
@@ -98,10 +101,6 @@ export default {
       const cleanFormValue = () => {
         vm.$delete(this.state, name)
         vm.$delete(this.errors, name)
-      }
-
-      if (this.handleModelChange) {
-        this.handleModelChange({ ...this.state, [name]: value })
       }
 
       return {

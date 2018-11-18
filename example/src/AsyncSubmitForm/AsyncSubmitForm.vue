@@ -16,7 +16,7 @@ export default {
       }).then(() => {
         Notification.success({
           title: 'Yay!',
-          message: 'Async Validation is Working',
+          message: 'Async Submittion is working',
         })
       })
     },
@@ -25,7 +25,7 @@ export default {
   render() {
     return (
       <div>
-        <h1>Async Validation Form</h1>
+        <h1>Async Submit Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form reset submit handleSubmit={this.handleSubmit}>
