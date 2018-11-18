@@ -81,19 +81,6 @@ export default {
     },
   },
 
-  methods: {
-    generateOptions(option) {
-      let { [this.valueKey]: optionValue, [this.labelKey]: optionLabel } = option
-
-      if (isNil(optionLabel)) {
-        optionValue = option
-        optionLabel = option
-      }
-
-      return <Option key={optionValue} label={optionLabel} value={optionValue} />
-    },
-  },
-
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
@@ -115,42 +102,74 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    generateOptions(option) {
+      let { [this.valueKey]: optionValue, [this.labelKey]: optionLabel } = option
 
-    return (
-      <Select
-        class={this.class}
-        name={this.name}
-        value={value}
-        multiple={this.multiple}
-        disabled={this.disabled}
-        value-key={this.valueKey}
-        size={this.size}
-        clearable={this.clearable}
-        collapse-tags={this.collapseTags}
-        multiple-limit={this.multipleLimit}
-        autocomplete={this.autocomplete}
-        placeholder={this.placeholder}
-        filterable={this.filterable}
-        allow-create={this.allowCreate}
-        filter-method={this.filterMethod}
-        remote={this.remote}
-        remote-method={this.remoteMethod}
-        loading={this.loading}
-        loading-text={this.loadingText}
-        no-match-text={this.noMatchText}
-        no-data-text={this.noDataText}
-        reserve-keyword={this.reserveKeyword}
-        default-first-option={this.defaultFirstOption}
-        popper-append-to-body={this.popperAppendToBody}
-        automatic-dropdown={this.automaticDropdown}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}>
-        {this.options.map(this.generateOptions)}
-      </Select>
-    )
+      if (isNil(optionLabel)) {
+        optionValue = option
+        optionLabel = option
+      }
+
+      return <Option key={optionValue} label={optionLabel} value={optionValue} />
+    },
+
+    handleFieldBlur(...args) {
+      this.touched = true
+
+      this.handleBlur(...args)
+    },
+
+    renderSelect(value, setValue) {
+      return (
+        <Select
+          class={this.class}
+          name={this.name}
+          value={value}
+          multiple={this.multiple}
+          disabled={this.disabled}
+          value-key={this.valueKey}
+          size={this.size}
+          clearable={this.clearable}
+          collapse-tags={this.collapseTags}
+          multiple-limit={this.multipleLimit}
+          autocomplete={this.autocomplete}
+          placeholder={this.placeholder}
+          filterable={this.filterable}
+          allow-create={this.allowCreate}
+          filter-method={this.filterMethod}
+          remote={this.remote}
+          remote-method={this.remoteMethod}
+          loading={this.loading}
+          loading-text={this.loadingText}
+          no-match-text={this.noMatchText}
+          no-data-text={this.noDataText}
+          reserve-keyword={this.reserveKeyword}
+          default-first-option={this.defaultFirstOption}
+          popper-append-to-body={this.popperAppendToBody}
+          automatic-dropdown={this.automaticDropdown}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}>
+          {this.options.map(this.generateOptions)}
+        </Select>
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderSelect(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderSelect(value, setValue)
   },
 }

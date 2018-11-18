@@ -56,29 +56,50 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <Switch
-        class={this.class}
-        name={this.name}
-        value={value}
-        disabled={this.disabled}
-        width={this.width}
-        active-icon-class={this.activeIconClass}
-        inactive-icon-class={this.inactiveIconClass}
-        active-text={this.activeText}
-        inactive-text={this.inactiveText}
-        active-value={this.activeValue}
-        inactive-value={this.inactiveValue}
-        active-color={this.activeColor}
-        inactive-color={this.inactiveColor}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}
-      />
-    )
+      this.handleBlur(...args)
+    },
+
+    renderSwitch(value, setValue) {
+      return (
+        <Switch
+          class={this.class}
+          name={this.name}
+          value={value}
+          disabled={this.disabled}
+          width={this.width}
+          active-icon-class={this.activeIconClass}
+          inactive-icon-class={this.inactiveIconClass}
+          active-text={this.activeText}
+          inactive-text={this.inactiveText}
+          active-value={this.activeValue}
+          inactive-value={this.inactiveValue}
+          active-color={this.activeColor}
+          inactive-color={this.inactiveColor}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}
+        />
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderSwitch(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderSwitch(value, setValue)
   },
 }

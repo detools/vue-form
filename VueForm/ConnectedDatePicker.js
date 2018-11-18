@@ -102,39 +102,60 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <DatePicker
-        class={this.class}
-        name={this.name}
-        value={value}
-        readonly={this.readonly}
-        disabled={this.disabled}
-        size={this.size}
-        editable={this.editable}
-        clearable={this.clearable}
-        placeholder={this.placeholder}
-        start-placeholder={this.startPlaceholder}
-        end-placeholder={this.endPlaceholder}
-        type={this.type}
-        format={this.format}
-        align={this.align}
-        popper-class={this.popperClass}
-        picker-options={this.pickerOptions}
-        range-separator={this.rangeSeparator}
-        default-value={this.defaultValue}
-        default-time={this.defaultTime}
-        value-format={this.valueFormat}
-        unlink-panels={this.unlinkPanels}
-        prefix-icon={this.prefixIcon}
-        clear-icon={this.clearIcon}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}
-      />
-    )
+      this.handleBlur(...args)
+    },
+
+    renderDatePicker(value, setValue) {
+      return (
+        <DatePicker
+          class={this.class}
+          name={this.name}
+          value={value}
+          readonly={this.readonly}
+          disabled={this.disabled}
+          size={this.size}
+          editable={this.editable}
+          clearable={this.clearable}
+          placeholder={this.placeholder}
+          start-placeholder={this.startPlaceholder}
+          end-placeholder={this.endPlaceholder}
+          type={this.type}
+          format={this.format}
+          align={this.align}
+          popper-class={this.popperClass}
+          picker-options={this.pickerOptions}
+          range-separator={this.rangeSeparator}
+          default-value={this.defaultValue}
+          default-time={this.defaultTime}
+          value-format={this.valueFormat}
+          unlink-panels={this.unlinkPanels}
+          prefix-icon={this.prefixIcon}
+          clear-icon={this.clearIcon}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}
+        />
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderDatePicker(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderDatePicker(value, setValue)
   },
 }

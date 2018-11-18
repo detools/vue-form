@@ -54,28 +54,49 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <Checkbox
-        class={this.class}
-        name={this.name}
-        value={value}
-        label={this.label}
-        true-label={this.trueLabel}
-        false-label={this.falseLabel}
-        disabled={this.disabled}
-        border={this.border}
-        size={this.size}
-        checked={this.checked}
-        indeterminate={this.indeterminate}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}>
-        {this.$slots.default}
-      </Checkbox>
-    )
+      this.handleBlur(...args)
+    },
+
+    renderCheckbox(value, setValue) {
+      return (
+        <Checkbox
+          class={this.class}
+          name={this.name}
+          value={value}
+          label={this.label}
+          true-label={this.trueLabel}
+          false-label={this.falseLabel}
+          disabled={this.disabled}
+          border={this.border}
+          size={this.size}
+          checked={this.checked}
+          indeterminate={this.indeterminate}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}>
+          {this.$slots.default}
+        </Checkbox>
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderCheckbox(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderCheckbox(value, setValue)
   },
 }

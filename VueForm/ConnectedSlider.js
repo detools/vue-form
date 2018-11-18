@@ -47,24 +47,45 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <Slider
-        class={this.class}
-        name={this.name}
-        value={value}
-        step={this.step}
-        min={this.min}
-        max={this.max}
-        show-stops={this.showStops}
-        show-input={this.showInput}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}
-      />
-    )
+      this.handleBlur(...args)
+    },
+
+    renderSlider(value, setValue) {
+      return (
+        <Slider
+          class={this.class}
+          name={this.name}
+          value={value}
+          step={this.step}
+          min={this.min}
+          max={this.max}
+          show-stops={this.showStops}
+          show-input={this.showInput}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}
+        />
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderSlider(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderSlider(value, setValue)
   },
 }

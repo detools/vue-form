@@ -61,37 +61,58 @@ export default {
     this.cleanFormValue()
   },
 
-  render() {
-    const [value, setValue] = this.useState()
+  methods: {
+    handleFieldBlur(...args) {
+      this.touched = true
 
-    return (
-      <TimeSelect
-        class={this.class}
-        name={this.name}
-        value={value}
-        readonly={this.readonly}
-        disabled={this.disabled}
-        editable={this.editable}
-        clearable={this.clearable}
-        size={this.size}
-        placeholder={this.placeholder}
-        start-placeholder={this.startPlaceholder}
-        end-placeholder={this.endPlaceholder}
-        is-range={this.isRange}
-        arrow-control={this.arrowControl}
-        align={this.align}
-        popper-class={this.popperClass}
-        picker-options={this.pickerOptions}
-        range-separator={this.rangeSeparator}
-        default-value={this.defaultValue}
-        value-format={this.valueFormat}
-        prefix-icon={this.prefixIcon}
-        clear-icon={this.clearIcon}
-        on-input={setValue}
-        on-focus={this.handleFocus}
-        on-blur={this.handleBlur}
-        on-change={this.handleChange}
-      />
-    )
+      this.handleBlur(...args)
+    },
+
+    render(value, setValue) {
+      return (
+        <TimeSelect
+          class={this.class}
+          name={this.name}
+          value={value}
+          readonly={this.readonly}
+          disabled={this.disabled}
+          editable={this.editable}
+          clearable={this.clearable}
+          size={this.size}
+          placeholder={this.placeholder}
+          start-placeholder={this.startPlaceholder}
+          end-placeholder={this.endPlaceholder}
+          is-range={this.isRange}
+          arrow-control={this.arrowControl}
+          align={this.align}
+          popper-class={this.popperClass}
+          picker-options={this.pickerOptions}
+          range-separator={this.rangeSeparator}
+          default-value={this.defaultValue}
+          value-format={this.valueFormat}
+          prefix-icon={this.prefixIcon}
+          clear-icon={this.clearIcon}
+          on-input={setValue}
+          on-focus={this.handleFocus}
+          on-blur={this.handleFieldBlur}
+          on-change={this.handleChange}
+        />
+      )
+    },
+  },
+
+  render() {
+    const [value, setValue, error] = this.useState()
+    const fieldError = this.touched ? error : undefined
+
+    if (this.formItem) {
+      return (
+        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
+          {this.renderSelect(value, setValue)}
+        </FormItem>
+      )
+    }
+
+    return this.renderSelect(value, setValue)
   },
 }
