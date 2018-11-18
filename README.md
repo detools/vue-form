@@ -76,6 +76,8 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 - [TimePicker](/VueForm/ConnectedTimePicker.js)
 - [Form](/VueForm/Form.vue)
 
+## [Changelog](/CHANGELOG.md)
+
 ## Roadmap
 
 - Add remaining components
