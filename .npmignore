@@ -1,2 +1,8 @@
+docs
 example
 scripts
+.editorconfig
+.eslintrc
+.prettierrc
+CHANGELOG.md
+twitter_header_photo_1.png
