@@ -222,6 +222,7 @@ export default {
 
     return (
       <Form
+        novalidate
         class={className}
         label-width={this.labelWidth}
         label-suffix={this.labelSuffix}

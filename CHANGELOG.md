@@ -1,3 +1,9 @@
+## 1.4.3
+
+### Added
+
+- `<Form />` has attribute novalidate by default
+
 ## 1.4.2
 
 ### Fixed
