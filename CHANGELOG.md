@@ -1,3 +1,9 @@
+## 1.4.4
+
+### Fixed
+
+- `isRequired` validator
+
 ## 1.4.3
 
 ### Added
