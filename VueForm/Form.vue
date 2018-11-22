@@ -2,8 +2,8 @@
 import { isNil, isBoolean, has, mapValues, noop } from 'lodash'
 import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
+import Notification from './Notification'
 import CONSTANTS from './constants'
-import isPromise from './utils/is-promise'
 
 const BUTTONS_POSITION = {
   START: 'start',
@@ -32,6 +32,8 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
+    messages: Object,
 
     handleSubmit: {
       type: Function,
@@ -128,14 +130,14 @@ export default {
         return this.handleDisabled(this.errors)
       }
 
-      const response = this.handleSubmit({ ...this.initialValues, ...this.state })
-      if (isPromise(response)) {
-        const off = this.manageSubmittingState()
-
-        return response.then(off).catch(off)
-      }
-
-      return response
+      const messages = this.messages || {}
+      const off = this.manageSubmittingState()
+      return Promise.resolve(this.handleSubmit({ ...this.initialValues, ...this.state }))
+        .then(
+          () => Notification.success(messages.success),
+          () => Notification.error(messages.error)
+        )
+        .then(off)
     },
 
     nativeOnReset(event) {
