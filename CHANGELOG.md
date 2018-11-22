@@ -1,6 +1,6 @@
 ## 1.5.0
 
-### Add
+### Added
 
 - `<Notification />` component to show notifications on success/error
 
