@@ -11,6 +11,9 @@ import Slider from './ConnectedSlider'
 import TimePicker from './ConnectedTimePicker'
 import DatePicker from './ConnectedDatePicker'
 import FormItem from './ConnectedFormItem'
+
+import Notification from './Notification'
+
 import validations from './validations'
 
 export {
@@ -26,6 +29,7 @@ export {
   TimePicker,
   DatePicker,
   FormItem,
+  Notification,
   validations,
 }
 
