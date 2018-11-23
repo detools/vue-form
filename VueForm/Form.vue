@@ -4,6 +4,7 @@ import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import Notification from './Notification'
 import CONSTANTS from './constants'
+import validate from './validators/validate'
 
 const BUTTONS_POSITION = {
   START: 'start',
@@ -73,17 +74,19 @@ export default {
 
   methods: {
     // Should be called once
-    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validate) {
+    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validators) {
       const vm = this
 
       const formLevelInitialValue = vm.initialValues[name]
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
       const setError = nextValue => {
-        const error = validate(nextValue, name)
-        const method = error ? vm.$set : vm.$delete
+        if (validators) {
+          const error = validate(validators, nextValue, name)
+          const method = error ? vm.$set : vm.$delete
 
-        method(this.errors, name, error)
+          method(this.errors, name, error)
+        }
       }
 
       const setValue = nextValue => {

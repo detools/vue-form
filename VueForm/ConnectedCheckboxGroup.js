@@ -43,10 +43,7 @@ export default {
     max: Number, // maximum number of checkbox checked
     border: Boolean,
 
-    validate: {
-      type: Function,
-      default: noop,
-    },
+    validators: Array,
 
     handleFocus: {
       type: Function,
@@ -82,7 +79,7 @@ export default {
       initialValue = castArray(initialValue)
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validate)
+    return $registerFormComponent(this.name, initialValue, this.validators)
   },
 
   destroyed() {

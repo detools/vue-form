@@ -61,10 +61,7 @@ export default {
     popperAppendToBody: Boolean,
     automaticDropdown: Boolean,
 
-    validate: {
-      type: Function,
-      default: noop,
-    },
+    validators: Array,
 
     handleFocus: {
       type: Function,
@@ -101,7 +98,7 @@ export default {
       }
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validate)
+    return $registerFormComponent(this.name, initialValue, this.validators)
   },
 
   destroyed() {

@@ -37,10 +37,7 @@ export default {
     form: String,
     tabindex: Number,
 
-    validate: {
-      type: Function,
-      default: noop,
-    },
+    validators: Array,
 
     handleFocus: {
       type: Function,
@@ -67,7 +64,7 @@ export default {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
     return {
-      ...$registerFormComponent(this.name, this.value, this.validate),
+      ...$registerFormComponent(this.name, this.value, this.validators),
       touched: false,
     }
   },

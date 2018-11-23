@@ -1,5 +1,5 @@
 <script>
-import Form, { Input, validations } from '@detools/vue-form'
+import Form, { Input, validators } from '@detools/vue-form'
 
 export default {
   data() {
@@ -17,7 +17,7 @@ export default {
   render() {
     return (
       <div>
-        <h1 id="inline-validations-form">Inline Validations Form</h1>
+        <h1 id="inline-validators-form">Inline Validators Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form reset save submit handleSubmit={this.handleSubmit}>
@@ -25,10 +25,10 @@ export default {
                 formItem
                 name="usename"
                 label="Username"
-                validate={validations.validate([
-                  validations.isRequired(),
-                  validations.length({ min: 6 }),
-                ])}
+                validators={[
+                  validators.isRequired(),
+                  validators.length({ min: 6 }),
+                ]}
               />
             </Form>
           </div>

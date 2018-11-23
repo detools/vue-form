@@ -1,6 +1,6 @@
 <script>
 import BasicForm from './BasicForm'
-import InlineValidationsForm from './InlineValidationsForm'
+import InlineValidatorsForm from './InlineValidatorsForm'
 import AsyncSubmitForm from './AsyncSubmitForm'
 import ImmediateForm from './ImmediateForm'
 
@@ -18,7 +18,7 @@ export default {
       <div class="forms">
         <BasicForm />
         <Divider />
-        <InlineValidationsForm />
+        <InlineValidatorsForm />
         <Divider />
         <AsyncSubmitForm />
         <Divider />

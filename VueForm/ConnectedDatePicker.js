@@ -72,10 +72,7 @@ export default {
     prefixIcon: String,
     clearIcon: String,
 
-    validate: {
-      type: Function,
-      default: noop,
-    },
+    validators: Array,
 
     handleFocus: {
       type: Function,
@@ -101,7 +98,7 @@ export default {
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
-    return $registerFormComponent(this.name, this.value, this.validate)
+    return $registerFormComponent(this.name, this.value, this.validators)
   },
 
   destroyed() {

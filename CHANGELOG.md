@@ -1,3 +1,29 @@
+## 2.0.0
+
+### BREAKING CHANGES
+
+- Every Form Control now accepts `validators`—Array prop instead of `validate`
+
+```js
+// Now
+import { Input, validators } from '@detools/vue-form'
+
+<Input
+  validators={[validators.isRequired()]}
+/>
+
+// Before
+import { Input, validations } from '@detools/vue-form'
+
+<Input
+  validate={validations.validate([validations.isRequired()])}
+/>
+```
+
+### Updated
+
+- `isRequired` validator now supports Arrays, Objects.
+
 ## 1.5.0
 
 ### Added

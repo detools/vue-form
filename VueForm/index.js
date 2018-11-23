@@ -14,7 +14,7 @@ import FormItem from './ConnectedFormItem'
 
 import Notification from './Notification'
 
-import validations from './validations'
+import validators from './validators'
 
 export {
   Radio,
@@ -30,7 +30,7 @@ export {
   DatePicker,
   FormItem,
   Notification,
-  validations,
+  validators,
 }
 
 export default Form
