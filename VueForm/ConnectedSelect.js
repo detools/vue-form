@@ -62,6 +62,7 @@ export default {
     automaticDropdown: Boolean,
 
     validators: Array,
+    asyncValidators: Array,
 
     handleFocus: {
       type: Function,
@@ -98,7 +99,7 @@ export default {
       }
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators)
+    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
   },
 
   destroyed() {

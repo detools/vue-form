@@ -74,18 +74,41 @@ export default {
 
   methods: {
     // Should be called once
-    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validators) {
+    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validators, asyncValidators) {
       const vm = this
 
       const formLevelInitialValue = vm.initialValues[name]
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
       const setError = nextValue => {
-        if (validators) {
-          const error = validate(validators, nextValue, name)
-          const method = error ? vm.$set : vm.$delete
+        let validatorsPromise = Promise.resolve()
+        let syncError = false
 
-          method(this.errors, name, error)
+        const on = {
+          success: () => vm.$delete(vm.errors, name),
+          error: error => {
+            if (error) {
+              vm.$set(vm.errors, name, error)
+            }
+          },
+        }
+
+        if (validators) {
+          validatorsPromise = validate(validators, nextValue, name)
+            .then(on.success)
+            .catch(error => {
+              on.error(error)
+              syncError = true
+            })
+        }
+
+        if (asyncValidators) {
+          validatorsPromise
+            // Prevent async validation when we have sync errors
+            .then(() => syncError && Promise.reject())
+            .then(() => validate(asyncValidators, nextValue, name))
+            .then(on.success)
+            .catch(on.error)
         }
       }
 

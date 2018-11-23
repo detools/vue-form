@@ -32,6 +32,7 @@ export default {
     clearIcon: String,
 
     validators: Array,
+    asyncValidators: Array,
 
     handleFocus: {
       type: Function,
@@ -57,7 +58,7 @@ export default {
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
-    return $registerFormComponent(this.name, this.value, this.validators)
+    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
   },
 
   destroyed() {

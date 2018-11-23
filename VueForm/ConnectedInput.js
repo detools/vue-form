@@ -38,6 +38,7 @@ export default {
     tabindex: Number,
 
     validators: Array,
+    asyncValidators: Array,
 
     handleFocus: {
       type: Function,
@@ -64,7 +65,7 @@ export default {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
     return {
-      ...$registerFormComponent(this.name, this.value, this.validators),
+      ...$registerFormComponent(this.name, this.value, this.validators, this.asyncValidators),
       touched: false,
     }
   },

@@ -44,6 +44,7 @@ export default {
     border: Boolean,
 
     validators: Array,
+    asyncValidators: Array,
 
     handleFocus: {
       type: Function,
@@ -79,7 +80,7 @@ export default {
       initialValue = castArray(initialValue)
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators)
+    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
   },
 
   destroyed() {

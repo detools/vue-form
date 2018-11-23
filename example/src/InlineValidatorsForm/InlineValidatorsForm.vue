@@ -12,6 +12,18 @@ export default {
     handleSubmit(values) {
       this.formValues = values
     },
+
+    asyncValidator(value, name) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (value === 'github') {
+            resolve()
+          } else {
+            reject(`${name} should be "github"`)
+          }
+        }, 2000)
+      })
+    },
   },
 
   render() {
@@ -23,11 +35,14 @@ export default {
             <Form reset save submit handleSubmit={this.handleSubmit}>
               <Input
                 formItem
-                name="usename"
+                name="asyncUsername"
                 label="Username"
                 validators={[
                   validators.isRequired(),
                   validators.length({ min: 6 }),
+                ]}
+                asyncValidators={[
+                  this.asyncValidator,
                 ]}
               />
             </Form>

@@ -7,7 +7,7 @@ export default function isRequired(customMessage) {
   return (value, name) => {
     let isError
 
-    if (isNil(value)) {
+    if (isNil(value) || value === '') {
       isError = true
     } else if (Array.isArray(value)) {
       isError = value.length === 0

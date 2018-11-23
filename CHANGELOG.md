@@ -1,3 +1,10 @@
+## 2.1.0
+
+### Added
+
+- `asyncValidators` property to every Form Control
+- They will validate only if there is no sync errors or sync validators
+
 ## 2.0.0
 
 ### BREAKING CHANGES
