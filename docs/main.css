@@ -54,17 +54,17 @@
 }
 
 
-.buttons[data-v-ebfc5fc8] {
+.buttons[data-v-01bb0c7a] {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.buttons_center[data-v-ebfc5fc8] {
+.buttons_center[data-v-01bb0c7a] {
   justify-content: center;
 }
-.buttons_end[data-v-ebfc5fc8] {
+.buttons_end[data-v-01bb0c7a] {
   justify-content: flex-end;
 }
 

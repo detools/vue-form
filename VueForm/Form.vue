@@ -42,7 +42,10 @@ export default {
       default: noop,
     },
     handleModelChange: Function,
-    handleDisabled: Function,
+    handleDisabled: {
+      type: Function,
+      default: noop,
+    },
     handleReset: Function,
 
     validate: Function,
@@ -55,6 +58,7 @@ export default {
       state: {},
       syncErrors: {},
       asyncErrors: {},
+      asyncValidations: {},
       form: {
         submitting: false,
         validating: false,
@@ -120,10 +124,7 @@ export default {
 
       const setError = nextValue => {
         if (validators) {
-          const offValidating = this.manageValidatingState()
           const error = validate(validators, nextValue, name)
-          offValidating()
-
           const method = error ? vm.$set : vm.$delete
 
           method(vm.syncErrors, name, error)
@@ -137,12 +138,15 @@ export default {
 
       const setAsyncError = () => {
         if (!this.syncErrors[name] && asyncValidators) {
-          const offValidating = this.manageValidatingState()
+          const promise = asyncValidate(asyncValidators, this.state[name], name)
+          const off = this.manageValidatingState(name, promise)
 
-          return asyncValidate(asyncValidators, this.state[name], name)
+          promise
             .then(on.success)
             .catch(on.error)
-            .then(offValidating)
+            .then(off)
+
+          return promise
         }
 
         return Promise.resolve()
@@ -150,6 +154,11 @@ export default {
 
       const setValue = nextValue => {
         vm.$set(this.state, name, nextValue)
+
+        // When control value changes we need to clean async errors
+        if (this.asyncErrors[name]) {
+          vm.$delete(this.asyncErrors, name)
+        }
 
         if (this.handleModelChange) {
           this.handleModelChange(this.state)
@@ -165,6 +174,7 @@ export default {
       const cleanFormValue = () => {
         vm.$delete(this.state, name)
         vm.$delete(this.syncErrors, name)
+        vm.$delete(this.asyncErrors, name)
       }
 
       return {
@@ -179,11 +189,13 @@ export default {
       }
     },
 
-    manageValidatingState() {
+    manageValidatingState(name, promise) {
       this.form.validating = true
+      this.$set(this.asyncValidations, name, promise)
 
       return () => {
         this.form.validating = false
+        this.$delete(this.asyncValidations, name)
       }
     },
 
@@ -195,15 +207,28 @@ export default {
       }
     },
 
+    handleFormDisabled(errors) {
+      this.handleDisabled(errors || { ...this.syncErrors, ...this.asyncErrors })
+    },
+
     nativeOnSubmit(event) {
       event.preventDefault()
 
+      // Just do not anything some form process in progress
+      if (this.form.submitting) {
+        return false
+      }
+
+      const isSubmitButtonClick = event.type === 'click'
+
+      // Form Level Sync Validate
       if (this.validate) {
         const syncErrors = this.validate(this.state)
 
         if (!isEmpty(syncErrors)) {
           this.syncErrors = syncErrors
-          return false
+
+          return this.handleFormDisabled(syncErrors)
         }
 
         this.syncErrors = {}
@@ -212,20 +237,29 @@ export default {
       // If Invalid
       // There is no SAVE BUTTON
       // There is a handleDisabled handler
-      if (!this.isValid && !this.save && this.handleDisabled) {
-        return this.handleDisabled({ ...this.syncErrors, ...this.asyncErrors })
+      if (!this.isValid && isSubmitButtonClick) {
+        return this.handleFormDisabled()
       }
 
       const messages = this.messages || {}
+
       const off = this.manageSubmittingState()
-      const submitPromise = Promise.resolve(
+      const submitForm = () => Promise.resolve(
         this.handleSubmit({ ...this.initialValues, ...this.state })
       )
+
+      const submitPromise = this.form.validating
+        ? Promise.all(Object.values(this.asyncValidations)).then(submitForm)
+        : submitForm()
 
       // Just subscribe to promise, do not catch errors
       submitPromise.then(
         () => Notification.success(messages.success),
-        () => Notification.error(messages.error)
+        () => {
+          Notification.error(messages.error)
+
+          this.handleFormDisabled()
+        }
       ).then(off)
 
       return submitPromise

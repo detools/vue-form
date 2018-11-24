@@ -1,3 +1,17 @@
+## 2.3.1
+
+### Fixed
+
+- Form submission when async validate in progress
+
+How to test:
+
+1.  Open [Inline Validators Form](https://detools.github.io/vue-form/#/inline-validators-form)
+2.  Type `123456` => click `Submit`
+3.  You will get an async error — form won't submit
+4.  Type `github` => click `Submit`
+5.  Form will be submitted after async form validation
+
 ## 2.3.0
 
 ### Added
