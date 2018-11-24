@@ -12,17 +12,17 @@
 }
 
 
-.buttons[data-v-98b83d4a] {
+.buttons[data-v-929e2c82] {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.buttons_center[data-v-98b83d4a] {
+.buttons_center[data-v-929e2c82] {
   justify-content: center;
 }
-.buttons_end[data-v-98b83d4a] {
+.buttons_end[data-v-929e2c82] {
   justify-content: flex-end;
 }
 

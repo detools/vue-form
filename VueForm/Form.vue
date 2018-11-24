@@ -4,7 +4,7 @@ import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import Notification from './Notification'
 import CONSTANTS from './constants'
-import validate from './validators/validate'
+import { validate, asyncValidate } from './validators/validate'
 
 const BUTTONS_POSITION = {
   START: 'start',
@@ -43,6 +43,10 @@ export default {
     handleModelChange: Function,
     handleDisabled: Function,
     handleReset: Function,
+
+    validate: Function,
+    asyncValidate: Function,
+    asyncBlurFields: Array,
   },
 
   data() {
@@ -51,6 +55,7 @@ export default {
       errors: {},
       form: {
         submitting: false,
+        validating: false,
       },
     }
   },
@@ -81,35 +86,33 @@ export default {
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
       const setError = nextValue => {
-        let validatorsPromise = Promise.resolve()
-        let syncError = false
-
-        const on = {
-          success: () => vm.$delete(vm.errors, name),
-          error: error => {
-            if (error) {
-              vm.$set(vm.errors, name, error)
-            }
-          },
-        }
-
         if (validators) {
-          validatorsPromise = validate(validators, nextValue, name)
-            .then(on.success)
-            .catch(error => {
-              on.error(error)
-              syncError = true
-            })
-        }
+          const offValidating = this.manageValidatingState()
+          const error = validate(validators, nextValue, name)
+          offValidating()
 
-        if (asyncValidators) {
-          validatorsPromise
-            // Prevent async validation when we have sync errors
-            .then(() => syncError && Promise.reject())
-            .then(() => validate(asyncValidators, nextValue, name))
+          const method = error ? vm.$set : vm.$delete
+
+          method(vm.errors, name, error)
+        }
+      }
+
+      const on = {
+        success: () => vm.$delete(vm.errors, name),
+        error: error => vm.$set(vm.errors, name, error),
+      }
+
+      const setAsyncError = () => {
+        if (!this.errors[name] && asyncValidators) {
+          const offValidating = this.manageValidatingState()
+
+          return asyncValidate(asyncValidators, this.state[name], name)
             .then(on.success)
             .catch(on.error)
+            .then(offValidating)
         }
+
+        return Promise.resolve()
       }
 
       const setValue = nextValue => {
@@ -134,7 +137,16 @@ export default {
       return {
         cleanFormValue,
         setError,
+        setAsyncError,
         useState: () => [this.state[name], setValue, this.errors[name]],
+      }
+    },
+
+    manageValidatingState() {
+      this.form.validating = true
+
+      return () => {
+        this.form.validating = false
       }
     },
 
@@ -158,12 +170,17 @@ export default {
 
       const messages = this.messages || {}
       const off = this.manageSubmittingState()
-      return Promise.resolve(this.handleSubmit({ ...this.initialValues, ...this.state }))
-        .then(
-          () => Notification.success(messages.success),
-          () => Notification.error(messages.error)
-        )
-        .then(off)
+      const submitPromise = Promise.resolve(
+        this.handleSubmit({ ...this.initialValues, ...this.state })
+      )
+
+      // Just subscribe to promise, do not catch errors
+      submitPromise.then(
+        () => Notification.success(messages.success),
+        () => Notification.error(messages.error)
+      ).then(off)
+
+      return submitPromise
     },
 
     nativeOnReset(event) {
@@ -202,15 +219,19 @@ export default {
         },
       ]
 
+      const { submitting, validating } = this.form
+      const disabled = submitting || validating
+      const submitDisabled = disabled || (!this.isValid && !this.handleDisabled)
+
       return (
         <div class={buttonsClassName}>
           {this.reset && (
-            <Button nativeType="reset" disabled={this.form.submitting}>
+            <Button nativeType="reset" disabled={disabled}>
               {buttons.reset}
             </Button>
           )}
           {this.save && (
-            <Button nativeType="submit" type="primary" disabled={this.form.submitting}>
+            <Button nativeType="submit" type="primary" disabled={disabled}>
               {buttons.save}
             </Button>
           )}
@@ -218,7 +239,7 @@ export default {
             <Button
               type={this.save ? 'danger' : 'primary'}
               nativeType={!this.save ? 'submit' : undefined}
-              disabled={(!this.isValid && !this.handleDisabled) || this.form.submitting}
+              disabled={submitDisabled}
               on-click={this.nativeOnSubmit}>
               {buttons.submit}
             </Button>

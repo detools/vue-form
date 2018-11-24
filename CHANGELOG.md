@@ -1,3 +1,10 @@
+## 2.2.0
+
+### Changed
+
+- `asyncValidators` will be called only on `blur` event
+- As before, they will be called only if there is no sync errors
+
 ## 2.1.0
 
 ### Added

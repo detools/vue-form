@@ -78,7 +78,9 @@ export default {
     handleFieldBlur(...args) {
       this.touched = true
 
-      this.handleBlur(...args)
+      const onBlur = () => this.handleBlur(...args)
+
+      return this.setAsyncError().then(onBlur, onBlur)
     },
 
     renderInput(value, setValue) {
