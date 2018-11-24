@@ -2,7 +2,7 @@
 
 ### Fixed
 
-- Form submission when async validate in progress
+- Form submission when async validation in progress
 
 How to test:
 
