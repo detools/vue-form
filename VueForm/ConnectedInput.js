@@ -24,9 +24,7 @@ export default {
     autosize: Boolean,
     autocomplete: {
       type: String,
-
-      // Autocomplete === 'off' does not work in Chrome
-      default: () => 'nope',
+      default: 'off',
     },
     readonly: Boolean,
     max: Number,

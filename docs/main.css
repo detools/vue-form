@@ -1,4 +1,46 @@
 
+.root-container[data-v-6dc3c25e] {
+  min-height: 100%;
+}
+.title[data-v-6dc3c25e] {
+  font-size: 40px;
+  margin: 10px 0 0;
+  font-weight: bold;
+}
+.main-container[data-v-6dc3c25e] {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.aside[data-v-6dc3c25e] {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.main[data-v-6dc3c25e] {
+  padding: 10px 40px 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.link[data-v-6dc3c25e] {
+  display: block;
+  line-height: 40px;
+  padding-left: 30px;
+  position: relative;
+  color: #0a0a0a;
+}
+.link_active[data-v-6dc3c25e]:before {
+  content: '\261B';
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  top: -3px;
+  left: 5px;
+  color: black;
+  font-size: 20px;
+}
+
+
 .is-vue-form-warn .el-form-item__error {
   color: #FF9800;
 }
@@ -12,74 +54,17 @@
 }
 
 
-.buttons[data-v-929e2c82] {
+.buttons[data-v-ebfc5fc8] {
   display: flex;
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
-.buttons_center[data-v-929e2c82] {
+.buttons_center[data-v-ebfc5fc8] {
   justify-content: center;
 }
-.buttons_end[data-v-929e2c82] {
+.buttons_end[data-v-ebfc5fc8] {
   justify-content: flex-end;
-}
-
-
-.wrapper[data-v-5084746c] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.form[data-v-5084746c] {
-  width: 750px;
-}
-.values[data-v-5084746c] {
-  width: 200px;
-}
-
-
-.wrapper[data-v-5e0e1c8c] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.form[data-v-5e0e1c8c],
-.values[data-v-5e0e1c8c] {
-  width: 320px;
-}
-
-
-.wrapper[data-v-12049160] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.form[data-v-12049160],
-.values[data-v-12049160] {
-  width: 320px;
-}
-
-
-.wrapper[data-v-08c02437] {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.form[data-v-08c02437],
-.values[data-v-08c02437] {
-  width: 320px;
-}
-
-
-.forms[data-v-fe917d3c] {
-  max-width: 1000px;
-  padding: 0 20px;
-}
-.divider[data-v-fe917d3c] {
-  height: 2px;
-  background-color: #757575;
-  margin: 50px 0;
 }
 

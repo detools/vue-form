@@ -1,4 +1,3 @@
-<script>
 import Form, { Input } from '@detools/vue-form'
 
 export default {
@@ -9,25 +8,34 @@ export default {
   },
 
   methods: {
-    handleModelChange(values) {
+    handleSubmit(values) {
       this.formValues = values
+    },
+
+    formValidate({ username }) {
+      const errors = {}
+
+      if (username && username.length < 6) {
+        errors.username = 'Username should be at least 6 characters'
+      }
+
+      if (!username) {
+        errors.username = 'Username is required'
+      }
+
+      return errors
     },
   },
 
   render() {
     return (
       <div>
-        <h1 id="immediate-form">Immediate Form</h1>
+        <h1>Sync Validation Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form handleModelChange={this.handleModelChange}>
-              <Input class="input" name="name" placeholder="Type and see to Form Values" />
-              <br/>
-              <br/>
-              <Input class="input" name="type" placeholder="Type and see to Form Values" />
+            <Form reset save submit validate={this.formValidate} handleSubmit={this.handleSubmit}>
+              <Input formItem name="username" label="Username" />
             </Form>
-            <br/>
-            <br/>
           </div>
           <div class="values">
             <strong>Form Values</strong>
@@ -42,16 +50,3 @@ export default {
     )
   },
 }
-</script>
-
-<style scoped lang="less">
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.form, .values {
-  width: 320px;
-}
-</style>

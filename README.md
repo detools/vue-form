@@ -78,6 +78,7 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 
 ## Changelog
 
+- [2.3.0](/CHANGELOG.md#230)
 - [2.2.0](/CHANGELOG.md#220)
 - [2.1.0](/CHANGELOG.md#210)
 - [2.0.0](/CHANGELOG.md#200)
@@ -94,7 +95,6 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
   - `<Upload />`
   - `<Rate />`
 - Add validation examples
-  - [Field level sync validation](https://detools.github.io/vue-form/#inline-validators-form)
-  - Form level sync validation
+  - [Field level sync validation](https://detools.github.io/vue-form/#/inline-validators-form)
+  - [Form level sync validation](https://detools.github.io/vue-form/#/sync-validation-form)
   - Field level async validation
-  - Form level async validation

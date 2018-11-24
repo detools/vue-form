@@ -1,4 +1,3 @@
-<script>
 import Form, {
   Input,
   Checkbox,
@@ -47,7 +46,9 @@ export default {
             <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
               <Input formItem name="username" label="Username" />
               <Input formItem name="password" type="password" label="Password" />
-              <Checkbox formItem name="savePassword">Save password on this computer</Checkbox>
+              <Checkbox formItem name="savePassword">
+                Save password on this computer
+              </Checkbox>
               <CheckboxGroup
                 formItem
                 name="companies"
@@ -56,8 +57,12 @@ export default {
               />
               <InputNumber formItem controls name="age" label="Select your age" value={26} />
               <div>
-                <Radio name="word" value="A">A</Radio>
-                <Radio name="word" value="B">B</Radio>
+                <Radio name="word" value="A">
+                  A
+                </Radio>
+                <Radio name="word" value="B">
+                  B
+                </Radio>
               </div>
               <br />
               <RadioGroup
@@ -103,20 +108,3 @@ export default {
     )
   },
 }
-</script>
-
-<style scoped lang="less">
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.form {
-  width: 750px;
-}
-
-.values {
-  width: 200px;
-}
-</style>

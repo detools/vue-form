@@ -1,3 +1,9 @@
+## 2.3.0
+
+### Added
+
+- Form level sync validation. [Demo](https://detools.github.io/vue-form/#/sync-validation-form)
+
 ## 2.2.0
 
 ### Changed

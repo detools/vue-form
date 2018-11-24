@@ -1,4 +1,3 @@
-<script>
 import Form, { Input } from '@detools/vue-form'
 import { Notification } from 'element-ui'
 
@@ -16,7 +15,7 @@ export default {
       }).then(() => {
         Notification.success({
           title: 'Yay!',
-          message: 'Async Submittion is working',
+          message: 'Async submission is working',
         })
       })
     },
@@ -29,17 +28,9 @@ export default {
         <div class="wrapper">
           <div class="form">
             <Form reset submit handleSubmit={this.handleSubmit}>
-              <Input
-                formItem
-                name="usename"
-                label="Username"
-                placeholder="Just submit me"
-              />
+              <Input formItem name="usename" label="Username" placeholder="Just submit me" />
               <div>
-                You will see a notification
-                <br />
-                when form will be submitted
-                <br />
+                You will see a notification when form will be submitted,<br />
                 buttons will be disabled
               </div>
               <br />
@@ -58,16 +49,3 @@ export default {
     )
   },
 }
-</script>
-
-<style scoped lang="less">
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.form, .values {
-  width: 320px;
-}
-</style>

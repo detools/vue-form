@@ -1,10 +1,11 @@
 <script>
-import { isNil, isBoolean, has, mapValues, noop } from 'lodash'
+import { isNil, isBoolean, isEmpty, has, mapValues, noop } from 'lodash'
 import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import Notification from './Notification'
 import CONSTANTS from './constants'
 import { validate, asyncValidate } from './validators/validate'
+import isValid from './utils/isValid'
 
 const BUTTONS_POSITION = {
   START: 'start',
@@ -52,7 +53,8 @@ export default {
   data() {
     return {
       state: {},
-      errors: {},
+      syncErrors: {},
+      asyncErrors: {},
       form: {
         submitting: false,
         validating: false,
@@ -73,7 +75,38 @@ export default {
 
   computed: {
     isValid() {
-      return !Object.values(this.errors).some(error => !isNil(error))
+      return isValid([this.syncErrors, this.asyncErrors])
+    },
+
+    isDisabled() {
+      const { submitting, validating } = this.form
+
+      return submitting || validating
+    },
+
+    isSubmitButtonDisabled() {
+      return this.isDisabled || !this.isValid
+    },
+
+    submitButtonType() {
+      return this.save ? 'danger' : 'primary'
+    },
+
+    buttons() {
+      return {
+        reset: isBoolean(this.reset) ? 'Reset' : this.reset,
+        save: isBoolean(this.save) ? 'Save' : this.save,
+        submit: isBoolean(this.submit) ? 'Submit' : this.submit,
+      }
+    },
+
+    buttonsClassName() {
+      return [
+        'buttons', {
+          buttons_center: this.buttonsPosition === BUTTONS_POSITION.CENTER,
+          buttons_end: this.buttonsPosition === BUTTONS_POSITION.END,
+        },
+      ]
     },
   },
 
@@ -93,17 +126,17 @@ export default {
 
           const method = error ? vm.$set : vm.$delete
 
-          method(vm.errors, name, error)
+          method(vm.syncErrors, name, error)
         }
       }
 
       const on = {
-        success: () => vm.$delete(vm.errors, name),
-        error: error => vm.$set(vm.errors, name, error),
+        success: () => vm.$delete(vm.asyncErrors, name),
+        error: error => vm.$set(vm.asyncErrors, name, error),
       }
 
       const setAsyncError = () => {
-        if (!this.errors[name] && asyncValidators) {
+        if (!this.syncErrors[name] && asyncValidators) {
           const offValidating = this.manageValidatingState()
 
           return asyncValidate(asyncValidators, this.state[name], name)
@@ -131,14 +164,18 @@ export default {
 
       const cleanFormValue = () => {
         vm.$delete(this.state, name)
-        vm.$delete(this.errors, name)
+        vm.$delete(this.syncErrors, name)
       }
 
       return {
         cleanFormValue,
         setError,
         setAsyncError,
-        useState: () => [this.state[name], setValue, this.errors[name]],
+        useState: () => [
+          this.state[name],
+          setValue,
+          this.syncErrors[name] || this.asyncErrors[name],
+        ],
       }
     },
 
@@ -161,11 +198,22 @@ export default {
     nativeOnSubmit(event) {
       event.preventDefault()
 
+      if (this.validate) {
+        const syncErrors = this.validate(this.state)
+
+        if (!isEmpty(syncErrors)) {
+          this.syncErrors = syncErrors
+          return false
+        }
+
+        this.syncErrors = {}
+      }
+
       // If Invalid
       // There is no SAVE BUTTON
       // There is a handleDisabled handler
       if (!this.isValid && !this.save && this.handleDisabled) {
-        return this.handleDisabled(this.errors)
+        return this.handleDisabled({ ...this.syncErrors, ...this.asyncErrors })
       }
 
       const messages = this.messages || {}
@@ -192,7 +240,8 @@ export default {
         const initialValue = this.initialValues[key]
 
         vm.$set(this.state, key, initialValue || (Array.isArray(value) ? [] : ''))
-        vm.$delete(this.errors, key)
+        vm.$delete(this.syncErrors, key)
+        vm.$delete(this.asyncErrors, key)
       })
 
       if (this.handleReset) {
@@ -202,46 +251,32 @@ export default {
 
     reinitializeValues(updatedInitialValues) {
       this.state = mapValues(this.state, (value, key) => updatedInitialValues[key])
-      this.errors = {}
+      this.syncErrors = {}
+      this.asyncErrors = {}
     },
 
     renderPlainButtons() {
-      const buttons = {
-        reset: isBoolean(this.reset) ? 'Reset' : this.reset,
-        save: isBoolean(this.save) ? 'Save' : this.save,
-        submit: isBoolean(this.submit) ? 'Submit' : this.submit,
-      }
-
-      const buttonsClassName = [
-        'buttons', {
-          buttons_center: this.buttonsPosition === BUTTONS_POSITION.CENTER,
-          buttons_end: this.buttonsPosition === BUTTONS_POSITION.END,
-        },
-      ]
-
-      const { submitting, validating } = this.form
-      const disabled = submitting || validating
-      const submitDisabled = disabled || (!this.isValid && !this.handleDisabled)
-
       return (
-        <div class={buttonsClassName}>
+        <div class={this.buttonsClassName}>
           {this.reset && (
-            <Button nativeType="reset" disabled={disabled}>
-              {buttons.reset}
+            <Button nativeType="reset" disabled={this.isDisabled}>
+              {this.buttons.reset}
             </Button>
           )}
           {this.save && (
-            <Button nativeType="submit" type="primary" disabled={disabled}>
-              {buttons.save}
+            <Button nativeType="submit" type="primary" disabled={this.isDisabled}>
+              {this.buttons.save}
             </Button>
           )}
           {this.submit && (
             <Button
-              type={this.save ? 'danger' : 'primary'}
+              class={[`el-button--${this.submitButtonType}`, {
+                'is-disabled': this.isSubmitButtonDisabled,
+              }]}
+              type={this.submitButtonType}
               nativeType={!this.save ? 'submit' : undefined}
-              disabled={submitDisabled}
               on-click={this.nativeOnSubmit}>
-              {buttons.submit}
+              {this.buttons.submit}
             </Button>
           )}
         </div>

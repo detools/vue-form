@@ -36,9 +36,7 @@ export default {
 
     autocomplete: {
       type: String,
-
-      // Autocomplete === 'off' does not work in Chrome
-      default: () => 'nope',
+      default: 'off',
     },
 
     disabled: Boolean,

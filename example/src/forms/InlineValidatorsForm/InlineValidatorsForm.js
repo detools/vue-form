@@ -1,4 +1,3 @@
-<script>
 import Form, { Input, validators } from '@detools/vue-form'
 
 export default {
@@ -29,7 +28,7 @@ export default {
   render() {
     return (
       <div>
-        <h1 id="inline-validators-form">Inline Validators Form</h1>
+        <h1>Inline Validators Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form reset save submit handleSubmit={this.handleSubmit}>
@@ -37,13 +36,8 @@ export default {
                 formItem
                 name="asyncUsername"
                 label="Username"
-                validators={[
-                  validators.isRequired(),
-                  validators.length({ min: 6 }),
-                ]}
-                asyncValidators={[
-                  this.asyncValidator,
-                ]}
+                validators={[validators.isRequired(), validators.length({ min: 6 })]}
+                asyncValidators={[this.asyncValidator]}
               />
             </Form>
           </div>
@@ -60,16 +54,3 @@ export default {
     )
   },
 }
-</script>
-
-<style scoped lang="less">
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.form, .values {
-  width: 320px;
-}
-</style>
