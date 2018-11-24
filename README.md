@@ -96,6 +96,5 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
   - `<Upload />`
   - `<Rate />`
 - Add validation examples
-  - [Field level sync validation](https://detools.github.io/vue-form/#/inline-validators-form)
+  - [Field level sync/async validation](https://detools.github.io/vue-form/#/inline-validators-form)
   - [Form level sync validation](https://detools.github.io/vue-form/#/sync-validation-form)
-  - Field level async validation
