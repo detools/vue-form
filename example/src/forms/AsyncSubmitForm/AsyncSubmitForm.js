@@ -1,5 +1,4 @@
-import Form, { Input } from '@detools/vue-form'
-import { Notification } from 'element-ui'
+import Form, { Input, Notification } from '@detools/vue-form'
 
 export default {
   data() {
@@ -9,14 +8,15 @@ export default {
   },
 
   methods: {
-    handleSubmit() {
+    handleSubmit(values) {
       return new Promise(resolve => {
-        setTimeout(resolve, 2000)
+        setTimeout(() => {
+          this.formValues = values
+
+          resolve()
+        }, 2000)
       }).then(() => {
-        Notification.success({
-          title: 'Yay!',
-          message: 'Async submission is working',
-        })
+        Notification.success('Async submission is working')
       })
     },
   },
