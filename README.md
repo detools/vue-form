@@ -78,6 +78,7 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 
 ## Changelog
 
+- [2.4.2](/CHANGELOG.md#242)
 - [2.4.1](/CHANGELOG.md#241)
 - [2.4.0](/CHANGELOG.md#240)
 - [2.3.1](/CHANGELOG.md#231)

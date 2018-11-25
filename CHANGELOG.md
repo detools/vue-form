@@ -1,3 +1,10 @@
+## 2.4.2
+
+### Updated
+
+- `length` validator. Now it supports arrays
+- [`All Validations Form` demo](https://detools.github.io/vue-form/#/all-validations-form)
+
 ## 2.4.1
 
 ### Fixed
