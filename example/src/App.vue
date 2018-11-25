@@ -19,6 +19,7 @@ export default {
         'ImmediateForm',
         'SyncValidationForm',
         'AllValidationsForm',
+        'ArrayFieldForm',
       ],
     }
   },

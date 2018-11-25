@@ -1,3 +1,10 @@
+## 2.5.0
+
+## Added
+
+- [`FieldArray`](/VueForm/components/ConnectedFieldArray.js) control
+- [`Array Field Form`](https://detools.github.io/vue-form/#/array-field-form) to explain how `FieldArray` works
+
 ## 2.4.2
 
 ### Updated

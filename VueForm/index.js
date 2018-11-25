@@ -10,6 +10,7 @@ import Switch from './components/ConnectedSwitch'
 import Slider from './components/ConnectedSlider'
 import TimePicker from './components/ConnectedTimePicker'
 import DatePicker from './components/ConnectedDatePicker'
+import ArrayField from './components/ConnectedArrayField'
 import FormItem from './components/ConnectedFormItem'
 
 import Notification from './components/Notification'
@@ -29,6 +30,7 @@ export {
   TimePicker,
   DatePicker,
   FormItem,
+  ArrayField,
   Notification,
   validators,
 }

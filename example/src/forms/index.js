@@ -7,6 +7,7 @@ import AsyncSubmitForm from './AsyncSubmitForm'
 import ImmediateForm from './ImmediateForm'
 import SyncValidationForm from './SyncValidationForm'
 import AllValidationsForm from './AllValidationsForm'
+import ArrayFieldForm from './ArrayFieldForm'
 
 Vue.use(Router)
 
@@ -42,8 +43,11 @@ const routes = [
     component: AllValidationsForm,
     path: '/all-validations-form',
   },
+  {
+    name: 'ArrayFieldForm',
+    component: ArrayFieldForm,
+    path: '/array-field-form',
+  },
 ]
 
-export default new Router({
-  routes,
-})
+export default new Router({ routes })

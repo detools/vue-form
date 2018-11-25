@@ -74,10 +74,12 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 - [Slider](/VueForm/components/ConnectedSlider.js)
 - [Switch](/VueForm/components/ConnectedSwitch.js)
 - [TimePicker](/VueForm/components/ConnectedTimePicker.js)
+- [FieldArray](/VueForm/components/ConnectedFieldArray.js)
 - [Form](/VueForm/components/Form/Form.vue)
 
 ## Changelog
 
+- [2.5.0](/CHANGELOG.md#250)
 - [2.4.2](/CHANGELOG.md#242)
 - [2.4.1](/CHANGELOG.md#241)
 - [2.4.0](/CHANGELOG.md#240)

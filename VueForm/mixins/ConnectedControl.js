@@ -14,6 +14,12 @@ const ConnectedControlMixin = {
     this.cleanFormValue()
   },
 
+  computed: {
+    state() {
+      return this.useState()
+    },
+  },
+
   methods: {
     handleFieldBlur(...args) {
       this.setTouched()
@@ -29,7 +35,7 @@ const ConnectedControlMixin = {
   },
 
   render() {
-    const [value, setValue, error] = this.useState()
+    const [value, setValue, error] = this.state
     const label = this.omitFormItemLabel ? undefined : this.label || this.name
 
     if (this.formItem) {
