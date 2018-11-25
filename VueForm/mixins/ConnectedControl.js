@@ -1,7 +1,7 @@
 import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
-import FormItem from '../ConnectedFormItem'
+import FormItem from '../components/ConnectedFormItem'
 
 const ConnectedControlMixin = {
   data() {
