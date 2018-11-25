@@ -1,3 +1,9 @@
+## 2.5.2
+
+### Fixed
+
+- Reinitialization for Array values
+
 ## 2.5.1
 
 ### Fixed
