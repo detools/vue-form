@@ -1,34 +1,34 @@
 
-.root-container[data-v-6dc3c25e] {
+.root-container[data-v-a969b32e] {
   min-height: 100%;
 }
-.title[data-v-6dc3c25e] {
+.title[data-v-a969b32e] {
   font-size: 40px;
   margin: 10px 0 0;
   font-weight: bold;
 }
-.main-container[data-v-6dc3c25e] {
+.main-container[data-v-a969b32e] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: stretch;
 }
-.aside[data-v-6dc3c25e] {
+.aside[data-v-a969b32e] {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.main[data-v-6dc3c25e] {
+.main[data-v-a969b32e] {
   padding: 10px 40px 40px;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
-.link[data-v-6dc3c25e] {
+.link[data-v-a969b32e] {
   display: block;
   line-height: 40px;
   padding-left: 30px;
   position: relative;
   color: #0a0a0a;
 }
-.link_active[data-v-6dc3c25e]:before {
+.link_active[data-v-a969b32e]:before {
   content: '\261B';
   position: absolute;
   display: block;
@@ -38,33 +38,5 @@
   left: 5px;
   color: black;
   font-size: 20px;
-}
-
-
-.is-vue-form-warn .el-form-item__error {
-  color: #FF9800;
-}
-.is-vue-form-warn .el-form-item.is-error .el-input__inner,
-.is-vue-form-warn .el-form-item.is-error .el-input__inner:focus,
-.is-vue-form-warn .el-form-item.is-error .el-textarea__inner,
-.is-vue-form-warn .el-form-item.is-error .el-textarea__inner:focus,
-.is-vue-form-warn .el-message-box__input input.invalid,
-.is-vue-form-warn .el-message-box__input input.invalid:focus {
-  border-color: #FF9800;
-}
-
-
-.buttons[data-v-01bb0c7a] {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: no-wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.buttons_center[data-v-01bb0c7a] {
-  justify-content: center;
-}
-.buttons_end[data-v-01bb0c7a] {
-  justify-content: flex-end;
 }
 

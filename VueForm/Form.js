@@ -210,19 +210,21 @@ export default {
         vm.$set(this.touchedFields, name, true)
       }
 
-      const isFieldTouched = this.touchedFields[name]
-
       return {
         cleanFormValue,
         setError,
         setAsyncError,
         setTouched,
-        useState: () => [
-          this.state[name],
-          setValue,
-          isFieldTouched && (this.syncErrors[name] || this.asyncErrors[name]),
-          isFieldTouched,
-        ],
+        useState: () => {
+          const isFieldTouched = this.touchedFields[name]
+
+          return [
+            this.state[name],
+            setValue,
+            isFieldTouched && (this.syncErrors[name] || this.asyncErrors[name]),
+            isFieldTouched,
+          ]
+        },
       }
     },
 
@@ -245,7 +247,7 @@ export default {
     },
 
     manageTouchedFieldsState() {
-      this.formFields.forEach(name => this.$set(this.touchedFields, name, true))
+      this.touchedFields = this.formFields.reduce((memo, name) => ({ ...memo, [name]: true }), {})
     },
 
     handleFormDisabled(errors) {
@@ -277,9 +279,6 @@ export default {
         this.syncErrors = {}
       }
 
-      // If Invalid
-      // There is no SAVE BUTTON
-      // There is a handleDisabled handler
       if (!this.isValid && isSubmitButtonClick) {
         return this.handleFormDisabled()
       }
@@ -375,18 +374,9 @@ export default {
   },
 
   render() {
-    const className = [
-      this.class,
-      {
-        'is-vue-form-error': !this.isValid && !this.save,
-        'is-vue-form-warn': !this.isValid && this.save,
-      },
-    ]
-
     return (
       <Form
         novalidate
-        class={className}
         label-width={this.labelWidth}
         label-suffix={this.labelSuffix}
         label-position={this.labelPosition}

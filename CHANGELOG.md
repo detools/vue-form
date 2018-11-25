@@ -1,3 +1,10 @@
+## 2.4.1
+
+### Fixed
+
+- Internal `manageTouchedFieldsState` method
+- Passing touched state from vue-form to control
+
 ## 2.4.0
 
 ### Updated
