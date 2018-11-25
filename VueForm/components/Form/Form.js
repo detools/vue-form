@@ -270,10 +270,13 @@ export default {
     },
 
     reinitializeValues(updatedInitialValues) {
-      this.state = mapValues(
-        this.state,
-        (value, key) => isNil(updatedInitialValues[key]) || (Array.isArray(value) ? [] : undefined)
-      )
+      this.state = mapValues(this.state, (value, key) => {
+        if (!isNil(updatedInitialValues[key])) {
+          return updatedInitialValues[key]
+        }
+
+        return Array.isArray(value) ? [] : undefined
+      })
       this.syncErrors = {}
       this.asyncErrors = {}
       this.touchedFields = {}
