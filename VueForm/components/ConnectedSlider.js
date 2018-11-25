@@ -1,27 +1,20 @@
-import { InputNumber } from 'element-ui'
+import { Slider } from 'element-ui'
 import noop from 'lodash/noop'
-import ConnectedControlMixin from './mixins/ConnectedControl'
+import ConnectedControlMixin from '../mixins/ConnectedControl'
 
-const ConnectedInputNumber = {
+const ConnectedSlider = {
   props: {
     name: {
       type: String,
       required: true,
     },
 
-    value: {
-      type: Number,
-      default: () => 0,
-    },
-
+    value: Number,
+    step: Number,
     min: Number,
     max: Number,
-    step: Number,
-    precision: Number,
-    size: String,
-    disabled: Boolean,
-    controls: Boolean,
-    controlsPosition: String,
+    showStops: Boolean,
+    showInput: Boolean,
 
     validators: Array,
     asyncValidators: Array,
@@ -52,19 +45,15 @@ const ConnectedInputNumber = {
   methods: {
     renderComponent(value, setValue) {
       return (
-        <InputNumber
+        <Slider
           class={this.class}
           name={this.name}
           value={value}
+          step={this.step}
           min={this.min}
           max={this.max}
-          step={this.step}
-          precision={this.precision}
-          size={this.size}
-          disabled={this.disabled}
-          controls={this.controls}
-          controls-position={this.controlsPosition}
-          label={this.label}
+          show-stops={this.showStops}
+          show-input={this.showInput}
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
@@ -75,4 +64,4 @@ const ConnectedInputNumber = {
   },
 }
 
-export default ConnectedInputNumber
+export default ConnectedSlider

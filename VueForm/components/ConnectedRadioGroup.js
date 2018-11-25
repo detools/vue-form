@@ -1,9 +1,9 @@
-import { Checkbox, CheckboxGroup } from 'element-ui'
+import { Radio, RadioGroup } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
-import { ConnectedCheckboxGroupMixin } from './mixins/ConnectedControl'
+import ConnectedControlMixin from '../mixins/ConnectedControl'
 
-const ConnectedCheckboxGroup = {
+const ConnectedRadioGroup = {
   props: {
     name: {
       type: String,
@@ -15,10 +15,7 @@ const ConnectedCheckboxGroup = {
       required: true,
     },
 
-    value: {
-      type: Array,
-      default: () => [],
-    },
+    value: [String, Number],
 
     valueKey: {
       type: String,
@@ -37,8 +34,6 @@ const ConnectedCheckboxGroup = {
 
     size: String,
     disabled: Boolean,
-    min: Number, // minimum number of checkbox checked
-    max: Number, // maximum number of checkbox checked
     border: Boolean,
 
     validators: Array,
@@ -65,7 +60,7 @@ const ConnectedCheckboxGroup = {
     labelWidth: String,
   },
 
-  mixins: [ConnectedCheckboxGroupMixin],
+  mixins: [ConnectedControlMixin],
 
   methods: {
     generateOptions(option) {
@@ -78,35 +73,29 @@ const ConnectedCheckboxGroup = {
       }
 
       return (
-        <Checkbox
-          key={optionValue}
-          label={optionValue}
-          disabled={optionDisabled}
-          border={this.border}>
+        <Radio key={optionValue} label={optionValue} disabled={optionDisabled} border={this.border}>
           {optionLabel || optionValue}
-        </Checkbox>
+        </Radio>
       )
     },
 
     renderComponent(value, setValue) {
       return (
-        <CheckboxGroup
+        <RadioGroup
           class={this.class}
           name={this.name}
           value={value}
           size={this.size}
           disabled={this.disabled}
-          min={this.min}
-          max={this.max}
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
           on-change={setValue}>
           {this.options.map(this.generateOptions)}
-        </CheckboxGroup>
+        </RadioGroup>
       )
     },
   },
 }
 
-export default ConnectedCheckboxGroup
+export default ConnectedRadioGroup

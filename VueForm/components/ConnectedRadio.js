@@ -1,27 +1,18 @@
-import { Checkbox } from 'element-ui'
+import { Radio } from 'element-ui'
 import noop from 'lodash/noop'
-import ConnectedControlMixin from './mixins/ConnectedControl'
+import ConnectedControlMixin from '../mixins/ConnectedControl'
 
-const ConnectedCheckbox = {
+const ConnectedRadio = {
   props: {
     name: {
       type: String,
       required: true,
     },
 
-    value: {
-      type: Boolean,
-      default: () => false,
-    },
-
-    label: String,
-    trueLabel: String,
-    falseLabel: String,
+    value: [String, Number, Boolean],
     disabled: Boolean,
     border: Boolean,
     size: String,
-    checked: String,
-    indeterminate: String,
 
     validators: Array,
     asyncValidators: Array,
@@ -46,36 +37,32 @@ const ConnectedCheckbox = {
     labelWidth: String,
   },
 
+  mixins: [ConnectedControlMixin],
+
   created() {
     this.omitFormItemLabel = true
   },
 
-  mixins: [ConnectedControlMixin],
-
   methods: {
     renderComponent(value, setValue) {
       return (
-        <Checkbox
+        <Radio
           class={this.class}
           name={this.name}
           value={value}
-          label={this.label}
-          true-label={this.trueLabel}
-          false-label={this.falseLabel}
+          label={this.value}
           disabled={this.disabled}
           border={this.border}
           size={this.size}
-          checked={this.checked}
-          indeterminate={this.indeterminate}
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleFieldChange}>
+          on-change={this.handleChange}>
           {this.$slots.default}
-        </Checkbox>
+        </Radio>
       )
     },
   },
 }
 
-export default ConnectedCheckbox
+export default ConnectedRadio

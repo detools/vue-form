@@ -1,6 +1,6 @@
 import { Input } from 'element-ui'
 import noop from 'lodash/noop'
-import ConnectedControlMixin from './mixins/ConnectedControl'
+import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedInput = {
   props: {

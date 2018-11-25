@@ -5,11 +5,16 @@ export default {
     label: String,
     labelWidth: String,
     error: String,
+    styles: [Object, Array],
   },
 
   render() {
     return (
-      <FormItem label={this.label} label-width={this.labelWidth} error={this.error}>
+      <FormItem
+        style={this.styles}
+        label={this.label}
+        label-width={this.labelWidth}
+        error={this.error}>
         {this.$slots.default}
       </FormItem>
     )

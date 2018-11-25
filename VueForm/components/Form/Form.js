@@ -1,72 +1,15 @@
-import { isNil, isBoolean, isEmpty, has, mapValues, noop, union } from 'lodash'
+import { isNil, isBoolean, isEmpty, has, mapValues, union } from 'lodash'
 import { Form, Button } from 'element-ui'
-import FormItem from './ConnectedFormItem'
-import Notification from './Notification'
-import CONSTANTS from './constants'
-import { validate, asyncValidate } from './validators/validate'
-import isValid from './utils/isValid'
-
-const BUTTONS_POSITION = {
-  START: 'start',
-  CENTER: 'center',
-  END: 'end',
-  LABEL: 'label',
-}
-
-const styles = {
-  buttons: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'no-wrap',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-  },
-  buttons_center: {
-    justifyContent: 'center',
-  },
-  buttons_end: {
-    justifyContent: 'flex-end',
-  },
-}
+import CONSTANTS from '../../constants'
+import { validate, asyncValidate } from '../../validators/validate'
+import isValid from '../../utils/isValid'
+import FormItem from '../ConnectedFormItem'
+import Notification from '../Notification'
+import props, { BUTTONS_POSITION } from './props'
+import styles from './styles'
 
 export default {
-  props: {
-    reset: [String, Boolean],
-    save: [String, Boolean],
-    submit: [String, Boolean],
-
-    labelWidth: String,
-    labelSuffix: String,
-    labelPosition: String,
-
-    buttonsPosition: {
-      type: String,
-      default: () => 'start',
-      validator: value => Object.values(BUTTONS_POSITION).includes(value),
-    },
-
-    initialValues: {
-      type: Object,
-      default: () => ({}),
-    },
-
-    messages: Object,
-
-    handleSubmit: {
-      type: Function,
-      default: noop,
-    },
-    handleModelChange: Function,
-    handleDisabled: {
-      type: Function,
-      default: noop,
-    },
-    handleReset: Function,
-
-    validate: Function,
-    asyncValidate: Function,
-    asyncBlurFields: Array,
-  },
+  props,
 
   data() {
     return {
@@ -130,6 +73,7 @@ export default {
         submit: isBoolean(this.submit) ? 'Submit' : this.submit,
       }
     },
+
     buttonsStyles() {
       const overridingStyles = {
         [BUTTONS_POSITION.CENTER]: styles.buttons_center,
@@ -216,12 +160,12 @@ export default {
         setAsyncError,
         setTouched,
         useState: () => {
-          const isFieldTouched = this.touchedFields[name]
+          const isFieldTouched = vm.touchedFields[name]
 
           return [
-            this.state[name],
+            vm.state[name],
             setValue,
-            isFieldTouched && (this.syncErrors[name] || this.asyncErrors[name]),
+            isFieldTouched && (vm.syncErrors[name] || vm.asyncErrors[name]),
             isFieldTouched,
           ]
         },
@@ -311,14 +255,13 @@ export default {
     nativeOnReset(event) {
       event.preventDefault()
 
-      const vm = this
-
       Object.entries(this.state).forEach(([key, value]) => {
         const initialValue = this.initialValues[key]
 
-        vm.$set(this.state, key, initialValue || (Array.isArray(value) ? [] : ''))
-        vm.$delete(this.syncErrors, key)
-        vm.$delete(this.asyncErrors, key)
+        this.$set(this.state, key, initialValue || (Array.isArray(value) ? [] : ''))
+        this.$delete(this.syncErrors, key)
+        this.$delete(this.asyncErrors, key)
+        this.$delete(this.touchedFields, key)
       })
 
       if (this.handleReset) {

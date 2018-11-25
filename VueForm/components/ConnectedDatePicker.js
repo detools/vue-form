@@ -1,6 +1,6 @@
 import { DatePicker } from 'element-ui'
 import noop from 'lodash/noop'
-import ConnectedControlMixin from './mixins/ConnectedControl'
+import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 /**
  * DatePicker Component connected to @detools/vue-form

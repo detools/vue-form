@@ -1,7 +1,7 @@
 import { Select, Option } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
-import { ConnectedSelectMixin } from './mixins/ConnectedControl'
+import { ConnectedSelectMixin } from '../mixins/ConnectedControl'
 
 const ConnectedSelect = {
   props: {
