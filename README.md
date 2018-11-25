@@ -63,18 +63,18 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 
 ## Available Connected Components
 
-- [Checkbox](/VueForm/ConnectedCheckbox.js)
-- [CheckboxGroup](/VueForm/ConnectedCheckboxGroup.js)
-- [DatePicker](/VueForm/ConnectedDatePicker.js)
-- [Input](/VueForm/ConnectedInput.js)
-- [InputNumber](/VueForm/ConnectedInputNumber.js)
-- [Radio](/VueForm/ConnectedRadio.js)
-- [RadioGroup](/VueForm/ConnectedRadioGroup.js)
-- [Select](/VueForm/ConnectedSelect.js)
-- [Slider](/VueForm/ConnectedSlider.js)
-- [Switch](/VueForm/ConnectedSwitch.js)
-- [TimePicker](/VueForm/ConnectedTimePicker.js)
-- [Form](/VueForm/Form.vue)
+- [Checkbox](/VueForm/components/ConnectedCheckbox.js)
+- [CheckboxGroup](/VueForm/components/ConnectedCheckboxGroup.js)
+- [DatePicker](/VueForm/components/ConnectedDatePicker.js)
+- [Input](/VueForm/components/ConnectedInput.js)
+- [InputNumber](/VueForm/components/ConnectedInputNumber.js)
+- [Radio](/VueForm/components/ConnectedRadio.js)
+- [RadioGroup](/VueForm/components/ConnectedRadioGroup.js)
+- [Select](/VueForm/components/ConnectedSelect.js)
+- [Slider](/VueForm/components/ConnectedSlider.js)
+- [Switch](/VueForm/components/ConnectedSwitch.js)
+- [TimePicker](/VueForm/components/ConnectedTimePicker.js)
+- [Form](/VueForm/components/Form/Form.vue)
 
 ## Changelog
 
