@@ -50,7 +50,7 @@ const ConnectedControlMixin = {
   },
 }
 
-export const ConnectedCheckboxGroupMixin = {
+export const ConnectedArrayFieldMixin = {
   ...ConnectedControlMixin,
 
   data() {

@@ -1,6 +1,13 @@
+## 2.5.1
+
+### Fixed
+
+- Rename `ConnectedCheckboxGroupMixin` => `ConnectedArrayFieldMixin`
+- Use `ConnectedArrayFieldMixin` for `ConnectedArrayField`, `ConnectedCheckboxGroup`
+
 ## 2.5.0
 
-## Added
+### Added
 
 - [`FieldArray`](/VueForm/components/ConnectedFieldArray.js) control
 - [`Array Field Form`](https://detools.github.io/vue-form/#/array-field-form) to explain how `FieldArray` works

@@ -1,7 +1,7 @@
 import { Checkbox, CheckboxGroup } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
-import { ConnectedCheckboxGroupMixin } from '../mixins/ConnectedControl'
+import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
 
 const ConnectedCheckboxGroup = {
   props: {
@@ -65,7 +65,7 @@ const ConnectedCheckboxGroup = {
     labelWidth: String,
   },
 
-  mixins: [ConnectedCheckboxGroupMixin],
+  mixins: [ConnectedArrayFieldMixin],
 
   methods: {
     generateOptions(option) {

@@ -1,6 +1,6 @@
 import without from 'lodash/without'
 import last from 'lodash/last'
-import ConnectedControlMixin from '../mixins/ConnectedControl'
+import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
 
 export default {
   props: {
@@ -23,7 +23,7 @@ export default {
     },
   },
 
-  mixins: [ConnectedControlMixin],
+  mixins: [ConnectedArrayFieldMixin],
 
   computed: {
     controlValue() {
