@@ -1,6 +1,6 @@
-![image](twitter_header_photo_1.png)
-
 # vue-form
+
+<img align="right" width="100" height="100" src="twitter_header_photo_1.png" />
 
 Form State Management for VueJS
 
