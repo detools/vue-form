@@ -1,9 +1,8 @@
 import { TimeSelect } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import ConnectedControlMixin from './mixins/ConnectedControl'
 
-export default {
+const ConnectedTimePicker = {
   props: {
     name: {
       type: String,
@@ -55,24 +54,10 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
-
-    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
-  },
-
-  destroyed() {
-    this.cleanFormValue()
-  },
+  mixins: [ConnectedControlMixin],
 
   methods: {
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderTimePicker(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <TimeSelect
           class={this.class}
@@ -104,19 +89,6 @@ export default {
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
-          {this.renderTimePicker(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderTimePicker(value, setValue)
-  },
 }
+
+export default ConnectedTimePicker

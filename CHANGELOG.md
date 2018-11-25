@@ -1,3 +1,9 @@
+## 2.4.0
+
+### Updated
+
+- Common methods were moved to `ConnectedControlMixin`
+
 ## 2.3.1
 
 ### Fixed

@@ -1,9 +1,8 @@
 import { Switch } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import ConnectedControlMixin from './mixins/ConnectedControl'
 
-export default {
+const ConnectedSwitch = {
   props: {
     name: {
       type: String,
@@ -50,24 +49,10 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
-
-    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
-  },
-
-  destroyed() {
-    this.cleanFormValue()
-  },
+  mixins: [ConnectedControlMixin],
 
   methods: {
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderSwitch(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <Switch
           class={this.class}
@@ -91,19 +76,6 @@ export default {
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
-          {this.renderSwitch(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderSwitch(value, setValue)
-  },
 }
+
+export default ConnectedSwitch

@@ -1,6 +1,7 @@
 import isNil from 'lodash/isNil'
 import isEmpty from 'lodash/isEmpty'
 import isPlainObject from 'lodash/isPlainObject'
+import isBoolean from 'lodash/isBoolean'
 import startCase from 'lodash/startCase'
 
 export default function isRequired(customMessage) {
@@ -13,6 +14,8 @@ export default function isRequired(customMessage) {
       isError = value.length === 0
     } else if (isPlainObject(value)) {
       isError = isEmpty(value)
+    } else if (isBoolean(value)) {
+      isError = value === false
     }
 
     return isError ? customMessage || `${startCase(name)} is required` : undefined

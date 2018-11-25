@@ -6,6 +6,7 @@ import InlineValidatorsForm from './InlineValidatorsForm'
 import AsyncSubmitForm from './AsyncSubmitForm'
 import ImmediateForm from './ImmediateForm'
 import SyncValidationForm from './SyncValidationForm'
+import AllValidationsForm from './AllValidationsForm'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ const routes = [
     name: 'SyncValidationForm',
     component: SyncValidationForm,
     path: '/sync-validation-form',
+  },
+  {
+    name: 'AllValidationsForm',
+    component: AllValidationsForm,
+    path: '/all-validations-form',
   },
 ]
 

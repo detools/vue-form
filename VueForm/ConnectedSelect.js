@@ -1,11 +1,9 @@
 import { Select, Option } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
-import castArray from 'lodash/castArray'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import { ConnectedSelectMixin } from './mixins/ConnectedControl'
 
-export default {
+const ConnectedSelect = {
   props: {
     name: {
       type: String,
@@ -83,26 +81,7 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
-
-    let initialValue = this.value
-    if (this.multiple) {
-      // If there is no defined "value" inside props — use an empty array
-      if (isNil(initialValue)) {
-        initialValue = []
-      } else if (!Array.isArray(initialValue)) {
-        // If there is a non-null value, but it is not an array — cast it to an array
-        initialValue = castArray(initialValue)
-      }
-    }
-
-    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
-  },
-
-  destroyed() {
-    this.cleanFormValue()
-  },
+  mixins: [ConnectedSelectMixin],
 
   methods: {
     generateOptions(option) {
@@ -116,13 +95,7 @@ export default {
       return <Option key={optionValue} label={optionLabel} value={optionValue} />
     },
 
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderSelect(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <Select
           class={this.class}
@@ -159,19 +132,6 @@ export default {
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
-          {this.renderSelect(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderSelect(value, setValue)
-  },
 }
+
+export default ConnectedSelect

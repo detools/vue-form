@@ -1,10 +1,8 @@
 import { Radio } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import ConnectedControlMixin from './mixins/ConnectedControl'
 
-// XXX: Add RadioGroup
-export default {
+const ConnectedRadio = {
   props: {
     name: {
       type: String,
@@ -39,24 +37,14 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
+  mixins: [ConnectedControlMixin],
 
-    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
-  },
-
-  destroyed() {
-    this.cleanFormValue()
+  created() {
+    this.omitFormItemLabel = true
   },
 
   methods: {
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderRadio(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <Radio
           class={this.class}
@@ -75,19 +63,6 @@ export default {
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label-width={this.labelWidth} error={fieldError}>
-          {this.renderRadio(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderRadio(value, setValue)
-  },
 }
+
+export default ConnectedRadio

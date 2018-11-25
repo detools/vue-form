@@ -1,9 +1,8 @@
 import { Checkbox } from 'element-ui'
 import noop from 'lodash/noop'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import ConnectedControlMixin from './mixins/ConnectedControl'
 
-export default {
+const ConnectedCheckbox = {
   props: {
     name: {
       type: String,
@@ -47,24 +46,14 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
-
-    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
+  created() {
+    this.omitFormItemLabel = true
   },
 
-  destroyed() {
-    this.cleanFormValue()
-  },
+  mixins: [ConnectedControlMixin],
 
   methods: {
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderCheckbox(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <Checkbox
           class={this.class}
@@ -81,25 +70,12 @@ export default {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleChange}>
+          on-change={this.handleFieldChange}>
           {this.$slots.default}
         </Checkbox>
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label-width={this.labelWidth} error={fieldError}>
-          {this.renderCheckbox(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderCheckbox(value, setValue)
-  },
 }
+
+export default ConnectedCheckbox

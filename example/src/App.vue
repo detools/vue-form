@@ -18,14 +18,15 @@ export default {
         'AsyncSubmitForm',
         'ImmediateForm',
         'SyncValidationForm',
-      ]
+        'AllValidationsForm',
+      ],
     }
   },
 
   computed: {
     routeName() {
       return this.$route.name
-    }
+    },
   },
 
   render() {

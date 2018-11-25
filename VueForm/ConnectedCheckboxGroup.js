@@ -1,11 +1,9 @@
 import { Checkbox, CheckboxGroup } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
-import castArray from 'lodash/castArray'
-import resolveRegisterFormComponent from './utils/resolveRegisterFormComponent'
-import FormItem from './ConnectedFormItem'
+import { ConnectedCheckboxGroupMixin } from './mixins/ConnectedControl'
 
-export default {
+const ConnectedCheckboxGroup = {
   props: {
     name: {
       type: String,
@@ -67,25 +65,7 @@ export default {
     labelWidth: String,
   },
 
-  data() {
-    const $registerFormComponent = resolveRegisterFormComponent(this)
-
-    let initialValue = this.value
-
-    // If there is no defined "value" inside props — use an empty array
-    if (isNil(initialValue)) {
-      initialValue = []
-    } else if (!Array.isArray(initialValue)) {
-      // If there is a non-null value, but it is not an array — cast it to an array
-      initialValue = castArray(initialValue)
-    }
-
-    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
-  },
-
-  destroyed() {
-    this.cleanFormValue()
-  },
+  mixins: [ConnectedCheckboxGroupMixin],
 
   methods: {
     generateOptions(option) {
@@ -108,13 +88,7 @@ export default {
       )
     },
 
-    handleFieldBlur(...args) {
-      this.touched = true
-
-      this.handleBlur(...args)
-    },
-
-    renderCheckboxGroup(value, setValue) {
+    renderComponent(value, setValue) {
       return (
         <CheckboxGroup
           class={this.class}
@@ -133,19 +107,6 @@ export default {
       )
     },
   },
-
-  render() {
-    const [value, setValue, error] = this.useState()
-    const fieldError = this.touched ? error : undefined
-
-    if (this.formItem) {
-      return (
-        <FormItem label={this.label || this.name} label-width={this.labelWidth} error={fieldError}>
-          {this.renderCheckboxGroup(value, setValue)}
-        </FormItem>
-      )
-    }
-
-    return this.renderCheckboxGroup(value, setValue)
-  },
 }
+
+export default ConnectedCheckboxGroup

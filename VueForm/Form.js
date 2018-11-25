@@ -1,5 +1,4 @@
-<script>
-import { isNil, isBoolean, isEmpty, has, mapValues, noop } from 'lodash'
+import { isNil, isBoolean, isEmpty, has, mapValues, noop, union } from 'lodash'
 import { Form, Button } from 'element-ui'
 import FormItem from './ConnectedFormItem'
 import Notification from './Notification'
@@ -12,6 +11,22 @@ const BUTTONS_POSITION = {
   CENTER: 'center',
   END: 'end',
   LABEL: 'label',
+}
+
+const styles = {
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'no-wrap',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  buttons_center: {
+    justifyContent: 'center',
+  },
+  buttons_end: {
+    justifyContent: 'flex-end',
+  },
 }
 
 export default {
@@ -55,10 +70,22 @@ export default {
 
   data() {
     return {
+      // { [fieldName]: Any }
       state: {},
+
+      // { [fieldName]: String }
       syncErrors: {},
       asyncErrors: {},
+
+      // { [fieldName]: Promise }
       asyncValidations: {},
+
+      // Array<String>
+      formFields: [],
+
+      // { [fieldName]: true }
+      touchedFields: {},
+
       form: {
         submitting: false,
         validating: false,
@@ -103,14 +130,13 @@ export default {
         submit: isBoolean(this.submit) ? 'Submit' : this.submit,
       }
     },
+    buttonsStyles() {
+      const overridingStyles = {
+        [BUTTONS_POSITION.CENTER]: styles.buttons_center,
+        [BUTTONS_POSITION.END]: styles.buttons_end,
+      }
 
-    buttonsClassName() {
-      return [
-        'buttons', {
-          buttons_center: this.buttonsPosition === BUTTONS_POSITION.CENTER,
-          buttons_end: this.buttonsPosition === BUTTONS_POSITION.END,
-        },
-      ]
+      return [styles.buttons, overridingStyles[this.buttonsPosition]]
     },
   },
 
@@ -118,6 +144,8 @@ export default {
     // Should be called once
     [CONSTANTS.SECRET_VUE_FORM_METHOD](name, fieldLevelInitialValue, validators, asyncValidators) {
       const vm = this
+
+      this.formFields = union(this.formFields, [name])
 
       const formLevelInitialValue = vm.initialValues[name]
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
@@ -175,16 +203,25 @@ export default {
         vm.$delete(this.state, name)
         vm.$delete(this.syncErrors, name)
         vm.$delete(this.asyncErrors, name)
+        vm.$delete(this.touchedFields, name)
       }
+
+      const setTouched = () => {
+        vm.$set(this.touchedFields, name, true)
+      }
+
+      const isFieldTouched = this.touchedFields[name]
 
       return {
         cleanFormValue,
         setError,
         setAsyncError,
+        setTouched,
         useState: () => [
           this.state[name],
           setValue,
-          this.syncErrors[name] || this.asyncErrors[name],
+          isFieldTouched && (this.syncErrors[name] || this.asyncErrors[name]),
+          isFieldTouched,
         ],
       }
     },
@@ -207,6 +244,10 @@ export default {
       }
     },
 
+    manageTouchedFieldsState() {
+      this.formFields.forEach(name => this.$set(this.touchedFields, name, true))
+    },
+
     handleFormDisabled(errors) {
       this.handleDisabled(errors || { ...this.syncErrors, ...this.asyncErrors })
     },
@@ -220,6 +261,8 @@ export default {
       }
 
       const isSubmitButtonClick = event.type === 'click'
+
+      this.manageTouchedFieldsState()
 
       // Form Level Sync Validate
       if (this.validate) {
@@ -244,23 +287,24 @@ export default {
       const messages = this.messages || {}
 
       const off = this.manageSubmittingState()
-      const submitForm = () => Promise.resolve(
-        this.handleSubmit({ ...this.initialValues, ...this.state })
-      )
+      const submitForm = () =>
+        Promise.resolve(this.handleSubmit({ ...this.initialValues, ...this.state }))
 
       const submitPromise = this.form.validating
         ? Promise.all(Object.values(this.asyncValidations)).then(submitForm)
         : submitForm()
 
       // Just subscribe to promise, do not catch errors
-      submitPromise.then(
-        () => Notification.success(messages.success),
-        () => {
-          Notification.error(messages.error)
+      submitPromise
+        .then(
+          () => Notification.success(messages.success),
+          () => {
+            Notification.error(messages.error)
 
-          this.handleFormDisabled()
-        }
-      ).then(off)
+            this.handleFormDisabled()
+          }
+        )
+        .then(off)
 
       return submitPromise
     },
@@ -287,11 +331,12 @@ export default {
       this.state = mapValues(this.state, (value, key) => updatedInitialValues[key])
       this.syncErrors = {}
       this.asyncErrors = {}
+      this.touchedFields = {}
     },
 
     renderPlainButtons() {
       return (
-        <div class={this.buttonsClassName}>
+        <div style={this.buttonsStyles}>
           {this.reset && (
             <Button nativeType="reset" disabled={this.isDisabled}>
               {this.buttons.reset}
@@ -304,9 +349,12 @@ export default {
           )}
           {this.submit && (
             <Button
-              class={[`el-button--${this.submitButtonType}`, {
-                'is-disabled': this.isSubmitButtonDisabled,
-              }]}
+              class={[
+                `el-button--${this.submitButtonType}`,
+                {
+                  'is-disabled': this.isSubmitButtonDisabled,
+                },
+              ]}
               type={this.submitButtonType}
               nativeType={!this.save ? 'submit' : undefined}
               on-click={this.nativeOnSubmit}>
@@ -319,11 +367,7 @@ export default {
 
     renderButtons() {
       if (this.buttonsPosition === BUTTONS_POSITION.LABEL) {
-        return (
-          <FormItem>
-            {this.renderPlainButtons()}
-          </FormItem>
-        )
+        return <FormItem>{this.renderPlainButtons()}</FormItem>
       }
 
       return this.renderPlainButtons()
@@ -332,7 +376,8 @@ export default {
 
   render() {
     const className = [
-      this.class, {
+      this.class,
+      {
         'is-vue-form-error': !this.isValid && !this.save,
         'is-vue-form-warn': !this.isValid && this.save,
       },
@@ -353,22 +398,3 @@ export default {
     )
   },
 }
-</script>
-
-<style scoped lang="less">
-  .buttons {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: no-wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    &_center {
-      justify-content: center;
-    }
-
-    &_end {
-      justify-content: flex-end;
-    }
-  }
-</style>

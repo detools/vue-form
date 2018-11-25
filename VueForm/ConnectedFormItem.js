@@ -1,4 +1,3 @@
-<script>
 import { FormItem } from 'element-ui'
 
 export default {
@@ -16,8 +15,8 @@ export default {
     )
   },
 }
-</script>
 
+/*
 <style lang="less">
   .is-vue-form-warn .el-form-item__error {
     color: #FF9800;
@@ -32,3 +31,4 @@ export default {
     border-color: #FF9800;
   }
 </style>
+*/
