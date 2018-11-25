@@ -41,7 +41,7 @@ export default {
   render() {
     return (
       <div>
-        <h1>Basic Form</h1>
+        <h1>All Validations Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
@@ -66,8 +66,17 @@ export default {
                 name="companies"
                 label="What companies do you prefer?"
                 options={this.companiesOptions}
+                validators={[validators.length({ min: 2 }, 'Please, select at least 2 companies')]}
               />
-              <InputNumber formItem controls name="age" label="Select your age" value={26} />
+              <InputNumber
+                formItem
+                controls
+                name="age"
+                label="Select your age"
+                value={26}
+                min={15}
+                max={30}
+              />
               <div>
                 <Radio name="word" value="A">
                   A
@@ -82,6 +91,7 @@ export default {
                 name="browser"
                 label="Which browser do you use?"
                 options={this.browsersOptions}
+                validators={[validators.isRequired('Please select a browser from list below')]}
               />
               <Select
                 formItem
@@ -103,9 +113,20 @@ export default {
                 label="What should we do with lights?"
                 activeText="ON"
                 inactiveText="OFF"
+                validators={[validators.isRequired()]}
               />
-              <TimePicker formItem name="time" label="Select Time" />
-              <DatePicker formItem name="date" label="Select Date" />
+              <TimePicker
+                formItem
+                name="time"
+                label="Select Time"
+                validators={[validators.isRequired()]}
+              />
+              <DatePicker
+                formItem
+                name="date"
+                label="Select Date"
+                validators={[validators.isRequired()]}
+              />
             </Form>
           </div>
           <div class="values">

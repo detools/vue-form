@@ -5,6 +5,7 @@ const styles = {
     flexWrap: 'no-wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    marginTop: '44px',
   },
   buttons_center: {
     justifyContent: 'center',
