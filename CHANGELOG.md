@@ -1,3 +1,9 @@
+## 2.5.6
+
+### Removed
+
+- `marginTop` for buttons container
+
 ## 2.5.5
 
 ### Fixed
