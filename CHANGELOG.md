@@ -1,3 +1,43 @@
+## 2.5.4
+
+### Updated
+
+- `renderField` now supports not only a function as prop value, also it supports any Component
+- A Component will get `{ data, fields, name }` options, where `data` is an Array, `fields` is an Object with methods to manipulate that Array, `name` is a String passed as a `name` to `ArrayField` component
+
+```js
+import Form, { ArrayField } from '@detools/vue-form'
+import Tasklist from '@/components/Tasklist'
+
+// OK
+const renderAsFunction = {
+  render() {
+    methods: {
+      renderTasklist({ data, fields, name }) {
+        return <Tasklist data={data} fields={fields} name={name} />
+      },
+    },
+
+    return (
+      <Form>
+        <ArrayField name="tasklist" renderField={this.renderTasklist} />
+      </Form>
+    )
+  }
+}
+
+// NOW OK
+const renderAsComponent = {
+  render() {
+    return (
+      <Form>
+        <ArrayField name="tasklist" renderField={Tasklist} />
+      </Form>
+    )
+  }
+}
+```
+
 ## 2.5.3
 
 ### Fixed

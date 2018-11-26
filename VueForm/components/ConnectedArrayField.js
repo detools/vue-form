@@ -1,5 +1,6 @@
 import without from 'lodash/without'
 import last from 'lodash/last'
+import isFunction from 'lodash/isFunction'
 import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
 
 export default {
@@ -18,7 +19,7 @@ export default {
     asyncValidators: Array,
 
     renderField: {
-      type: Function,
+      type: [Function, Object],
       required: true,
     },
   },
@@ -169,8 +170,14 @@ export default {
       return nextArray
     },
 
-    renderComponent(value) {
-      return this.renderField({ data: value, fields: this.fields })
+    renderComponent(value, setValue, createElement) {
+      const props = { data: value, fields: this.fields, name: this.name }
+
+      if (isFunction(this.renderField)) {
+        return this.renderField(props)
+      }
+
+      return createElement(this.renderField, { props })
     },
   },
 }
