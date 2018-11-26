@@ -1,3 +1,9 @@
+## 2.5.5
+
+### Fixed
+
+- `renderComponent` now accepts `createElement` as 3rd argument
+
 ## 2.5.4
 
 ### Updated

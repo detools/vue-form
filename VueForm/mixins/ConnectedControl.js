@@ -34,19 +34,19 @@ const ConnectedControlMixin = {
     },
   },
 
-  render() {
+  render(createElement) {
     const [value, setValue, error] = this.state
     const label = this.omitFormItemLabel ? undefined : this.label || this.name
 
     if (this.formItem) {
       return (
         <FormItem label={label} label-width={this.labelWidth} error={error}>
-          {this.renderComponent(value, setValue)}
+          {this.renderComponent(value, setValue, createElement)}
         </FormItem>
       )
     }
 
-    return this.renderComponent(value, setValue)
+    return this.renderComponent(value, setValue, createElement)
   },
 }
 
