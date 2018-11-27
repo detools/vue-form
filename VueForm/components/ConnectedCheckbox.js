@@ -14,7 +14,7 @@ const ConnectedCheckbox = {
       default: () => false,
     },
 
-    label: String,
+    label: [String, Boolean],
     trueLabel: String,
     falseLabel: String,
     disabled: Boolean,

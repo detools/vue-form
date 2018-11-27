@@ -91,7 +91,7 @@ const ConnectedDatePicker = {
     },
 
     /* FormItem Props */
-    label: String,
+    label: [String, Boolean],
     formItem: Boolean,
     labelWidth: String,
   },

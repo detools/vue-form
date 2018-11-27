@@ -25,7 +25,7 @@ export default {
 
     /* FormItem Props */
     formItem: Boolean,
-    label: String,
+    label: [String, Boolean],
     labelWidth: String,
   },
 

@@ -2,7 +2,7 @@ import { FormItem } from 'element-ui'
 
 export default {
   props: {
-    label: String,
+    label: [String, Boolean],
     labelWidth: String,
     error: String,
     styles: [Object, Array],

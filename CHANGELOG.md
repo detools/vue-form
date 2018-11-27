@@ -1,3 +1,9 @@
+## 2.5.8
+
+### Fixed
+
+- `label` prop now accepts `[String, Boolean]`
+
 ## 2.5.7
 
 ### Added
