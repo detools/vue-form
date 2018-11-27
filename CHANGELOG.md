@@ -1,3 +1,9 @@
+## 2.5.11
+
+### Fixed
+
+- Omit Boolean type from `label` prop `<FormItem />`
+
 ## 2.5.10
 
 ### Fixed
