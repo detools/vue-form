@@ -86,7 +86,6 @@ const ConnectedInput = {
           resize={this.resize}
           autofocus={this.autofocus}
           form={this.form}
-          label={this.label}
           tabindex={this.tabindex}
           on-input={setValue}
           on-focus={this.handleFocus}

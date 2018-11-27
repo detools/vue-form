@@ -64,7 +64,6 @@ const ConnectedInputNumber = {
           disabled={this.disabled}
           controls={this.controls}
           controls-position={this.controlsPosition}
-          label={this.label}
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}

@@ -1,3 +1,9 @@
+## 2.5.9
+
+### Fixed
+
+- Do not pass `label` prop to `<Input />` and `<InputNumber />`
+
 ## 2.5.8
 
 ### Fixed
