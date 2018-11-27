@@ -59,7 +59,6 @@ const ConnectedCheckbox = {
           class={this.class}
           name={this.name}
           value={value}
-          label={this.label}
           true-label={this.trueLabel}
           false-label={this.falseLabel}
           disabled={this.disabled}

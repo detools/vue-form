@@ -1,3 +1,9 @@
+## 2.5.10
+
+### Fixed
+
+- Do not pass `label` prop to `<Checkbox />`
+
 ## 2.5.9
 
 ### Fixed
