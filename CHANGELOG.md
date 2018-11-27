@@ -1,3 +1,15 @@
+## 2.5.7
+
+### Added
+
+- Every unrecognized props applied to `ArrayField` passed to `renderField` as `extra` prop
+
+### Fixed
+
+- `ArrayField` now also supports `FormItem` Props
+- If you want to pass an empty label to a Control due to `element-ui` limitations — now you can. It won't be a `name` prop anymore.
+- But if you will pass a `label` that means `label={true}` you will get a label `startCase(name)`
+
 ## 2.5.6
 
 ### Removed

@@ -22,6 +22,11 @@ export default {
       type: [Function, Object],
       required: true,
     },
+
+    /* FormItem Props */
+    formItem: Boolean,
+    label: String,
+    labelWidth: String,
   },
 
   mixins: [ConnectedArrayFieldMixin],
@@ -171,7 +176,12 @@ export default {
     },
 
     renderComponent(value, setValue, createElement) {
-      const props = { data: value, fields: this.fields, name: this.name }
+      const props = {
+        data: value,
+        fields: this.fields,
+        name: this.name,
+        extra: this.$attrs,
+      }
 
       if (isFunction(this.renderField)) {
         return this.renderField(props)

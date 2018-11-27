@@ -1,5 +1,7 @@
 import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
+import isBoolean from 'lodash/isBoolean'
+import startCase from 'lodash/startCase'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import FormItem from '../components/ConnectedFormItem'
 
@@ -36,7 +38,15 @@ const ConnectedControlMixin = {
 
   render(createElement) {
     const [value, setValue, error] = this.state
-    const label = this.omitFormItemLabel ? undefined : this.label || this.name
+    let { label } = this
+
+    if (isBoolean(this.label)) {
+      label = this.label ? startCase(this.name) : undefined
+    }
+
+    if (this.omitFormItemLabel) {
+      label = undefined
+    }
 
     if (this.formItem) {
       return (
