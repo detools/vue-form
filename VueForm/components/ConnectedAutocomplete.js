@@ -1,6 +1,7 @@
 import { Autocomplete } from 'element-ui'
 import noop from 'lodash/noop'
 import isNull from 'lodash/isNull'
+import isString from 'lodash/isString'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedAutocomplete = {
@@ -10,10 +11,7 @@ const ConnectedAutocomplete = {
       required: true,
     },
 
-    value: {
-      type: [String, Number],
-      default: '',
-    },
+    value: String,
 
     labelKey: {
       type: String,
@@ -96,13 +94,23 @@ const ConnectedAutocomplete = {
       setValue(nextValue)
     },
 
-    renderComponent() {
+    renderComponent(value) {
+      let inputValue
+
+      if (isString(value)) {
+        inputValue = value
+      }
+
+      if (isString(this.viewValue)) {
+        inputValue = this.viewValue
+      }
+
       return (
         <Autocomplete
           class={this.class}
           name={this.name}
           type={this.type}
-          value={this.viewValue}
+          value={inputValue}
           placeholder={this.placeholder}
           clearable={this.clearable}
           disabled={this.disabled}

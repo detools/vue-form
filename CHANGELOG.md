@@ -1,3 +1,7 @@
+## 2.6.1
+
+- Check `<Autocomplete />` initial value. If it's string — use it. If there is a default value for this control — use it.
+
 ## 2.6.0
 
 - Added `<Autocomplete />` control
