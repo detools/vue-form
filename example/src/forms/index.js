@@ -8,6 +8,7 @@ import ImmediateForm from './ImmediateForm'
 import SyncValidationForm from './SyncValidationForm'
 import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
+import AutocompleteForm from './AutocompleteForm'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ const routes = [
     name: 'ArrayFieldForm',
     component: ArrayFieldForm,
     path: '/array-field-form',
+  },
+  {
+    name: 'AutocompleteForm',
+    component: AutocompleteForm,
+    path: '/autocomplete-form',
   },
 ]
 

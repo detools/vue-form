@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Added `<Autocomplete />` control
+
 ## 2.5.11
 
 ### Fixed

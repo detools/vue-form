@@ -20,6 +20,7 @@ export default {
         'SyncValidationForm',
         'AllValidationsForm',
         'ArrayFieldForm',
+        'AutocompleteForm',
       ],
     }
   },
