@@ -9,6 +9,7 @@ import SyncValidationForm from './SyncValidationForm'
 import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
 import AutocompleteForm from './AutocompleteForm'
+import UploadForm from './UploadForm'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ const routes = [
     name: 'AutocompleteForm',
     component: AutocompleteForm,
     path: '/autocomplete-form',
+  },
+  {
+    name: 'UploadForm',
+    component: UploadForm,
+    path: '/upload-form',
   },
 ]
 

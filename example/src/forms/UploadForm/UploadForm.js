@@ -1,4 +1,5 @@
-import Form, { Autocomplete } from '@detools/vue-form'
+import Form, { Input, Upload, validators } from '@detools/vue-form'
+import { Button } from 'element-ui'
 
 export default {
   data() {
@@ -11,28 +12,12 @@ export default {
     handleSubmit(values) {
       this.formValues = values
     },
-
-    fetchSuggestions(query, callback) {
-      if (query !== '') {
-        setTimeout(() => {
-          callback(
-            [
-              { id: 1, name: 'Leonard Leblanc' },
-              { id: 2, name: 'Mitzi Rocha' },
-              { id: 3, name: 'Marquita Giles' },
-            ].filter(({ name: item }) => item.toLowerCase().includes(query))
-          )
-        }, 500)
-      } else {
-        callback([])
-      }
-    },
   },
 
   render() {
     return (
       <div>
-        <h1>Autocomplete Form</h1>
+        <h1>Upload Form</h1>
         <div class="wrapper">
           <div class="form">
             <Form
@@ -40,14 +25,18 @@ export default {
               labelWidth="150px"
               labelPosition="left"
               labelSuffix=":"
-              buttonsPosition="label"
+              buttonsPosition="start"
               handleSubmit={this.handleSubmit}>
-              <Autocomplete
+              <Input formItem label name="username" />
+              <Upload
                 formItem
-                name="username"
-                label="Type A and wait"
-                fetchSuggestions={this.fetchSuggestions}
-              />
+                label
+                endpoint="upload"
+                name="files"
+                validators={[validators.isRequired()]}
+                formatResponse={({ items }) => items}>
+                <Button>Upload</Button>
+              </Upload>
             </Form>
           </div>
           <div class="values">

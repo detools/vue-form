@@ -11,6 +11,7 @@ const PATH_TO_VUE_FORM = path.resolve(__dirname, '..', 'VueForm')
 const PATH_TO_DIST = path.resolve(__dirname, '..', 'docs')
 const PATH_TO_DEV_DIST = path.resolve(__dirname, 'public')
 const PATH_TO_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules')
+const API_SERVER = 'http://localhost:33333'
 
 const CLEAN_OPTIONS = {
   // Instead of this ugly hack — we will get "wwwroot is outside of the project root. Skipping..."
@@ -107,6 +108,13 @@ export default {
       PATH_TO_DEV_DIST,
       path.resolve(PATH_TO_NODE_MODULES, 'element-ui/lib/theme-chalk'),
     ], // boolean | string | array, static file location
+    proxy: {
+      '/upload': {
+        target: API_SERVER,
+        changeOrigin: true,
+        secure: false,
+      },
+    },
     compress: true, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     https: false, // true for self-signed, object for cert authority

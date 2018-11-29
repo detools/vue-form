@@ -1,10 +1,20 @@
+## 2.7.0
+
+### Added
+
+— `<Upload />` control
+
 ## 2.6.1
+
+### Fixed
 
 - Check `<Autocomplete />` initial value. If it's string — use it. If there is a default value for this control — use it.
 
 ## 2.6.0
 
-- Added `<Autocomplete />` control
+### Added
+
+- `<Autocomplete />` control
 
 ## 2.5.11
 

@@ -74,11 +74,13 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 - [Slider](/VueForm/components/ConnectedSlider.js)
 - [Switch](/VueForm/components/ConnectedSwitch.js)
 - [TimePicker](/VueForm/components/ConnectedTimePicker.js)
+- [Upload](/VueForm/components/ConnectedUpload.js)
 - [FieldArray](/VueForm/components/ConnectedFieldArray.js)
 - [Form](/VueForm/components/Form/Form.vue)
 
 ## Changelog
 
+- [2.7.0](/CHANGELOG.md#270)
 - [2.6.1](/CHANGELOG.md#261)
 - [2.6.0](/CHANGELOG.md#260)
 - [2.5.11](/CHANGELOG.md#2511)
@@ -107,12 +109,3 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 - [1.4.2](/CHANGELOG.md#142)
 - [1.4.1](/CHANGELOG.md#141)
 - [1.4.0](/CHANGELOG.md#140)
-
-## Roadmap
-
-- Add remaining components
-  - `<Upload />`
-  - `<Rate />`
-- Add validation examples
-  - [Field level sync/async validation](https://detools.github.io/vue-form/#/inline-validators-form)
-  - [Form level sync validation](https://detools.github.io/vue-form/#/sync-validation-form)

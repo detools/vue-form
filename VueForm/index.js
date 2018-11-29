@@ -12,6 +12,7 @@ import Slider from './components/ConnectedSlider'
 import TimePicker from './components/ConnectedTimePicker'
 import DatePicker from './components/ConnectedDatePicker'
 import ArrayField from './components/ConnectedArrayField'
+import Upload from './components/ConnectedUpload'
 import FormItem from './components/ConnectedFormItem'
 
 import Notification from './components/Notification'
@@ -31,8 +32,9 @@ export {
   Slider,
   TimePicker,
   DatePicker,
-  FormItem,
   ArrayField,
+  Upload,
+  FormItem,
   Notification,
   validators,
 }

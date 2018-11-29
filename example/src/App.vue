@@ -21,6 +21,7 @@ export default {
         'AllValidationsForm',
         'ArrayFieldForm',
         'AutocompleteForm',
+        'UploadForm',
       ],
     }
   },
