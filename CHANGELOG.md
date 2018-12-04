@@ -1,3 +1,9 @@
+## 2.7.1
+
+### Fixed
+
+— Merge values for submit instead of destructuring
+
 ## 2.7.0
 
 ### Added

@@ -1,4 +1,4 @@
-import { isNil, isBoolean, isEmpty, has, mapValues, union } from 'lodash'
+import { isNil, isBoolean, isEmpty, has, mapValues, union, merge } from 'lodash'
 import { Form, Button } from 'element-ui'
 import CONSTANTS from '../../constants'
 import { validate, asyncValidate } from '../../validators/validate'
@@ -231,7 +231,7 @@ export default {
 
       const off = this.manageSubmittingState()
       const submitForm = () =>
-        Promise.resolve(this.handleSubmit({ ...this.initialValues, ...this.state }))
+        Promise.resolve(this.handleSubmit(merge({}, this.initialValues, this.state)))
 
       const submitPromise = this.form.validating
         ? Promise.all(Object.values(this.asyncValidations)).then(submitForm)
