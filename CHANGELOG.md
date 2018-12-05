@@ -1,3 +1,9 @@
+## 2.7.2
+
+### Fixed
+
+— Added `append`, `prepend` props to `<Input />`
+
 ## 2.7.1
 
 ### Fixed

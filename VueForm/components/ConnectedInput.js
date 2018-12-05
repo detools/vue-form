@@ -33,6 +33,8 @@ const ConnectedInput = {
     autofocus: Boolean,
     form: String,
     tabindex: Number,
+    append: [String, Number, Boolean],
+    prepend: [String, Number, Boolean],
 
     validators: Array,
     asyncValidators: Array,
