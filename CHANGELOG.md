@@ -1,3 +1,9 @@
+## 2.7.3
+
+### Updated
+
+— When form field has removed from form — it value won't be passed to submit
+
 ## 2.7.2
 
 ### Fixed

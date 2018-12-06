@@ -1,4 +1,4 @@
-import { isNil, isBoolean, isEmpty, has, mapValues, union, merge } from 'lodash'
+import { isNil, isBoolean, isEmpty, has, mapValues, union, merge, without, omit } from 'lodash'
 import { Form, Button } from 'element-ui'
 import CONSTANTS from '../../constants'
 import { validate, asyncValidate } from '../../validators/validate'
@@ -25,6 +25,9 @@ export default {
 
       // Array<String>
       formFields: [],
+
+      // Array<String>
+      removedFields: [],
 
       // { [fieldName]: true }
       touchedFields: {},
@@ -90,6 +93,7 @@ export default {
       const vm = this
 
       this.formFields = union(this.formFields, [name])
+      this.removedFields = without(this.removedFields, name)
 
       const formLevelInitialValue = vm.initialValues[name]
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
@@ -148,6 +152,8 @@ export default {
         vm.$delete(this.syncErrors, name)
         vm.$delete(this.asyncErrors, name)
         vm.$delete(this.touchedFields, name)
+
+        this.removedFields = this.removedFields.concat(name)
       }
 
       const setTouched = () => {
@@ -231,7 +237,9 @@ export default {
 
       const off = this.manageSubmittingState()
       const submitForm = () =>
-        Promise.resolve(this.handleSubmit(merge({}, this.initialValues, this.state)))
+        Promise.resolve(
+          this.handleSubmit(merge({}, omit(this.initialValues, this.removedFields), this.state))
+        )
 
       const submitPromise = this.form.validating
         ? Promise.all(Object.values(this.asyncValidations)).then(submitForm)
