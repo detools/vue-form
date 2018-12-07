@@ -1,3 +1,9 @@
+## 2.7.4
+
+### Added
+
+— `<Button />` component from `element-ui`, just for convenience
+
 ## 2.7.3
 
 ### Updated

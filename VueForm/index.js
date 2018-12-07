@@ -1,3 +1,5 @@
+import { Button } from 'element-ui'
+
 import Form from './components/Form'
 import Radio from './components/ConnectedRadio'
 import RadioGroup from './components/ConnectedRadioGroup'
@@ -36,6 +38,7 @@ export {
   Upload,
   FormItem,
   Notification,
+  Button,
   validators,
 }
 
