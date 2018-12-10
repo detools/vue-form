@@ -1,3 +1,28 @@
+## 2.7.6
+
+### Fixed
+
+— Pass `fileList` prop as `file-list` prop to `<Upload />`
+— Can't use value for now as `file-list` prop
+
+```js
+// Correct example
+<Upload
+  formItem
+  showFileList
+  name="specificationFiles"
+  label="Upload Specification*"
+  labelWidth="150px"
+  endpoint="uploadSpecification"
+  // These initial values you have passed to form
+  // Default value is an empty array
+  fileList={this.initialValues.specificationFiles}
+  httpRequest={this.createUploadFile}
+  formatResponse={this.formatResponse}>
+  <Button>Browse</Button>
+</Upload>
+```
+
 ## 2.7.5
 
 ### Fixed

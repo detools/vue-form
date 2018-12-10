@@ -80,6 +80,7 @@ See demo at [https://detools.github.io/vue-form](https://detools.github.io/vue-f
 
 ## Changelog
 
+- [2.7.6](/CHANGELOG.md#276)
 - [2.7.5](/CHANGELOG.md#275)
 - [2.7.4](/CHANGELOG.md#274)
 - [2.7.3](/CHANGELOG.md#273)

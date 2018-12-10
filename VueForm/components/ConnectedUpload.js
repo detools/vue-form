@@ -1,5 +1,6 @@
 import { Upload } from 'element-ui'
 import noop from 'lodash/noop'
+import castArray from 'lodash/castArray'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -82,10 +83,10 @@ const ConnectedInput = {
       default: response => response,
     },
 
-    // fileList: {
-    //   type: Array,
-    //   default: () => [],
-    // },
+    fileList: {
+      type: Array,
+      default: () => [],
+    },
 
     listType: {
       type: String,
@@ -158,10 +159,15 @@ const ConnectedInput = {
       this.handleSuccess(response, file, filelist)
 
       const [, setValue] = this.state
-      setValue(this.formatResponse(response, file, filelist))
+      const transformedResponse = this.formatResponse(response, file, filelist)
+      const nextValue = castArray(filelist)
+        .slice(0, -1)
+        .concat(transformedResponse)
+
+      setValue(nextValue)
     },
 
-    renderComponent(value) {
+    renderComponent() {
       return (
         <Upload
           {...this.callbacks}
@@ -177,7 +183,7 @@ const ConnectedInput = {
           accept={this.accept}
           before-upload={this.beforeUpload}
           before-remove={this.beforeRemove}
-          file-list={value}
+          file-list={this.fileList}
           list-type={this.listType}
           auto-upload={this.autoUpload}
           http-request={this.httpRequest}
