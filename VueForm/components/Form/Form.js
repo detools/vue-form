@@ -136,9 +136,7 @@ export default {
           vm.$delete(this.asyncErrors, name)
         }
 
-        if (this.handleModelChange) {
-          this.handleModelChange(this.state)
-        }
+        this.handleModelChange(this.state)
 
         setError(nextValue)
       }
@@ -288,6 +286,8 @@ export default {
       this.syncErrors = {}
       this.asyncErrors = {}
       this.touchedFields = {}
+
+      this.handleModelChange(this.state)
     },
 
     renderPlainButtons() {

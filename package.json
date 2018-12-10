@@ -1,6 +1,6 @@
 {
   "name": "@detools/vue-form",
-  "version": "2.7.4",
+  "version": "2.7.5",
   "description": "Form State Management for VueJS",
   "main": "VueForm/index.js",
   "scripts": {
@@ -15,14 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/detools/vue-form.git"
   },
-  "keywords": [
-    "vue",
-    "form",
-    "state",
-    "management",
-    "validation",
-    "errors"
-  ],
+  "keywords": ["vue", "form", "state", "management", "validation", "errors"],
   "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
   "license": "MIT",
   "bugs": {

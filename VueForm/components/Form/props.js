@@ -33,7 +33,10 @@ const formProps = {
     type: Function,
     default: noop,
   },
-  handleModelChange: Function,
+  handleModelChange: {
+    type: Function,
+    default: noop,
+  },
   handleDisabled: {
     type: Function,
     default: noop,

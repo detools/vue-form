@@ -1,3 +1,11 @@
+## 2.7.5
+
+### Fixed
+
+— Pass `<Upload />` value as `file-list` prop to UI component
+— Add default noop value for `handleModelChange`
+— Call `handleModelChange` on `reinitialize`
+
 ## 2.7.4
 
 ### Added

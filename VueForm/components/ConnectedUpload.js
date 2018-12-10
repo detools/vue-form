@@ -82,10 +82,11 @@ const ConnectedInput = {
       default: response => response,
     },
 
-    fileList: {
-      type: Array,
-      default: () => [],
-    },
+    // fileList: {
+    //   type: Array,
+    //   default: () => [],
+    // },
+
     listType: {
       type: String,
       default: 'text',
@@ -160,7 +161,7 @@ const ConnectedInput = {
       setValue(this.formatResponse(response, file, filelist))
     },
 
-    renderComponent() {
+    renderComponent(value) {
       return (
         <Upload
           {...this.callbacks}
@@ -176,7 +177,7 @@ const ConnectedInput = {
           accept={this.accept}
           before-upload={this.beforeUpload}
           before-remove={this.beforeRemove}
-          file-list={this.fileList}
+          file-list={value}
           list-type={this.listType}
           auto-upload={this.autoUpload}
           http-request={this.httpRequest}
