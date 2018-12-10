@@ -15,7 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/detools/vue-form.git"
   },
-  "keywords": ["vue", "form", "state", "management", "validation", "errors"],
+  "keywords": [
+    "vue",
+    "form",
+    "state",
+    "management",
+    "validation",
+    "errors"
+  ],
   "author": "Anton Kuznetsov <isnifer@gmail.com> (https://github.com/isnifer)",
   "license": "MIT",
   "bugs": {
