@@ -167,10 +167,20 @@ export default {
           const isFieldTouched = vm.touchedFields[name]
 
           return [
+            // Current value
             vm.state[name],
+
+            // Value handler
             setValue,
+
+            // Current error
             isFieldTouched && (vm.syncErrors[name] || vm.asyncErrors[name]),
+
+            // Touched indicator
             isFieldTouched,
+
+            // Initial value
+            this.initialValues[name],
           ]
         },
       }

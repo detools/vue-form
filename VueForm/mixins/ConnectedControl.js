@@ -37,7 +37,7 @@ const ConnectedControlMixin = {
   },
 
   render(createElement) {
-    const [value, setValue, error] = this.state
+    const [value, setValue, error, , initialValue] = this.state
     let { label } = this
 
     if (isBoolean(this.label)) {
@@ -51,12 +51,12 @@ const ConnectedControlMixin = {
     if (this.formItem) {
       return (
         <FormItem label={label} label-width={this.labelWidth} error={error}>
-          {this.renderComponent(value, setValue, createElement)}
+          {this.renderComponent(value, setValue, createElement, initialValue)}
         </FormItem>
       )
     }
 
-    return this.renderComponent(value, setValue, createElement)
+    return this.renderComponent(value, setValue, createElement, initialValue)
   },
 }
 

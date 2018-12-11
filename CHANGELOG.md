@@ -1,65 +1,54 @@
+## 2.7.7
+
+### Fixed
+
+- `vue-form` now passes itself initial value to every component
+- User no need to define `fileList` if he passed `initalValues` to `Form`
+
 ## 2.7.6
 
 ### Fixed
 
-— Pass `fileList` prop as `file-list` prop to `<Upload />`
-— Can't use value for now as `file-list` prop
-
-```js
-// Correct example
-<Upload
-  formItem
-  showFileList
-  name="specificationFiles"
-  label="Upload Specification*"
-  labelWidth="150px"
-  endpoint="uploadSpecification"
-  // These initial values you have passed to form
-  // Default value is an empty array
-  fileList={this.initialValues.specificationFiles}
-  httpRequest={this.createUploadFile}
-  formatResponse={this.formatResponse}>
-  <Button>Browse</Button>
-</Upload>
-```
+- Pass `fileList` prop as `file-list` prop to `<Upload />`
+- Can't use value for now as `file-list` prop
 
 ## 2.7.5
 
 ### Fixed
 
-— Pass `<Upload />` value as `file-list` prop to UI component
-— Add default noop value for `handleModelChange`
-— Call `handleModelChange` on `reinitialize`
+- Pass `<Upload />` value as `file-list` prop to UI component
+- Add default noop value for `handleModelChange`
+- Call `handleModelChange` on `reinitialize`
 
 ## 2.7.4
 
 ### Added
 
-— `<Button />` component from `element-ui`, just for convenience
+- `<Button />` component from `element-ui`, just for convenience
 
 ## 2.7.3
 
 ### Updated
 
-— When form field has removed from form — it value won't be passed to submit
+- When form field has removed from form — it value won't be passed to submit
 
 ## 2.7.2
 
 ### Fixed
 
-— Added `append`, `prepend` props to `<Input />`
+- Added `append`, `prepend` props to `<Input />`
 
 ## 2.7.1
 
 ### Fixed
 
-— Merge values for submit instead of destructuring
+- Merge values for submit instead of destructuring
 
 ## 2.7.0
 
 ### Added
 
-— `<Upload />` control
+- `<Upload />` control
 
 ## 2.6.1
 
