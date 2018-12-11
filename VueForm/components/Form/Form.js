@@ -1,4 +1,15 @@
-import { isNil, isBoolean, isEmpty, has, mapValues, union, merge, without, omit } from 'lodash'
+import {
+  isNil,
+  isBoolean,
+  isEmpty,
+  isEqual,
+  has,
+  mapValues,
+  union,
+  merge,
+  without,
+  omit,
+} from 'lodash'
 import { Form, Button } from 'element-ui'
 import CONSTANTS from '../../constants'
 import { validate, asyncValidate } from '../../validators/validate'
@@ -44,7 +55,7 @@ export default {
   },
 
   updated() {
-    if (this.defaultInitialValues !== this.initialValues) {
+    if (!isEqual(this.defaultInitialValues, this.initialValues)) {
       this.defaultInitialValues = this.initialValues
       this.reinitializeValues(this.initialValues)
     }

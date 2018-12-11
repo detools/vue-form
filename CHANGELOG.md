@@ -1,3 +1,9 @@
+## 2.7.8
+
+### Fixed
+
+- Do deep equal of `initialValues` via `lodash.isEqual` on `updated`
+
 ## 2.7.7
 
 ### Fixed
