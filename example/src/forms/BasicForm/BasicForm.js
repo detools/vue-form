@@ -43,7 +43,7 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
+            <Form cancel submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
               <Input formItem name="username" label="Username" />
               <Input formItem name="password" type="password" label="Password" />
               <Checkbox formItem name="savePassword">

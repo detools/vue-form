@@ -44,7 +44,7 @@ export default {
         <h1>All Validations Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
+            <Form cancel submit labelPosition="top" handleSubmit={this.handleSubmit}>
               <Input
                 formItem
                 name="username"

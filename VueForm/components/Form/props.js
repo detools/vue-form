@@ -8,7 +8,7 @@ export const BUTTONS_POSITION = {
 }
 
 const formProps = {
-  reset: [String, Boolean],
+  cancel: [String, Boolean],
   save: [String, Boolean],
   submit: [String, Boolean],
 

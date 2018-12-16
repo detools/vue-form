@@ -59,7 +59,7 @@ export default {
         <div class="wrapper">
           <div class="form">
             <Form
-              reset
+              cancel
               save
               submit
               handleSubmit={this.handleSubmit}

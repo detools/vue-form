@@ -1,3 +1,9 @@
+## 3.0.1
+
+### Breaking changes
+
+- `reset` property renamed to `cancel`
+
 ## 3.0.0
 
 ### Breaking changes

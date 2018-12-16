@@ -39,8 +39,8 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
-              <Input formItem name="username" label="Username" />
+            <Form cancel submit labelPosition="top" handleSubmit={this.handleSubmit}>
+              <Input formItem label name="username" />
             </Form>
           </div>
           <div class="values">
@@ -80,6 +80,7 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Changelog
 
+- [3.0.1](/CHANGELOG.md#301)
 - [3.0.0](/CHANGELOG.md#300)
 - [2.x.x](/CHANGELOG.md#278)
 - [1.x.x](/CHANGELOG.md#150)

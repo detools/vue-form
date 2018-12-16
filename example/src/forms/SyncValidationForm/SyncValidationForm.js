@@ -33,7 +33,7 @@ export default {
         <h1>Sync Validation Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset save submit validate={this.formValidate} handleSubmit={this.handleSubmit}>
+            <Form cancel save submit validate={this.formValidate} handleSubmit={this.handleSubmit}>
               <Input formItem name="username" label="Username" />
             </Form>
           </div>

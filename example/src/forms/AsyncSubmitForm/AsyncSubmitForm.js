@@ -27,10 +27,11 @@ export default {
         <h1>Async Submit Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form reset submit handleSubmit={this.handleSubmit}>
+            <Form cancel submit handleSubmit={this.handleSubmit}>
               <Input formItem name="usename" label="Username" placeholder="Just submit me" />
               <div>
-                You will see a notification when form will be submitted,<br />
+                You will see a notification when form will be submitted,
+                <br />
                 buttons will be disabled
               </div>
               <br />

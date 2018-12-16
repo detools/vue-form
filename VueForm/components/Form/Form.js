@@ -38,7 +38,7 @@ export default {
 
     buttons() {
       return {
-        reset: isBoolean(this.reset) ? 'Reset' : this.reset,
+        reset: isBoolean(this.cancel) ? 'Cancel' : this.cancel,
         save: isBoolean(this.save) ? 'Save' : this.save,
         submit: isBoolean(this.submit) ? 'Submit' : this.submit,
       }
@@ -132,7 +132,7 @@ export default {
     renderPlainButtons() {
       return (
         <div style={this.buttonsStyles}>
-          {this.reset && (
+          {this.cancel && (
             <Button nativeType="reset" disabled={this.store.isDisabled}>
               {this.buttons.reset}
             </Button>
