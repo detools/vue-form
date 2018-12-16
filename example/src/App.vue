@@ -22,6 +22,7 @@ export default {
         'ArrayFieldForm',
         'AutocompleteForm',
         'UploadForm',
+        'DynamicValidatorsForm',
       ],
     }
   },

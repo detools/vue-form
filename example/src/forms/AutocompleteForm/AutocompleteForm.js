@@ -4,6 +4,11 @@ export default {
   data() {
     return {
       formValues: {},
+      autocompleteList: [
+        { id: 1, name: 'Leonard Leblanc' },
+        { id: 2, name: 'Mitzi Rocha' },
+        { id: 3, name: 'Marquita Giles' },
+      ],
     }
   },
 
@@ -16,11 +21,7 @@ export default {
       if (query !== '') {
         setTimeout(() => {
           callback(
-            [
-              { id: 1, name: 'Leonard Leblanc' },
-              { id: 2, name: 'Mitzi Rocha' },
-              { id: 3, name: 'Marquita Giles' },
-            ].filter(({ name: item }) => item.toLowerCase().includes(query))
+            this.autocompleteList.filter(({ name: item }) => item.toLowerCase().includes(query))
           )
         }, 500)
       } else {
@@ -56,6 +57,13 @@ export default {
             <br />
             <div>
               <pre>{JSON.stringify(this.formValues, null, 2)}</pre>
+            </div>
+            <br />
+            <strong>Autocomplete List</strong>
+            <br />
+            <br />
+            <div>
+              <pre>{JSON.stringify(this.autocompleteList, null, 2)}</pre>
             </div>
           </div>
         </div>

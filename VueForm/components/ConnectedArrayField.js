@@ -99,7 +99,7 @@ export default {
       const nextArray = [
         ...arrayWithout.slice(0, toIndex),
         elementToMove,
-        ...arrayWithout.slice(toIndex + 1),
+        ...arrayWithout.slice(toIndex),
       ]
 
       this.setValue(nextArray)

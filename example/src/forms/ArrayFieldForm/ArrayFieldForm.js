@@ -143,9 +143,9 @@ export default {
           <div class="form">
             <Form submit initialValues={this.initialValues} handleSubmit={this.handleSubmit}>
               <ArrayField name="tasklist" renderField={this.renderFieldTable} />
+              <br />
+              <br />
             </Form>
-            <br />
-            <br />
           </div>
           <div class="values">
             <strong>Form Values</strong>

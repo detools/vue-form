@@ -13,7 +13,7 @@ export default {
       this.formValues = values
     },
 
-    handleReset() {
+    handleCancel() {
       this.formValues = {}
     },
 
@@ -63,7 +63,7 @@ export default {
               save
               submit
               handleSubmit={this.handleSubmit}
-              handleReset={this.handleReset}
+              handleCancel={this.handleCancel}
               handleDisabled={this.handleDisabled}>
               <Input
                 formItem

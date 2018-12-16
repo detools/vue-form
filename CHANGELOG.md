@@ -1,3 +1,31 @@
+## 3.0.0
+
+### Breaking changes
+
+- `handleReset` callback now `handleCancel`, because personally I didn't use any reset button, but every time I have a `Cancel` button
+- Demo site now moved on from `Github Pages` to [`Netlify`](https://detools-vue-form.netlify.com)
+
+### Updated
+
+- `initialValues` now track changes via `watch` instead of `updated` callback
+- `SECRET_VUE_FORM_METHOD` moved to store at all
+
+### Fixed
+
+- `length` validator
+- `ArrayField`'s `move` method
+- On success form level sync validation (if exists) `syncErrors` no more cleared
+- On failed form level sync validation error messages now merge with existing errors
+- Field Level Sync Error messages [have high priority](https://github.com/detools/vue-form/pull/12/files#diff-cc347fc7d9ff2647f1b2670fce6f2d0cR134)
+- Validators now can react on any changes. See [**Dynamic Validators Form**](https://detools-vue-form.netlify.com/#/dynamic-validators-form)
+- All time when `vue-form` needs to validate some value — it uses actual validators
+- Values now validate on `reinitializeValues`
+
+### Added
+
+- Independent store to keep form state
+- [Tests for this store](https://github.com/detools/vue-form/pull/12/files#diff-c1514b4bdc660c0a5cf1c0155331e290)
+
 ## 2.7.8
 
 ### Fixed
@@ -180,14 +208,14 @@ const renderAsComponent = {
 ### Added
 
 - [`FieldArray`](/VueForm/components/ConnectedFieldArray.js) control
-- [`Array Field Form`](https://detools.github.io/vue-form/#/array-field-form) to explain how `FieldArray` works
+- [`Array Field Form`](https://detools-vue-form.netlify.com/#/array-field-form) to explain how `FieldArray` works
 
 ## 2.4.2
 
 ### Updated
 
 - `length` validator. Now it supports arrays
-- [`All Validations Form` demo](https://detools.github.io/vue-form/#/all-validations-form)
+- [`All Validations Form` demo](https://detools-vue-form.netlify.com/#/all-validations-form)
 
 ## 2.4.1
 
@@ -210,7 +238,7 @@ const renderAsComponent = {
 
 How to test:
 
-1.  Open [Inline Validators Form](https://detools.github.io/vue-form/#/inline-validators-form)
+1.  Open [Inline Validators Form](https://detools-vue-form.netlify.com/#/inline-validators-form)
 2.  Type `123456` => click `Submit`
 3.  You will get an async error — form won't submit
 4.  Type `github` => click `Submit`
@@ -220,7 +248,7 @@ How to test:
 
 ### Added
 
-- Form level sync validation. [Demo](https://detools.github.io/vue-form/#/sync-validation-form)
+- Form level sync validation. [Demo](https://detools-vue-form.netlify.com/#/sync-validation-form)
 
 ## 2.2.0
 
@@ -246,16 +274,20 @@ How to test:
 // Now
 import { Input, validators } from '@detools/vue-form'
 
-<Input
-  validators={[validators.isRequired()]}
-/>
+const After = {
+  render() {
+    return <Input validators={[validators.isRequired()]} />
+  },
+}
 
 // Before
 import { Input, validations } from '@detools/vue-form'
 
-<Input
-  validate={validations.validate([validations.isRequired()])}
-/>
+const Before = {
+  render() {
+    return <Input validate={validations.validate([validations.isRequired()])} />
+  },
+}
 ```
 
 ### Updated
@@ -291,7 +323,7 @@ import { Input, validations } from '@detools/vue-form'
 ### Added:
 
 - Support for immediate changes handler `handleModelChange`
-- Example for immediate changes form [`<ImmediateForm />`](https://detools.github.io/vue-form#immediate-form)
+- Example for immediate changes form [`<ImmediateForm />`](https://detools-vue-form.netlify.com#immediate-form)
 
 ### Changed:
 

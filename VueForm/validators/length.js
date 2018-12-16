@@ -1,11 +1,11 @@
-import isObject from 'lodash/isObject'
+import isPlainObject from 'lodash/isPlainObject'
 import isEmpty from 'lodash/isEmpty'
 import isNil from 'lodash/isNil'
 import startCase from 'lodash/startCase'
 import invariant from 'invariant'
 
-export default function length(options, customMessage = {}) {
-  invariant(isObject(options), '"options" should be an object [validators.length]')
+export default function length(options, customMessage = '') {
+  invariant(isPlainObject(options), '"options" should be an object [validators.length]')
   invariant(!isEmpty(options), '"options" should be not an empty object [validators.length]')
 
   const { equals, min, max } = options
@@ -13,7 +13,7 @@ export default function length(options, customMessage = {}) {
 
   return (rawValue, name) => {
     const cleanValue = isNil(rawValue) ? '' : rawValue
-    const value = Array.isArray(cleanValue) ? cleanValue : String().trim()
+    const value = Array.isArray(cleanValue) ? cleanValue : String(cleanValue).trim()
 
     if (equals) {
       return value.length !== equals

@@ -41,7 +41,7 @@ const formProps = {
     type: Function,
     default: noop,
   },
-  handleReset: Function,
+  handleCancel: Function,
 
   validate: Function,
   asyncValidate: Function,

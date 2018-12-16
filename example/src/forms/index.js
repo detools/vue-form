@@ -10,6 +10,7 @@ import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
 import AutocompleteForm from './AutocompleteForm'
 import UploadForm from './UploadForm'
+import DynamicValidatorsForm from './DynamicValidatorsForm'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ const routes = [
     name: 'UploadForm',
     component: UploadForm,
     path: '/upload-form',
+  },
+  {
+    name: 'DynamicValidatorsForm',
+    component: DynamicValidatorsForm,
+    path: '/dynamic-validators-form',
   },
 ]
 
