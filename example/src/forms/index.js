@@ -10,6 +10,7 @@ import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
 import AutocompleteForm from './AutocompleteForm'
 import UploadForm from './UploadForm'
+import StoreOutsideForm from './StoreOutsideForm'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ const routes = [
     name: 'UploadForm',
     component: UploadForm,
     path: '/upload-form',
+  },
+  {
+    name: 'StoreOutsideForm',
+    component: StoreOutsideForm,
+    path: '/store-outside-form',
   },
 ]
 

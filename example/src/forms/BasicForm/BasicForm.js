@@ -79,7 +79,7 @@ export default {
               />
               <Slider
                 formItem
-                name="coffee"
+                name="controls"
                 label="How many controls in this form?"
                 min={0}
                 max={10}

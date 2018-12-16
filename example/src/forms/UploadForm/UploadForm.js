@@ -18,6 +18,7 @@ export default {
     return (
       <div>
         <h1>Upload Form</h1>
+        <h4>(this demo currently working only with local dev server)</h4>
         <div class="wrapper">
           <div class="form">
             <Form
@@ -31,6 +32,7 @@ export default {
               <Upload
                 formItem
                 label
+                showFileList
                 endpoint="upload"
                 name="files"
                 validators={[validators.isRequired()]}

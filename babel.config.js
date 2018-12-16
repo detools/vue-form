@@ -1,11 +1,8 @@
-const getRealPaths = plugin => (
+const getRealPaths = plugin =>
   Array.isArray(plugin) ? [require.resolve(plugin[0]), ...plugin.slice(1)] : require.resolve(plugin)
-)
 
 module.exports = {
-  presets: [
-    [require.resolve('@babel/preset-env'), { modules: false }],
-  ],
+  presets: [[require.resolve('@babel/preset-env'), { modules: false }]],
   plugins: [
     ['@babel/plugin-proposal-class-properties', { loose: false }],
     ['@babel/plugin-proposal-decorators', { legacy: true }],

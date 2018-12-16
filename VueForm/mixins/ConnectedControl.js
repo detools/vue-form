@@ -2,6 +2,7 @@ import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
 import isBoolean from 'lodash/isBoolean'
 import startCase from 'lodash/startCase'
+import isEqual from 'lodash/isEqual'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import FormItem from '../components/ConnectedFormItem'
 
@@ -9,7 +10,21 @@ const ConnectedControlMixin = {
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
-    return $registerFormComponent(this.name, this.value, this.validators, this.asyncValidators)
+    return $registerFormComponent(this.name, this.value, this.validators)
+  },
+
+  mounted() {
+    this.validateOnReinitialize(value => {
+      this.setError(this.validators)(value)
+    })
+  },
+
+  watch: {
+    validators(validators, prevValidators) {
+      if (!isEqual(validators, prevValidators)) {
+        this.setError(validators)()
+      }
+    },
   },
 
   destroyed() {
@@ -18,7 +33,7 @@ const ConnectedControlMixin = {
 
   computed: {
     state() {
-      return this.useState()
+      return this.useState(this.validators)
     },
   },
 
@@ -27,7 +42,7 @@ const ConnectedControlMixin = {
       this.setTouched()
       this.handleBlur(...args)
 
-      return this.setAsyncError()
+      return this.setAsyncError(this.asyncValidators)()
     },
 
     handleFieldChange(...args) {
@@ -76,7 +91,7 @@ export const ConnectedArrayFieldMixin = {
       initialValue = castArray(initialValue)
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
+    return $registerFormComponent(this.name, initialValue, this.validators)
   },
 }
 
@@ -97,7 +112,7 @@ export const ConnectedSelectMixin = {
       }
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators, this.asyncValidators)
+    return $registerFormComponent(this.name, initialValue, this.validators)
   },
 }
 
