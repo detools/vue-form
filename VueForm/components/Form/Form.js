@@ -56,8 +56,8 @@ export default {
 
   methods: {
     // Should be called once
-    [CONSTANTS.SECRET_VUE_FORM_METHOD](name, initialValue, validators) {
-      return this.store.registerFormControl(name, initialValue, validators)
+    [CONSTANTS.SECRET_VUE_FORM_METHOD](...args) {
+      return this.store.registerFormControl(...args)
     },
 
     handleFormDisabled(errors) {

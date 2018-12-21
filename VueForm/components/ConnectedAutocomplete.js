@@ -1,6 +1,6 @@
 import { Autocomplete } from 'element-ui'
 import noop from 'lodash/noop'
-import isNull from 'lodash/isNull'
+import isNil from 'lodash/isNil'
 import isString from 'lodash/isString'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
@@ -83,15 +83,30 @@ const ConnectedAutocomplete = {
 
   methods: {
     handleFieldSelect(value) {
-      const nextValue = isNull(this.valueKey) ? value : value[this.valueKey]
+      const nextValue = isNil(this.valueKey) ? value : value[this.valueKey]
 
       this.setTouched()
       this.handleSelect(nextValue)
 
-      this.viewValue = isNull(this.labelKey) ? value : value[this.labelKey]
+      this.viewValue = isNil(this.labelKey) ? value : value[this.labelKey]
 
-      const [, setValue] = this.state
-      setValue(nextValue)
+      if (!this.isComponentPartOfArrayField) {
+        const [, setValue] = this.state
+        setValue(nextValue)
+      }
+    },
+
+    handleAutocompleteBlur(event) {
+      this.handleFieldBlur(event)
+
+      const { value } = event.target
+
+      if (!this.isComponentPartOfArrayField) {
+        if (isNil(value) || value === '') {
+          const [, setValue] = this.state
+          setValue(null)
+        }
+      }
     },
 
     renderComponent(value) {
@@ -131,7 +146,7 @@ const ConnectedAutocomplete = {
           size={this.size}
           fetch-suggestions={this.fetchSuggestions}
           on-focus={this.handleFocus}
-          on-blur={this.handleFieldBlur}
+          on-blur={this.handleAutocompleteBlur}
           on-select={this.handleFieldSelect}>
           {Boolean(this.prefix) && <template slot="prefix">{this.prefix}</template>}
           {Boolean(this.suffix) && <template slot="suffix">{this.suffix}</template>}

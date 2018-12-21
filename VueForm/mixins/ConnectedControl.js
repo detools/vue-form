@@ -4,16 +4,23 @@ import isBoolean from 'lodash/isBoolean'
 import startCase from 'lodash/startCase'
 import isEqual from 'lodash/isEqual'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
+import isComponentPartOfArrayField from '../utils/isComponentPartOfArrayField'
 import FormItem from '../components/ConnectedFormItem'
 
 const ConnectedControlMixin = {
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
-    return $registerFormComponent(this.name, this.value, this.validators)
+    return $registerFormComponent(
+      this.name,
+      this.value,
+      this.validators,
+      isComponentPartOfArrayField(this)
+    )
   },
 
   mounted() {
+    this.isComponentPartOfArrayField = isComponentPartOfArrayField(this)
     this.validateOnReinitialize(value => {
       this.setError(this.validators)(value)
     })
@@ -91,7 +98,12 @@ export const ConnectedArrayFieldMixin = {
       initialValue = castArray(initialValue)
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators)
+    return $registerFormComponent(
+      this.name,
+      initialValue,
+      this.validators,
+      isComponentPartOfArrayField(this)
+    )
   },
 }
 
@@ -112,7 +124,12 @@ export const ConnectedSelectMixin = {
       }
     }
 
-    return $registerFormComponent(this.name, initialValue, this.validators)
+    return $registerFormComponent(
+      this.name,
+      initialValue,
+      this.validators,
+      isComponentPartOfArrayField(this)
+    )
   },
 }
 

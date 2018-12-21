@@ -2,6 +2,7 @@ import without from 'lodash/without'
 import last from 'lodash/last'
 import isFunction from 'lodash/isFunction'
 import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
+import CONSTANTS from '../constants'
 
 export default {
   props: {
@@ -32,6 +33,10 @@ export default {
   mixins: [ConnectedArrayFieldMixin],
 
   computed: {
+    [CONSTANTS.IS_ARRAY_FIELD]() {
+      return true
+    },
+
     controlValue() {
       return this.state[0]
     },

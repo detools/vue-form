@@ -1,3 +1,9 @@
+## 3.1.0
+
+### Added
+
+- Flag that indicates about "is field part of <ArrayField />"
+
 ## 3.0.1
 
 ### Breaking changes

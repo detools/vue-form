@@ -67,10 +67,12 @@ export const VueFormStoreParams = {
     },
     // ON MOUNT FORM END
 
-    registerFormControl(name, fieldLevelInitialValue, validators) {
+    registerFormControl(name, fieldLevelInitialValue, validators, isComponentPartOfArrayField) {
       const vm = this
 
-      vm.addFormField(name)
+      if (!isComponentPartOfArrayField) {
+        vm.addFormField(name)
+      }
 
       const setError = vm.createSetError(name)
       const setAsyncError = vm.createSetAsyncError(name)
@@ -81,8 +83,11 @@ export const VueFormStoreParams = {
 
       const formLevelInitialValue = vm.props.initialValues[name]
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
-      if (!has(vm.state, name)) {
-        setValue(validators)(value)
+
+      if (!isComponentPartOfArrayField) {
+        if (!has(vm.state, name)) {
+          setValue(validators)(value)
+        }
       }
 
       return {
@@ -91,6 +96,7 @@ export const VueFormStoreParams = {
         cleanFormValue,
         validateOnReinitialize,
         setTouched,
+        isComponentPartOfArrayField,
         useState: syncValidators => {
           const isFieldTouched = vm.touchedFields[name]
 
