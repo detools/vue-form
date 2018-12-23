@@ -73,6 +73,8 @@ export default {
       }
 
       const isSubmitButtonClick = event.type === 'click'
+      const submitHandler =
+        !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
 
       this.store.manageTouchedFieldsState()
 
@@ -96,7 +98,7 @@ export default {
       const off = this.store.manageSubmittingState()
       const submitForm = () =>
         Promise.resolve(
-          this.handleSubmit(
+          submitHandler(
             merge({}, omit(this.initialValues, this.store.removedFields), this.store.state)
           )
         )

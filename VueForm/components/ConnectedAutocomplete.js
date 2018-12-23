@@ -2,6 +2,7 @@ import { Autocomplete } from 'element-ui'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import isString from 'lodash/isString'
+import get from 'lodash/get'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedAutocomplete = {
@@ -11,7 +12,7 @@ const ConnectedAutocomplete = {
       required: true,
     },
 
-    value: String,
+    value: [String, Number],
 
     labelKey: {
       type: String,
@@ -46,6 +47,8 @@ const ConnectedAutocomplete = {
 
     validators: Array,
     asyncValidators: Array,
+
+    options: Array,
 
     fetchSuggestions: {
       type: Function,
@@ -82,18 +85,22 @@ const ConnectedAutocomplete = {
   },
 
   methods: {
+    getValueFromOptions(value, options = this.options) {
+      const item = options.find(({ [this.valueKey]: valueProp }) => valueProp === value)
+
+      return get(item, this.labelKey, value)
+    },
+
     handleFieldSelect(value) {
-      const nextValue = isNil(this.valueKey) ? value : value[this.valueKey]
+      const nextValue = get(value, this.valueKey, value)
 
       this.setTouched()
       this.handleSelect(nextValue)
 
-      this.viewValue = isNil(this.labelKey) ? value : value[this.labelKey]
+      this.viewValue = get(value, this.labelKey, value)
 
-      if (!this.isComponentPartOfArrayField) {
-        const [, setValue] = this.state
-        setValue(nextValue)
-      }
+      const [, setValue] = this.state
+      setValue(nextValue)
     },
 
     handleAutocompleteBlur(event) {
@@ -101,11 +108,9 @@ const ConnectedAutocomplete = {
 
       const { value } = event.target
 
-      if (!this.isComponentPartOfArrayField) {
-        if (isNil(value) || value === '') {
-          const [, setValue] = this.state
-          setValue(null)
-        }
+      if (isNil(value) || value === '') {
+        const [, setValue] = this.state
+        setValue(null)
       }
     },
 
@@ -118,6 +123,11 @@ const ConnectedAutocomplete = {
 
       if (isString(this.viewValue)) {
         inputValue = this.viewValue
+      }
+
+      // Should work only on initial render/reinitialize
+      if (isNil(this.viewValue) && Array.isArray(this.options)) {
+        inputValue = this.getValueFromOptions(value)
       }
 
       return (

@@ -1,5 +1,17 @@
 import Vue from 'vue'
-import { union, without, has, isNil, noop, isFunction, mapValues, merge } from 'lodash'
+import {
+  union,
+  without,
+  has,
+  isNil,
+  noop,
+  isFunction,
+  mapValues,
+  merge,
+  get,
+  set,
+  lowerCase,
+} from 'lodash'
 import { validate, asyncValidate } from '../validators/validate'
 import isValid from '../utils/isValid'
 import CONSTANTS from '../constants'
@@ -81,7 +93,7 @@ export const VueFormStoreParams = {
       const validateOnReinitialize = vm.createValidateOnReinitialize(name)
       const setTouched = vm.createSetTouched(name)
 
-      const formLevelInitialValue = vm.props.initialValues[name]
+      const formLevelInitialValue = get(vm.props.initialValues, name)
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
       if (!isComponentPartOfArrayField) {
@@ -102,7 +114,7 @@ export const VueFormStoreParams = {
 
           return [
             // Current value
-            vm.state[name],
+            get(vm.state, name),
 
             // Value handler — setValue
             setValue(syncValidators),
@@ -114,7 +126,7 @@ export const VueFormStoreParams = {
             isFieldTouched,
 
             // Initial value
-            vm.props.initialValues[name],
+            get(vm.props.initialValues, name),
           ]
         },
       }
@@ -146,7 +158,7 @@ export const VueFormStoreParams = {
     createSetError(name) {
       const vm = this
 
-      return validators => (nextValue = vm.state[name]) => {
+      return validators => (nextValue = get(vm.state, name)) => {
         if (validators) {
           const error = validate(validators, nextValue, name)
           const method = error ? vm.$set : vm.$delete
@@ -164,7 +176,7 @@ export const VueFormStoreParams = {
         error: error => vm.$set(vm.asyncErrors, name, error),
       }
 
-      return asyncValidators => (nextValue = vm.state[name]) => {
+      return asyncValidators => (nextValue = get(vm.state, name)) => {
         if (!vm.syncErrors[name] && asyncValidators) {
           const promise = asyncValidate(asyncValidators, nextValue, name)
           const off = vm.manageValidatingState(name, promise)
@@ -185,7 +197,13 @@ export const VueFormStoreParams = {
       const vm = this
 
       return validators => nextValue => {
-        vm.$set(vm.state, name, nextValue)
+        const fieldPath = lowerCase(name)
+
+        if (fieldPath === name) {
+          vm.$set(vm.state, name, nextValue)
+        } else {
+          vm.state = merge({}, set(vm.state, name, nextValue))
+        }
 
         // When control value changes we need to clean async errors
         if (vm.asyncErrors[name]) {
@@ -223,7 +241,7 @@ export const VueFormStoreParams = {
 
       return callback => {
         vm.$on(CONSTANTS.VUE_FORM_REINITIALIZE, () => {
-          callback(vm.state[name])
+          callback(get(vm.state, name))
         })
       }
     },

@@ -1,3 +1,10 @@
+## 3.2.0
+
+### Added
+
+- Support for nested fields
+- `options` prop for autocomplete
+
 ## 3.1.0
 
 ### Added

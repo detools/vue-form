@@ -1,16 +1,32 @@
-import Form, { Input, Checkbox, Notification, validators } from '@detools/vue-form'
+import Form, { Input, Checkbox, Notification, ArrayField, validators } from '@detools/vue-form'
+import InfiniteInput from '@/components/InfiniteInput'
+import InfiniteAutocomplete from '@/components/InfiniteAutocomplete'
 
 export default {
   data() {
     return {
-      formValues: {},
+      form: {},
       initialValues: {},
     }
   },
 
   mounted() {
     setTimeout(() => {
-      this.initialValues = { isRequired: true, password: 'asfaseaasradasda' }
+      this.initialValues = {
+        isRequired: true,
+        password: 'asfaseaasradasda',
+        inputs: [
+          { firstName: 'Anton', lastName: 'Kuznetsov' },
+          { firstName: 'Hello', lastName: 'World' },
+        ],
+        autocompleteIds: [45, 44],
+        autocomplete: [
+          { id: 45, name: 'Donald Trump' },
+          { id: 44, name: 'Barack Obama' },
+          { id: 43, name: 'George W. Bush' },
+          { id: 42, name: 'Bill Clinton' },
+        ],
+      }
 
       Notification.warning('Initial values have been updated like in real world apps')
     }, 1000)
@@ -18,7 +34,7 @@ export default {
 
   methods: {
     handleModelChange(values) {
-      this.formValues = values
+      this.form = values
     },
 
     handleSubmit() {
@@ -49,7 +65,7 @@ export default {
               formItem
               name="name"
               placeholder="Name"
-              validators={this.formValues.isRequired ? [validators.isRequired()] : []}
+              validators={this.form.isRequired ? [validators.isRequired()] : []}
             />
             <Input
               formItem
@@ -58,13 +74,19 @@ export default {
               placeholder="Password"
               validators={[validators.length({ min: 8 })]}
             />
+            <ArrayField name="inputs" renderField={InfiniteInput} />
+            <ArrayField
+              name="autocompleteIds"
+              renderField={InfiniteAutocomplete}
+              options={this.initialValues.autocomplete}
+            />
           </Form>
           <div class="values">
             <strong>Form Values</strong>
             <br />
             <br />
             <div>
-              <pre>{JSON.stringify(this.formValues, null, 2)}</pre>
+              <pre>{JSON.stringify(this.form, null, 2)}</pre>
             </div>
           </div>
         </div>
