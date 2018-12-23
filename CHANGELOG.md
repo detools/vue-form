@@ -226,8 +226,8 @@ const renderAsComponent = {
 
 ### Added
 
-- [`FieldArray`](/VueForm/components/ConnectedFieldArray.js) control
-- [`Array Field Form`](https://detools-vue-form.netlify.com/#/array-field-form) to explain how `FieldArray` works
+- [`ArrayField`](/VueForm/components/ConnectedArrayField.js) control
+- [`Array Field Form`](https://detools-vue-form.netlify.com/#/array-field-form) to explain how `ArrayField` works
 
 ## 2.4.2
 
