@@ -1,3 +1,9 @@
+## 3.3.2
+
+### Fixed
+
+- `zIndex` property for sticky buttons
+
 ## 3.3.1
 
 ### Added

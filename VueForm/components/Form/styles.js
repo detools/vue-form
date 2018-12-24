@@ -24,6 +24,7 @@ const styles = {
     borderBottom: '1px solid #dadada',
     backgroundColor: '#ffffff',
     boxShadow: '0 0 10px 2px rgba(0, 0, 0, 0.2)',
+    zIndex: 1,
   },
   sticky_placeholder: {
     height: '60px',
