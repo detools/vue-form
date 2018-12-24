@@ -50,7 +50,12 @@ export default {
         [BUTTONS_POSITION.END]: styles.buttons_end,
       }
 
-      return [styles.buttons, overridingStyles[this.buttonsPosition], this.buttonsStyles]
+      return [
+        styles.buttons,
+        overridingStyles[this.buttonsPosition],
+        this.buttonsSticky && styles.buttons_container_sticky,
+        this.buttonsStyles,
+      ]
     },
   },
 
@@ -182,6 +187,7 @@ export default {
         nativeOnReset={this.nativeOnReset}>
         {this.$slots.default}
         {this.renderButtons()}
+        {this.buttonsSticky && <div style={styles.sticky_placeholder} />}
       </Form>
     )
   },

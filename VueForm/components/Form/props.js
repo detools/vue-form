@@ -24,6 +24,7 @@ const formProps = {
 
   buttonsClassName: String,
   buttonsStyles: [Object, Array],
+  buttonsSticky: Boolean,
 
   initialValues: {
     type: Object,

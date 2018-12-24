@@ -48,9 +48,9 @@ export default {
             <Form
               cancel
               submit
+              buttonsSticky
               labelPosition="top"
               buttonsPosition="end"
-              buttonsClassName="sticky-buttons"
               handleSubmit={this.handleSubmit}>
               <Input
                 formItem
@@ -150,23 +150,3 @@ export default {
   },
 }
 </script>
-
-<style scoped lang="less">
-.wrapper {
-  padding-bottom: 60px;
-
-  /deep/ .sticky-buttons {
-    height: 60px;
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    align-items: center !important;
-    padding-right: 50px;
-    border-top: 1px solid #dadada;
-    border-bottom: 1px solid #dadada;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
-  }
-}
-</style>
