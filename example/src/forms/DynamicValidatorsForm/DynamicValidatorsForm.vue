@@ -1,3 +1,4 @@
+<script>
 import Form, { Input, Checkbox, Notification, ArrayField, validators } from '@detools/vue-form'
 import InfiniteInput from '@/components/InfiniteInput'
 import InfiniteAutocomplete from '@/components/InfiniteAutocomplete'
@@ -54,6 +55,8 @@ export default {
           <Form
             submit
             class="form"
+            buttonsPosition="end"
+            buttonsClassName="sticky-buttons"
             initialValues={this.initialValues}
             validate={this.validate}
             handleModelChange={this.handleModelChange}
@@ -94,3 +97,22 @@ export default {
     )
   },
 }
+</script>
+
+<style scoped lang="less">
+.wrapper {
+  padding-bottom: 60px;
+
+  /deep/ .sticky-buttons {
+    height: 60px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    align-items: center !important;
+    padding-right: 50px;
+    border-top: 1px solid #dadada;
+    background-color: #ffffff;
+  }
+}
+</style>

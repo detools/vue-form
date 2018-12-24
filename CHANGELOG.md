@@ -1,3 +1,10 @@
+## 3.3.0
+
+### Added
+
+- Support for prop `buttonsClassName` — String
+- Support for prop `buttonsStyles` — [Object, Array]
+
 ## 3.2.0
 
 ### Added

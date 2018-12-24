@@ -22,6 +22,9 @@ const formProps = {
     validator: value => Object.values(BUTTONS_POSITION).includes(value),
   },
 
+  buttonsClassName: String,
+  buttonsStyles: [Object, Array],
+
   initialValues: {
     type: Object,
     default: () => ({}),

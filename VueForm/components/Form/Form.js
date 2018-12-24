@@ -44,13 +44,13 @@ export default {
       }
     },
 
-    buttonsStyles() {
+    vueFormButtonsStyles() {
       const overridingStyles = {
         [BUTTONS_POSITION.CENTER]: styles.buttons_center,
         [BUTTONS_POSITION.END]: styles.buttons_end,
       }
 
-      return [styles.buttons, overridingStyles[this.buttonsPosition]]
+      return [styles.buttons, overridingStyles[this.buttonsPosition], this.buttonsStyles]
     },
   },
 
@@ -133,7 +133,7 @@ export default {
 
     renderPlainButtons() {
       return (
-        <div style={this.buttonsStyles}>
+        <div style={this.vueFormButtonsStyles} class={this.buttonsClassName}>
           {this.cancel && (
             <Button nativeType="reset" disabled={this.store.isDisabled}>
               {this.buttons.reset}

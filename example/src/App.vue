@@ -36,7 +36,7 @@ export default {
   render() {
     return (
       <Container direction="vertical" class="root-container">
-        <Header height="80px">
+        <Header class="header" height="80px">
           <pre class="title">@detools/vue-form</pre>
         </Header>
         <Container class="main-container">
@@ -62,6 +62,19 @@ export default {
 <style scoped lang="less">
 .root-container {
   min-height: 100%;
+  padding-top: 80px;
+  padding-left: 250px;
+}
+
+.header {
+  height: 80px;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: #ffffff;
+  z-index: 1;
 }
 
 .title {
@@ -78,13 +91,16 @@ export default {
 }
 
 .aside {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 250px;
+  top: 80px;
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .main {
   padding: 10px 40px 40px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .link {
