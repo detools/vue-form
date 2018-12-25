@@ -1,3 +1,9 @@
+## 3.3.4
+
+### Fixed
+
+- import for `isNumber` validator
+
 ## 3.3.3
 
 ### Added

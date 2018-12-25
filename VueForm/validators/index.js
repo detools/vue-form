@@ -1,7 +1,9 @@
-import isRequired from './isRequired'
 import length from './length'
+import isRequired from './isRequired'
+import isNumber from './isNumber'
 
 export default {
-  isRequired,
   length,
+  isRequired,
+  isNumber,
 }
