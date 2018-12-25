@@ -1,3 +1,9 @@
+## 3.3.3
+
+### Added
+
+- `isNumber` validator
+
 ## 3.3.2
 
 ### Fixed
