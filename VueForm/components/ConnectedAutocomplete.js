@@ -88,16 +88,16 @@ const ConnectedAutocomplete = {
     getValueFromOptions(value, options = this.options) {
       const item = options.find(({ [this.valueKey]: valueProp }) => valueProp === value)
 
-      return get(item, this.labelKey, value)
+      return get(item, this.labelKey, String(value))
     },
 
     handleFieldSelect(value) {
-      const nextValue = get(value, this.valueKey, value)
+      const nextValue = get(value, this.valueKey, String(value))
 
       this.setTouched()
       this.handleSelect(nextValue)
 
-      this.viewValue = get(value, this.labelKey, value)
+      this.viewValue = get(value, this.labelKey, String(value))
 
       const [, setValue] = this.state
       setValue(nextValue)

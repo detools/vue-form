@@ -1,3 +1,9 @@
+## 3.3.5
+
+### Fixed
+
+- Passed value to UIAutocomplete converted to `String`
+
 ## 3.3.4
 
 ### Fixed
