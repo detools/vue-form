@@ -1,3 +1,9 @@
+## 3.4.2
+
+### Fixed
+
+- Do not transform to `String` **null** or **undefined** `<Autocomplete />` value
+
 ## 3.4.1
 
 ### Fixed

@@ -85,19 +85,23 @@ const ConnectedAutocomplete = {
   },
 
   methods: {
+    normalizeValue(value) {
+      return !isNil(value) ? String(value) : value
+    },
+
     getValueFromOptions(value, options = this.options) {
       const item = options.find(({ [this.valueKey]: valueProp }) => valueProp === value)
 
-      return get(item, this.labelKey, String(value))
+      return get(item, this.labelKey, this.normalizeValue(value))
     },
 
     handleFieldSelect(value) {
-      const nextValue = get(value, this.valueKey, String(value))
+      const nextValue = get(value, this.valueKey, this.normalizeValue(value))
 
       this.setTouched()
       this.handleSelect(nextValue)
 
-      this.viewValue = get(value, this.labelKey, String(value))
+      this.viewValue = get(value, this.labelKey, this.normalizeValue(value))
 
       const [, setValue] = this.state
       setValue(nextValue)
