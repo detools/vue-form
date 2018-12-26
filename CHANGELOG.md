@@ -1,3 +1,9 @@
+## 3.4.1
+
+### Fixed
+
+- Margin for wrapped submit button
+
 ## 3.4.0
 
 ### Added

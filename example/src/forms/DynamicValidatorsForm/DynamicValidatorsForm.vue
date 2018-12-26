@@ -53,6 +53,8 @@ export default {
         <h1>Dynamic Validators Form</h1>
         <div class="wrapper">
           <Form
+            cancel
+            save
             submit
             class="form"
             confirmMessage="Are you sure want to submit form?"

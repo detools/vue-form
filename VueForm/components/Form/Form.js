@@ -168,7 +168,8 @@ export default {
           <Popover
             ref="confirmPopover"
             message={this.confirmMessage}
-            handleConfirm={this.nativeOnSubmit}>
+            handleConfirm={this.nativeOnSubmit}
+            style={this.cancel || this.save ? 'margin-left: 10px' : undefined}>
             {this.renderPlainSubmitButton()}
           </Popover>
         )
