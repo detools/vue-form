@@ -5,6 +5,7 @@ import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
 import FormItem from '../ConnectedFormItem'
 import Notification from '../Notification'
+import Popover from '../Popover'
 import props, { BUTTONS_POSITION } from './props'
 import styles from './styles'
 
@@ -69,7 +70,7 @@ export default {
       this.handleDisabled(errors || this.store.allErrors)
     },
 
-    nativeOnSubmit(event) {
+    nativeOnSubmit(event, isConfirmSubmit) {
       event.preventDefault()
 
       // Just don't do anything — some form process in progress
@@ -96,6 +97,10 @@ export default {
 
       if (!this.store.isValid && isSubmitButtonClick) {
         return this.handleFormDisabled()
+      }
+
+      if (!isConfirmSubmit && isSubmitButtonClick && this.confirmMessage) {
+        return this.$refs.confirmPopover.show()
       }
 
       const messages = this.messages || {}
@@ -136,6 +141,42 @@ export default {
       }
     },
 
+    renderPlainSubmitButton() {
+      return (
+        <Button
+          class={[
+            `el-button--${this.submitButtonType}`,
+            {
+              'is-disabled': this.isSubmitButtonDisabled,
+            },
+          ]}
+          type={this.submitButtonType}
+          nativeType={!this.save ? 'submit' : undefined}
+          on-click={this.nativeOnSubmit}>
+          {this.buttons.submit}
+        </Button>
+      )
+    },
+
+    renderSubmitButton() {
+      if (!this.submit) {
+        return null
+      }
+
+      if (this.confirmMessage) {
+        return (
+          <Popover
+            ref="confirmPopover"
+            message={this.confirmMessage}
+            handleConfirm={this.nativeOnSubmit}>
+            {this.renderPlainSubmitButton()}
+          </Popover>
+        )
+      }
+
+      return this.renderPlainSubmitButton()
+    },
+
     renderPlainButtons() {
       return (
         <div style={this.vueFormButtonsStyles} class={this.buttonsClassName}>
@@ -149,20 +190,7 @@ export default {
               {this.buttons.save}
             </Button>
           )}
-          {this.submit && (
-            <Button
-              class={[
-                `el-button--${this.submitButtonType}`,
-                {
-                  'is-disabled': this.isSubmitButtonDisabled,
-                },
-              ]}
-              type={this.submitButtonType}
-              nativeType={!this.save ? 'submit' : undefined}
-              on-click={this.nativeOnSubmit}>
-              {this.buttons.submit}
-            </Button>
-          )}
+          {this.renderSubmitButton()}
         </div>
       )
     },

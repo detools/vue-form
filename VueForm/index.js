@@ -18,6 +18,7 @@ import Upload from './components/ConnectedUpload'
 import FormItem from './components/ConnectedFormItem'
 
 import Notification from './components/Notification'
+import Popover from './components/Popover'
 
 import validators from './validators'
 
@@ -38,6 +39,7 @@ export {
   Upload,
   FormItem,
   Notification,
+  Popover,
   Button,
   validators,
 }

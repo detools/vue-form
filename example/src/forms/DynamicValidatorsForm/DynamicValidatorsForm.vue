@@ -54,9 +54,8 @@ export default {
         <div class="wrapper">
           <Form
             submit
-            buttonsSticky
             class="form"
-            buttonsPosition="end"
+            confirmMessage="Are you sure want to submit form?"
             initialValues={this.initialValues}
             validate={this.validate}
             handleModelChange={this.handleModelChange}

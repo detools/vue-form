@@ -51,6 +51,9 @@ const formProps = {
   validate: Function,
   asyncValidate: Function,
   asyncBlurFields: Array,
+
+  // Activates Popover
+  confirmMessage: String,
 }
 
 export default formProps
