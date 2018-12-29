@@ -86,6 +86,7 @@ export default {
               renderField={InfiniteAutocomplete}
               options={this.initialValues.autocomplete}
             />
+            <Input formItem name="url" placeholder="Url" validators={[validators.url()]} />
           </Form>
           <div class="values">
             <strong>Form Values</strong>

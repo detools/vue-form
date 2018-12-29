@@ -1,3 +1,9 @@
+## 3.4.5
+
+### Added
+
+- Added `url` validator, based on `uri-js`
+
 ## 3.4.4
 
 ### Fixed
