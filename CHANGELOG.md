@@ -1,3 +1,9 @@
+## 3.4.4
+
+### Fixed
+
+- Back `<br />` between message and buttons
+
 ## 3.4.3
 
 ### Fixed
