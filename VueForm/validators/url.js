@@ -1,15 +1,12 @@
-import startCase from 'lodash/startCase'
 import isNil from 'lodash/isNil'
 import { parse } from 'uri-js'
 import { DEFAULT_URL_PROTOCOLS } from '../constants'
 
 export default function isRequired(protocols = DEFAULT_URL_PROTOCOLS, customMessage) {
-  return (value, name) => {
+  return value => {
     let isError
 
-    if (isNil(value) || value === '') {
-      isError = `${startCase(name)} is not defined`
-    } else {
+    if (!(isNil(value) || value === '')) {
       const { scheme: protocol, error } = parse(value)
 
       if (error) {

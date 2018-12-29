@@ -1,3 +1,9 @@
+## 3.4.6
+
+### Fixed
+
+- Validators `isNumber`, `url` no more check if value is defined
+
 ## 3.4.5
 
 ### Added
