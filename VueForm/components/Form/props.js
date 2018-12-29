@@ -54,6 +54,13 @@ const formProps = {
 
   // Activates Popover
   confirmMessage: String,
+
+  // Popover Enhancements
+  confirmNo: String,
+  confirmYes: String,
+  confirmWidth: [String, Number],
+  confirmPlacement: String,
+  confirmTrigger: String,
 }
 
 export default formProps

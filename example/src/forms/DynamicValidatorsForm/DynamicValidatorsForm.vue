@@ -57,7 +57,9 @@ export default {
             save
             submit
             class="form"
-            confirmMessage="Are you sure want to submit form?"
+            confirmMessage="Submit will update user data, are you sure?"
+            confirmYes="Yes"
+            confirmNo="No"
             initialValues={this.initialValues}
             validate={this.validate}
             handleModelChange={this.handleModelChange}

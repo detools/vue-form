@@ -1,3 +1,13 @@
+## 3.4.3
+
+### Fixed
+
+- Confirm button in `Popover` now has `autoFocus` when rendered
+
+### Added
+
+- `confirmNo`, `confirmYes`, `confirmWidth`, `confirmPlacement`, `confirmTrigger` props to `<Form />`
+
 ## 3.4.2
 
 ### Fixed

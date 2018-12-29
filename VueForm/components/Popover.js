@@ -68,12 +68,12 @@ export default {
         trigger={this.trigger}
         value={this.confirmIsVisible}>
         <p style="text-align: left">{this.message}</p>
-        <br />
         <div>
           <Button size="mini" type="text" on-click={this.handleClickCancel}>
             {this.cancel}
           </Button>
           <Button
+            autoFocus
             type="primary"
             size="mini"
             name="popoverConfirm"
