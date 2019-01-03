@@ -1,3 +1,9 @@
+## 3.4.7
+
+### Fixed
+
+- Now confirm button in `Popover` autofocused pragrammaticaly
+
 ## 3.4.6
 
 ### Fixed

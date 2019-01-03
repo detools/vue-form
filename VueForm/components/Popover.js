@@ -1,5 +1,57 @@
 import { Popover, Button } from 'element-ui'
 
+const Buttons = {
+  props: {
+    cancel: {
+      type: String,
+      required: true,
+    },
+
+    confirm: {
+      type: String,
+      required: true,
+    },
+
+    message: {
+      type: String,
+      required: true,
+    },
+
+    handleClickCancel: {
+      type: Function,
+      required: true,
+    },
+
+    handleClickConfirm: {
+      type: Function,
+      required: true,
+    },
+  },
+
+  mounted() {
+    if (this.$refs.yes) {
+      this.$refs.yes.$el.focus()
+    }
+  },
+
+  render() {
+    return (
+      <div>
+        <p style="text-align: left">{this.message}</p>
+        <br />
+        <div>
+          <Button size="mini" type="text" on-click={this.handleClickCancel}>
+            {this.cancel}
+          </Button>
+          <Button ref="yes" type="primary" size="mini" on-click={this.handleClickConfirm}>
+            {this.confirm}
+          </Button>
+        </div>
+      </div>
+    )
+  },
+}
+
 export default {
   props: {
     message: {
@@ -67,21 +119,15 @@ export default {
         width={String(this.width)}
         trigger={this.trigger}
         value={this.confirmIsVisible}>
-        <p style="text-align: left">{this.message}</p>
-        <br />
-        <div>
-          <Button size="mini" type="text" on-click={this.handleClickCancel}>
-            {this.cancel}
-          </Button>
-          <Button
-            autoFocus
-            type="primary"
-            size="mini"
-            name="popoverConfirm"
-            on-click={this.handleClickConfirm}>
-            {this.confirm}
-          </Button>
-        </div>
+        {this.confirmIsVisible && (
+          <Buttons
+            cancel={this.cancel}
+            confirm={this.confirm}
+            message={this.message}
+            handleClickCancel={this.handleClickCancel}
+            handleClickConfirm={this.handleClickConfirm}
+          />
+        )}
         <div slot="reference">{this.$slots.default}</div>
       </Popover>
     )
