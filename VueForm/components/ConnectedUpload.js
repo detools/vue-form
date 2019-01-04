@@ -1,6 +1,5 @@
 import { Upload } from 'element-ui'
 import noop from 'lodash/noop'
-import castArray from 'lodash/castArray'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -48,6 +47,12 @@ const ConnectedInput = {
     showFileList: Boolean,
     drag: Boolean,
     accept: String,
+
+    // Unique Id of uploaded file in it model
+    fileKey: {
+      type: String,
+      default: 'id',
+    },
 
     // hook function when clicking the uploaded files
     handlePreview: defaultHandler,
@@ -124,7 +129,7 @@ const ConnectedInput = {
       return {
         props: {
           onPreview: this.handlePreview,
-          onRemove: this.handleRemove,
+          onRemove: this.handleFieldRemove,
           onSuccess: this.handleFieldSuccess,
           onError: this.handleError,
           onProgress: this.handleProgress,
@@ -148,21 +153,29 @@ const ConnectedInput = {
       return this.refs.$uiUpload.submit()
     },
 
-    handleFieldRemove() {
-      this.handleRemove()
+    handleFieldRemove(...args) {
+      this.handleRemove(...args).then(() => {
+        const [value, setValue] = this.state
+        const { [this.fileKey]: id, uid } = args[0]
+        let nextValue
 
-      const [, setValue] = this.state
-      setValue([])
+        if (id) {
+          nextValue = value.filter(file => file[this.fileKey] !== id)
+        } else {
+          nextValue = value.filter(file => file.uid !== uid)
+        }
+
+        setValue(nextValue)
+      })
     },
 
     handleFieldSuccess(response, file, fileList) {
       this.handleSuccess(response, file, fileList)
 
-      const [, setValue] = this.state
-      const transformedResponse = this.formatResponse(response, file, fileList)
-      const nextValue = castArray(fileList)
-        .slice(0, -1)
-        .concat(transformedResponse)
+      const [value, setValue] = this.state
+      const [uploadedFile] = this.formatResponse(response, file, fileList)
+
+      const nextValue = value.concat({ ...uploadedFile, uid: file.uid })
 
       setValue(nextValue)
     },

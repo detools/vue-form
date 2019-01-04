@@ -1,6 +1,6 @@
 {
   "name": "@detools/vue-form",
-  "version": "3.4.7",
+  "version": "3.4.8",
   "description": "Form State Management for VueJS",
   "main": "VueForm/index.js",
   "scripts": {

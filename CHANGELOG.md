@@ -1,3 +1,9 @@
+## 3.4.8
+
+### Fixed
+
+- `<Upload />` correctly handle file remove
+
 ## 3.4.7
 
 ### Fixed
