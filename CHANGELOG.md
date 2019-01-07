@@ -1,3 +1,9 @@
+## 3.4.11
+
+### Fixed
+
+- `Phone` validator
+
 ## 3.4.10
 
 ### Added
