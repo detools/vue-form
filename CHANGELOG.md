@@ -1,3 +1,9 @@
+## 3.4.13
+
+### Fixed
+
+- `Phone` and `isNumber` validators
+
 ## 3.4.12
 
 ### Fixed

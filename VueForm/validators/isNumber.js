@@ -1,19 +1,19 @@
 import startCase from 'lodash/startCase'
 import isNaN from 'lodash/isNaN'
 import toNumber from 'lodash/toNumber'
-import isNull from 'lodash/isNull'
+import isNil from 'lodash/isNil'
 
 export default function isNumber(customMessage) {
   return (rawValue, name) => {
     const value = toNumber(rawValue)
     let isError
 
-    if (isNull(rawValue)) {
+    if (isNil(rawValue) || rawValue === '') {
       isError = false
     } else if (isNaN(value)) {
-      isError = true
+      isError = `${startCase(name)} is not a number`
     }
 
-    return isError ? customMessage || `${startCase(name)} is not a number` : undefined
+    return isError ? customMessage || isError : undefined
   }
 }
