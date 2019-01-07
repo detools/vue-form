@@ -87,6 +87,7 @@ export default {
               options={this.initialValues.autocomplete}
             />
             <Input formItem name="url" placeholder="Url" validators={[validators.url()]} />
+            <Input formItem name="phone" placeholder="Phone" validators={[validators.phone()]} />
           </Form>
           <div class="values">
             <strong>Form Values</strong>

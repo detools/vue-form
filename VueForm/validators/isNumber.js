@@ -3,7 +3,7 @@ import isNaN from 'lodash/isNaN'
 import toNumber from 'lodash/toNumber'
 import isNull from 'lodash/isNull'
 
-export default function isRequired(customMessage) {
+export default function isNumber(customMessage) {
   return (rawValue, name) => {
     const value = toNumber(rawValue)
     let isError

@@ -1,3 +1,10 @@
+## 3.4.10
+
+### Added
+
+- Simple `Phone` validator — like isNumber, but with `length` property
+- `length` equals 10 by default (US)
+
 ## 3.4.9
 
 ### Updated
