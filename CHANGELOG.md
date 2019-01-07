@@ -1,3 +1,10 @@
+## 3.4.9
+
+### Updated
+
+- `<Select />` component prop `default-first-option` now depends on `remote` or `configurable`
+- If these props are `true` then `default-first-option` is `true`.
+
 ## 3.4.8
 
 ### Fixed

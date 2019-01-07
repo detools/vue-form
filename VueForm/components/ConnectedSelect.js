@@ -53,7 +53,7 @@ const ConnectedSelect = {
     noMatchText: String,
     noDataText: String,
     reserveKeyword: String,
-    defaultFirstOption: [String, Number],
+    defaultFirstOption: Boolean,
     popperAppendToBody: Boolean,
     automaticDropdown: Boolean,
 
@@ -96,6 +96,8 @@ const ConnectedSelect = {
     },
 
     renderComponent(value, setValue) {
+      const defaultFirstOption = Boolean(this.defaultFirstOption || this.filterable || this.remote)
+
       return (
         <Select
           class={this.class}
@@ -120,7 +122,7 @@ const ConnectedSelect = {
           no-match-text={this.noMatchText}
           no-data-text={this.noDataText}
           reserve-keyword={this.reserveKeyword}
-          default-first-option={this.defaultFirstOption}
+          default-first-option={defaultFirstOption}
           popper-append-to-body={this.popperAppendToBody}
           automatic-dropdown={this.automaticDropdown}
           on-input={setValue}
