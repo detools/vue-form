@@ -9,15 +9,15 @@ const US_PHONE_NUMBER_LENGTH = 10
 export default function phone(customMessage, length = US_PHONE_NUMBER_LENGTH) {
   return (rawValue, name) => {
     const value = toNumber(rawValue)
-    const isValueExists = isNull(rawValue)
+    const valueIsNull = isNull(rawValue)
 
     let isError
 
-    if (isValueExists) {
+    if (valueIsNull) {
       isError = false
     } else if (isNaN(value)) {
       isError = true
-    } else if (isValueExists && length) {
+    } else if (!valueIsNull && length) {
       isError =
         rawValue.length !== length ? `Phone number should contain only ${length} characters` : false
     }
