@@ -1,3 +1,9 @@
+## 3.4.14
+
+### Fixed
+
+- Destroy store on `<Form />` destroy
+
 ## 3.4.13
 
 ### Fixed

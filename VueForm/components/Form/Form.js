@@ -210,6 +210,10 @@ export default {
     },
   },
 
+  beforeDestroy() {
+    this.store.$destroy()
+  },
+
   render() {
     return (
       <Form
