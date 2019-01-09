@@ -184,6 +184,8 @@ export default {
     },
 
     renderPlainButtons() {
+      const extraButtons = this.renderExtraButtons && this.renderExtraButtons()
+
       return (
         <div style={this.vueFormButtonsStyles} class={this.buttonsClassName}>
           {this.cancel && (
@@ -191,6 +193,7 @@ export default {
               {this.buttons.reset}
             </Button>
           )}
+          {extraButtons && <div style="margin-left: 10px; margin-right: 10px">{extraButtons}</div>}
           {this.save && (
             <Button nativeType="submit" type="primary" disabled={this.store.isDisabled}>
               {this.buttons.save}

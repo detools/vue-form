@@ -61,6 +61,9 @@ const formProps = {
   confirmWidth: [String, Number],
   confirmPlacement: String,
   confirmTrigger: String,
+
+  // Extra buttons between Cancel and Save for now
+  renderExtraButtons: Function,
 }
 
 export default formProps

@@ -1,3 +1,9 @@
+## 3.5.0
+
+### Added
+
+- Ability to add extra buttons between Cancel and Save
+
 ## 3.4.14
 
 ### Fixed
