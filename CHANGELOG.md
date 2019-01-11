@@ -1,3 +1,9 @@
+## 3.5.1
+
+### Fixed
+
+- Do not show any errors on Save
+
 ## 3.5.0
 
 ### Added

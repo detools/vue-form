@@ -82,10 +82,12 @@ export default {
       const submitHandler =
         !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
 
-      this.store.manageTouchedFieldsState()
+      if (isSubmitButtonClick) {
+        this.store.manageTouchedFieldsState()
+      }
 
       // Form Level Sync Validate
-      if (this.validate) {
+      if (isSubmitButtonClick && this.validate) {
         const syncErrors = this.validate(this.store.state)
 
         if (!isEmpty(syncErrors)) {

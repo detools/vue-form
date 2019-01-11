@@ -12,6 +12,10 @@ export default {
       this.formValues = values
     },
 
+    handleSave(values) {
+      this.formValues = values
+    },
+
     formValidate({ username }) {
       const errors = {}
 
@@ -33,7 +37,14 @@ export default {
         <h1>Sync Validation Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form cancel save submit validate={this.formValidate} handleSubmit={this.handleSubmit}>
+            <Form
+              cancel
+              save
+              submit
+              messages={{ success: 'Username has been saved' }}
+              validate={this.formValidate}
+              handleSave={this.handleSave}
+              handleSubmit={this.handleSubmit}>
               <Input formItem name="username" label="Username" />
             </Form>
           </div>
