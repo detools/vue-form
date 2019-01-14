@@ -1,3 +1,9 @@
+## 3.6.0
+
+### Added
+
+- Ability to pass `disabled` attribute as `String` message about error that exists outside form and does not accept us to submit form
+
 ## 3.5.1
 
 ### Fixed

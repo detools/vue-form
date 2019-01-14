@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { isBoolean, isEmpty, isEqual, merge, omit } from 'lodash'
+import { isBoolean, isEmpty, isEqual, merge, omit, isNil } from 'lodash'
 import { Form, Button } from 'element-ui'
 import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
@@ -81,6 +81,10 @@ export default {
       const isSubmitButtonClick = event.type === 'click'
       const submitHandler =
         !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
+
+      if (isSubmitButtonClick && !isNil(this.disabled)) {
+        return Notification.error(this.disabled)
+      }
 
       if (isSubmitButtonClick) {
         this.store.manageTouchedFieldsState()
