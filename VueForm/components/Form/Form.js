@@ -190,7 +190,7 @@ export default {
     },
 
     renderPlainButtons() {
-      const extraButtons = this.renderExtraButtons && this.renderExtraButtons()
+      const extraButtons = this.renderExtraButtons && this.renderExtraButtons(this.store.isDisabled)
 
       return (
         <div style={this.vueFormButtonsStyles} class={this.buttonsClassName}>

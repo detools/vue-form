@@ -1,3 +1,9 @@
+## 3.6.1
+
+### Fixed
+
+- Pass `disabled` state to `renderExtraButtons`
+
 ## 3.6.0
 
 ### Added
