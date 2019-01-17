@@ -1,3 +1,9 @@
+## 3.6.2
+
+### Fixed
+
+- Pass `statusIcon` prop to `<Form />`. `true` by default
+
 ## 3.6.1
 
 ### Fixed

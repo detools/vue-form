@@ -230,6 +230,7 @@ export default {
         label-width={this.labelWidth}
         label-suffix={this.labelSuffix}
         label-position={this.labelPosition}
+        status-icon={this.statusIcon}
         nativeOnSubmit={this.nativeOnSubmit}
         nativeOnReset={this.nativeOnReset}>
         {this.$slots.default}

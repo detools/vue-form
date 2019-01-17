@@ -15,6 +15,10 @@ const formProps = {
   labelWidth: String,
   labelSuffix: String,
   labelPosition: String,
+  statusIcon: {
+    type: Boolean,
+    default: true,
+  },
 
   buttonsPosition: {
     type: String,
