@@ -1,3 +1,9 @@
+## 3.6.3
+
+### Fixed
+
+- Scroll to first invalid field on try to submit
+
 ## 3.6.2
 
 ### Fixed

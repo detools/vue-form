@@ -48,6 +48,7 @@ const ConnectedSlider = {
         <Slider
           class={this.class}
           name={this.name}
+          id={this.name}
           value={value}
           step={this.step}
           min={this.min}

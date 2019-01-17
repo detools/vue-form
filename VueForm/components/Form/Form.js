@@ -102,6 +102,8 @@ export default {
       }
 
       if (!this.store.isValid && isSubmitButtonClick) {
+        this.handleFocusToFirstInvalidField()
+
         return this.handleFormDisabled()
       }
 
@@ -145,6 +147,22 @@ export default {
       if (this.handleCancel) {
         this.handleCancel(this.initialValues)
       }
+    },
+
+    handleFocusToFirstInvalidField() {
+      const [name] = this.store.allErrorsFields
+      const fieldByName = document.querySelector(`[name=${name}]`)
+
+      if (fieldByName) {
+        return fieldByName.focus()
+      }
+
+      const fieldById = document.getElementById(name)
+      if (fieldById) {
+        return window.scroll(0, fieldById.offsetTop)
+      }
+
+      return false
     },
 
     renderPlainSubmitButton() {

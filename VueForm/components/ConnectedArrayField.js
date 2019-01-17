@@ -189,10 +189,10 @@ export default {
       }
 
       if (isFunction(this.renderField)) {
-        return this.renderField(props)
+        return <div id={this.name}>{this.renderField(props)}</div>
       }
 
-      return createElement(this.renderField, { props })
+      return <div id={this.name}>{createElement(this.renderField, { props })}</div>
     },
   },
 }

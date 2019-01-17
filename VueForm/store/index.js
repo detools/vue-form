@@ -66,6 +66,10 @@ export const VueFormStoreParams = {
     allErrors() {
       return merge({}, this.syncErrors, this.asyncErrors)
     },
+
+    allErrorsFields() {
+      return Object.keys(this.allErrors)
+    },
   },
 
   methods: {
