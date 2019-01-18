@@ -23,7 +23,7 @@ const ConnectedTimePicker = {
     arrowControl: Boolean,
     align: String,
     popperClass: String,
-    pickerOptions: Array,
+    pickerOptions: Object,
     rangeSeparator: String,
     defaultValue: [Date, String, Number],
     valueFormat: String,

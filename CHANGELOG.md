@@ -1,3 +1,9 @@
+## 3.6.4
+
+### Fixed
+
+- `<Timepicker />` prop `pickerOptions`. `Array` => `Object`
+
 ## 3.6.3
 
 ### Fixed
