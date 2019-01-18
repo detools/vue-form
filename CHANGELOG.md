@@ -1,3 +1,9 @@
+## 3.6.6
+
+### Fixed
+
+- Default value format for `<Timepicker />` is `HH:mm:ss`
+
 ## 3.6.5
 
 ### Fixed
