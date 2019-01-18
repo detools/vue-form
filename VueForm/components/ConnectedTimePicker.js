@@ -1,4 +1,4 @@
-import { TimeSelect } from 'element-ui'
+import { TimePicker } from 'element-ui'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
@@ -59,7 +59,7 @@ const ConnectedTimePicker = {
   methods: {
     renderComponent(value, setValue) {
       return (
-        <TimeSelect
+        <TimePicker
           class={this.class}
           name={this.name}
           value={value}

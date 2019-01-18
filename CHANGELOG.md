@@ -1,3 +1,9 @@
+## 3.6.5
+
+### Fixed
+
+- Replace `<TimeSelect />` with `<TimePicker />`
+
 ## 3.6.4
 
 ### Fixed
