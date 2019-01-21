@@ -56,7 +56,7 @@ const ConnectedDatePicker = {
     type: String,
     format: {
       type: String,
-      default: () => 'MM/dd/yyyy',
+      default: () => 'M/d/yyyy',
     },
     align: String,
     popperClass: String,
@@ -66,7 +66,7 @@ const ConnectedDatePicker = {
     defaultTime: String,
     valueFormat: {
       type: String,
-      default: () => 'MM/dd/yyyy',
+      default: () => 'M/d/yyyy',
     },
     unlinkPanels: Boolean,
     prefixIcon: String,

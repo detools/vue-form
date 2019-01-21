@@ -1,3 +1,9 @@
+## 3.6.7
+
+### Fixed
+
+- Default format for `<DatePicker />` is `M/d/yyyy`
+
 ## 3.6.6
 
 ### Fixed
