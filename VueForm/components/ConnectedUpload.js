@@ -172,7 +172,7 @@ const ConnectedInput = {
     handleFieldSuccess(response, file, fileList) {
       this.handleSuccess(response, file, fileList)
 
-      const [value, setValue] = this.state
+      const [value = [], setValue] = this.state
       const [uploadedFile] = this.formatResponse(response, file, fileList)
 
       const nextValue = value.concat({ ...uploadedFile, uid: file.uid })

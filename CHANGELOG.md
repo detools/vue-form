@@ -1,3 +1,9 @@
+## 3.6.8
+
+### Fixed
+
+- Default internal value for `<Upload />` is an `Array`
+
 ## 3.6.7
 
 ### Fixed
