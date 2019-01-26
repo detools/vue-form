@@ -129,8 +129,13 @@ export default {
       submitPromise
         .then(
           () => Notification.success(messages.success),
-          () => {
-            Notification.error(messages.error)
+          error => {
+            if (error && error.error) {
+              Notification.error(error.error)
+            } else {
+              Notification.error(messages.error)
+            }
+
             this.handleFormDisabled()
           }
         )

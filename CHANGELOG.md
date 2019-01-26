@@ -1,3 +1,9 @@
+## 3.6.9
+
+### Fixed
+
+- Check `error` field inside `Error` on failed submission
+
 ## 3.6.8
 
 ### Fixed
