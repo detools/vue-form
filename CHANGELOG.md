@@ -1,3 +1,9 @@
+## 3.6.11
+
+### Fixed
+
+- Imports inside `<Popover />` to Element UI
+
 ## 3.6.10
 
 ### Fixed
