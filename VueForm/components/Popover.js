@@ -1,4 +1,5 @@
-import { Popover, Button } from 'element-ui'
+import Popover from 'element-ui/lib/Popover'
+import Button from 'element-ui/lib/Button'
 
 const Buttons = {
   props: {

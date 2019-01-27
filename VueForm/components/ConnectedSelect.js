@@ -1,4 +1,5 @@
-import { Select, Option } from 'element-ui'
+import Select from 'element-ui/lib/select'
+import Option from 'element-ui/lib/option'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import { ConnectedSelectMixin } from '../mixins/ConnectedControl'

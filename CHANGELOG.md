@@ -1,3 +1,9 @@
+## 3.6.10
+
+### Fixed
+
+- Every import of Element UI component now absolute path to module inside `lib`
+
 ## 3.6.9
 
 ### Fixed

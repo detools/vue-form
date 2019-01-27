@@ -1,4 +1,4 @@
-import { Button } from 'element-ui'
+import Button from 'element-ui/lib/button'
 
 import Form from './components/Form'
 import Radio from './components/ConnectedRadio'

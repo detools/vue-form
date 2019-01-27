@@ -1,4 +1,4 @@
-import { InputNumber } from 'element-ui'
+import InputNumber from 'element-ui/lib/input-number'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

@@ -1,4 +1,4 @@
-import { Slider } from 'element-ui'
+import Slider from 'element-ui/lib/slider'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

@@ -1,4 +1,4 @@
-import { Autocomplete } from 'element-ui'
+import Autocomplete from 'element-ui/lib/autocomplete'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import isString from 'lodash/isString'

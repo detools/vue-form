@@ -1,4 +1,4 @@
-import { Checkbox } from 'element-ui'
+import Checkbox from 'element-ui/lib/checkbox'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

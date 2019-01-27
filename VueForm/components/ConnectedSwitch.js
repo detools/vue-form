@@ -1,4 +1,4 @@
-import { Switch } from 'element-ui'
+import Switch from 'element-ui/lib/switch'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

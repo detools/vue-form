@@ -1,4 +1,4 @@
-import { TimePicker } from 'element-ui'
+import TimePicker from 'element-ui/lib/time-picker'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

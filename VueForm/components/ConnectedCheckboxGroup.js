@@ -1,4 +1,5 @@
-import { Checkbox, CheckboxGroup } from 'element-ui'
+import Checkbox from 'element-ui/lib/checkbox'
+import CheckboxGroup from 'element-ui/lib/checkbox-group'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'

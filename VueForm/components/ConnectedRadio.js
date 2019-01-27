@@ -1,4 +1,4 @@
-import { Radio } from 'element-ui'
+import Radio from 'element-ui/lib/radio'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

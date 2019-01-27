@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import startCase from 'lodash/startCase'
-import { Notification } from 'element-ui'
+import Notification from 'element-ui/lib/notification'
 
 export default new Vue({
   methods: {

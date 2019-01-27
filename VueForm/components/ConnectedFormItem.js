@@ -1,4 +1,4 @@
-import { FormItem } from 'element-ui'
+import FormItem from 'element-ui/lib/form-item'
 
 export default {
   props: {

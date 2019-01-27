@@ -1,4 +1,4 @@
-import { DatePicker } from 'element-ui'
+import DatePicker from 'element-ui/lib/date-picker'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 

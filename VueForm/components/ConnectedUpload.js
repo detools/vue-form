@@ -1,4 +1,4 @@
-import { Upload } from 'element-ui'
+import Upload from 'element-ui/lib/upload'
 import noop from 'lodash/noop'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
