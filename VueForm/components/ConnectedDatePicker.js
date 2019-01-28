@@ -60,7 +60,7 @@ const ConnectedDatePicker = {
     },
     align: String,
     popperClass: String,
-    pickerOptions: Array,
+    pickerOptions: Object,
     rangeSeparator: String,
     defaultValue: [Date, String, Number],
     defaultTime: String,

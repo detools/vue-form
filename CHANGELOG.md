@@ -1,3 +1,9 @@
+## 3.6.13
+
+### Fixed
+
+- `pickerOptions` prop for `<DatePicker />` is an `Object`
+
 ## 3.6.12
 
 ### Fixed
