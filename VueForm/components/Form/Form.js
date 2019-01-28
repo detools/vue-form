@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { isBoolean, isEmpty, isEqual, merge, omit, isNil } from 'lodash'
+import { isBoolean, isEmpty, isEqual, mergeWith, omit, isNil } from 'lodash'
 import Form from 'element-ui/lib/form'
 import Button from 'element-ui/lib/button'
 import CONSTANTS from '../../constants'
@@ -114,12 +114,20 @@ export default {
 
       const messages = this.messages || {}
 
+      function customizer(objValue, srcValue) {
+        if (Array.isArray(objValue)) {
+          return srcValue;
+        }
+      }
       const off = this.store.manageSubmittingState()
       const submitForm = () =>
         Promise.resolve(
-          submitHandler(
-            merge({}, omit(this.initialValues, this.store.removedFields), this.store.state)
-          )
+          submitHandler(mergeWith(
+            {},
+            omit(this.initialValues, this.store.removedFields),
+            this.store.state,
+            customizer
+          ))
         )
 
       const submitPromise = this.store.form.validating

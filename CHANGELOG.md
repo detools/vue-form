@@ -1,3 +1,9 @@
+## 3.6.12
+
+### Fixed
+
+- Do not merge arrays inside `values` on submit
+
 ## 3.6.11
 
 ### Fixed
