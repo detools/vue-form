@@ -1,3 +1,9 @@
+## 3.6.15
+
+### Fixed
+
+- Prefer only String `placeholder` prop for `<InputNumber />`
+
 ## 3.6.14
 
 ### Fixed

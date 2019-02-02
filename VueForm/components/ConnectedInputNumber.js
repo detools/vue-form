@@ -20,8 +20,8 @@ const ConnectedInputNumber = {
     controls: Boolean,
     controlsPosition: String,
     placeholder: {
-      type: [String, Number],
-      default: 0,
+      type: String,
+      default: '0',
     },
 
     validators: Array,
