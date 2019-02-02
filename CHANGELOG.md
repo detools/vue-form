@@ -1,3 +1,9 @@
+## 3.6.17
+
+### Fixed
+
+- Defaut `precision` prop for `<InputNumber />` set to `0`
+
 ## 3.6.16
 
 ### Fixed

@@ -17,7 +17,10 @@ const ConnectedInputNumber = {
       type: Number,
       default: 1,
     },
-    precision: Number,
+    precision: {
+      type: Number,
+      default: 0,
+    },
     size: String,
     disabled: Boolean,
     controls: Boolean,
