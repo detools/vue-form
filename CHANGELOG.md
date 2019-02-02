@@ -1,3 +1,9 @@
+## 3.6.16
+
+### Fixed
+
+- Defaut `step` prop for `<InputNumber />` set to `1`
+
 ## 3.6.15
 
 ### Fixed

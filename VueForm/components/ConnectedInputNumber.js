@@ -13,7 +13,10 @@ const ConnectedInputNumber = {
 
     min: Number,
     max: Number,
-    step: Number,
+    step: {
+      type: Number,
+      default: 1,
+    },
     precision: Number,
     size: String,
     disabled: Boolean,
