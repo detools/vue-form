@@ -1,3 +1,10 @@
+## 3.6.14
+
+### Fixed
+
+- `<InputNumber />` does not have default `0` value.
+- Instead if this, now you can pass a `placeholder` prop (default is `0`)
+
 ## 3.6.13
 
 ### Fixed

@@ -9,10 +9,7 @@ const ConnectedInputNumber = {
       required: true,
     },
 
-    value: {
-      type: Number,
-      default: () => 0,
-    },
+    value: Number,
 
     min: Number,
     max: Number,
@@ -22,6 +19,10 @@ const ConnectedInputNumber = {
     disabled: Boolean,
     controls: Boolean,
     controlsPosition: String,
+    placeholder: {
+      type: [String, Number],
+      default: 0,
+    },
 
     validators: Array,
     asyncValidators: Array,
@@ -68,6 +69,7 @@ const ConnectedInputNumber = {
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
           on-change={this.handleChange}
+          placeholder={this.placeholder}
         />
       )
     },
