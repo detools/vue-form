@@ -1,3 +1,9 @@
+## 3.6.18
+
+### Fixed
+
+- Pass mixin-level callback `handleFieldChange` to controls
+
 ## 3.6.17
 
 ### Fixed

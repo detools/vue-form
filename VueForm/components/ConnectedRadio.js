@@ -57,7 +57,7 @@ const ConnectedRadio = {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleChange}>
+          on-change={this.handleFieldChange}>
           {this.$slots.default}
         </Radio>
       )

@@ -92,7 +92,7 @@ const ConnectedInput = {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleChange}>
+          on-change={this.handleFieldChange}>
           {Boolean(this.append) && <template slot="append">{this.append}</template>}
           {Boolean(this.prepend) && <template slot="prepend">{this.prepend}</template>}
         </Input>
