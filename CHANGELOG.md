@@ -1,3 +1,10 @@
+## 3.6.19
+
+### Fixed
+
+- On `Select` event `onBlur` emits the same time as `onChange` it produces an error state for required fields for 1 second
+- Now `onBlur` event on `Select` does not set control as `touched`
+
 ## 3.6.18
 
 ### Fixed

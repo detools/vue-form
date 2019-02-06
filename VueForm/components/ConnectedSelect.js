@@ -96,6 +96,12 @@ const ConnectedSelect = {
       return <Option key={optionValue} label={optionLabel} value={optionValue} />
     },
 
+    handleFieldBlur(...args) {
+      this.handleBlur(...args)
+
+      return this.setAsyncError(this.asyncValidators)()
+    },
+
     renderComponent(value, setValue) {
       const defaultFirstOption = Boolean(this.defaultFirstOption || this.filterable || this.remote)
 
