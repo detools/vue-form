@@ -3,14 +3,8 @@ import Form, { Input } from '@detools/vue-form'
 export default {
   data() {
     return {
-      formValues: {},
+      form: {},
     }
-  },
-
-  methods: {
-    handleModelChange(values) {
-      this.formValues = values
-    },
   },
 
   render() {
@@ -19,7 +13,7 @@ export default {
         <h1>Immediate Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form handleModelChange={this.handleModelChange}>
+            <Form v-model={this.form}>
               <Input class="input" name="name" placeholder="Type and see to Form Values" />
               <br />
               <br />
@@ -33,7 +27,7 @@ export default {
             <br />
             <br />
             <div>
-              <pre>{JSON.stringify(this.formValues, null, 2)}</pre>
+              <pre>{JSON.stringify(this.form, null, 2)}</pre>
             </div>
           </div>
         </div>

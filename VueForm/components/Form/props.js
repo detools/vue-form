@@ -8,6 +8,9 @@ export const BUTTONS_POSITION = {
 }
 
 const formProps = {
+  // v-model
+  value: Object,
+
   cancel: [String, Boolean],
   save: [String, Boolean],
   submit: [String, Boolean],
@@ -42,10 +45,6 @@ const formProps = {
     default: noop,
   },
   handleSave: Function,
-  handleModelChange: {
-    type: Function,
-    default: noop,
-  },
   handleDisabled: {
     type: Function,
     default: noop,

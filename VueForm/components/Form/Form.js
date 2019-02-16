@@ -67,6 +67,10 @@ export default {
       return this.store.registerFormControl(...args)
     },
 
+    handleModelChange(values) {
+      this.$emit('input', values)
+    },
+
     handleFormDisabled(errors) {
       this.handleDisabled(errors || this.store.allErrors)
     },

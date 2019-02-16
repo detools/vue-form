@@ -34,10 +34,6 @@ export default {
   },
 
   methods: {
-    handleModelChange(values) {
-      this.form = values
-    },
-
     handleSubmit() {
       Notification.success('Form has been submitted')
     },
@@ -56,13 +52,13 @@ export default {
             cancel
             save
             submit
+            v-model={this.form}
             class="form"
             confirmMessage="Submit will update user data, are you sure?"
             confirmYes="Yes"
             confirmNo="No"
             initialValues={this.initialValues}
             validate={this.validate}
-            handleModelChange={this.handleModelChange}
             handleSubmit={this.handleSubmit}>
             <Checkbox formItem name="isRequired">
               Is name required?

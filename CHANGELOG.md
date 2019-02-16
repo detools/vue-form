@@ -1,3 +1,10 @@
+## 4.0.0
+
+### Breaking changes
+
+- Removed `handleModelChange` prop
+- Now just pass value to v-model that you've used inside `handleModelChange`
+
 ## 3.6.19
 
 ### Fixed
