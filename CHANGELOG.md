@@ -1,3 +1,11 @@
+## 4.2.0
+
+### Added
+
+- In 3.6.14 I have removed default value (0) for prop `value`
+- Now I have added a separate prop `defaultValue`
+- You can use this field in cases where user has removed any value from field, but this field does not support empty value (for example it can be `0`)
+
 ## 4.1.1
 
 ### Fixed

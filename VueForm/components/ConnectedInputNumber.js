@@ -10,6 +10,7 @@ const ConnectedInputNumber = {
     },
 
     value: Number,
+    defaultValue: Number,
 
     min: Number,
     max: Number,
@@ -57,7 +58,7 @@ const ConnectedInputNumber = {
   mixins: [ConnectedControlMixin],
 
   methods: {
-    renderComponent(value, setValue) {
+    renderComponent(value = this.defaultValue, setValue) {
       return (
         <InputNumber
           class={this.class}
