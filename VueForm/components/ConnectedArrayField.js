@@ -186,6 +186,7 @@ export default {
         fields: this.fields,
         name: this.name,
         extra: this.$attrs,
+        setValue: this.setValue,
       }
 
       if (isFunction(this.renderField)) {

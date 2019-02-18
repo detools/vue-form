@@ -1,3 +1,9 @@
+## 4.3.0
+
+### Added
+
+- `<ArrayField />` child component now accept `setValue` as `prop`
+
 ## 4.2.0
 
 ### Added
