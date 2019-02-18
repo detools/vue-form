@@ -1,8 +1,14 @@
+## 4.3.1
+
+### Added
+
+- Pass `label` prop from `<ArrayField />` to child
+
 ## 4.3.0
 
 ### Added
 
-- `<ArrayField />` child component now accept `setValue` as `prop`
+- Pass `setValue` prop from `<ArrayField />` to child
 
 ## 4.2.0
 
