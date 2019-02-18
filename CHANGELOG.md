@@ -1,3 +1,9 @@
+## 4.1.1
+
+### Fixed
+
+- Pass `null` on `submit` when value of control became `undefined`
+
 ## 4.1.0
 
 ### Changed

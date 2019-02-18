@@ -120,9 +120,17 @@ export default {
 
       function customizer(objValue, srcValue) {
         if (Array.isArray(objValue)) {
-          return srcValue;
+          return srcValue
         }
+
+        // Mostly handle undefined values that merge do not use
+        if (isNil(srcValue)) {
+          return null
+        }
+
+        return undefined
       }
+
       const off = this.store.manageSubmittingState()
       const submitForm = () =>
         Promise.resolve(
