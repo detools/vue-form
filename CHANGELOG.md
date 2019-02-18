@@ -1,3 +1,9 @@
+## 4.1.0
+
+### Changed
+
+- `<DatePicker />` prop `editable` is `true` by default
+
 ## 4.0.0
 
 ### Breaking changes

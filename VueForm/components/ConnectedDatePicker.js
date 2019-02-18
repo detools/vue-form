@@ -10,7 +10,7 @@ import ConnectedControlMixin from '../mixins/ConnectedControl'
  * @param {Boolean} readonly [false] whether DatePicker is read only
  * @param {Boolean} disabled [false] whether DatePicker is disabled
  * @param {Enum} size (large/small/mini) size of input
- * @param {Boolean} editable [true] whether DatePicker is disabled
+ * @param {Boolean} editable [true] whether DatePicker is editable
  * @param {Boolean} clearable whether to show clear button
  * @param {String} placeholder only in non-range mode
  * @param {String} startPlaceholder for the start date in range mode
@@ -48,7 +48,10 @@ const ConnectedDatePicker = {
     readonly: Boolean,
     disabled: Boolean,
     size: String,
-    editable: Boolean,
+    editable: {
+      type: Boolean,
+      default: true,
+    },
     clearable: Boolean,
     placeholder: String,
     startPlaceholder: String,
