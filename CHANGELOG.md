@@ -1,3 +1,9 @@
+## 4.3.2
+
+### Fixed
+
+- Return state value for an `Array` field instead of empty `Array`
+
 ## 4.3.1
 
 ### Added

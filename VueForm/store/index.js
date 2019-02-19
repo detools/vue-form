@@ -292,7 +292,13 @@ export const VueFormStoreParams = {
           return initialValue
         }
 
-        return Array.isArray(value) ? [] : undefined
+        // Array that does not have formLevel value
+        // Do not reset it state to empty array
+        if (Array.isArray(value)) {
+          return value
+        }
+
+        return undefined
       })
 
       this.$emit(CONSTANTS.VUE_FORM_REINITIALIZE, this.state)
