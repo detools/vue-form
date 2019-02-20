@@ -1,3 +1,9 @@
+## 4.3.3
+
+### Fixed
+
+- `onChange` event for `<RadioGroup />`
+
 ## 4.3.2
 
 ### Fixed

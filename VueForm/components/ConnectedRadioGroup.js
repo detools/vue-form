@@ -91,7 +91,7 @@ const ConnectedRadioGroup = {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={setValue}>
+          on-change={this.handleFieldChange}>
           {this.options.map(this.generateOptions)}
         </RadioGroup>
       )
