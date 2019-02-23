@@ -1,3 +1,9 @@
+## 4.6.1
+
+### Fixed
+
+- Smooth `HTMLElement.scrollIntoView()` does not work in Chrome
+
 ## 4.6.0
 
 ### Changed

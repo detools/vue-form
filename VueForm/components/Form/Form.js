@@ -178,9 +178,22 @@ export default {
     handleFocusToFirstInvalidField() {
       const [name] = this.store.allErrorsFields
 
-      const element = document.querySelector(`[name=${name}]`) || document.getElementById(name)
-      if (element.scrollIntoView) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      const elementByName = document.querySelector(`[name=${name}]`)
+      const elementById = document.getElementById(name)
+
+      if (/WebKit/.test(navigator.userAgent)) {
+        if (elementByName) {
+          elementByName.focus()
+        }
+
+        if (elementById) {
+          window.scroll(0, elementById.offsetTop)
+        }
+      } else {
+        const element = elementByName || elementById
+        if (element.scrollIntoView) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+        }
       }
     },
 
