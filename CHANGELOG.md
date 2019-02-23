@@ -1,3 +1,9 @@
+## 4.5.0
+
+### Changed
+
+- Use `file.id` as `file.uid` if it exists to keep initialValues of form with `Upload` controls consistent
+
 ## 4.4.0
 
 ### Changed

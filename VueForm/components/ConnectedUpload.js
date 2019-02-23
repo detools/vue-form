@@ -175,12 +175,16 @@ const ConnectedInput = {
       const [value = [], setValue] = this.state
       const [uploadedFile] = this.formatResponse(response, file, fileList)
 
-      const nextValue = value.concat({ ...uploadedFile, uid: file.uid })
+      const nextValue = value.concat({ ...uploadedFile, uid: file.id || file.uid })
 
       setValue(nextValue)
     },
 
     renderComponent(value, setValue, createElement, initialValue) {
+      const fileList = initialValue
+        ? initialValue.map(item => ({ ...item, uid: item.uid || item.id }))
+        : initialValue
+
       return (
         <Upload
           {...this.callbacks}
@@ -196,7 +200,7 @@ const ConnectedInput = {
           accept={this.accept}
           before-upload={this.beforeUpload}
           before-remove={this.beforeRemove}
-          file-list={initialValue || this.fileList}
+          file-list={fileList || this.fileList}
           list-type={this.listType}
           auto-upload={this.autoUpload}
           http-request={this.httpRequest}
