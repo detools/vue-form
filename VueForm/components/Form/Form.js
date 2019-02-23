@@ -177,18 +177,11 @@ export default {
 
     handleFocusToFirstInvalidField() {
       const [name] = this.store.allErrorsFields
-      const fieldByName = document.querySelector(`[name=${name}]`)
 
-      if (fieldByName) {
-        return fieldByName.focus()
+      const element = document.querySelector(`[name=${name}]`) || document.getElementById(name)
+      if (element.scrollIntoView) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
-
-      const fieldById = document.getElementById(name)
-      if (fieldById) {
-        return window.scroll(0, fieldById.offsetTop)
-      }
-
-      return false
     },
 
     renderPlainSubmitButton() {

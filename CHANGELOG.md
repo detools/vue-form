@@ -1,3 +1,9 @@
+## 4.6.0
+
+### Changed
+
+- Replace `HTMLElement.focus()` with `HTMLElement.scrollIntoView()`
+
 ## 4.5.0
 
 ### Changed
