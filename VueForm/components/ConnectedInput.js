@@ -23,7 +23,7 @@ const ConnectedInput = {
     autosize: Boolean,
     autocomplete: {
       type: String,
-      default: 'off',
+      default: 'new-password',
     },
     readonly: Boolean,
     max: Number,

@@ -41,7 +41,7 @@ const ConnectedAutocomplete = {
     autosize: Boolean,
     autocomplete: {
       type: String,
-      default: 'off',
+      default: 'new-password',
     },
     size: String,
 

@@ -35,7 +35,7 @@ const ConnectedSelect = {
 
     autocomplete: {
       type: String,
-      default: 'off',
+      default: 'new-password',
     },
 
     disabled: Boolean,
