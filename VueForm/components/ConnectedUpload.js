@@ -181,9 +181,10 @@ const ConnectedInput = {
     },
 
     renderComponent(value, setValue, createElement, initialValue) {
-      const fileList = initialValue
-        ? initialValue.map(item => ({ ...item, uid: item.uid || item.id }))
-        : initialValue
+      const nextValue = value || initialValue
+      const fileList = nextValue
+        ? nextValue.map(item => ({ ...item, uid: item.uid || item.id }))
+        : nextValue
 
       return (
         <Upload
