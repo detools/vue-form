@@ -1,3 +1,9 @@
+## 4.6.3
+
+### Fixed
+
+- Do not change uid of every file inside render
+
 ## 4.6.2
 
 ### Fixed
