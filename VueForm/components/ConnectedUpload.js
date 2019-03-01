@@ -1,6 +1,7 @@
 import Upload from 'element-ui/lib/upload'
 import noop from 'lodash/noop'
 import isBoolean from 'lodash/isBoolean'
+import isPlainObject from 'lodash/isPlainObject'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -152,7 +153,7 @@ const ConnectedInput = {
         return false
       }
 
-      return Boolean(this.showFileList.beforeDestroy)
+      return isPlainObject(this.showFileList)
     },
   },
 
