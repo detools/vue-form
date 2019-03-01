@@ -1,3 +1,9 @@
+## 4.7.1
+
+### Added
+
+- Support to pass a component as File List to `<Upload />`
+
 ## 4.7.0
 
 ### Added

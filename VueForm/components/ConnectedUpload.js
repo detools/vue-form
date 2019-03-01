@@ -1,6 +1,6 @@
 import Upload from 'element-ui/lib/upload'
 import noop from 'lodash/noop'
-import isFunction from 'lodash/isFunction'
+import isBoolean from 'lodash/isBoolean'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -45,7 +45,10 @@ const ConnectedInput = {
     },
 
     withCredentials: Boolean,
-    showFileList: [Boolean, Function],
+    showFileList: {
+      type: [Boolean, Function, Object],
+      default: false,
+    },
     drag: Boolean,
     accept: String,
 
@@ -141,7 +144,15 @@ const ConnectedInput = {
     },
 
     shouldRenderCustomFileList() {
-      return isFunction(this.showFileList)
+      return !isBoolean(this.showFileList)
+    },
+
+    isFileListAComponent() {
+      if (!this.shouldRenderCustomFileList) {
+        return false
+      }
+
+      return Boolean(this.showFileList.beforeDestroy)
     },
   },
 
@@ -189,6 +200,22 @@ const ConnectedInput = {
       setValue(nextValue)
     },
 
+    renderFileList(fileList, handleRemoveFile, labelWidth) {
+      if (this.isFileListAComponent) {
+        const FileList = this.showFileList
+
+        return (
+          <FileList
+            fileList={fileList}
+            handleRemoveFile={handleRemoveFile}
+            labelWidth={labelWidth}
+          />
+        )
+      }
+
+      return this.showFileList(fileList, handleRemoveFile, labelWidth)
+    },
+
     renderComponent(value, setValue, createElement, initialValue) {
       const fileList = value || initialValue
 
@@ -223,7 +250,7 @@ const ConnectedInput = {
         return (
           <div>
             {uploadComponent}
-            {this.showFileList(fileList, this.handleFieldRemove, this.labelWidth)}
+            {this.renderFileList(fileList, this.handleFieldRemove, this.labelWidth)}
           </div>
         )
       }
