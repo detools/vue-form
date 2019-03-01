@@ -133,7 +133,7 @@ const ConnectedInput = {
           onSuccess: this.handleFieldSuccess,
           onError: this.handleError,
           onProgress: this.handleProgress,
-          onChange: this.handleFieldChange,
+          onChange: this.handleChange,
           onExceed: this.handleExceed,
         },
       }
@@ -154,6 +154,8 @@ const ConnectedInput = {
     },
 
     handleFieldRemove(...args) {
+      this.setTouched()
+
       this.handleRemove(...args).then(() => {
         const [value, setValue] = this.state
         const { [this.fileKey]: id, uid } = args[0]
@@ -170,6 +172,8 @@ const ConnectedInput = {
     },
 
     handleFieldSuccess(response, file, fileList) {
+      this.setTouched()
+
       this.handleSuccess(response, file, fileList)
 
       const [value = [], setValue] = this.state

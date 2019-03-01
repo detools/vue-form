@@ -1,3 +1,9 @@
+## 4.6.4
+
+### Updated
+
+- Do not `setTouched` on change `<Upload />`
+
 ## 4.6.3
 
 ### Fixed
