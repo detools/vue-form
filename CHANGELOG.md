@@ -1,3 +1,9 @@
+## 4.7.0
+
+### Added
+
+- Support to render custom File List under `<Upload />`
+
 ## 4.6.4
 
 ### Updated

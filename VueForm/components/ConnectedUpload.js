@@ -1,5 +1,6 @@
 import Upload from 'element-ui/lib/upload'
 import noop from 'lodash/noop'
+import isFunction from 'lodash/isFunction'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -44,7 +45,7 @@ const ConnectedInput = {
     },
 
     withCredentials: Boolean,
-    showFileList: Boolean,
+    showFileList: [Boolean, Function],
     drag: Boolean,
     accept: String,
 
@@ -138,6 +139,10 @@ const ConnectedInput = {
         },
       }
     },
+
+    shouldRenderCustomFileList() {
+      return isFunction(this.showFileList)
+    },
   },
 
   methods: {
@@ -187,7 +192,7 @@ const ConnectedInput = {
     renderComponent(value, setValue, createElement, initialValue) {
       const fileList = value || initialValue
 
-      return (
+      const uploadComponent = (
         <Upload
           {...this.callbacks}
           ref="uiUpload"
@@ -197,7 +202,7 @@ const ConnectedInput = {
           data={this.data}
           name={this.prop}
           with-credentials={this.withCredentials}
-          show-file-list={this.showFileList}
+          show-file-list={this.shouldRenderCustomFileList ? false : this.showFileList}
           drag={this.drag}
           accept={this.accept}
           before-upload={this.beforeUpload}
@@ -213,6 +218,17 @@ const ConnectedInput = {
           {this.$slots.default}
         </Upload>
       )
+
+      if (this.shouldRenderCustomFileList) {
+        return (
+          <div>
+            {uploadComponent}
+            {this.showFileList(fileList, this.handleFieldRemove, this.labelWidth)}
+          </div>
+        )
+      }
+
+      return uploadComponent
     },
   },
 }
