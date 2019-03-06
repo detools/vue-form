@@ -3,6 +3,7 @@ import castArray from 'lodash/castArray'
 import isBoolean from 'lodash/isBoolean'
 import startCase from 'lodash/startCase'
 import isEqual from 'lodash/isEqual'
+import get from 'lodash/get'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import isComponentPartOfArrayField from '../utils/isComponentPartOfArrayField'
 import FormItem from '../components/ConnectedFormItem'
@@ -21,7 +22,9 @@ const ConnectedControlMixin = {
 
   mounted() {
     this.isComponentPartOfArrayField = isComponentPartOfArrayField(this)
-    this.validateOnReinitialize(value => {
+    this.reinitializeCallback = this.validateOnReinitialize(state => {
+      const value = get(state, this.name)
+
       this.setError(this.validators)(value)
     })
   },
@@ -36,6 +39,10 @@ const ConnectedControlMixin = {
 
   destroyed() {
     this.cleanFormValue()
+
+    if (this.reinitializeCallback) {
+      this.reinitializeCallback()
+    }
   },
 
   computed: {

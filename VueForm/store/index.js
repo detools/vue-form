@@ -244,9 +244,9 @@ export const VueFormStoreParams = {
       const vm = this
 
       return callback => {
-        vm.$on(CONSTANTS.VUE_FORM_REINITIALIZE, () => {
-          callback(get(vm.state, name))
-        })
+        vm.$on(CONSTANTS.VUE_FORM_REINITIALIZE, callback)
+
+        return () => vm.$off(CONSTANTS.VUE_FORM_REINITIALIZE, callback)
       }
     },
 

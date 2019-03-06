@@ -1,3 +1,9 @@
+## 4.7.3
+
+### Fixed
+
+- Unsubscribe from `validateOnReinitialize` if form control is hidden
+
 ## 4.7.2
 
 ### Fixed

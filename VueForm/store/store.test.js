@@ -325,8 +325,8 @@ test('Reinitialize values', async t => {
   const errorMessage = `${name} should be equal 43`
   const validators = [controlValue => (controlValue !== 43 ? errorMessage : undefined)]
 
-  const reinitializeCallback = sinon.spy(nextValue => {
-    setError(validators)(nextValue)
+  const reinitializeCallback = sinon.spy(state => {
+    setError(validators)(state[name])
   })
   validateOnReinitialize(reinitializeCallback)
 
@@ -336,7 +336,10 @@ test('Reinitialize values', async t => {
   // Expectations
   t.equal(store.state[name], value, '"state" should contain original "username"')
   t.ok(reinitializeCallback.calledOnce, '"reinitializeCallback" should be called')
-  t.ok(reinitializeCallback.calledWith(value), '"reinitializeCallback" should be called with value')
+  t.ok(
+    reinitializeCallback.calledWith(store.state),
+    '"reinitializeCallback" should be called with store state'
+  )
 })
 
 test('Add Form Sync Errors', async t => {

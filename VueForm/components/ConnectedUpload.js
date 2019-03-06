@@ -23,7 +23,7 @@ const httpRequest = ({ headers, file, filename, action }) => {
   }).then(response => response.json())
 }
 
-const ConnectedInput = {
+const ConnectedUpload = {
   props: {
     name: {
       type: String,
@@ -261,4 +261,4 @@ const ConnectedInput = {
   },
 }
 
-export default ConnectedInput
+export default ConnectedUpload

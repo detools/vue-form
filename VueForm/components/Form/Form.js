@@ -191,7 +191,8 @@ export default {
         }
       } else {
         const element = elementByName || elementById
-        if (element.scrollIntoView) {
+
+        if (element && element.scrollIntoView) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
         }
       }
