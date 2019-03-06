@@ -1,3 +1,9 @@
+## 4.7.4
+
+### Fixed
+
+- Check response before setValue on success `<Upload />`
+
 ## 4.7.3
 
 ### Fixed

@@ -194,11 +194,14 @@ const ConnectedUpload = {
       this.handleSuccess(response, file, fileList)
 
       const [value = [], setValue] = this.state
-      const [uploadedFile] = this.formatResponse(response, file, fileList)
+      const formattedResponse = this.formatResponse(response, file, fileList)
 
-      const nextValue = value.concat({ ...uploadedFile, uid: file.id || file.uid })
+      if (formattedResponse && formattedResponse.length) {
+        const [uploadedFile] = formattedResponse
+        const nextValue = value.concat({ ...uploadedFile, uid: file.id || file.uid })
 
-      setValue(nextValue)
+        setValue(nextValue)
+      }
     },
 
     renderFileList(fileList, handleRemoveFile, labelWidth) {
