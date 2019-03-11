@@ -10,7 +10,6 @@ import {
   merge,
   get,
   set,
-  lowerCase,
 } from 'lodash'
 import { validate, asyncValidate } from '../validators/validate'
 import isValid from '../utils/isValid'
@@ -201,9 +200,9 @@ export const VueFormStoreParams = {
       const vm = this
 
       return validators => nextValue => {
-        const fieldPath = lowerCase(name)
+        const useLodashSet = /[[]/.test(name)
 
-        if (fieldPath === name) {
+        if (!useLodashSet) {
           vm.$set(vm.state, name, nextValue)
         } else {
           vm.state = merge({}, set(vm.state, name, nextValue))
@@ -240,7 +239,7 @@ export const VueFormStoreParams = {
       }
     },
 
-    createValidateOnReinitialize(name) {
+    createValidateOnReinitialize() {
       const vm = this
 
       return callback => {

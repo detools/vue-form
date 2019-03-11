@@ -1,3 +1,9 @@
+## 4.7.5
+
+### Fixed
+
+- Check if field is a part of Array by regexp
+
 ## 4.7.4
 
 ### Fixed
