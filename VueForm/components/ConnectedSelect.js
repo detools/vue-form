@@ -2,6 +2,7 @@ import Select from 'element-ui/lib/select'
 import Option from 'element-ui/lib/option'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
+import isFunction from 'lodash/isFunction'
 import { ConnectedSelectMixin } from '../mixins/ConnectedControl'
 
 const ConnectedSelect = {
@@ -19,18 +20,18 @@ const ConnectedSelect = {
     value: [Number, String, Array],
 
     valueKey: {
-      type: String,
-      default: () => 'id',
+      type: [String, Function],
+      default: 'id',
     },
 
     labelKey: {
-      type: String,
-      default: () => 'name',
+      type: [String, Function],
+      default: 'name',
     },
 
     multiple: {
       type: Boolean,
-      default: () => false,
+      default: false,
     },
 
     autocomplete: {
@@ -86,7 +87,17 @@ const ConnectedSelect = {
 
   methods: {
     generateOptions(option) {
-      let { [this.valueKey]: optionValue, [this.labelKey]: optionLabel } = option
+      const { valueKey, labelKey } = this
+
+      let { [valueKey]: optionValue, [labelKey]: optionLabel } = option
+
+      if (isFunction(valueKey)) {
+        optionValue = valueKey(option)
+      }
+
+      if (isFunction(labelKey)) {
+        optionLabel = labelKey(option)
+      }
 
       if (isNil(optionLabel)) {
         optionValue = option

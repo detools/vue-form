@@ -1,3 +1,9 @@
+## 4.8.0
+
+### Added
+
+- `valueKey` and `labelKey` can be functions that accept option as argument
+
 ## 4.7.5
 
 ### Fixed
