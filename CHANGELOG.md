@@ -1,3 +1,10 @@
+## 4.9.0
+
+### Added
+
+- Support for `required` prop for `<FormItem />`
+- Now `isRequired` validator will add an element-ui asterisk for required fields
+
 ## 4.8.0
 
 ### Added

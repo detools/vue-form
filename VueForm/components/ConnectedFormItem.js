@@ -6,6 +6,7 @@ export default {
     labelWidth: String,
     error: String,
     styles: [Object, Array],
+    required: Boolean,
   },
 
   render() {
@@ -14,7 +15,8 @@ export default {
         style={this.styles}
         label={this.label}
         label-width={this.labelWidth}
-        error={this.error}>
+        error={this.error}
+        required={this.required}>
         {this.$slots.default}
       </FormItem>
     )

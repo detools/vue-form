@@ -77,9 +77,15 @@ const ConnectedControlMixin = {
       label = undefined
     }
 
+    let required = false
+    const { validators } = this
+    if (validators && validators.length) {
+      required = validators.some(validator => validator.name === 'isRequired')
+    }
+
     if (this.formItem) {
       return (
-        <FormItem label={label} label-width={this.labelWidth} error={error}>
+        <FormItem label={label} label-width={this.labelWidth} error={error} required={required}>
           {this.renderComponent(value, setValue, createElement, initialValue)}
         </FormItem>
       )
