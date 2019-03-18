@@ -1,3 +1,9 @@
+## 4.9.2
+
+### Added
+
+- Support for `handleRowClick` prop for `<FileList />` inside `<Upload />`
+
 ## 4.9.1
 
 ### Added

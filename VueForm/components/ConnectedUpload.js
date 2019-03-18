@@ -126,6 +126,9 @@ const ConnectedUpload = {
     // vue-form Props
     validators: Array,
     asyncValidators: Array,
+
+    // File List Props
+    handleRowClick: Function,
   },
 
   mixins: [ConnectedControlMixin],
@@ -205,7 +208,7 @@ const ConnectedUpload = {
       }
     },
 
-    renderFileList(fileList, handleRemoveFile, labelWidth) {
+    renderFileList(fileList, handleRemoveFile, labelWidth, handleRowClick) {
       if (this.isFileListAComponent) {
         const FileList = this.showFileList
 
@@ -214,6 +217,7 @@ const ConnectedUpload = {
             fileList={fileList}
             handleRemoveFile={handleRemoveFile}
             labelWidth={labelWidth}
+            handleRowClick={handleRowClick}
           />
         )
       }
@@ -255,7 +259,12 @@ const ConnectedUpload = {
         return (
           <div>
             {uploadComponent}
-            {this.renderFileList(fileList, this.handleFieldRemove, this.labelWidth)}
+            {this.renderFileList(
+              fileList,
+              this.handleFieldRemove,
+              this.labelWidth,
+              this.handleRowClick
+            )}
           </div>
         )
       }
