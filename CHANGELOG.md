@@ -1,3 +1,10 @@
+## 4.9.1
+
+### Added
+
+- Support for `required` prop for every form control
+- You can pass `required={null}` if you do not want to show asterisk
+
 ## 4.9.0
 
 ### Added

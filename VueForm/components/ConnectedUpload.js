@@ -121,6 +121,7 @@ const ConnectedUpload = {
     label: [String, Boolean],
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
 
     // vue-form Props
     validators: Array,

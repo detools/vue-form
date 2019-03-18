@@ -35,6 +35,7 @@ const ConnectedRadio = {
     /* FormItem Props */
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
   },
 
   mixins: [ConnectedControlMixin],

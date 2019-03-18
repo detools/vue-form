@@ -28,6 +28,7 @@ export default {
     formItem: Boolean,
     label: [String, Boolean],
     labelWidth: String,
+    required: Boolean,
   },
 
   mixins: [ConnectedArrayFieldMixin],

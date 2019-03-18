@@ -1,6 +1,7 @@
 import isNil from 'lodash/isNil'
 import castArray from 'lodash/castArray'
 import isBoolean from 'lodash/isBoolean'
+import isNull from 'lodash/isNull'
 import startCase from 'lodash/startCase'
 import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
@@ -79,7 +80,8 @@ const ConnectedControlMixin = {
 
     let required = false
     const { validators } = this
-    if (validators && validators.length) {
+
+    if (!isNull(this.required) && validators && validators.length) {
       required = validators.some(validator => validator.name === 'isRequired')
     }
 

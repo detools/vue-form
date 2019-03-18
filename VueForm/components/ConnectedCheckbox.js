@@ -44,6 +44,7 @@ const ConnectedCheckbox = {
     /* FormItem Props */
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
   },
 
   created() {

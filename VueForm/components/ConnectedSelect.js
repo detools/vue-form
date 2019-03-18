@@ -81,6 +81,7 @@ const ConnectedSelect = {
     label: [String, Boolean],
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
   },
 
   mixins: [ConnectedSelectMixin],

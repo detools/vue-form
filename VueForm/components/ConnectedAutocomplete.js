@@ -74,6 +74,7 @@ const ConnectedAutocomplete = {
     label: [String, Boolean],
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
   },
 
   mixins: [ConnectedControlMixin],

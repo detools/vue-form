@@ -47,6 +47,7 @@ const ConnectedSwitch = {
     label: [String, Boolean],
     formItem: Boolean,
     labelWidth: String,
+    required: Boolean,
   },
 
   mixins: [ConnectedControlMixin],
