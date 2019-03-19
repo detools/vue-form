@@ -8,6 +8,9 @@ import get from 'lodash/get'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import isComponentPartOfArrayField from '../utils/isComponentPartOfArrayField'
 import FormItem from '../components/ConnectedFormItem'
+import createIsRequiredValidator from '../validators/isRequired'
+
+const isRequired = createIsRequiredValidator()
 
 const ConnectedControlMixin = {
   data() {
@@ -82,7 +85,7 @@ const ConnectedControlMixin = {
     const { validators } = this
 
     if (!isNull(this.required) && validators && validators.length) {
-      required = validators.some(validator => validator.name === 'isRequired')
+      required = validators.some(validator => validator.name === isRequired.name)
     }
 
     if (this.formItem) {
