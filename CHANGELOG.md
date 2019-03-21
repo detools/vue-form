@@ -1,3 +1,9 @@
+## 4.9.4
+
+### Fixed
+
+- Check correct mangled validator name for `isRequired`
+
 ## 4.9.3
 
 ### Fixed

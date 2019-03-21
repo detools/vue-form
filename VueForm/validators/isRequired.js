@@ -4,7 +4,7 @@ import isPlainObject from 'lodash/isPlainObject'
 import startCase from 'lodash/startCase'
 
 export default function createIsRequiredValidator(customMessage) {
-  return function isRequired(value, name) {
+  function isRequired(value, name) {
     let isError
 
     if (isNil(value) || value === '') {
@@ -17,4 +17,8 @@ export default function createIsRequiredValidator(customMessage) {
 
     return isError ? customMessage || `${startCase(name)} is required` : undefined
   }
+
+  isRequired.IS_REQUIRED_VALIDATOR = true
+
+  return isRequired
 }
