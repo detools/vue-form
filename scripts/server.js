@@ -1,6 +1,6 @@
-import express from 'express'
-import fileUpload from 'express-fileupload'
-import castArray from 'lodash/castArray'
+const express = require('express')
+const fileUpload = require('express-fileupload')
+const castArray = require('lodash/castArray')
 
 const app = express()
 const port = 33333

@@ -1,8 +1,8 @@
-import path from 'path'
-import webpack from 'webpack'
-import { VueLoaderPlugin } from 'vue-loader'
-import CleanWebpackPlugin from 'clean-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+const path = require('path')
+const webpack = require('webpack')
+const { VueLoaderPlugin } = require('vue-loader')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const DEV_SERVER_PORT = 3000
 const IS_PRODUCTION = process.env.NODE_ENV === 'production'
@@ -14,22 +14,27 @@ const PATH_TO_NODE_MODULES = path.resolve(__dirname, '..', 'node_modules')
 const API_SERVER = 'http://localhost:33333'
 
 const CLEAN_OPTIONS = {
-  // Instead of this ugly hack — we will get "wwwroot is outside of the project root. Skipping..."
-  root: path.resolve(PATH_TO_DIST, '..'),
-  exclude: ['index.html', 'favicon.png'],
-  verbose: true,
-  dry: false,
+  cleanOnceBeforeBuildPatterns: [
+    '**/*',
+    '!index.html',
+    '!200.html',
+    '!favicon.png',
+    '!cropped-Favicon_Nexxus-270x270.png',
+    '!cropped-Favicon_Nexxus-180x180.png',
+    '!cropped-Favicon_Nexxus-192x192.png',
+    '!cropped-Favicon_Nexxus-32x32.png',
+  ],
 }
 
 const productionPlugins = [
-  new CleanWebpackPlugin(PATH_TO_DIST, CLEAN_OPTIONS),
+  new CleanWebpackPlugin(CLEAN_OPTIONS),
   new MiniCssExtractPlugin({
     filename: '[name].css',
     chunkFilename: '[id].css',
   }),
 ]
 
-export default {
+module.exports = {
   mode: 'development',
 
   entry: path.resolve(PATH_TO_SRC, 'index.js'),
@@ -93,7 +98,6 @@ export default {
   },
 
   plugins: [
-    // common
     new VueLoaderPlugin(),
     new webpack.NormalModuleReplacementPlugin(
       /element-ui[/\\]lib[/\\]locale[/\\]lang[/\\]zh-CN/,
