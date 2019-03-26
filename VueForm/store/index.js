@@ -1,16 +1,5 @@
 import Vue from 'vue'
-import {
-  union,
-  without,
-  has,
-  isNil,
-  noop,
-  isFunction,
-  mapValues,
-  merge,
-  get,
-  set,
-} from 'lodash'
+import { union, without, has, isNil, noop, isFunction, mapValues, merge, get, set } from 'lodash'
 import { validate, asyncValidate } from '../validators/validate'
 import isValid from '../utils/isValid'
 import CONSTANTS from '../constants'
@@ -47,6 +36,8 @@ export const VueFormStoreParams = {
         initialValues: {},
 
         handleModelChange: noop,
+
+        keepValueOnRemove: false,
       },
     }
   },
@@ -79,6 +70,10 @@ export const VueFormStoreParams = {
 
     setHandleModelChange(handleModelChange) {
       this.props.handleModelChange = handleModelChange
+    },
+
+    setBehaviourOnRemoveControl(keepValueOnRemove) {
+      this.props.keepValueOnRemove = keepValueOnRemove
     },
     // ON MOUNT FORM END
 
@@ -225,7 +220,9 @@ export const VueFormStoreParams = {
       const vm = this
 
       return () => {
-        vm.$delete(vm.state, name)
+        if (!this.props.keepValueOnRemove) {
+          vm.$delete(vm.state, name)
+        }
         vm.removeFormFieldErrors(name)
         vm.removedFields = vm.removedFields.concat(name)
       }

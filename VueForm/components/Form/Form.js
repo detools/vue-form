@@ -18,6 +18,7 @@ export default {
 
     this.store.setInitialValues(this.initialValues)
     this.store.setHandleModelChange(this.handleModelChange)
+    this.store.setBehaviourOnRemoveControl(this.keepValueOnRemove)
   },
 
   watch: {
@@ -134,12 +135,14 @@ export default {
       const off = this.store.manageSubmittingState()
       const submitForm = () =>
         Promise.resolve(
-          submitHandler(mergeWith(
-            {},
-            omit(this.initialValues, this.store.removedFields),
-            this.store.state,
-            customizer
-          ))
+          submitHandler(
+            mergeWith(
+              {},
+              omit(this.initialValues, this.store.removedFields),
+              this.store.state,
+              customizer
+            )
+          )
         )
 
       const submitPromise = this.store.form.validating

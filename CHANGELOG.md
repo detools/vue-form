@@ -1,3 +1,10 @@
+## 4.10.0
+
+### Added
+
+- Support for prop `keepValueOnRemove` on `<Form />`
+- If you will use this prop — value of any control won't be cleared on remove
+
 ## 4.9.4
 
 ### Fixed

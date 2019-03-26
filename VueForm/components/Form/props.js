@@ -72,6 +72,9 @@ const formProps = {
 
   // Extra buttons between Cancel and Save for now
   renderExtraButtons: Function,
+
+  // Best way when filtering data grids
+  keepValueOnRemove: Boolean,
 }
 
 export default formProps
