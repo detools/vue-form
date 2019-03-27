@@ -1,3 +1,9 @@
+## 4.10.1
+
+### Updated
+
+- Preserve white space in the `<Notification />`
+
 ## 4.10.0
 
 ### Added

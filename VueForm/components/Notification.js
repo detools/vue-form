@@ -5,7 +5,7 @@ import Notification from 'element-ui/lib/notification'
 export default new Vue({
   methods: {
     renderMessage(message) {
-      return <div style="text-align: left">{message}</div>
+      return <div style="text-align: left; white-space: pre-line">{message}</div>
     },
 
     getHandler(type, message) {
