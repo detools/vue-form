@@ -22,6 +22,8 @@ import Popover from './components/Popover'
 
 import validators from './validators'
 
+import VueFormPlugin from 'plugin'
+
 export {
   Radio,
   RadioGroup,
@@ -42,6 +44,7 @@ export {
   Popover,
   Button,
   validators,
+  VueFormPlugin,
 }
 
 export default Form

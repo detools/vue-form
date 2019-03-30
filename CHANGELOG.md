@@ -1,3 +1,9 @@
+## 4.11.1
+
+### Fixed
+
+- Export of `VueFormPlugin`
+
 ## 4.11.0
 
 ### Added
