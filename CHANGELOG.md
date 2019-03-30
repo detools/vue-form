@@ -1,3 +1,18 @@
+## 4.11.0
+
+### Added
+
+- Support for `VueFormPlugin`
+- Just use it like any other plugin:
+
+```
+import Vue from 'vue'
+import { VueFormPlugin } from '@detools/vue-form'
+
+// `size` is the only available option for now
+Vue.use(VueFormPlugin, { size: 'small' })
+```
+
 ## 4.10.1
 
 ### Updated

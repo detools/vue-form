@@ -50,6 +50,14 @@ const ConnectedControlMixin = {
     state() {
       return this.useState(this.validators)
     },
+
+    plugin() {
+      return get(this, '$vueForm', {})
+    },
+
+    controlSize() {
+      return this.size || this.plugin.size
+    },
   },
 
   methods: {
