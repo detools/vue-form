@@ -22,7 +22,7 @@ import Popover from './components/Popover'
 
 import validators from './validators'
 
-import VueFormPlugin from 'plugin'
+import VueFormPlugin from './plugin'
 
 export {
   Radio,
