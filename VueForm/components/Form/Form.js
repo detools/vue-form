@@ -190,7 +190,7 @@ export default {
         }
 
         if (elementById) {
-          window.scroll(0, elementById.offsetTop)
+          window.scroll(0, elementById.offsetParent.offsetTop)
         }
       } else {
         const element = elementByName || elementById

@@ -214,6 +214,7 @@ const ConnectedUpload = {
 
         return (
           <FileList
+            name={this.name}
             fileList={fileList}
             handleRemoveFile={handleRemoveFile}
             labelWidth={labelWidth}

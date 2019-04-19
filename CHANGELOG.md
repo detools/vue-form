@@ -1,3 +1,10 @@
+## 4.11.3
+
+### Fixed
+
+- User offsetTop of offsetParent to scroll to element on error
+- Pass the name of the `<Upload />` to `<FileList />`
+
 ## 4.11.2
 
 ### Fixed
