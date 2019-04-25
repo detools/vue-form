@@ -138,6 +138,11 @@ export const VueFormStoreParams = {
     removeFormField(name) {
       this.formFields = without(this.formFields, name)
       this.removedFields = this.removedFields.concat(name)
+
+      if (!this.props.keepValueOnRemove) {
+        this.$delete(this.state, name)
+      }
+
       this.removeFormFieldErrors(name)
     },
 
@@ -220,11 +225,7 @@ export const VueFormStoreParams = {
       const vm = this
 
       return () => {
-        if (!this.props.keepValueOnRemove) {
-          vm.$delete(vm.state, name)
-        }
-        vm.removeFormFieldErrors(name)
-        vm.removedFields = vm.removedFields.concat(name)
+        vm.removeFormField(name)
       }
     },
 

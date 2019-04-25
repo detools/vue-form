@@ -1,3 +1,9 @@
+## 4.11.4
+
+### Fixed
+
+- `createCleanFormValue` now uses internally method `removeFormField`
+
 ## 4.11.3
 
 ### Fixed
