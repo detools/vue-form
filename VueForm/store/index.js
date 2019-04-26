@@ -275,6 +275,7 @@ export const VueFormStoreParams = {
 
     resetValues() {
       this.reinitializeValues(this.props.initialValues)
+      this.props.handleModelChange(this.props.initialValues)
     },
 
     reinitializeValues(nextInitialValues) {

@@ -1,3 +1,9 @@
+## 4.11.5
+
+### Fixed
+
+- Call `handleModelChange` and `v-model` update on `reset`
+
 ## 4.11.4
 
 ### Fixed
