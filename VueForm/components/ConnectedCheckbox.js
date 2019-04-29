@@ -45,10 +45,10 @@ const ConnectedCheckbox = {
     formItem: Boolean,
     labelWidth: String,
     required: Boolean,
-  },
-
-  created() {
-    this.omitFormItemLabel = true
+    omitFormItemLabel: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   mixins: [ConnectedControlMixin],

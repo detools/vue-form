@@ -36,13 +36,13 @@ const ConnectedRadio = {
     formItem: Boolean,
     labelWidth: String,
     required: Boolean,
+    omitFormItemLabel: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   mixins: [ConnectedControlMixin],
-
-  created() {
-    this.omitFormItemLabel = true
-  },
 
   methods: {
     renderComponent(value, setValue) {

@@ -1,3 +1,9 @@
+## 4.12.0
+
+### Updated
+
+- `omitFormItemLabel` now is a `prop` for `<Checkbox />` and `<Radio />`
+
 ## 4.11.5
 
 ### Fixed
