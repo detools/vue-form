@@ -58,7 +58,7 @@ const formProps = {
   // Extra form props
   // This prop tells us that we can't submit a form (some extra check outside form)
   // It should be an error message that describes what type of error exists outside form
-  disabled: String,
+  disabled: [String, Object],
 
   // Activates Popover
   confirmMessage: String,

@@ -1,5 +1,14 @@
 import Vue from 'vue'
-import { isBoolean, isEmpty, isEqual, mergeWith, omit, isNil } from 'lodash'
+import {
+  isBoolean,
+  isEmpty,
+  isEqual,
+  isString,
+  isPlainObject,
+  mergeWith,
+  omit,
+  isNil,
+} from 'lodash'
 import Form from 'element-ui/lib/form'
 import Button from 'element-ui/lib/button'
 import CONSTANTS from '../../constants'
@@ -89,7 +98,15 @@ export default {
         !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
 
       if (isSubmitButtonClick && !isNil(this.disabled)) {
-        return Notification.error(this.disabled)
+        if (isString(this.disabled)) {
+          return Notification.error(this.disabled)
+        }
+
+        if (isPlainObject(this.disabled)) {
+          Notification.error(this.disabled.message)
+
+          return this.handleFocusToInvalidField(this.disabled.id)
+        }
       }
 
       if (isSubmitButtonClick) {
@@ -108,7 +125,7 @@ export default {
       }
 
       if (!this.store.isValid && isSubmitButtonClick) {
-        this.handleFocusToFirstInvalidField()
+        this.handleFocusToInvalidField()
 
         return this.handleFormDisabled()
       }
@@ -178,11 +195,12 @@ export default {
       }
     },
 
-    handleFocusToFirstInvalidField() {
+    handleFocusToInvalidField(passedElementId) {
       const [name] = this.store.allErrorsFields
+      const elementId = passedElementId || name
 
-      const elementByName = document.querySelector(`[name=${name}]`)
-      const elementById = document.getElementById(name)
+      const elementByName = document.querySelector(`[name=${elementId}]`)
+      const elementById = document.getElementById(elementId)
 
       if (/WebKit/.test(navigator.userAgent)) {
         if (elementByName) {
@@ -190,7 +208,11 @@ export default {
         }
 
         if (elementById) {
-          window.scroll(0, elementById.offsetParent.offsetTop)
+          if (elementById.scrollIntoView) {
+            elementById.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+          } else {
+            window.scroll(0, elementById.offsetParent.offsetTop)
+          }
         }
       } else {
         const element = elementByName || elementById

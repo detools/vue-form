@@ -1,3 +1,9 @@
+## 4.13.0
+
+### Updated
+
+- `disabled` property. Now you can pass an object with `id` and `message` fields to show `message` as `<Notification />` and scroll to element by `id`
+
 ## 4.12.0
 
 ### Updated
