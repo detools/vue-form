@@ -1,3 +1,9 @@
+## 4.13.1
+
+### Fixed
+
+- Move call of `asyncValidators` to `on-change` event for `<Select />` instead of `on-blur`. `on-blur` emits before change
+
 ## 4.13.0
 
 ### Updated
