@@ -1,3 +1,9 @@
+## 4.14.0
+
+### Added
+
+- Disable fields during async validations
+
 ## 4.13.1
 
 ### Fixed

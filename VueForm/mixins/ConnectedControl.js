@@ -58,6 +58,10 @@ const ConnectedControlMixin = {
     controlSize() {
       return this.size || this.plugin.size
     },
+
+    isFieldDisabled() {
+      return this.disabled || !!this.asyncValidations[this.name]
+    },
   },
 
   methods: {

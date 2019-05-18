@@ -107,6 +107,7 @@ export const VueFormStoreParams = {
         validateOnReinitialize,
         setTouched,
         isComponentPartOfArrayField,
+        asyncValidations: vm.asyncValidations,
         useState: syncValidators => {
           const isFieldTouched = vm.touchedFields[name]
 
