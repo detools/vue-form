@@ -1,3 +1,10 @@
+## 5.0.0
+
+### Breaking changes
+
+- Removed `<Autocomplete />` component
+- `<ArrayField />` components' parts are doing `setValue` and `addFormField` on register
+
 ## 4.14.0
 
 ### Added

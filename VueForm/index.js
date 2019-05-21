@@ -7,7 +7,6 @@ import Checkbox from './components/ConnectedCheckbox'
 import CheckboxGroup from './components/ConnectedCheckboxGroup'
 import Input from './components/ConnectedInput'
 import InputNumber from './components/ConnectedInputNumber'
-import Autocomplete from './components/ConnectedAutocomplete'
 import Select from './components/ConnectedSelect'
 import Switch from './components/ConnectedSwitch'
 import Slider from './components/ConnectedSlider'
@@ -31,7 +30,6 @@ export {
   CheckboxGroup,
   Input,
   InputNumber,
-  Autocomplete,
   Select,
   Switch,
   Slider,

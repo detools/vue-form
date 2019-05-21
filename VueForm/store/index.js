@@ -80,9 +80,7 @@ export const VueFormStoreParams = {
     registerFormControl(name, fieldLevelInitialValue, validators, isComponentPartOfArrayField) {
       const vm = this
 
-      if (!isComponentPartOfArrayField) {
-        vm.addFormField(name)
-      }
+      vm.addFormField(name)
 
       const setError = vm.createSetError(name)
       const setAsyncError = vm.createSetAsyncError(name)
@@ -94,10 +92,8 @@ export const VueFormStoreParams = {
       const formLevelInitialValue = get(vm.props.initialValues, name)
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
 
-      if (!isComponentPartOfArrayField) {
-        if (!has(vm.state, name)) {
-          setValue(validators)(value)
-        }
+      if (!has(vm.state, name)) {
+        setValue(validators)(value)
       }
 
       return {

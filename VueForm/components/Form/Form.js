@@ -199,7 +199,7 @@ export default {
       const [name] = this.store.allErrorsFields
       const elementId = passedElementId || name
 
-      const elementByName = document.querySelector(`[name=${elementId}]`)
+      const [elementByName] = document.getElementsByName(elementId)
       const elementById = document.getElementById(elementId)
 
       if (/WebKit/.test(navigator.userAgent)) {
