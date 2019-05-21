@@ -94,6 +94,8 @@ export const VueFormStoreParams = {
 
       if (!has(vm.state, name)) {
         setValue(validators)(value)
+      } else {
+        setError(validators)()
       }
 
       return {

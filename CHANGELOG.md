@@ -1,3 +1,9 @@
+## 5.0.1
+
+### Added
+
+- Validation on register for existing value in store
+
 ## 5.0.0
 
 ### Breaking changes
