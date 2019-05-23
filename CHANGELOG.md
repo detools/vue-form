@@ -1,3 +1,9 @@
+## 5.0.2
+
+### Added
+
+- Ability to pass `disabled` prop to `<Select />` `<Option />`
+
 ## 5.0.1
 
 ### Added

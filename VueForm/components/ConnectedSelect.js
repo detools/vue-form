@@ -90,7 +90,7 @@ const ConnectedSelect = {
     generateOptions(option) {
       const { valueKey, labelKey } = this
 
-      let { [valueKey]: optionValue, [labelKey]: optionLabel } = option
+      let { [valueKey]: optionValue, [labelKey]: optionLabel, disabled } = option
 
       if (isFunction(valueKey)) {
         optionValue = valueKey(option)
@@ -103,9 +103,12 @@ const ConnectedSelect = {
       if (isNil(optionLabel)) {
         optionValue = option
         optionLabel = option
+        disabled = false
       }
 
-      return <Option key={optionValue} label={optionLabel} value={optionValue} />
+      return (
+        <Option key={optionValue} label={optionLabel} value={optionValue} disabled={disabled} />
+      )
     },
 
     handleFieldBlur(...args) {
