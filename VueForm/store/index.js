@@ -1,5 +1,17 @@
 import Vue from 'vue'
-import { union, without, has, isNil, noop, isFunction, mapValues, merge, get, set } from 'lodash'
+import {
+  union,
+  without,
+  has,
+  isNil,
+  noop,
+  isFunction,
+  mapValues,
+  merge,
+  get,
+  set,
+  cloneDeep,
+} from 'lodash'
 import { validate, asyncValidate } from '../validators/validate'
 import isValid from '../utils/isValid'
 import CONSTANTS from '../constants'
@@ -286,7 +298,7 @@ export const VueFormStoreParams = {
         this.removeFormFieldErrors(name)
 
         if (!isNil(initialValue)) {
-          return initialValue
+          return Array.isArray(initialValue) ? cloneDeep(initialValue) : initialValue
         }
 
         // Array that does not have formLevel value
