@@ -77,7 +77,7 @@ export const VueFormStoreParams = {
   methods: {
     // ON MOUNT FORM START
     setInitialValues(initialValues) {
-      this.props.initialValues = initialValues
+      this.props.initialValues = JSON.parse(JSON.stringify(initialValues))
     },
 
     setHandleModelChange(handleModelChange) {

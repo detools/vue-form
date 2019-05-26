@@ -1,3 +1,9 @@
+## 5.0.4
+
+### Fixed
+
+- Array fields of initial values now doing deepClone instead a reference
+
 ## 5.0.3
 
 ### Fixed
