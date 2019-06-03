@@ -82,6 +82,13 @@ const ConnectedSelect = {
     formItem: Boolean,
     labelWidth: String,
     required: Boolean,
+
+    /* Detached Store Props */
+    detached: {
+      type: Boolean,
+      default: false,
+    },
+    initialValues: Object,
   },
 
   mixins: [ConnectedSelectMixin],

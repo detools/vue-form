@@ -78,6 +78,8 @@ export const VueFormStoreParams = {
     // ON MOUNT FORM START
     setInitialValues(initialValues) {
       this.props.initialValues = JSON.parse(JSON.stringify(initialValues))
+
+      return this
     },
 
     setHandleModelChange(handleModelChange) {
@@ -311,6 +313,10 @@ export const VueFormStoreParams = {
       })
 
       this.$emit(CONSTANTS.VUE_FORM_REINITIALIZE, this.state)
+    },
+
+    creatDetached(initialValues) {
+      return new Vue(VueFormStoreParams).setInitialValues(initialValues).registerFormControl
     },
   },
 }

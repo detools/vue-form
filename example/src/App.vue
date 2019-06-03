@@ -20,9 +20,9 @@ export default {
         'SyncValidationForm',
         'AllValidationsForm',
         'ArrayFieldForm',
-        'AutocompleteForm',
         'UploadForm',
         'DynamicValidatorsForm',
+        'DetachedForm',
       ],
     }
   },

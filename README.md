@@ -63,7 +63,6 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Available Connected Components
 
-- [Autocomplete](/VueForm/components/ConnectedAutocomplete.js)
 - [Checkbox](/VueForm/components/ConnectedCheckbox.js)
 - [CheckboxGroup](/VueForm/components/ConnectedCheckboxGroup.js)
 - [DatePicker](/VueForm/components/ConnectedDatePicker.js)
@@ -81,6 +80,7 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Changelog
 
+- [5.1.0](/CHANGELOG.md#510)
 - [5.0.4](/CHANGELOG.md#504)
 - [5.0.3](/CHANGELOG.md#503)
 - [5.0.2](/CHANGELOG.md#502)

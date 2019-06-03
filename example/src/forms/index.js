@@ -8,9 +8,9 @@ import ImmediateForm from './ImmediateForm'
 import SyncValidationForm from './SyncValidationForm'
 import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
-import AutocompleteForm from './AutocompleteForm'
 import UploadForm from './UploadForm'
 import DynamicValidatorsForm from './DynamicValidatorsForm'
+import DetachedForm from './DetachedForm'
 
 Vue.use(Router)
 
@@ -52,11 +52,6 @@ const routes = [
     path: '/array-field-form',
   },
   {
-    name: 'AutocompleteForm',
-    component: AutocompleteForm,
-    path: '/autocomplete-form',
-  },
-  {
     name: 'UploadForm',
     component: UploadForm,
     path: '/upload-form',
@@ -65,6 +60,11 @@ const routes = [
     name: 'DynamicValidatorsForm',
     component: DynamicValidatorsForm,
     path: '/dynamic-validators-form',
+  },
+  {
+    name: 'DetachedForm',
+    component: DetachedForm,
+    path: '/detached-form',
   },
 ]
 

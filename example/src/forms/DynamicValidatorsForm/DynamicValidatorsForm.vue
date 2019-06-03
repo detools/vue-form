@@ -1,7 +1,6 @@
 <script>
 import Form, { Input, Checkbox, Notification, ArrayField, validators } from '@detools/vue-form'
 import InfiniteInput from '@/components/InfiniteInput'
-import InfiniteAutocomplete from '@/components/InfiniteAutocomplete'
 
 export default {
   data() {
@@ -77,11 +76,6 @@ export default {
               validators={[validators.length({ min: 8 })]}
             />
             <ArrayField name="inputs" renderField={InfiniteInput} />
-            <ArrayField
-              name="autocompleteIds"
-              renderField={InfiniteAutocomplete}
-              options={this.initialValues.autocomplete}
-            />
             <Input formItem name="url" placeholder="Url" validators={[validators.url()]} />
             <Input
               formItem

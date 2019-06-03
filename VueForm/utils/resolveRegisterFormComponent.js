@@ -1,7 +1,12 @@
 import isNil from 'lodash/isNil'
 import CONSTANTS from '../constants'
+import store from '../store'
 
 export default function resolveRegisterFormComponent(formComponent) {
+  if (formComponent.detached) {
+    return store.creatDetached(formComponent.initialValues)
+  }
+
   let parent = formComponent.$parent
   let resolver = null
 

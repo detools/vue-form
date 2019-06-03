@@ -1,3 +1,9 @@
+## 5.1.0
+
+### Added
+
+- Initial solution to use `vue-form` without `<Form />` wrapper
+
 ## 5.0.4
 
 ### Fixed
