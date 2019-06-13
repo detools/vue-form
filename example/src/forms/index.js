@@ -10,7 +10,6 @@ import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
 import UploadForm from './UploadForm'
 import DynamicValidatorsForm from './DynamicValidatorsForm'
-import DetachedForm from './DetachedForm'
 
 Vue.use(Router)
 
@@ -60,11 +59,6 @@ const routes = [
     name: 'DynamicValidatorsForm',
     component: DynamicValidatorsForm,
     path: '/dynamic-validators-form',
-  },
-  {
-    name: 'DetachedForm',
-    component: DetachedForm,
-    path: '/detached-form',
   },
 ]
 

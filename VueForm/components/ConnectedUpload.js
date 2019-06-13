@@ -117,12 +117,6 @@ const ConnectedUpload = {
     trigger: [Function, Object],
     tip: [Function, Object],
 
-    // FormItem Props
-    label: [String, Boolean],
-    formItem: Boolean,
-    labelWidth: String,
-    required: Boolean,
-
     // vue-form Props
     validators: Array,
     asyncValidators: Array,

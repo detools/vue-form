@@ -42,9 +42,6 @@ const ConnectedCheckbox = {
     },
 
     /* FormItem Props */
-    formItem: Boolean,
-    labelWidth: String,
-    required: Boolean,
     omitFormItemLabel: {
       type: Boolean,
       default: true,

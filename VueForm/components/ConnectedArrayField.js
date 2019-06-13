@@ -23,12 +23,6 @@ export default {
       type: [Function, Object],
       required: true,
     },
-
-    /* FormItem Props */
-    formItem: Boolean,
-    label: [String, Boolean],
-    labelWidth: String,
-    required: Boolean,
   },
 
   mixins: [ConnectedArrayFieldMixin],

@@ -8,8 +8,20 @@ import get from 'lodash/get'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import isComponentPartOfArrayField from '../utils/isComponentPartOfArrayField'
 import FormItem from '../components/ConnectedFormItem'
+import VueFormItem from '../components/VueFormItem'
 
 const ConnectedControlMixin = {
+  props: {
+    /* FormItem Props */
+    formItem: Boolean,
+    label: [String, Boolean],
+    labelWidth: String,
+    required: Boolean,
+
+    /* FormItem Lite Props */
+    formItemLite: Boolean,
+  },
+
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
@@ -102,6 +114,14 @@ const ConnectedControlMixin = {
         <FormItem label={label} label-width={this.labelWidth} error={error} required={required}>
           {this.renderComponent(value, setValue, createElement, initialValue)}
         </FormItem>
+      )
+    }
+
+    if (this.formItemLite) {
+      return (
+        <VueFormItem label={label} label-width={this.labelWidth} error={error} required={required}>
+          {this.renderComponent(value, setValue, createElement, initialValue)}
+        </VueFormItem>
       )
     }
 

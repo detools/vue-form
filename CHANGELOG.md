@@ -1,3 +1,9 @@
+## 5.2.0
+
+### Added
+
+- `<VueFormItem />` component as lite copy of `<FormItem />`
+
 ## 5.1.0
 
 ### Added

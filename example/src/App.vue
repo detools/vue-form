@@ -22,7 +22,6 @@ export default {
         'ArrayFieldForm',
         'UploadForm',
         'DynamicValidatorsForm',
-        'DetachedForm',
       ],
     }
   },

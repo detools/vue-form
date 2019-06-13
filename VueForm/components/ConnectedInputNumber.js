@@ -48,19 +48,6 @@ const ConnectedInputNumber = {
       type: Function,
       default: noop,
     },
-
-    /* FormItem Props */
-    label: [String, Boolean],
-    formItem: Boolean,
-    labelWidth: String,
-    required: Boolean,
-
-    /* Detached Store Props */
-    detached: {
-      type: Boolean,
-      default: false,
-    },
-    initialValues: Object,
   },
 
   mixins: [ConnectedControlMixin],
