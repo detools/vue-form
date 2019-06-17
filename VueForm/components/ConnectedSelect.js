@@ -133,7 +133,6 @@ const ConnectedSelect = {
           value={value}
           multiple={this.multiple}
           disabled={this.isFieldDisabled}
-          value-key={this.valueKey}
           size={this.controlSize}
           clearable={this.clearable}
           collapse-tags={this.collapseTags}

@@ -1,3 +1,9 @@
+## 5.2.1
+
+### Updated
+
+- Do not pass `valueKey` prop to `<UISelect />`
+
 ## 5.2.0
 
 ### Added
