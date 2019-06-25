@@ -175,7 +175,7 @@ export default {
       return nextArray
     },
 
-    renderComponent(value, setValue, createElement) {
+    renderComponent(value, setValue, createElement, initialValue, required) {
       const props = {
         data: value,
         fields: this.fields,
@@ -183,6 +183,7 @@ export default {
         extra: this.$attrs,
         setValue: this.setValue,
         label: this.label,
+        required,
       }
 
       if (isFunction(this.renderField)) {

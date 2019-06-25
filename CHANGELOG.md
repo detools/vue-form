@@ -1,3 +1,9 @@
+## 5.2.2
+
+### Added
+
+- prop `required` as 5th argument to `renderComponent` method
+
 ## 5.2.1
 
 ### Updated

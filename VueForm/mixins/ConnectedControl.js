@@ -112,7 +112,7 @@ const ConnectedControlMixin = {
     if (this.formItem) {
       return (
         <FormItem label={label} label-width={this.labelWidth} error={error} required={required}>
-          {this.renderComponent(value, setValue, createElement, initialValue)}
+          {this.renderComponent(value, setValue, createElement, initialValue, required)}
         </FormItem>
       )
     }
@@ -120,12 +120,12 @@ const ConnectedControlMixin = {
     if (this.formItemLite) {
       return (
         <VueFormItem label={label} label-width={this.labelWidth} error={error} required={required}>
-          {this.renderComponent(value, setValue, createElement, initialValue)}
+          {this.renderComponent(value, setValue, createElement, initialValue, required)}
         </VueFormItem>
       )
     }
 
-    return this.renderComponent(value, setValue, createElement, initialValue)
+    return this.renderComponent(value, setValue, createElement, initialValue, required)
   },
 }
 
