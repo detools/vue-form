@@ -115,8 +115,6 @@ const ConnectedSelect = {
 
     generateOptions({ groupLabel, options, ...option }) {
       if (groupLabel && options) {
-        console.log(groupLabel)
-
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>
             {options.map(this.generateOption)}

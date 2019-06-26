@@ -1,3 +1,9 @@
+## 5.3.1
+
+### Fixed
+
+- Removed unnecessary `console.log`
+
 ## 5.3.0
 
 ### Added
