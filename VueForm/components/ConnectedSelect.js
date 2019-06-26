@@ -1,5 +1,6 @@
 import Select from 'element-ui/lib/select'
 import Option from 'element-ui/lib/option'
+import OptionGroup from 'element-ui/lib/option-group'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import isFunction from 'lodash/isFunction'
@@ -88,7 +89,7 @@ const ConnectedSelect = {
   mixins: [ConnectedSelectMixin],
 
   methods: {
-    generateOptions(option) {
+    generateOption(option) {
       const { valueKey, labelKey } = this
 
       let { [valueKey]: optionValue, [labelKey]: optionLabel, disabled } = option
@@ -110,6 +111,20 @@ const ConnectedSelect = {
       return (
         <Option key={optionValue} label={optionLabel} value={optionValue} disabled={disabled} />
       )
+    },
+
+    generateOptions({ groupLabel, options, ...option }) {
+      if (groupLabel && options) {
+        console.log(groupLabel)
+
+        return (
+          <OptionGroup key={groupLabel} label={groupLabel}>
+            {options.map(this.generateOption)}
+          </OptionGroup>
+        )
+      }
+
+      return this.generateOption(option)
     },
 
     handleFieldBlur(...args) {

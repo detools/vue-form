@@ -1,3 +1,10 @@
+## 5.3.0
+
+### Added
+
+- Support for `<OptionGroup />` for `<Select />` component
+- You need to pass an object contains properties `groupLabel` and `options` to generate `<OptionGroup />`
+
 ## 5.2.3
 
 ### Added
