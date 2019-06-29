@@ -1,3 +1,9 @@
+## 5.3.2
+
+### Fixed
+
+- Prop Type for `reserveKeyword` on `<Select />`
+
 ## 5.3.1
 
 ### Fixed

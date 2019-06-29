@@ -55,7 +55,7 @@ const ConnectedSelect = {
     loadingText: String,
     noMatchText: String,
     noDataText: String,
-    reserveKeyword: String,
+    reserveKeyword: Boolean,
     defaultFirstOption: Boolean,
     popperAppendToBody: Boolean,
     automaticDropdown: Boolean,
