@@ -54,6 +54,11 @@ const ConnectedInput = {
       default: noop,
     },
 
+    handleClear: {
+      type: Function,
+      default: noop,
+    },
+
     /* Detached Store Props */
     detached: {
       type: Boolean,
@@ -94,7 +99,8 @@ const ConnectedInput = {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleFieldChange}>
+          on-change={this.handleFieldChange}
+          on-clear={this.handleClear}>
           {Boolean(this.append) && <template slot="append">{this.append}</template>}
           {Boolean(this.prepend) && <template slot="prepend">{this.prepend}</template>}
         </Input>

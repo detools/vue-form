@@ -78,6 +78,11 @@ const ConnectedSelect = {
       default: noop,
     },
 
+    handleClear: {
+      type: Function,
+      default: noop,
+    },
+
     /* Detached Store Props */
     detached: {
       type: Boolean,
@@ -168,7 +173,8 @@ const ConnectedSelect = {
           on-input={setValue}
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
-          on-change={this.handleFieldChange}>
+          on-change={this.handleFieldChange}
+          on-clear={this.handleClear}>
           {this.options.map(this.generateOptions)}
         </Select>
       )

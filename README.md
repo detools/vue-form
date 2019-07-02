@@ -80,6 +80,7 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Changelog
 
+- [5.4.0](/CHANGELOG.md#540)
 - [5.3.2](/CHANGELOG.md#532)
 - [5.3.1](/CHANGELOG.md#531)
 - [5.3.0](/CHANGELOG.md#530)

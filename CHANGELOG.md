@@ -1,3 +1,9 @@
+## 5.4.0
+
+### Added
+
+- Support for `handleClear` method for `<DatePicker />`, `<Input />`, `<Select />`, `<TimePicker />`
+
 ## 5.3.2
 
 ### Fixed

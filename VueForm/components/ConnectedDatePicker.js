@@ -59,7 +59,7 @@ const ConnectedDatePicker = {
     type: String,
     format: {
       type: String,
-      default: () => 'M/d/yyyy',
+      default: 'M/d/yyyy',
     },
     align: String,
     popperClass: String,
@@ -69,7 +69,7 @@ const ConnectedDatePicker = {
     defaultTime: String,
     valueFormat: {
       type: String,
-      default: () => 'M/d/yyyy',
+      default: 'M/d/yyyy',
     },
     unlinkPanels: Boolean,
     prefixIcon: String,
@@ -89,6 +89,11 @@ const ConnectedDatePicker = {
     },
 
     handleChange: {
+      type: Function,
+      default: noop,
+    },
+
+    handleClear: {
       type: Function,
       default: noop,
     },
@@ -127,6 +132,7 @@ const ConnectedDatePicker = {
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
           on-change={this.handleFieldChange}
+          on-clear={this.handleClear}
         />
       )
     },

@@ -50,6 +50,11 @@ const ConnectedTimePicker = {
       type: Function,
       default: noop,
     },
+
+    handleClear: {
+      type: Function,
+      default: noop,
+    },
   },
 
   mixins: [ConnectedControlMixin],
@@ -83,6 +88,7 @@ const ConnectedTimePicker = {
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
           on-change={this.handleFieldChange}
+          on-clear={this.handleClear}
         />
       )
     },
