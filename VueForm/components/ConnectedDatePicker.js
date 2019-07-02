@@ -1,5 +1,6 @@
 import DatePicker from 'element-ui/lib/date-picker'
 import noop from 'lodash/noop'
+import get from 'lodash/get'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 /**
@@ -101,13 +102,35 @@ const ConnectedDatePicker = {
 
   mixins: [ConnectedControlMixin],
 
+  updated() {
+    if (!this.picker) {
+      this.picker = get(this.$refs, 'datepicker.picker')
+      if (this.picker) {
+        this.picker.$on('pick', this.handleFieldClear)
+      }
+    }
+  },
+
+  beforeUnmount() {
+    if (this.picker) {
+      this.picker.$off('pick', this.handleFieldClear)
+    }
+  },
+
   methods: {
+    handleFieldClear(value) {
+      if (value === null) {
+        this.handleClear()
+      }
+    },
+
     renderComponent(value, setValue) {
       return (
         <DatePicker
           class={this.class}
           name={this.name}
           value={value}
+          ref="datepicker"
           readonly={this.readonly}
           disabled={this.isFieldDisabled}
           size={this.controlSize}
@@ -132,7 +155,7 @@ const ConnectedDatePicker = {
           on-focus={this.handleFocus}
           on-blur={this.handleFieldBlur}
           on-change={this.handleFieldChange}
-          on-clear={this.handleClear}
+          on-pick={this.handleFieldClear}
         />
       )
     },

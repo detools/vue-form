@@ -1,3 +1,9 @@
+## 5.4.1
+
+### Fixed
+
+- `<DatePicker />` doesn't support `on-clear` by default — fixed.
+
 ## 5.4.0
 
 ### Added
