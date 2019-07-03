@@ -11,12 +11,12 @@ const ConnectedCheckbox = {
 
     value: {
       type: Boolean,
-      default: () => false,
+      default: false,
     },
 
     label: [String, Boolean],
-    trueLabel: String,
-    falseLabel: String,
+    trueLabel: [String, Number],
+    falseLabel: [String, Number],
     disabled: Boolean,
     border: Boolean,
     size: String,

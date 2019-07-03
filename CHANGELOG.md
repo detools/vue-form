@@ -1,3 +1,9 @@
+## 5.4.2
+
+### Added
+
+- Second type for `trueLabel` and `falseLabel` — Number
+
 ## 5.4.1
 
 ### Fixed
