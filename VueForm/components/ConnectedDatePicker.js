@@ -70,7 +70,7 @@ const ConnectedDatePicker = {
     defaultTime: String,
     valueFormat: {
       type: String,
-      default: 'M/d/yyyy',
+      default: 'yyyy-MM-dd',
     },
     unlinkPanels: Boolean,
     prefixIcon: String,

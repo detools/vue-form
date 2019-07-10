@@ -1,3 +1,9 @@
+## 5.4.3
+
+### Changed
+
+- `DatePicker` value format from `M/d/yyyy` to `yyyy-MM-dd`
+
 ## 5.4.2
 
 ### Added
