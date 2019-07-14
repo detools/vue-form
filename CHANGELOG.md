@@ -1,3 +1,9 @@
+## 5.4.4
+
+### Updated
+
+- Dependencies
+
 ## 5.4.3
 
 ### Changed
