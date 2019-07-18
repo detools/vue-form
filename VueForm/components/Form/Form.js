@@ -41,7 +41,7 @@ export default {
 
   computed: {
     isSubmitButtonDisabled() {
-      return this.store.isDisabled || !this.store.isValid
+      return this.store.isDisabled || !this.store.isValid || !!this.disabled
     },
 
     submitButtonType() {

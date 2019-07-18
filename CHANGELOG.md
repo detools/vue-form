@@ -1,3 +1,9 @@
+## 5.4.5
+
+### Updated
+
+- Now submit button will be disabled if some form level validations are failed
+
 ## 5.4.4
 
 ### Updated
