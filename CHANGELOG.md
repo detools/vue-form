@@ -1,3 +1,9 @@
+## 5.4.7
+
+### Updated
+
+- zIndex for fixed buttons container
+
 ## 5.4.6
 
 ### Updated
