@@ -308,6 +308,7 @@ export default {
           allButtonsDisabled: this.store.isDisabled,
           isSubmitButtonDisabled: this.isSubmitButtonDisabled,
           submitButtonClassName: this.submitButtonClassName,
+          submitting: this.store.form.submitting,
           handleSubmit: this.nativeOnSubmit,
           handleCancel: this.nativeOnReset,
         })

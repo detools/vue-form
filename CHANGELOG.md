@@ -1,3 +1,9 @@
+## 5.5.1
+
+### Added
+
+- Pass `submitting` state to `scopedSlot`
+
 ## 5.5.0
 
 ### Added
