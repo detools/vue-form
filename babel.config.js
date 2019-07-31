@@ -18,4 +18,9 @@ module.exports = {
     'babel-plugin-vue-jsx-sync',
     'babel-plugin-jsx-v-model',
   ].map(getRealPaths),
+  env: {
+    test: {
+      presets: [require.resolve('@babel/preset-env')],
+    },
+  },
 }
