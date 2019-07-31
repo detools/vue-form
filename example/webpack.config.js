@@ -37,6 +37,10 @@ const productionPlugins = [
 module.exports = {
   mode: 'development',
 
+  // cheap-module-eval-source-map — original source (lines only) (rebuild faster)
+  // eval-source-map — original source
+  devtool: 'cheap-module-eval-source-map',
+
   entry: path.resolve(PATH_TO_SRC, 'index.js'),
 
   output: {
@@ -119,9 +123,11 @@ module.exports = {
         secure: false,
       },
     },
-    compress: true, // enable gzip compression
+    compress: false, // enable gzip compression
     historyApiFallback: true, // true for index.html upon 404, object for multiple paths
     https: false, // true for self-signed, object for cert authority
     noInfo: false, // only errors & warns on hot reload
+    clientLogLevel: 'error',
+    disableHostCheck: true,
   },
 }

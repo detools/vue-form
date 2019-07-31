@@ -22,6 +22,7 @@ export default {
         'ArrayFieldForm',
         'UploadForm',
         'DynamicValidatorsForm',
+        'ScopedSlotForm',
       ],
     }
   },

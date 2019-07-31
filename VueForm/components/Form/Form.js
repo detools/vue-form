@@ -10,14 +10,14 @@ import {
   isNil,
 } from 'lodash'
 import Form from 'element-ui/lib/form'
-import Button from 'element-ui/lib/button'
 import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
-import FormItem from '../ConnectedFormItem'
-import Notification from '../Notification'
-import Popover from '../Popover'
 import props, { BUTTONS_POSITION } from './props'
 import styles from './styles'
+import FormItem from '../ConnectedFormItem'
+import Button from '../Button'
+import Notification from '../Notification'
+import Popover from '../Popover'
 
 export default {
   props,
@@ -46,6 +46,15 @@ export default {
 
     submitButtonType() {
       return this.save ? 'danger' : 'primary'
+    },
+
+    submitButtonClassName() {
+      return [
+        `el-button--${this.submitButtonType}`,
+        {
+          'is-disabled': this.isSubmitButtonDisabled,
+        },
+      ]
     },
 
     buttons() {
@@ -226,12 +235,7 @@ export default {
     renderPlainSubmitButton() {
       return (
         <Button
-          class={[
-            `el-button--${this.submitButtonType}`,
-            {
-              'is-disabled': this.isSubmitButtonDisabled,
-            },
-          ]}
+          class={this.submitButtonClassName}
           type={this.submitButtonType}
           nativeType={!this.save ? 'submit' : undefined}
           on-click={this.nativeOnSubmit}>
@@ -293,6 +297,24 @@ export default {
 
       return this.renderPlainButtons()
     },
+
+    renderFormContent() {
+      if (this.$slots.default) {
+        return this.$slots.default
+      }
+
+      if (this.$scopedSlots.default) {
+        return this.$scopedSlots.default({
+          allButtonsDisabled: this.store.isDisabled,
+          isSubmitButtonDisabled: this.isSubmitButtonDisabled,
+          submitButtonClassName: this.submitButtonClassName,
+          handleSubmit: this.nativeOnSubmit,
+          handleCancel: this.nativeOnReset,
+        })
+      }
+
+      return null
+    },
   },
 
   beforeDestroy() {
@@ -309,7 +331,7 @@ export default {
         status-icon={this.statusIcon}
         nativeOnSubmit={this.nativeOnSubmit}
         nativeOnReset={this.nativeOnReset}>
-        {this.$slots.default}
+        {this.renderFormContent()}
         {this.renderButtons()}
         {this.buttonsSticky && <div style={styles.sticky_placeholder} />}
       </Form>

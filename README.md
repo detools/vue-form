@@ -17,8 +17,9 @@ npm i @detools/vue-form
 ## Usage
 
 ```js
-import { Button } from 'element-ui'
+import { mapActions } from 'vuex'
 import Form, { Input } from '@detools/vue-form'
+import { Button } from 'element-ui'
 
 export default {
   data() {
@@ -28,8 +29,10 @@ export default {
   },
 
   methods: {
+    ...mapActions('cart', ['checkout'])
+
     handleSubmit(values) {
-      this.formValues = values
+      return this.checkout(values)
     },
   },
 
@@ -39,7 +42,7 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form cancel submit labelPosition="top" handleSubmit={this.handleSubmit}>
+            <Form cancel submit labelPosition="top" handleSubmit={this.handleSubmit} v-model={this.formValues>
               <Input formItem label name="username" />
             </Form>
           </div>
@@ -80,6 +83,7 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Changelog
 
+- [5.5.0](/CHANGELOG.md#550)
 - [5.4.7](/CHANGELOG.md#547)
 - [5.4.6](/CHANGELOG.md#546)
 - [5.4.5](/CHANGELOG.md#545)

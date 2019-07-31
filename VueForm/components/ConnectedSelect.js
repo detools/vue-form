@@ -118,7 +118,8 @@ const ConnectedSelect = {
       )
     },
 
-    generateOptions({ groupLabel, options, ...option }) {
+    generateOptions(option) {
+      const { groupLabel, options } = option
       if (groupLabel && options) {
         return (
           <OptionGroup key={groupLabel} label={groupLabel}>

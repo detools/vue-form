@@ -1,3 +1,24 @@
+## 5.5.0
+
+### Added
+
+- Ability to render form content inside [scopedSlot](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots)
+- If you're using this approach you can use available options passed to scopedSlot:
+  - allButtonsDisabled — Boolean
+  - isSubmitButtonDisabled — Boolean
+  - submitButtonClassName — String
+  - handleSubmit — Function
+  - handleCancel — Function
+- Demo — [Scoped Slots Form](https://detools-vue-form.netlify.com/#/scoped-slots-form)
+
+### Updated
+
+- `<Button />` component now not just a plain `element-ui` `<Button />`
+- Now it's my own implementation from main project that I'm working on
+- It automatically handles promises inside `on-click` callback
+- But you should explicitly `return` this promise from handler
+- Button will have a spinner until promise fullfilled
+
 ## 5.4.7
 
 ### Updated

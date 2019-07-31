@@ -1,5 +1,3 @@
-import Button from 'element-ui/lib/button'
-
 import Form from './components/Form'
 import Radio from './components/ConnectedRadio'
 import RadioGroup from './components/ConnectedRadioGroup'
@@ -18,6 +16,7 @@ import FormItem from './components/ConnectedFormItem'
 
 import Notification from './components/Notification'
 import Popover from './components/Popover'
+import Button from './components/Button'
 
 import validators from './validators'
 

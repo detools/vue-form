@@ -10,6 +10,7 @@ import AllValidationsForm from './AllValidationsForm'
 import ArrayFieldForm from './ArrayFieldForm'
 import UploadForm from './UploadForm'
 import DynamicValidatorsForm from './DynamicValidatorsForm'
+import ScopedSlotForm from './ScopedSlotForm'
 
 Vue.use(Router)
 
@@ -59,6 +60,11 @@ const routes = [
     name: 'DynamicValidatorsForm',
     component: DynamicValidatorsForm,
     path: '/dynamic-validators-form',
+  },
+  {
+    name: 'ScopedSlotForm',
+    component: ScopedSlotForm,
+    path: '/scoped-slot-form',
   },
 ]
 

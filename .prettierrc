@@ -1,12 +1,12 @@
 {
   "printWidth": 100,
   "tabWidth": 2,
-  "useTabs": true,
+  "useTabs": false,
   "semi": false,
   "singleQuote": true,
   "trailingComma": "es5",
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
   "arrowParens": "avoid",
-  "parser": "vue"
+  "parser": "babel"
 }
