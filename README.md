@@ -19,7 +19,6 @@ npm i @detools/vue-form
 ```js
 import { mapActions } from 'vuex'
 import Form, { Input } from '@detools/vue-form'
-import { Button } from 'element-ui'
 
 export default {
   data() {
@@ -29,7 +28,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('cart', ['checkout'])
+    ...mapActions('cart', ['checkout']),
 
     handleSubmit(values) {
       return this.checkout(values)
@@ -42,7 +41,7 @@ export default {
         <h1>Basic Form</h1>
         <div class="wrapper">
           <div class="form">
-            <Form cancel submit labelPosition="top" handleSubmit={this.handleSubmit} v-model={this.formValues>
+            <Form cancel submit handleSubmit={this.handleSubmit} v-model={this.formValues}>
               <Input formItem label name="username" />
             </Form>
           </div>
