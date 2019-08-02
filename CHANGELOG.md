@@ -1,3 +1,13 @@
+## 5.6.0
+
+### Added
+
+- `Dirty` state to every form control
+- Show error only for `touched + dirty` controls
+- Added `dirty` state to form at store
+- Pass isDirty to `scopedSlot`
+- Don't do anything on `pristine` state (`!dirty`)
+
 ## 5.5.1
 
 ### Added

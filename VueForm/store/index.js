@@ -38,9 +38,13 @@ export const VueFormStoreParams = {
       // { [fieldName]: true }
       touchedFields: {},
 
+      // { [fieldName]: true }
+      dirtyFields: {},
+
       form: {
         submitting: false,
         validating: false,
+        dirty: false,
       },
 
       props: {
@@ -60,9 +64,9 @@ export const VueFormStoreParams = {
     },
 
     isDisabled() {
-      const { submitting, validating } = this.form
+      const { submitting, validating, dirty } = this.form
 
-      return submitting || validating
+      return submitting || validating || !dirty
     },
 
     allErrors() {
@@ -102,6 +106,7 @@ export const VueFormStoreParams = {
       const cleanFormValue = vm.createCleanFormValue(name)
       const validateOnReinitialize = vm.createValidateOnReinitialize(name)
       const setTouched = vm.createSetTouched(name)
+      const setDirty = vm.createSetDirty(name)
 
       const formLevelInitialValue = get(vm.props.initialValues, name)
       const value = !isNil(formLevelInitialValue) ? formLevelInitialValue : fieldLevelInitialValue
@@ -118,20 +123,22 @@ export const VueFormStoreParams = {
         cleanFormValue,
         validateOnReinitialize,
         setTouched,
+        setDirty,
         isComponentPartOfArrayField,
         asyncValidations: vm.asyncValidations,
         useState: syncValidators => {
           const isFieldTouched = vm.touchedFields[name]
+          const isFieldDirty = vm.dirtyFields[name]
 
           return [
             // Current value
             get(vm.state, name),
 
             // Value handler — setValue
-            setValue(syncValidators),
+            setValue(syncValidators, setDirty),
 
             // Current error
-            isFieldTouched && vm.allErrors[name],
+            isFieldTouched && isFieldDirty && vm.allErrors[name],
 
             // Touched indicator
             isFieldTouched,
@@ -160,9 +167,14 @@ export const VueFormStoreParams = {
     },
 
     removeFormFieldErrors(name) {
+      // Control Level
       this.$delete(this.syncErrors, name)
       this.$delete(this.asyncErrors, name)
       this.$delete(this.touchedFields, name)
+      this.$delete(this.dirtyFields, name)
+
+      // Form Level
+      this.form.dirty = Boolean(Object.keys(this.dirtyFields).length)
     },
 
     addFormSyncErrors(syncErrors) {
@@ -212,7 +224,7 @@ export const VueFormStoreParams = {
     createSetValue(name, setError) {
       const vm = this
 
-      return validators => nextValue => {
+      return (validators, setDirty) => nextValue => {
         const useLodashSet = /[[]/.test(name)
 
         if (!useLodashSet) {
@@ -228,6 +240,11 @@ export const VueFormStoreParams = {
 
         if (isFunction(vm.props.handleModelChange)) {
           vm.props.handleModelChange(vm.state)
+        }
+
+        // setDirty passed only for setValue for Control
+        if (setDirty) {
+          setDirty()
         }
 
         setError(validators)(nextValue)
@@ -247,6 +264,15 @@ export const VueFormStoreParams = {
 
       return () => {
         vm.$set(vm.touchedFields, name, true)
+      }
+    },
+
+    createSetDirty(name) {
+      const vm = this
+
+      return () => {
+        vm.$set(vm.dirtyFields, name, true)
+        vm.$set(this.form, 'dirty', true)
       }
     },
 
@@ -283,7 +309,10 @@ export const VueFormStoreParams = {
     },
 
     manageTouchedFieldsState() {
-      this.touchedFields = this.formFields.reduce((memo, name) => ({ ...memo, [name]: true }), {})
+      const fields = this.formFields.reduce((memo, name) => ({ ...memo, [name]: true }), {})
+
+      this.touchedFields = fields
+      this.dirtyFields = fields
     },
 
     resetValues() {

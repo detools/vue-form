@@ -132,11 +132,12 @@ const ConnectedSelect = {
     },
 
     handleFieldBlur(...args) {
+      this.setTouched()
       this.handleBlur(...args)
     },
 
     handleFieldChange(...args) {
-      this.setTouched()
+      this.setDirty()
       this.handleChange(...args)
 
       return this.setAsyncError(this.asyncValidators)()

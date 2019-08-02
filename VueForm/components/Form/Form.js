@@ -98,7 +98,7 @@ export default {
       event.preventDefault()
 
       // Just don't do anything — some form process in progress
-      if (this.store.form.submitting) {
+      if (this.store.form.submitting || !this.store.form.dirty) {
         return false
       }
 
@@ -309,6 +309,7 @@ export default {
           isSubmitButtonDisabled: this.isSubmitButtonDisabled,
           submitButtonClassName: this.submitButtonClassName,
           submitting: this.store.form.submitting,
+          isDirty: this.store.form.dirty,
           handleSubmit: this.nativeOnSubmit,
           handleCancel: this.nativeOnReset,
         })

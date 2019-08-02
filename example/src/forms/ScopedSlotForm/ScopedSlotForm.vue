@@ -1,5 +1,5 @@
 <script>
-import Form, { Input, Button, validators } from '@detools/vue-form'
+import Form, { Input, Select, Button, validators } from '@detools/vue-form'
 
 const pause = (ms = 2000) => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -24,9 +24,25 @@ export default {
             formItem
             name="username"
             label="Username"
-            validators={[validators.isRequired('Username is required')]}
+            // validators={[validators.isRequired('Username is required')]}
           />
-          <Button on-click={handleCancel}>Cancel</Button>
+          <Select
+            formItem
+            clearable
+            filterable
+            popperAppendToBody
+            name="os"
+            label="OS"
+            options={[
+              { id: 1, name: 'Windows' },
+              { id: 2, name: 'Linux' },
+              { id: 3, name: 'macOS' },
+            ]}
+            // validators={[validators.isRequired('OS is required')]}
+          />
+          <Button on-click={handleCancel} disabled={allButtonsDisabled}>
+            Cancel
+          </Button>
           <Button type="primary" class={submitButtonClassName} on-click={handleSubmit}>
             Submit
           </Button>
@@ -42,6 +58,9 @@ export default {
         <div class="wrapper">
           <div class="form">
             <Form
+              labelSuffix=":"
+              labelWidth="90px"
+              labelPosition="left"
               v-model={this.formValues}
               handleSubmit={this.handleSubmit}
               scopedSlots={{ default: this.renderFormContent }}

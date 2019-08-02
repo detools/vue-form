@@ -85,7 +85,6 @@ const ConnectedControlMixin = {
     },
 
     handleFieldChange(...args) {
-      this.setTouched()
       this.handleChange(...args)
     },
   },

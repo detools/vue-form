@@ -170,6 +170,7 @@ const ConnectedUpload = {
 
     handleFieldRemove(...args) {
       this.setTouched()
+      this.setDirty()
 
       this.handleRemove(...args).then(() => {
         const [value, setValue] = this.state
@@ -188,6 +189,7 @@ const ConnectedUpload = {
 
     handleFieldSuccess(response, file, fileList) {
       this.setTouched()
+      this.setDirty()
 
       this.handleSuccess(response, file, fileList)
 
