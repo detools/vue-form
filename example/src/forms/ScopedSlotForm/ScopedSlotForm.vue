@@ -24,7 +24,7 @@ export default {
             formItem
             name="username"
             label="Username"
-            // validators={[validators.isRequired('Username is required')]}
+            validators={[validators.isRequired('Username is required')]}
           />
           <Select
             formItem
@@ -38,7 +38,7 @@ export default {
               { id: 2, name: 'Linux' },
               { id: 3, name: 'macOS' },
             ]}
-            // validators={[validators.isRequired('OS is required')]}
+            validators={[validators.isRequired('OS is required')]}
           />
           <Button on-click={handleCancel} disabled={allButtonsDisabled}>
             Cancel

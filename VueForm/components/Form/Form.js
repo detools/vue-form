@@ -44,6 +44,12 @@ export default {
       return this.store.isDisabled || !this.store.isValid || !!this.disabled
     },
 
+    allButtonsDisabled() {
+      const { submitting, validating } = this.store.form
+
+      return submitting || validating
+    },
+
     submitButtonType() {
       return this.save ? 'danger' : 'primary'
     },
@@ -98,7 +104,7 @@ export default {
       event.preventDefault()
 
       // Just don't do anything — some form process in progress
-      if (this.store.form.submitting || !this.store.form.dirty) {
+      if (this.store.isDisabled) {
         return false
       }
 
@@ -305,11 +311,12 @@ export default {
 
       if (this.$scopedSlots.default) {
         return this.$scopedSlots.default({
-          allButtonsDisabled: this.store.isDisabled,
+          allButtonsDisabled: this.allButtonsDisabled,
           isSubmitButtonDisabled: this.isSubmitButtonDisabled,
           submitButtonClassName: this.submitButtonClassName,
           submitting: this.store.form.submitting,
-          isDirty: this.store.form.dirty,
+          validating: this.store.form.validating,
+          dirty: this.store.form.dirty,
           handleSubmit: this.nativeOnSubmit,
           handleCancel: this.nativeOnReset,
         })

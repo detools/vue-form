@@ -11,6 +11,7 @@ import ArrayFieldForm from './ArrayFieldForm'
 import UploadForm from './UploadForm'
 import DynamicValidatorsForm from './DynamicValidatorsForm'
 import ScopedSlotForm from './ScopedSlotForm'
+import NoFieldsForm from './NoFieldsForm'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ const routes = [
     name: 'ScopedSlotForm',
     component: ScopedSlotForm,
     path: '/scoped-slot-form',
+  },
+  {
+    name: 'NoFieldsForm',
+    component: NoFieldsForm,
+    path: '/no-fields-form',
   },
 ]
 

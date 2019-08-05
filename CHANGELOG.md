@@ -1,3 +1,10 @@
+## 5.6.1
+
+### Updated
+
+- scopedSlot prop `isDirty` => `dirty`
+- [NoFieldsForm](https://detools-vue-form.netlify.com/#/no-fields-form) no more blocked by `pristine` state
+
 ## 5.6.0
 
 ### Added
