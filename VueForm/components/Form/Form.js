@@ -71,6 +71,18 @@ export default {
       }
     },
 
+    extraButtons() {
+      if (!this.renderExtraButtons) {
+        return null
+      }
+
+      return (
+        <div style="margin-left: 10px; margin-right: 10px">
+          {this.renderExtraButtons(this.allButtonsDisabled)}
+        </div>
+      )
+    },
+
     vueFormButtonsStyles() {
       const overridingStyles = {
         [BUTTONS_POSITION.CENTER]: styles.buttons_center,
@@ -276,18 +288,16 @@ export default {
     },
 
     renderPlainButtons() {
-      const extraButtons = this.renderExtraButtons && this.renderExtraButtons(this.store.isDisabled)
-
       return (
         <div style={this.vueFormButtonsStyles} class={this.buttonsClassName}>
           {this.cancel && (
-            <Button nativeType="reset" disabled={this.store.isDisabled}>
+            <Button nativeType="reset" disabled={this.allButtonsDisabled}>
               {this.buttons.reset}
             </Button>
           )}
-          {extraButtons && <div style="margin-left: 10px; margin-right: 10px">{extraButtons}</div>}
+          {this.extraButtons}
           {this.save && (
-            <Button nativeType="submit" type="primary" disabled={this.store.isDisabled}>
+            <Button nativeType="submit" type="primary" disabled={this.allButtonsDisabled}>
               {this.buttons.save}
             </Button>
           )}

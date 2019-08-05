@@ -1,9 +1,16 @@
+## 5.6.2
+
+### Updated
+
+- Apply `allButtonsDisabled` to internal `Cancel/Save` buttons
+
 ## 5.6.1
 
 ### Updated
 
 - scopedSlot prop `isDirty` => `dirty`
 - [NoFieldsForm](https://detools-vue-form.netlify.com/#/no-fields-form) no more blocked by `pristine` state
+- Update internal value for `allButtonsDisabled`
 
 ## 5.6.0
 
