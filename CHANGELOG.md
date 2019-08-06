@@ -1,3 +1,9 @@
+## 5.6.3
+
+### Fixed
+
+- Sometimes store flag `isDisabled` returned `0` instead of `false`
+
 ## 5.6.2
 
 ### Updated
