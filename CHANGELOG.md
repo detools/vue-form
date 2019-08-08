@@ -1,3 +1,9 @@
+## 5.6.4
+
+### Fixed
+
+- Removed bottom margin for form buttons when position equals `label`
+
 ## 5.6.3
 
 ### Fixed

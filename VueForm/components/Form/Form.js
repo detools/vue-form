@@ -308,7 +308,7 @@ export default {
 
     renderButtons() {
       if (this.buttonsPosition === BUTTONS_POSITION.LABEL) {
-        return <FormItem>{this.renderPlainButtons()}</FormItem>
+        return <FormItem style="margin-bottom: 0">{this.renderPlainButtons()}</FormItem>
       }
 
       return this.renderPlainButtons()
