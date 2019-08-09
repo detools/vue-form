@@ -1,3 +1,9 @@
+## 5.6.5
+
+### Updated
+
+- Do not disable submit button when save is available while form is pristine
+
 ## 5.6.4
 
 ### Fixed

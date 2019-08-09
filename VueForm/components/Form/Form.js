@@ -41,6 +41,10 @@ export default {
 
   computed: {
     isSubmitButtonDisabled() {
+      if (this.save) {
+        return this.allButtonsDisabled
+      }
+
       return this.store.isDisabled || !this.store.isValid || !!this.disabled
     },
 
