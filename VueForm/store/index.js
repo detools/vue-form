@@ -63,10 +63,14 @@ export const VueFormStoreParams = {
       return isValid([this.syncErrors, this.asyncErrors])
     },
 
-    isDisabled() {
-      const { submitting, validating, dirty } = this.form
+    isPristine() {
+      return Boolean(this.formFields.length) && !this.form.dirty
+    },
 
-      return submitting || validating || (Boolean(this.formFields.length) && !dirty)
+    isDisabled() {
+      const { submitting, validating } = this.form
+
+      return submitting || validating
     },
 
     allErrors() {

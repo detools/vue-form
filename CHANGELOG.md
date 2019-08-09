@@ -1,3 +1,9 @@
+## 5.6.6
+
+### Updated
+
+- Store now is not disabled when `isPristine`. Just submit button when `save` is not available
+
 ## 5.6.5
 
 ### Updated

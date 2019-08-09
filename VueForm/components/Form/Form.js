@@ -45,7 +45,9 @@ export default {
         return this.allButtonsDisabled
       }
 
-      return this.store.isDisabled || !this.store.isValid || !!this.disabled
+      return (
+        this.store.isDisabled || this.store.isPristine || !this.store.isValid || !!this.disabled
+      )
     },
 
     allButtonsDisabled() {
