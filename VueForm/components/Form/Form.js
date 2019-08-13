@@ -167,6 +167,11 @@ export default {
         return this.$refs.confirmPopover.show()
       }
 
+      // Last case — pristine
+      if (isSubmitButtonClick && this.isSubmitButtonDisabled) {
+        return false
+      }
+
       const messages = this.messages || {}
 
       function customizer(objValue, srcValue) {

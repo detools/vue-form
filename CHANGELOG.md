@@ -1,3 +1,9 @@
+## 5.6.7
+
+### Updated
+
+- Do not submit pristine form
+
 ## 5.6.6
 
 ### Updated
