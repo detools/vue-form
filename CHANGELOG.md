@@ -1,3 +1,12 @@
+## 5.7.0
+
+### Added
+
+- Sometimes you need to show confirmation popover only when you get a response from server
+- Now you can do it by passing `confirmHandler` property among existing confirm popover properties
+- Just pass your async callback and return from it boolean value
+- `true` will indicate `vue-form` that popover needs to be visible
+
 ## 5.6.7
 
 ### Updated

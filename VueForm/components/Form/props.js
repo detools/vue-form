@@ -70,6 +70,9 @@ const formProps = {
   confirmPlacement: String,
   confirmTrigger: String,
 
+  // Async callback to activate popover
+  confirmHandler: Function,
+
   // Extra buttons between Cancel and Save for now
   renderExtraButtons: Function,
 

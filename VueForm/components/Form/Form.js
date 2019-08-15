@@ -20,6 +20,19 @@ import Notification from '../Notification'
 import Popover from '../Popover'
 
 export default {
+  mergeCustomizer: (objValue, srcValue) => {
+    if (Array.isArray(objValue)) {
+      return srcValue
+    }
+
+    // Mostly handle undefined values that merge do not use
+    if (isNil(srcValue)) {
+      return null
+    }
+
+    return undefined
+  },
+
   props,
 
   beforeMount() {
@@ -118,7 +131,7 @@ export default {
       this.handleDisabled(errors || this.store.allErrors)
     },
 
-    nativeOnSubmit(event, isConfirmSubmit) {
+    async nativeOnSubmit(event, isConfirmSubmit) {
       event.preventDefault()
 
       // Just don't do anything — some form process in progress
@@ -163,8 +176,17 @@ export default {
         return this.handleFormDisabled()
       }
 
+      const formValues = mergeWith(
+        {},
+        omit(this.initialValues, this.store.removedFields),
+        this.store.state,
+        this.$options.mergeCustomizer
+      )
+
       if (!isConfirmSubmit && isSubmitButtonClick && this.confirmMessage) {
-        return this.$refs.confirmPopover.show()
+        if (!this.confirmHandler || (await this.confirmHandler(formValues))) {
+          return this.$refs.confirmPopover.show()
+        }
       }
 
       // Last case — pristine
@@ -172,34 +194,10 @@ export default {
         return false
       }
 
-      const messages = this.messages || {}
-
-      function customizer(objValue, srcValue) {
-        if (Array.isArray(objValue)) {
-          return srcValue
-        }
-
-        // Mostly handle undefined values that merge do not use
-        if (isNil(srcValue)) {
-          return null
-        }
-
-        return undefined
-      }
-
       const off = this.store.manageSubmittingState()
-      const submitForm = () =>
-        Promise.resolve(
-          submitHandler(
-            mergeWith(
-              {},
-              omit(this.initialValues, this.store.removedFields),
-              this.store.state,
-              customizer
-            )
-          )
-        )
+      const submitForm = () => Promise.resolve(submitHandler(formValues))
 
+      const messages = this.messages || {}
       const submitPromise = this.store.form.validating
         ? Promise.all(Object.values(this.store.asyncValidations)).then(submitForm)
         : submitForm()

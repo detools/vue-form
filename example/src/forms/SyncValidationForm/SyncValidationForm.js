@@ -1,5 +1,7 @@
 import Form, { Input } from '@detools/vue-form'
 
+const pause = (ms = 2000) => new Promise(resolve => setTimeout(resolve, ms))
+
 export default {
   data() {
     return {
@@ -8,7 +10,9 @@ export default {
   },
 
   methods: {
-    handleSubmit(values) {
+    async handleSubmit(values) {
+      await pause()
+
       this.formValues = values
     },
 
@@ -29,9 +33,15 @@ export default {
 
       return errors
     },
+
+    confirmHandler() {
+      return pause().then(() => true)
+    },
   },
 
   render() {
+    const confirmMessage = 'There is a confirmation, please click Yes or No'
+
     return (
       <div>
         <h1>Sync Validation Form</h1>
@@ -42,6 +52,11 @@ export default {
               save
               submit
               messages={{ success: 'Username has been saved' }}
+              confirmMessage={confirmMessage}
+              confirmYes="Yes"
+              confirmNo="No"
+              confirmWidth="300px"
+              confirmHandler={this.confirmHandler}
               validate={this.formValidate}
               handleSave={this.handleSave}
               handleSubmit={this.handleSubmit}>
