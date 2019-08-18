@@ -1,3 +1,9 @@
+## 5.7.1
+
+### Updated
+
+- Now `handleFocusToInvalidField` search in particular form to focus field
+
 ## 5.7.0
 
 ### Added

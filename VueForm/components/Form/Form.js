@@ -235,8 +235,13 @@ export default {
       const [name] = this.store.allErrorsFields
       const elementId = passedElementId || name
 
-      const [elementByName] = document.getElementsByName(elementId)
-      const elementById = document.getElementById(elementId)
+      let elementByName = this.$refs.vueFormNode.$el.querySelector(`[name=${elementId}]`)
+      let elementById = this.$refs.vueFormNode.$el.querySelector(`#${elementId}`)
+
+      if (!elementByName && !elementById) {
+        elementByName = document.getElementsByName(elementId)[0]
+        elementById = document.getElementById(elementId)
+      }
 
       if (/WebKit/.test(navigator.userAgent)) {
         if (elementByName) {
@@ -353,6 +358,7 @@ export default {
     return (
       <Form
         novalidate
+        ref="vueFormNode"
         label-width={this.labelWidth}
         label-suffix={this.labelSuffix}
         label-position={this.labelPosition}
