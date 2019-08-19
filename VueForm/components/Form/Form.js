@@ -1,38 +1,17 @@
 import Vue from 'vue'
-import {
-  isBoolean,
-  isEmpty,
-  isEqual,
-  isString,
-  isPlainObject,
-  mergeWith,
-  omit,
-  isNil,
-} from 'lodash'
+import { isBoolean, isEqual } from 'lodash'
 import Form from 'element-ui/lib/form'
 import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
 import props, { BUTTONS_POSITION } from './props'
+import submitHandler from './submitHandler'
+import handleFocusToInvalidField from './handleFocusToInvalidField'
 import styles from './styles'
 import FormItem from '../ConnectedFormItem'
 import Button from '../Button'
-import Notification from '../Notification'
 import Popover from '../Popover'
 
 export default {
-  mergeCustomizer: (objValue, srcValue) => {
-    if (Array.isArray(objValue)) {
-      return srcValue
-    }
-
-    // Mostly handle undefined values that merge do not use
-    if (isNil(srcValue)) {
-      return null
-    }
-
-    return undefined
-  },
-
   props,
 
   beforeMount() {
@@ -74,12 +53,7 @@ export default {
     },
 
     submitButtonClassName() {
-      return [
-        `el-button--${this.submitButtonType}`,
-        {
-          'is-disabled': this.isSubmitButtonDisabled,
-        },
-      ]
+      return [`el-button--${this.submitButtonType}`, { 'is-disabled': this.isSubmitButtonDisabled }]
     },
 
     buttons() {
@@ -131,94 +105,22 @@ export default {
       this.handleDisabled(errors || this.store.allErrors)
     },
 
-    async nativeOnSubmit(event, isConfirmSubmit) {
-      event.preventDefault()
-
-      // Just don't do anything — some form process in progress
-      if (this.store.isDisabled) {
-        return false
-      }
-
-      const isSubmitButtonClick = event.type === 'click'
-      const submitHandler =
-        !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
-
-      if (isSubmitButtonClick && !isNil(this.disabled)) {
-        if (isString(this.disabled)) {
-          return Notification.error(this.disabled)
-        }
-
-        if (isPlainObject(this.disabled)) {
-          Notification.error(this.disabled.message)
-
-          return this.handleFocusToInvalidField(this.disabled.id)
-        }
-      }
-
-      if (isSubmitButtonClick) {
-        this.store.manageTouchedFieldsState()
-      }
-
-      // Form Level Sync Validate
-      if (isSubmitButtonClick && this.validate) {
-        const syncErrors = this.validate(this.store.state)
-
-        if (!isEmpty(syncErrors)) {
-          this.store.addFormSyncErrors(syncErrors)
-
-          return this.handleFormDisabled(syncErrors)
-        }
-      }
-
-      if (!this.store.isValid && isSubmitButtonClick) {
-        this.handleFocusToInvalidField()
-
-        return this.handleFormDisabled()
-      }
-
-      const formValues = mergeWith(
-        {},
-        omit(this.initialValues, this.store.removedFields),
-        this.store.state,
-        this.$options.mergeCustomizer
-      )
-
-      if (!isConfirmSubmit && isSubmitButtonClick && this.confirmMessage) {
-        if (!this.confirmHandler || (await this.confirmHandler(formValues))) {
-          return this.$refs.confirmPopover.show()
-        }
-      }
-
-      // Last case — pristine
-      if (isSubmitButtonClick && this.isSubmitButtonDisabled) {
-        return false
-      }
-
-      const off = this.store.manageSubmittingState()
-      const submitForm = () => Promise.resolve(submitHandler(formValues))
-
-      const messages = this.messages || {}
-      const submitPromise = this.store.form.validating
-        ? Promise.all(Object.values(this.store.asyncValidations)).then(submitForm)
-        : submitForm()
-
-      // Just subscribe to promise, do not catch errors
-      submitPromise
-        .then(
-          () => Notification.success(messages.success),
-          error => {
-            if (error && error.error) {
-              Notification.error(error.error)
-            } else {
-              Notification.error(messages.error)
-            }
-
-            this.handleFormDisabled()
-          }
-        )
-        .then(off)
-
-      return submitPromise
+    nativeOnSubmit(event, isConfirmSubmit) {
+      return submitHandler({
+        handleSave: this.handleSave,
+        handleSubmit: this.handleSubmit,
+        disabled: this.disabled,
+        validate: this.validate,
+        handleFocusToInvalidField: this.handleFocusToInvalidField,
+        handleFormDisabled: this.handleFormDisabled,
+        initialValues: this.initialValues,
+        confirmMessage: this.confirmMessage,
+        confirmHandler: this.confirmHandler,
+        confirmPopoverRef: this.$refs.confirmPopover,
+        isSubmitButtonDisabled: this.isSubmitButtonDisabled,
+        messages: this.messages,
+        store: this.store,
+      })(event, isConfirmSubmit)
     },
 
     nativeOnReset(event) {
@@ -232,36 +134,9 @@ export default {
     },
 
     handleFocusToInvalidField(passedElementId) {
-      const [name] = this.store.allErrorsFields
-      const elementId = passedElementId || name
-
-      let elementByName = this.$refs.vueFormNode.$el.querySelector(`[name=${elementId}]`)
-      let elementById = this.$refs.vueFormNode.$el.querySelector(`#${elementId}`)
-
-      if (!elementByName && !elementById) {
-        elementByName = document.getElementsByName(elementId)[0]
-        elementById = document.getElementById(elementId)
-      }
-
-      if (/WebKit/.test(navigator.userAgent)) {
-        if (elementByName) {
-          elementByName.focus()
-        }
-
-        if (elementById) {
-          if (elementById.scrollIntoView) {
-            elementById.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
-          } else {
-            window.scroll(0, elementById.offsetParent.offsetTop)
-          }
-        }
-      } else {
-        const element = elementByName || elementById
-
-        if (element && element.scrollIntoView) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
-        }
-      }
+      return handleFocusToInvalidField({ store: this.store, formRef: this.$refs.vueFormNode })(
+        passedElementId
+      )
     },
 
     renderPlainSubmitButton() {
