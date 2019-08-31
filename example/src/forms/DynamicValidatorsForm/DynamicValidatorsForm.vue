@@ -76,7 +76,6 @@ export default {
               validators={[validators.length({ min: 8 })]}
             />
             <ArrayField name="inputs" renderField={InfiniteInput} />
-            <Input formItem name="url" placeholder="Url" validators={[validators.url()]} />
             <Input
               formItem
               name="number"

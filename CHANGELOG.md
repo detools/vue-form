@@ -1,3 +1,9 @@
+## 5.8.0
+
+### Removed
+
+- `url` validator. Too much cost in the vendor bundle
+
 ## 5.7.1
 
 ### Updated
