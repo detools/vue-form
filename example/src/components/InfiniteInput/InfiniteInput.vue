@@ -51,7 +51,8 @@ export default {
         </div>
         <Button
           circle
-          style={{ marginBottom: '22px' }}
+          size="mini"
+          style={{ marginBottom: '28px' }}
           type="primary"
           icon="el-icon-plus"
           on-click={this.add}
