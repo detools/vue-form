@@ -239,7 +239,7 @@ export default {
       let elementById = this.$refs.vueFormNode.$el.querySelector(`#${elementId}`)
 
       if (!elementByName && !elementById) {
-        elementByName = document.getElementsByName(elementId)[0]
+        elementByName = document.getElementsByName(elementId)[0] // eslint-disable-line
         elementById = document.getElementById(elementId)
       }
 
