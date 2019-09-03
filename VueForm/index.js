@@ -12,7 +12,7 @@ import TimePicker from './components/ConnectedTimePicker'
 import DatePicker from './components/ConnectedDatePicker'
 import ArrayField from './components/ConnectedArrayField'
 import Upload from './components/ConnectedUpload'
-import FormItem from './components/ConnectedFormItem'
+import FormItem from './components/VueFormItem'
 
 import Notification from './components/Notification'
 import Popover from './components/Popover'

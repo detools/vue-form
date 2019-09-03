@@ -9,17 +9,19 @@ import {
   omit,
   isNil,
 } from 'lodash'
-import Form from 'element-ui/lib/form'
 import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
 import props, { BUTTONS_POSITION } from './props'
 import styles from './styles'
-import FormItem from '../ConnectedFormItem'
+import FormItem from '../VueFormItem'
 import Button from '../Button'
 import Notification from '../Notification'
 import Popover from '../Popover'
 
 export default {
+  name: 'VueForm',
+  componentName: 'VueForm',
+
   mergeCustomizer: (objValue, srcValue) => {
     if (Array.isArray(objValue)) {
       return srcValue
@@ -355,8 +357,15 @@ export default {
   },
 
   render() {
+    const classNames = [
+      'el-form',
+      {
+        [`el-form--label-${this.labelPosition}`]: this.labelPosition,
+      },
+    ]
+
     return (
-      <Form
+      <form
         novalidate
         ref="vueFormNode"
         label-width={this.labelWidth}
@@ -364,11 +373,12 @@ export default {
         label-position={this.labelPosition}
         status-icon={this.statusIcon}
         nativeOnSubmit={this.nativeOnSubmit}
-        nativeOnReset={this.nativeOnReset}>
+        nativeOnReset={this.nativeOnReset}
+        class={classNames}>
         {this.renderFormContent()}
         {this.renderButtons()}
         {this.buttonsSticky && <div style={styles.sticky_placeholder} />}
-      </Form>
+      </form>
     )
   },
 }

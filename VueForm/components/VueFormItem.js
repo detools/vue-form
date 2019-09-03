@@ -1,21 +1,19 @@
-import Tooltip from 'element-ui/lib/tooltip'
-
-const VueFormItem = {
-  name: 'ElFormItem',
-
-  componentName: 'ElFormItem',
-
-  provide() {
-    return {
-      elFormItem: this,
-    }
-  },
+export default {
+  name: 'VueFormItem',
+  componentName: 'VueFormItem',
 
   props: {
     label: String,
     labelWidth: String,
+    labelPosition: String,
+    prop: String,
     required: Boolean,
+    rules: [Object, Array],
     error: String,
+    showErrorUnderLabel: Boolean,
+    validateStatus: String,
+    for: String,
+    size: String,
   },
 
   data() {
@@ -33,59 +31,81 @@ const VueFormItem = {
         this.validateState = value ? 'error' : ''
       },
     },
+
+    validateStatus(value) {
+      this.validateState = value
+    },
+  },
+
+  computed: {
+    labelFor() {
+      return this.for || this.prop
+    },
+
+    labelStyle() {
+      const styles = undefined
+
+      if (this.form.labelPosition === 'top' || this.labelPosition === 'top') {
+        return styles
+      }
+
+      return this.labelWidth || this.form.labelWidth || styles
+    },
+
+    form() {
+      let parent = this.$parent
+      let parentName = parent.$options.componentName
+
+      while (parentName !== 'VueForm') {
+        parent = parent.$parent
+        parentName = parent.$options.componentName
+      }
+
+      return parent
+    },
+
+    sizeClass() {
+      return (this.$ELEMENT || {}).size
+    },
+  },
+
+  methods: {
+    clearValidate() {
+      this.validateState = ''
+      this.validateMessage = ''
+    },
   },
 
   render() {
-    const classNames = [
-      'el-form-item',
-      'el-form-item-lite',
+    const formItemClassNames = [
       'el-form-item--feedback',
       {
-        'is-error': !!this.error,
-        'is-required': this.required,
+        [`el-form-item--${this.sizeClass}`]: this.sizeClass,
+        'is-error': this.validateState === 'error',
+        'is-validating': this.validateState === 'validating',
+        'is-success': this.validateState === 'success',
+        'is-required': this.isRequired || this.required,
       },
     ]
 
     return (
-      <div class={classNames}>
-        <div class="el-form-item__content">
-          <Tooltip
-            manual
-            effect="light"
-            visibleArrow={false}
-            openDelay={0}
-            content={this.error}
-            placement="bottom"
-            value={!!this.error}
-            disabled={!this.error}
-            popperClass="vue-form-item-popper">
-            {this.$slots.default}
-          </Tooltip>
+      <div class="el-form-item" class={formItemClassNames}>
+        {this.label && (
+          <label for={this.labelFor} class="el-form-item__label" style={{ width: this.labelStyle }}>
+            <slot name="label">{this.label + this.form.labelSuffix}</slot>
+          </label>
+        )}
+        <div class="el-form-item__content" style={{ marginLeft: this.labelStyle }}>
+          {this.$slots.default}
+          <transition name="el-zoom-in-top">
+            {this.validateState === 'error' && (
+              <slot name="error" error={this.validateMessage}>
+                <div class="el-form-item__error">{this.validateMessage}</div>
+              </slot>
+            )}
+          </transition>
         </div>
       </div>
-    )
-  },
-}
-
-export default {
-  props: {
-    label: String,
-    labelWidth: String,
-    error: String,
-    styles: [Object, Array],
-    required: Boolean,
-  },
-
-  render() {
-    return (
-      <VueFormItem
-        style={this.styles}
-        label={this.label}
-        label-width={this.labelWidth}
-        error={this.error}
-        required={this.required}>
-        {this.$slots.default}
-      </VueFormItem>
     )
   },
 }

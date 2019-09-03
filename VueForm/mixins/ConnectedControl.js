@@ -7,8 +7,8 @@ import isEqual from 'lodash/isEqual'
 import get from 'lodash/get'
 import resolveRegisterFormComponent from '../utils/resolveRegisterFormComponent'
 import isComponentPartOfArrayField from '../utils/isComponentPartOfArrayField'
-import FormItem from '../components/ConnectedFormItem'
 import VueFormItem from '../components/VueFormItem'
+import VueFormItemLite from '../components/VueFormItemLite'
 
 const ConnectedControlMixin = {
   props: {
@@ -16,6 +16,8 @@ const ConnectedControlMixin = {
     formItem: Boolean,
     label: [String, Boolean],
     labelWidth: String,
+    labelPosition: String,
+    showErrorUnderLabel: Boolean,
     required: Boolean,
 
     /* FormItem Lite Props */
@@ -110,17 +112,28 @@ const ConnectedControlMixin = {
 
     if (this.formItem) {
       return (
-        <FormItem label={label} label-width={this.labelWidth} error={error} required={required}>
+        <VueFormItem
+          label={label}
+          labelWidth={this.labelWidth}
+          labelPosition={this.labelPosition}
+          showErrorUnderLabel={this.showErrorUnderLabel}
+          error={error}
+          validateStatus={error ? 'error' : 'success'}
+          required={required}>
           {this.renderComponent(value, setValue, createElement, initialValue, required)}
-        </FormItem>
+        </VueFormItem>
       )
     }
 
     if (this.formItemLite) {
       return (
-        <VueFormItem label={label} label-width={this.labelWidth} error={error} required={required}>
+        <VueFormItemLite
+          label={label}
+          label-width={this.labelWidth}
+          error={error}
+          required={required}>
           {this.renderComponent(value, setValue, createElement, initialValue, required)}
-        </VueFormItem>
+        </VueFormItemLite>
       )
     }
 

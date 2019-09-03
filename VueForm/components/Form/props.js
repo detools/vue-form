@@ -16,8 +16,9 @@ const formProps = {
   submit: [String, Boolean],
 
   labelWidth: String,
-  labelSuffix: String,
-  labelPosition: String,
+  labelPosition: { type: String, default: 'left' },
+  labelSuffix: { type: String, default: ':' },
+
   statusIcon: {
     type: Boolean,
     default: true,

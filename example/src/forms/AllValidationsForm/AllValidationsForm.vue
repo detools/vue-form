@@ -28,8 +28,8 @@ export default {
         'Doctor Strange',
         'Ebony Maw',
       ],
-      companiesOptions: ['Apple', 'Google', 'Amazon', 'Microsoft'],
-      browsersOptions: ['Chrome', 'Safari', 'Firefox', 'Edge', 'Opera'],
+      companiesOptions: ['Apple', 'Google', 'Amazon'],
+      browsersOptions: ['Chrome', 'Safari', 'Firefox'],
     }
   },
 
@@ -49,13 +49,14 @@ export default {
               cancel
               submit
               buttonsSticky
-              labelPosition="top"
+              labelWidth="230px"
               buttonsPosition="end"
               handleSubmit={this.handleSubmit}>
               <Input
                 formItem
                 name="username"
                 label="Username"
+                labelPosition="top"
                 validators={[validators.isRequired()]}
               />
               <Input
@@ -63,9 +64,14 @@ export default {
                 name="password"
                 type="password"
                 label="Password"
+                labelPosition="top"
                 validators={[validators.isRequired(), validators.length({ min: 6 })]}
               />
-              <Checkbox formItem name="policyAgreement" validators={[validators.isRequired()]}>
+              <Checkbox
+                formItem
+                labelWidth="0"
+                name="policyAgreement"
+                validators={[validators.isRequired()]}>
                 I have read and agree to the Privacy Policy
               </Checkbox>
               <CheckboxGroup
@@ -80,6 +86,7 @@ export default {
                 controls
                 name="age"
                 label="Select your age"
+                labelWidth="120px"
                 value={26}
                 min={15}
                 max={30}
@@ -92,7 +99,6 @@ export default {
                   B
                 </Radio>
               </div>
-              <br />
               <RadioGroup
                 formItem
                 name="browser"
