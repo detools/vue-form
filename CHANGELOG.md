@@ -1,3 +1,9 @@
+## 5.9.0
+
+### Added
+
+- Ability to not watch `initialValues` by passing `doNotWatchInitialValues` prop
+
 ## 5.8.0
 
 ### Removed

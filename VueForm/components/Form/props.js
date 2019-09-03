@@ -78,6 +78,9 @@ const formProps = {
 
   // Best way when filtering data grids
   keepValueOnRemove: Boolean,
+
+  // A property that will stop watching initialValues
+  doNotWatchInitialValues: Boolean,
 }
 
 export default formProps

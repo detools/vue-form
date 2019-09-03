@@ -45,7 +45,7 @@ export default {
 
   watch: {
     initialValues(initialValues, prevInitialValues) {
-      if (!isEqual(initialValues, prevInitialValues)) {
+      if (!this.doNotWatchInitialValues && !isEqual(initialValues, prevInitialValues)) {
         this.store.reinitializeValues(initialValues)
         this.handleModelChange(this.store.state)
       }
