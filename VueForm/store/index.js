@@ -17,6 +17,8 @@ import isValid from '../utils/isValid'
 import CONSTANTS from '../constants'
 
 export const VueFormStoreParams = {
+  defaultNormalizer: ({ value, name }) => ({ value, name }),
+
   data() {
     return {
       // { [fieldName]: Any }
@@ -40,6 +42,9 @@ export const VueFormStoreParams = {
 
       // { [fieldName]: true }
       dirtyFields: {},
+
+      // { [fieldName]: Function }
+      normalizers: {},
 
       form: {
         submitting: false,
@@ -99,10 +104,22 @@ export const VueFormStoreParams = {
     },
     // ON MOUNT FORM END
 
-    registerFormControl(name, fieldLevelInitialValue, validators, isComponentPartOfArrayField) {
+    registerFormControl(params) {
+      const {
+        name,
+        fieldLevelInitialValue,
+        validators,
+        isComponentPartOfArrayField,
+        normalize,
+      } = params
+
       const vm = this
 
       vm.addFormField(name)
+
+      if (normalize) {
+        vm.$set(vm.normalizers, name, normalize)
+      }
 
       const setError = vm.createSetError(name)
       const setAsyncError = vm.createSetAsyncError(name)
@@ -225,16 +242,23 @@ export const VueFormStoreParams = {
       }
     },
 
-    createSetValue(name, setError) {
+    createSetValue(passedName, setError) {
       const vm = this
+      const normalizer = vm.normalizers[passedName] || this.$options.defaultNormalizer
 
       return (validators, setDirty) => nextValue => {
+        const { name = passedName, value } = normalizer({
+          value: nextValue,
+          name: passedName,
+          state: vm.state,
+        })
+
         const useLodashSet = /[[]/.test(name)
 
         if (!useLodashSet) {
-          vm.$set(vm.state, name, nextValue)
+          vm.$set(vm.state, name, value)
         } else {
-          vm.state = merge({}, set(vm.state, name, nextValue))
+          vm.state = merge({}, set(vm.state, name, value))
         }
 
         // When control value changes we need to clean async errors
@@ -251,7 +275,7 @@ export const VueFormStoreParams = {
           setDirty()
         }
 
-        setError(validators)(nextValue)
+        setError(validators)(value)
       }
     },
 

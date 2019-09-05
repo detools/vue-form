@@ -1,3 +1,11 @@
+## 5.10.0
+
+### Added
+
+- Prop `normalize` to normalize value before set to store
+- See example at Basic Form — Fill Username, Password, click Enter
+- Find an Object with values at `user` property
+
 ## 5.9.0
 
 ### Added

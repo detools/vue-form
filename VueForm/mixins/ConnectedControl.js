@@ -20,17 +20,21 @@ const ConnectedControlMixin = {
 
     /* FormItem Lite Props */
     formItemLite: Boolean,
+
+    /* Normalize */
+    normalize: Function,
   },
 
   data() {
     const $registerFormComponent = resolveRegisterFormComponent(this)
 
-    return $registerFormComponent(
-      this.name,
-      this.value,
-      this.validators,
-      isComponentPartOfArrayField(this)
-    )
+    return $registerFormComponent({
+      name: this.name,
+      fieldLevelInitialValue: this.value,
+      validators: this.validators,
+      isComponentPartOfArrayField: isComponentPartOfArrayField(this),
+      normalize: this.normalize,
+    })
   },
 
   mounted() {
@@ -144,12 +148,13 @@ export const ConnectedArrayFieldMixin = {
       initialValue = castArray(initialValue)
     }
 
-    return $registerFormComponent(
-      this.name,
-      initialValue,
-      this.validators,
-      isComponentPartOfArrayField(this)
-    )
+    return $registerFormComponent({
+      name: this.name,
+      fieldLevelInitialValue: initialValue,
+      validators: this.validators,
+      isComponentPartOfArrayField: isComponentPartOfArrayField(this),
+      normalize: this.normalize,
+    })
   },
 }
 
@@ -170,12 +175,13 @@ export const ConnectedSelectMixin = {
       }
     }
 
-    return $registerFormComponent(
-      this.name,
-      initialValue,
-      this.validators,
-      isComponentPartOfArrayField(this)
-    )
+    return $registerFormComponent({
+      name: this.name,
+      fieldLevelInitialValue: initialValue,
+      validators: this.validators,
+      isComponentPartOfArrayField: isComponentPartOfArrayField(this),
+      normalize: this.normalize,
+    })
   },
 }
 

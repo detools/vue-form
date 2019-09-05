@@ -13,7 +13,7 @@ test('Register Form Control', async t => {
   const addFormField = sinon.spy(store, 'addFormField')
 
   // Action
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Expectations
   t.ok(addFormField.calledOnce, '"addFormField" should be called once')
@@ -28,7 +28,7 @@ test('Unregister Form Control', async t => {
 
   const store = new Vue(VueFormStoreParams)
   const removeFormField = sinon.spy(store, 'removeFormField')
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Action
   store.removeFormField(name)
@@ -45,7 +45,7 @@ test('Handle Model Change', async t => {
   const value = 42
 
   const store = new Vue(VueFormStoreParams)
-  const { useState } = store.registerFormControl(name, value)
+  const { useState } = store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   const handleModelChange = sinon.spy(noop)
 
@@ -73,7 +73,11 @@ test('Create "setError" callback', async t => {
   const createSetError = sinon.spy(store, 'createSetError')
 
   // Action
-  const { setError } = store.registerFormControl(name, value, validators)
+  const { setError } = store.registerFormControl({
+    name,
+    fieldLevelInitialValue: value,
+    validators,
+  })
   setError(validators)(value)
 
   // Expectations
@@ -92,7 +96,7 @@ test('Create "setAsyncError" callback', async t => {
   const createSetAsyncError = sinon.spy(store, 'createSetAsyncError')
 
   // Action
-  const { setAsyncError } = store.registerFormControl(name, value)
+  const { setAsyncError } = store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Expectations
   t.ok(createSetAsyncError.calledOnce, '"createSetAsyncError" should be called once')
@@ -111,7 +115,7 @@ test('Create "setValue" callback', async t => {
   const createSetValue = sinon.spy(store, 'createSetValue')
 
   // Action
-  const { useState } = store.registerFormControl(name, value)
+  const { useState } = store.registerFormControl({ name, fieldLevelInitialValue: value })
   const [, setValue] = useState()
 
   // Expectations
@@ -148,6 +152,25 @@ test('Create "setValue" callback', async t => {
   )
 })
 
+test('Use normalize to get a different value in store', async t => {
+  // Prerequisites
+  const name = 'username'
+  const value = 42
+  const normalizedValue = 100
+  const normalize = ({ name: fieldName }) => ({ value: normalizedValue, name: fieldName })
+
+  const store = new Vue(VueFormStoreParams)
+
+  // Action
+  const { useState } = store.registerFormControl({ name, fieldLevelInitialValue: value, normalize })
+  const [, setValue] = useState()
+
+  setValue(value)
+
+  // Expectations
+  t.equal(store.state[name], normalizedValue, '"setValue" set normalizedValue for "username"')
+})
+
 test('Create "cleanFormValue" callback', async t => {
   // Prerequisites
   const name = 'username'
@@ -157,7 +180,7 @@ test('Create "cleanFormValue" callback', async t => {
   const createCleanFormValue = sinon.spy(store, 'createCleanFormValue')
 
   // Action
-  const { cleanFormValue } = store.registerFormControl(name, value)
+  const { cleanFormValue } = store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Expectations
   t.ok(createCleanFormValue.calledOnce, '"createCleanFormValue" should be called once')
@@ -187,7 +210,11 @@ test('Create "setTouched" callback', async t => {
   const createSetTouched = sinon.spy(store, 'createSetTouched')
 
   // Action
-  const { setTouched } = store.registerFormControl(name, value, validators)
+  const { setTouched } = store.registerFormControl({
+    name,
+    fieldLevelInitialValue: value,
+    validators,
+  })
 
   // Expectations
   t.ok(createSetTouched.calledOnce, '"createSetTouched" should be called once')
@@ -210,7 +237,7 @@ test('Manage validating state', async t => {
   const promise = Promise.resolve()
 
   const store = new Vue(VueFormStoreParams)
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Action
   const off = store.manageValidatingState(name, promise)
@@ -239,7 +266,7 @@ test('Manage submitting state', async t => {
   const value = 42
 
   const store = new Vue(VueFormStoreParams)
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Action
   const off = store.manageSubmittingState()
@@ -262,7 +289,7 @@ test('Manage touched fields state', async t => {
   const value = 42
 
   const store = new Vue(VueFormStoreParams)
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Action
   store.manageTouchedFieldsState()
@@ -280,7 +307,7 @@ test('Reset values', async t => {
 
   // Action
   store.setInitialValues({ [name]: value })
-  const { useState } = store.registerFormControl(name)
+  const { useState } = store.registerFormControl({ name })
 
   // Expectations
   t.equal(store.state[name], value, '"state" should contain "username" value')
@@ -309,7 +336,7 @@ test('Reinitialize values', async t => {
 
   // Action
   store.setInitialValues(initialValues)
-  const { useState, setError, validateOnReinitialize } = store.registerFormControl(name)
+  const { useState, setError, validateOnReinitialize } = store.registerFormControl({ name })
 
   // Expectations
   t.equal(store.state[name], value, '"state" should contain "username" value')
@@ -349,7 +376,7 @@ test('Add Form Sync Errors', async t => {
   const errorMessage = `${name} is required`
 
   const store = new Vue(VueFormStoreParams)
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   // Action
   store.addFormSyncErrors({ [name]: errorMessage })
@@ -364,7 +391,7 @@ test('Remove Form Field Errors', async t => {
   const value = 42
 
   const store = new Vue(VueFormStoreParams)
-  store.registerFormControl(name, value)
+  store.registerFormControl({ name, fieldLevelInitialValue: value })
 
   store.$set(store.syncErrors, name, 'syncError')
   store.$set(store.asyncErrors, name, 'asyncError')

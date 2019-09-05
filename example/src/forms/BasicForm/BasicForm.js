@@ -36,6 +36,18 @@ export default {
     handleSubmit(values) {
       this.formValues = values
     },
+
+    normalizeUserFields({ value, name, state }) {
+      const [fieldName, propName] = name.split('.')
+
+      return {
+        name: fieldName,
+        value: {
+          ...state[fieldName],
+          [propName]: value,
+        },
+      }
+    },
   },
 
   render() {
@@ -45,8 +57,19 @@ export default {
         <div class="wrapper">
           <div class="form">
             <Form cancel submit="Save" labelPosition="top" handleSubmit={this.handleSubmit}>
-              <Input formItem name="username" label="Username" />
-              <Input formItem name="password" type="password" label="Password" />
+              <Input
+                formItem
+                name="user.name"
+                label="Username"
+                normalize={this.normalizeUserFields}
+              />
+              <Input
+                formItem
+                name="user.password"
+                type="password"
+                label="Password"
+                normalize={this.normalizeUserFields}
+              />
               <Checkbox formItem name="savePassword">
                 Save password on this computer
               </Checkbox>
