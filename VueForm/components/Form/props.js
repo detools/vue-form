@@ -81,6 +81,9 @@ const formProps = {
 
   // A property that will stop watching initialValues
   doNotWatchInitialValues: Boolean,
+
+  // This flag indicates that default state for the form is ok to submit
+  allowSubmitPristineForm: Boolean,
 }
 
 export default formProps

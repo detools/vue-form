@@ -1,3 +1,9 @@
+## 5.10.1
+
+### Added
+
+- Prop `allowSubmitPristineForm` to submit a pristine form
+
 ## 5.10.0
 
 ### Added

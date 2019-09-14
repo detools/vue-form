@@ -59,7 +59,10 @@ export default {
       }
 
       return (
-        this.store.isDisabled || this.store.isPristine || !this.store.isValid || !!this.disabled
+        this.store.isDisabled ||
+        (!this.allowSubmitPristineForm && this.store.isPristine) ||
+        !this.store.isValid ||
+        !!this.disabled
       )
     },
 
