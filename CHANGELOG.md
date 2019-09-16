@@ -1,3 +1,9 @@
+## 5.10.2
+
+### Added
+
+- `white-space: pre` styles to Confirmation `<Popover />`
+
 ## 5.10.1
 
 ### Added
