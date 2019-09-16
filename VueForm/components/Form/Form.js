@@ -35,6 +35,12 @@ export default {
 
   props,
 
+  data() {
+    return {
+      saving: false,
+    }
+  },
+
   beforeMount() {
     this.store = new Vue(VueFormStoreParams)
 
@@ -198,9 +204,12 @@ export default {
       }
 
       const off = this.store.manageSubmittingState()
+
       const submitForm = () => Promise.resolve(submitHandler(formValues))
 
       const messages = this.messages || {}
+
+      this.saving = !isSubmitButtonClick
       const submitPromise = this.store.form.validating
         ? Promise.all(Object.values(this.store.asyncValidations)).then(submitForm)
         : submitForm()
@@ -219,7 +228,10 @@ export default {
             this.handleFormDisabled()
           }
         )
-        .then(off)
+        .then(() => {
+          this.saving = false
+          off()
+        })
 
       return submitPromise
     },
@@ -314,7 +326,11 @@ export default {
           )}
           {this.extraButtons}
           {this.save && (
-            <Button nativeType="submit" type="primary" disabled={this.allButtonsDisabled}>
+            <Button
+              nativeType="submit"
+              type="primary"
+              disabled={this.allButtonsDisabled}
+              loading={this.saving && this.store.form.submitting}>
               {this.buttons.save}
             </Button>
           )}

@@ -1,3 +1,9 @@
+## 5.10.3
+
+### Added
+
+- Loading state for save button
+
 ## 5.10.2
 
 ### Added
