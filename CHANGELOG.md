@@ -1,3 +1,9 @@
+## 5.10.4
+
+### Fixed
+
+- `white-space: pre` styles to `<Popover />` changed to `pre-line`
+
 ## 5.10.3
 
 ### Added

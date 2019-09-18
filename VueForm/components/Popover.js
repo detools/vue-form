@@ -38,7 +38,7 @@ const Buttons = {
   render() {
     return (
       <div>
-        <p style="text-align: left; white-space: pre;">{this.message}</p>
+        <p style="text-align: left; white-space: pre-line;">{this.message}</p>
         <br />
         <div>
           <Button size="mini" type="text" on-click={this.handleClickCancel}>
