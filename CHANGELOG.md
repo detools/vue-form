@@ -1,3 +1,9 @@
+## 5.10.5
+
+### Fixed
+
+- Pass `handleRemoveFile` to custom `FileList` inside `<Upload />` only when `handleRemove` has passed
+
 ## 5.10.4
 
 ### Fixed

@@ -204,9 +204,10 @@ const ConnectedUpload = {
       }
     },
 
-    renderFileList(fileList, handleRemoveFile, labelWidth, handleRowClick) {
+    renderFileList(fileList, removeFileHandler, labelWidth, handleRowClick) {
       if (this.isFileListAComponent) {
         const FileList = this.showFileList
+        const handleRemoveFile = this.handleRemove !== noop ? removeFileHandler : undefined
 
         return (
           <FileList
