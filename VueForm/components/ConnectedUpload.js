@@ -172,19 +172,21 @@ const ConnectedUpload = {
       this.setTouched()
       this.setDirty()
 
-      this.handleRemove(...args).then(() => {
-        const [value, setValue] = this.state
-        const { [this.fileKey]: id, uid } = args[0]
-        let nextValue
+      return Promise.resolve()
+        .then(() => this.handleRemove(...args))
+        .then(() => {
+          const [value, setValue] = this.state
+          const { [this.fileKey]: id, uid } = args[0]
+          let nextValue
 
-        if (id) {
-          nextValue = value.filter(file => file[this.fileKey] !== id)
-        } else {
-          nextValue = value.filter(file => file.uid !== uid)
-        }
+          if (id) {
+            nextValue = value.filter(file => file[this.fileKey] !== id)
+          } else {
+            nextValue = value.filter(file => file.uid !== uid)
+          }
 
-        setValue(nextValue)
-      })
+          setValue(nextValue)
+        })
     },
 
     handleFieldSuccess(response, file, fileList) {
@@ -205,9 +207,9 @@ const ConnectedUpload = {
     },
 
     renderFileList(fileList, removeFileHandler, labelWidth, handleRowClick) {
+      const handleRemoveFile = this.handleRemove !== noop ? removeFileHandler : undefined
       if (this.isFileListAComponent) {
         const FileList = this.showFileList
-        const handleRemoveFile = this.handleRemove !== noop ? removeFileHandler : undefined
 
         return (
           <FileList

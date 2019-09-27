@@ -1,3 +1,9 @@
+## 5.10.6
+
+### Fixed
+
+- Wrap `handleRemove` into Promise to handle sync remove handler the same way as async
+
 ## 5.10.5
 
 ### Fixed
