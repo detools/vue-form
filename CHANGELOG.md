@@ -1,3 +1,9 @@
+## 5.10.7
+
+### Added
+
+- Ability to pass a title to Notification
+
 ## 5.10.6
 
 ### Fixed

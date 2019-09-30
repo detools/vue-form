@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import startCase from 'lodash/startCase'
+import isUndefined from 'lodash/isUndefined'
 import Notification from 'element-ui/lib/notification'
 
 export default new Vue({
@@ -8,26 +9,29 @@ export default new Vue({
       return <div style="text-align: left; white-space: pre-line">{message}</div>
     },
 
-    getHandler(type, message) {
+    getHandler(type, message, title) {
       if (message) {
-        Notification[type]({ title: startCase(type), message: this.renderMessage(message) })
+        Notification[type]({
+          title: startCase(isUndefined(title) ? type : title),
+          message: this.renderMessage(message),
+        })
       }
     },
 
-    success(message) {
-      return this.getHandler('success', message)
+    success(message, title) {
+      return this.getHandler('success', message, title)
     },
 
-    warning(message) {
-      return this.getHandler('warning', message)
+    warning(message, title) {
+      return this.getHandler('warning', message, title)
     },
 
-    info(message) {
-      return this.getHandler('info', message)
+    info(message, title) {
+      return this.getHandler('info', message, title)
     },
 
-    error(message) {
-      return this.getHandler('error', message)
+    error(message, title) {
+      return this.getHandler('error', message, title)
     },
   },
 })
