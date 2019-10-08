@@ -1,3 +1,9 @@
+## 5.10.8
+
+### Added
+
+- Pass `isConfirmSubmit` parameter to `submitHandler`
+
 ## 5.10.7
 
 ### Added

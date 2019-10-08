@@ -205,7 +205,7 @@ export default {
 
       const off = this.store.manageSubmittingState()
 
-      const submitForm = () => Promise.resolve(submitHandler(formValues))
+      const submitForm = () => Promise.resolve(submitHandler(formValues, isConfirmSubmit))
 
       const messages = this.messages || {}
 
