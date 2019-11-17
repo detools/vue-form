@@ -1,3 +1,9 @@
+## 5.11.0
+
+### Added
+
+- Two props to <Upload /> `isEditDisabled`, `isRemoveDisabled` for a FileList
+
 ## 5.10.8
 
 ### Added

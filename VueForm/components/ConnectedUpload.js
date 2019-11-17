@@ -97,6 +97,8 @@ const ConnectedUpload = {
       type: Array,
       default: () => [],
     },
+    isEditDisabled: [Boolean, Function],
+    isRemoveDisabled: [Boolean, Function],
 
     listType: {
       type: String,
@@ -215,14 +217,24 @@ const ConnectedUpload = {
           <FileList
             name={this.name}
             fileList={fileList}
-            handleRemoveFile={handleRemoveFile}
             labelWidth={labelWidth}
             handleRowClick={handleRowClick}
+            handleRemoveFile={handleRemoveFile}
+            isEditDisabled={this.isEditDisabled}
+            isRemoveDisabled={this.isRemoveDisabled}
           />
         )
       }
 
-      return this.showFileList(fileList, handleRemoveFile, labelWidth)
+      return this.showFileList({
+        name: this.name,
+        fileList,
+        labelWidth,
+        handleRowClick,
+        handleRemoveFile,
+        isEditDisabled: this.isEditDisabled,
+        isRemoveDisabled: this.isRemoveDisabled,
+      })
     },
 
     renderComponent(value, setValue, createElement, initialValue) {
