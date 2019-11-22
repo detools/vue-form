@@ -1,3 +1,9 @@
+## 5.11.1
+
+### Added
+
+- `word-break` property to Notification message
+
 ## 5.11.0
 
 ### Added
