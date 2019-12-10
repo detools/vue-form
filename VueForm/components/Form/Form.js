@@ -354,6 +354,7 @@ export default {
 
       if (this.$scopedSlots.default) {
         return this.$scopedSlots.default({
+          state: this.store.state,
           allButtonsDisabled: this.allButtonsDisabled,
           isSubmitButtonDisabled: this.isSubmitButtonDisabled,
           submitButtonClassName: this.submitButtonClassName,
