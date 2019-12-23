@@ -84,6 +84,9 @@ const formProps = {
 
   // This flag indicates that default state for the form is ok to submit
   allowSubmitPristineForm: Boolean,
+
+  // This flag describes behavior of save button as submit
+  performAllChecksOnSave: Boolean,
 }
 
 export default formProps

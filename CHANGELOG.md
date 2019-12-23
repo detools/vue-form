@@ -1,3 +1,9 @@
+## 5.12.0
+
+### Added
+
+- Flag `performAllChecksOnSave` to perform all checks on save
+
 ## 5.11.2
 
 ### Added

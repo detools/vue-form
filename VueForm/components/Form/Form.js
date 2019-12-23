@@ -149,10 +149,11 @@ export default {
       }
 
       const isSubmitButtonClick = event.type === 'click'
+      const shouldPerformAllChecks = this.performAllChecksOnSave || isSubmitButtonClick
       const submitHandler =
         !isSubmitButtonClick && this.handleSave ? this.handleSave : this.handleSubmit
 
-      if (isSubmitButtonClick && !isNil(this.disabled)) {
+      if (shouldPerformAllChecks && !isNil(this.disabled)) {
         if (isString(this.disabled)) {
           return Notification.error(this.disabled)
         }
@@ -164,12 +165,12 @@ export default {
         }
       }
 
-      if (isSubmitButtonClick) {
+      if (shouldPerformAllChecks) {
         this.store.manageTouchedFieldsState()
       }
 
       // Form Level Sync Validate
-      if (isSubmitButtonClick && this.validate) {
+      if (shouldPerformAllChecks && this.validate) {
         const syncErrors = this.validate(this.store.state)
 
         if (!isEmpty(syncErrors)) {
@@ -179,7 +180,7 @@ export default {
         }
       }
 
-      if (!this.store.isValid && isSubmitButtonClick) {
+      if (!this.store.isValid && shouldPerformAllChecks) {
         this.handleFocusToInvalidField()
 
         return this.handleFormDisabled()
@@ -192,14 +193,14 @@ export default {
         this.$options.mergeCustomizer
       )
 
-      if (!isConfirmSubmit && isSubmitButtonClick && this.confirmMessage) {
+      if (!isConfirmSubmit && shouldPerformAllChecks && this.confirmMessage) {
         if (!this.confirmHandler || (await this.confirmHandler(formValues))) {
           return this.$refs.confirmPopover.show()
         }
       }
 
       // Last case — pristine
-      if (isSubmitButtonClick && this.isSubmitButtonDisabled) {
+      if (shouldPerformAllChecks && this.isSubmitButtonDisabled) {
         return false
       }
 
@@ -209,7 +210,7 @@ export default {
 
       const messages = this.messages || {}
 
-      this.saving = !isSubmitButtonClick
+      this.saving = !shouldPerformAllChecks
       const submitPromise = this.store.form.validating
         ? Promise.all(Object.values(this.store.asyncValidations)).then(submitForm)
         : submitForm()
