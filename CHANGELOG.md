@@ -1,3 +1,9 @@
+## 5.11.3
+
+### Fixed
+
+- `isRequired` validator to not pass empty string with spaces
+
 ## 5.11.2
 
 ### Added
