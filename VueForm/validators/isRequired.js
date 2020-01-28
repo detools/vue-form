@@ -7,7 +7,7 @@ export default function createIsRequiredValidator(customMessage) {
   function isRequired(value, name) {
     let isError
 
-    if (isNil(value) || value === '') {
+    if (isNil(value) || String(value).trim() === '') {
       isError = true
     } else if (Array.isArray(value)) {
       isError = value.length === 0
