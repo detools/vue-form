@@ -1,3 +1,10 @@
+## 5.12.2
+
+### Fixed
+
+- Handle nil `Plain Object` value on `reinitialize` same as nil `Array`
+- Added test to handle both cases
+
 ## 5.12.1
 
 ### Fixed

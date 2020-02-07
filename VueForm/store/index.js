@@ -11,6 +11,7 @@ import {
   get,
   set,
   cloneDeep,
+  isPlainObject,
 } from 'lodash'
 import { validate, asyncValidate } from '../validators/validate'
 import isValid from '../utils/isValid'
@@ -363,6 +364,13 @@ export const VueFormStoreParams = {
         // Array that does not have formLevel value
         // Do not reset it state to empty array
         if (Array.isArray(value)) {
+          return value
+        }
+
+        // Plaing object that does not have formLevel value
+        // Do not reset it state to empty nil value
+        // Form controls already created default value for it
+        if (isPlainObject(value)) {
           return value
         }
 

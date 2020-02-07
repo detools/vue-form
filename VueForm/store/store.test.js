@@ -330,16 +330,28 @@ test('Reinitialize values', async t => {
   // Prerequisites
   const name = 'username'
   const value = 42
-  const initialValues = { [name]: value }
+  const arrayName = 'array'
+  const arrayValue = [{ a: 'b' }]
+  const objectName = 'object'
+  const objectValue = { c: 'd' }
+  const initialValues = {
+    [name]: value,
+    [arrayName]: arrayValue,
+    [objectName]: objectValue,
+  }
 
   const store = new Vue(VueFormStoreParams)
 
   // Action
   store.setInitialValues(initialValues)
   const { useState, setError, validateOnReinitialize } = store.registerFormControl({ name })
+  store.registerFormControl({ name: arrayName })
+  store.registerFormControl({ name: objectName })
 
   // Expectations
   t.equal(store.state[name], value, '"state" should contain "username" value')
+  t.same(store.state[arrayName], arrayValue, '"state" should contain `[{ a: "b" }]` value')
+  t.same(store.state[objectName], objectValue, '"state" should contain `{ c: "d" }` value')
 
   // Action
   const [, setValue] = useState()
@@ -358,10 +370,12 @@ test('Reinitialize values', async t => {
   validateOnReinitialize(reinitializeCallback)
 
   // Action
-  store.reinitializeValues(initialValues)
+  store.reinitializeValues({ ...initialValues, [arrayName]: null, [objectName]: null })
 
   // Expectations
   t.equal(store.state[name], value, '"state" should contain original "username"')
+  t.same(store.state[arrayName], arrayValue, '"state" should contain `[{ a: "b" }]` value')
+  t.same(store.state[objectName], objectValue, '"state" should contain `{ c: "d" }` value')
   t.ok(reinitializeCallback.calledOnce, '"reinitializeCallback" should be called')
   t.ok(
     reinitializeCallback.calledWith(store.state),

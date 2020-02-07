@@ -60,7 +60,7 @@ export default {
 
 ## More Examples
 
-See source in [example/src](/example/src) folder.  
+See source in [example/src](/example/src) folder.
 See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netlify.com)
 
 ## Available Connected Components
@@ -82,6 +82,7 @@ See demo at [https://detools-vue-form.netlify.com](https://detools-vue-form.netl
 
 ## Changelog
 
+- [5.12.2](/CHANGELOG.md#5122)
 - [5.12.1](/CHANGELOG.md#5121)
 - [5.12.0](/CHANGELOG.md#5120)
 - [5.11.2](/CHANGELOG.md#5112)
