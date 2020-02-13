@@ -1,3 +1,9 @@
+## 5.12.3
+
+### Updated
+
+- `isRequired` validator to handle `false` values if needed
+
 ## 5.12.2
 
 ### Fixed
