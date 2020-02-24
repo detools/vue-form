@@ -1,5 +1,6 @@
 import Checkbox from 'element-ui/lib/checkbox'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedCheckbox = {
@@ -55,7 +56,7 @@ const ConnectedCheckbox = {
       return (
         <Checkbox
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           true-label={this.trueLabel}
           false-label={this.falseLabel}

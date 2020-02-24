@@ -1,5 +1,6 @@
 import TimePicker from 'element-ui/lib/time-picker'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedTimePicker = {
@@ -64,7 +65,7 @@ const ConnectedTimePicker = {
       return (
         <TimePicker
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           readonly={this.readonly}
           disabled={this.isFieldDisabled}

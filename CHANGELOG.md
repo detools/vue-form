@@ -1,3 +1,9 @@
+## 5.13.0
+
+### Updated
+
+- Now all `name/id` html attributes are `camelCased` to avoid errors with difficult selectors
+
 ## 5.12.3
 
 ### Updated

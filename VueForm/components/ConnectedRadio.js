@@ -1,5 +1,6 @@
 import Radio from 'element-ui/lib/radio'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedRadio = {
@@ -46,7 +47,7 @@ const ConnectedRadio = {
       return (
         <Radio
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           label={this.value}
           disabled={this.isFieldDisabled}

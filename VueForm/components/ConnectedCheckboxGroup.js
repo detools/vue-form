@@ -2,6 +2,7 @@ import Checkbox from 'element-ui/lib/checkbox'
 import CheckboxGroup from 'element-ui/lib/checkbox-group'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
+import camelCase from 'lodash/camelCase'
 import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
 
 const ConnectedCheckboxGroup = {
@@ -88,7 +89,7 @@ const ConnectedCheckboxGroup = {
       return (
         <CheckboxGroup
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           size={this.controlSize}
           disabled={this.isFieldDisabled}

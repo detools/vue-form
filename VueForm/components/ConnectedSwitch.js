@@ -1,5 +1,6 @@
 import Switch from 'element-ui/lib/switch'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedSwitch = {
@@ -51,7 +52,7 @@ const ConnectedSwitch = {
       return (
         <Switch
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           disabled={this.isFieldDisabled}
           width={this.width}

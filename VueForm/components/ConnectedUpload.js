@@ -2,6 +2,7 @@ import Upload from 'element-ui/lib/upload'
 import noop from 'lodash/noop'
 import isBoolean from 'lodash/isBoolean'
 import isPlainObject from 'lodash/isPlainObject'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const defaultHandler = {
@@ -248,7 +249,7 @@ const ConnectedUpload = {
           headers={this.headers}
           multiple={this.multiple}
           data={this.data}
-          name={this.prop}
+          name={camelCase(this.prop)}
           with-credentials={this.withCredentials}
           show-file-list={this.shouldRenderCustomFileList ? false : this.showFileList}
           drag={this.drag}

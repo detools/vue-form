@@ -4,6 +4,7 @@ import OptionGroup from 'element-ui/lib/option-group'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
 import isFunction from 'lodash/isFunction'
+import camelCase from 'lodash/camelCase'
 import { ConnectedSelectMixin } from '../mixins/ConnectedControl'
 
 const ConnectedSelect = {
@@ -149,7 +150,7 @@ const ConnectedSelect = {
       return (
         <Select
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           multiple={this.multiple}
           disabled={this.isFieldDisabled}

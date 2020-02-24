@@ -1,5 +1,6 @@
 import InputNumber from 'element-ui/lib/input-number'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedInputNumber = {
@@ -57,7 +58,7 @@ const ConnectedInputNumber = {
       return (
         <InputNumber
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           min={this.min}
           max={this.max}

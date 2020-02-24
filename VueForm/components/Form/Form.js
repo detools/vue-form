@@ -1,14 +1,13 @@
 import Vue from 'vue'
-import {
-  isBoolean,
-  isEmpty,
-  isEqual,
-  isString,
-  isPlainObject,
-  mergeWith,
-  omit,
-  isNil,
-} from 'lodash'
+import isBoolean from 'lodash/isBoolean'
+import isEmpty from 'lodash/isEmpty'
+import isEqual from 'lodash/isEqual'
+import isString from 'lodash/isString'
+import isPlainObject from 'lodash/isPlainObject'
+import mergeWith from 'lodash/mergeWith'
+import omit from 'lodash/omit'
+import isNil from 'lodash/isNil'
+import camelCase from 'lodash/camelCase'
 import Form from 'element-ui/lib/form'
 import CONSTANTS from '../../constants'
 import { VueFormStoreParams } from '../../store'
@@ -249,7 +248,7 @@ export default {
 
     handleFocusToInvalidField(passedElementId) {
       const [name] = this.store.allErrorsFields
-      const elementId = passedElementId || name
+      const elementId = camelCase(passedElementId || name)
 
       let elementByName = this.$refs.vueFormNode.$el.querySelector(`[name=${elementId}]`)
       let elementById = this.$refs.vueFormNode.$el.querySelector(`#${elementId}`)

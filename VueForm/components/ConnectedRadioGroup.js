@@ -2,6 +2,7 @@ import Radio from 'element-ui/lib/radio'
 import RadioGroup from 'element-ui/lib/radio-group'
 import noop from 'lodash/noop'
 import isNil from 'lodash/isNil'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedRadioGroup = {
@@ -79,7 +80,7 @@ const ConnectedRadioGroup = {
       return (
         <RadioGroup
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           size={this.controlSize}
           disabled={this.isFieldDisabled}

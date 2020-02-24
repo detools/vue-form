@@ -1,6 +1,7 @@
 import without from 'lodash/without'
 import last from 'lodash/last'
 import isFunction from 'lodash/isFunction'
+import camelCase from 'lodash/camelCase'
 import { ConnectedArrayFieldMixin } from '../mixins/ConnectedControl'
 import CONSTANTS from '../constants'
 
@@ -187,10 +188,10 @@ export default {
       }
 
       if (isFunction(this.renderField)) {
-        return <div id={this.name}>{this.renderField(props)}</div>
+        return <div id={camelCase(this.name)}>{this.renderField(props)}</div>
       }
 
-      return <div id={this.name}>{createElement(this.renderField, { props })}</div>
+      return <div id={camelCase(this.name)}>{createElement(this.renderField, { props })}</div>
     },
   },
 }

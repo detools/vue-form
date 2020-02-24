@@ -1,6 +1,7 @@
 import DatePicker from 'element-ui/lib/date-picker'
 import noop from 'lodash/noop'
 import get from 'lodash/get'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 /**
@@ -128,7 +129,7 @@ const ConnectedDatePicker = {
       return (
         <DatePicker
           class={this.class}
-          name={this.name}
+          name={camelCase(this.name)}
           value={value}
           ref="datepicker"
           readonly={this.readonly}

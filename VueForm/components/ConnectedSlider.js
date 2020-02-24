@@ -1,5 +1,6 @@
 import Slider from 'element-ui/lib/slider'
 import noop from 'lodash/noop'
+import camelCase from 'lodash/camelCase'
 import ConnectedControlMixin from '../mixins/ConnectedControl'
 
 const ConnectedSlider = {
@@ -42,8 +43,8 @@ const ConnectedSlider = {
       return (
         <Slider
           class={this.class}
-          name={this.name}
-          id={this.name}
+          name={camelCase(this.name)}
+          id={camelCase(this.name)}
           value={value}
           step={this.step}
           min={this.min}
