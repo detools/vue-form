@@ -126,7 +126,10 @@ export default {
     },
 
     remove(index) {
-      const nextArray = without(this.controlValue, this.controlValue[index])
+      const nextArray = [
+        ...this.controlValue.slice(0, index),
+        ...this.controlValue.slice(index + 1),
+      ]
 
       this.setValue(nextArray)
 

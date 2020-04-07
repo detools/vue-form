@@ -1,3 +1,9 @@
+## 5.13.1
+
+### Updated
+
+- Method `remove` in ArrayField
+
 ## 5.13.0
 
 ### Updated
