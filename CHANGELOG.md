@@ -1,3 +1,9 @@
+## 5.13.2
+
+### Updated
+
+- Default `Notification` duration changed to 10s (you can change it by passing it manually)
+
 ## 5.13.1
 
 ### Updated

@@ -13,29 +13,30 @@ export default new Vue({
       )
     },
 
-    getHandler(type, message, title) {
+    getHandler(type, message, title, duration = 10000) {
       if (message) {
         Notification[type]({
           title: startCase(isUndefined(title) ? type : title),
           message: this.renderMessage(message),
+          duration,
         })
       }
     },
 
-    success(message, title) {
-      return this.getHandler('success', message, title)
+    success(message, title, duration) {
+      return this.getHandler('success', message, title, duration)
     },
 
-    warning(message, title) {
-      return this.getHandler('warning', message, title)
+    warning(message, title, duration) {
+      return this.getHandler('warning', message, title, duration)
     },
 
-    info(message, title) {
-      return this.getHandler('info', message, title)
+    info(message, title, duration) {
+      return this.getHandler('info', message, title, duration)
     },
 
-    error(message, title) {
-      return this.getHandler('error', message, title)
+    error(message, title, duration) {
+      return this.getHandler('error', message, title, duration)
     },
   },
 })
