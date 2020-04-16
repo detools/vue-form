@@ -28,7 +28,7 @@ export default {
         ],
       }
 
-      Notification.warning('Initial values have been updated like in real world apps')
+      Notification.info('Initial values have been updated like in real world apps')
     }, 1000)
   },
 
