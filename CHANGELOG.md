@@ -1,3 +1,9 @@
+## 5.13.3
+
+### Changed
+
+- `<Input />`, `<Select />`, `<Form />` prop `autocomplete` changed to `off` instead of `new-password`. https://stackoverflow.com/a/16130452
+
 ## 5.13.2
 
 ### Updated
