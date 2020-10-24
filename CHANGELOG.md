@@ -1,3 +1,9 @@
+## 5.13.5
+
+### Fixed
+
+- Now `uiUpload` instead of `$uiUpload` is used for submit method internally for `<Upload />`
+
 ## 5.13.4
 
 ### Fixed

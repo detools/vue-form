@@ -168,7 +168,7 @@ const ConnectedUpload = {
     },
 
     submit() {
-      return this.$refs.$uiUpload.submit()
+      return this.$refs.uiUpload.submit()
     },
 
     handleFieldRemove(...args) {
