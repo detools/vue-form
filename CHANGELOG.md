@@ -1,3 +1,9 @@
+## 5.13.4
+
+### Fixed
+
+- Now `$refs` instead of `refs` is used for submit method internally for `<Upload />`
+
 ## 5.13.3
 
 ### Changed
