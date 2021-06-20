@@ -60,6 +60,7 @@ const ConnectedSelect = {
     defaultFirstOption: Boolean,
     popperAppendToBody: Boolean,
     automaticDropdown: Boolean,
+    suffixIcon: String,
 
     validators: Array,
     asyncValidators: Array,
@@ -170,6 +171,7 @@ const ConnectedSelect = {
           no-match-text={this.noMatchText}
           no-data-text={this.noDataText}
           reserve-keyword={this.reserveKeyword}
+          suffixIcon={this.suffixIcon}
           default-first-option={defaultFirstOption}
           popper-append-to-body={this.popperAppendToBody}
           automatic-dropdown={this.automaticDropdown}

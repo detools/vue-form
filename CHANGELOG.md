@@ -1,3 +1,9 @@
+## 5.13.6
+
+### Updated
+
+- Added `suffixIcon` prop to `<Select />` passed to `<Input />` internally
+
 ## 5.13.5
 
 ### Fixed
