@@ -95,6 +95,12 @@ const ConnectedSelect = {
 
   mixins: [ConnectedSelectMixin],
 
+  data() {
+    return {
+      loadingState: false,
+    }
+  },
+
   methods: {
     generateOption(option) {
       const { valueKey, labelKey } = this
@@ -140,7 +146,19 @@ const ConnectedSelect = {
 
     handleFieldChange(...args) {
       this.setDirty()
-      this.handleChange(...args)
+
+      const posiblePromise = this.handleChange(...args)
+      if (posiblePromise && posiblePromise.then) {
+        this.loadingState = true
+
+        posiblePromise
+          .then(() => {
+            this.loadingState = false
+          })
+          .catch(() => {
+            this.loadingState = false
+          })
+      }
 
       return this.setAsyncError(this.asyncValidators)()
     },
@@ -171,7 +189,7 @@ const ConnectedSelect = {
           no-match-text={this.noMatchText}
           no-data-text={this.noDataText}
           reserve-keyword={this.reserveKeyword}
-          suffixIcon={this.suffixIcon}
+          suffixIcon={this.suffixIcon || (this.loadingState ? 'el-icon-loading' : '')}
           default-first-option={defaultFirstOption}
           popper-append-to-body={this.popperAppendToBody}
           automatic-dropdown={this.automaticDropdown}

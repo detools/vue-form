@@ -1,3 +1,9 @@
+## 5.13.7
+
+### Updated
+
+- Added check for promise for `handleChange` to set `suffixIcon` internally
+
 ## 5.13.6
 
 ### Updated
