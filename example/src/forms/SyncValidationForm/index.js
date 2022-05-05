@@ -1,1 +1,1 @@
-export default from './SyncValidationForm'
+export { default } from './SyncValidationForm'

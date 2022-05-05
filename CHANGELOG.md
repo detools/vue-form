@@ -1,3 +1,9 @@
+## 5.13.8
+
+### Updated
+
+- Added missing `format` property to `<TimePicker />`. Updated deps
+
 ## 5.13.7
 
 ### Updated

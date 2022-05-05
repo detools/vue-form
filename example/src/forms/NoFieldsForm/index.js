@@ -1,1 +1,1 @@
-export default from './NoFieldsForm'
+export { default } from './NoFieldsForm'

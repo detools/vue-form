@@ -1,1 +1,1 @@
-export default from './UploadForm'
+export { default } from './UploadForm'

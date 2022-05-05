@@ -1,1 +1,1 @@
-export default from './InlineValidatorsForm'
+export { default } from './InlineValidatorsForm'

@@ -1,1 +1,1 @@
-export default from './BasicForm'
+export { default } from './BasicForm'

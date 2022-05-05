@@ -1,1 +1,1 @@
-export default from './AsyncSubmitForm'
+export { default } from './AsyncSubmitForm'

@@ -1,1 +1,1 @@
-export default from './ArrayFieldForm'
+export { default } from './ArrayFieldForm'

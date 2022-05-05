@@ -1,1 +1,1 @@
-export default from './AllValidationsForm'
+export { default } from './AllValidationsForm'

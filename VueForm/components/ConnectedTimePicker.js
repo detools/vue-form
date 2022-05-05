@@ -27,6 +27,10 @@ const ConnectedTimePicker = {
     pickerOptions: Object,
     rangeSeparator: String,
     defaultValue: [Date, String, Number],
+    format: {
+      type: String,
+      default: 'HH:mm:ss',
+    },
     valueFormat: {
       type: String,
       default: 'HH:mm:ss',
@@ -82,6 +86,7 @@ const ConnectedTimePicker = {
           picker-options={this.pickerOptions}
           range-separator={this.rangeSeparator}
           default-value={this.defaultValue}
+          format={this.format}
           value-format={this.valueFormat}
           prefix-icon={this.prefixIcon}
           clear-icon={this.clearIcon}

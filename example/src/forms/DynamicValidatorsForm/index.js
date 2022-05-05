@@ -1,1 +1,1 @@
-export default from './DynamicValidatorsForm'
+export { default } from './DynamicValidatorsForm'

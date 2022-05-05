@@ -1,1 +1,1 @@
-export default from './ImmediateForm'
+export { default } from './ImmediateForm'

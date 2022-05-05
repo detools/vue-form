@@ -1,1 +1,1 @@
-export default from './ScopedSlotForm'
+export { default } from './ScopedSlotForm'
